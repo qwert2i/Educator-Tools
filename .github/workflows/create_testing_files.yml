@@ -76,30 +76,16 @@ jobs:
           echo INFO: downloading pillow module for Python
           pip install pillow
           
-          python ./.github/python/create_testing_files.py ~/zip_tmp '.' ~/mcaddon_file_dir ~/mcworld_file_dir $tag_name
+          python ./.github/python/create_testing_files.py ~/zip_tmp '.' ~/mcaddon_file_dir $tag_name
           
-          asset_name_1=$(ls ~/mcworld_file_dir)
           asset_name_2=$(ls ~/mcaddon_file_dir)
           
-          asset_path_1=~/mcworld_file_dir/$asset_name_1
           asset_path_2=~/mcaddon_file_dir/$asset_name_2
           
           echo "::set-output name=asset_name_1::$asset_name_1"
           echo "::set-output name=asset_name_2::$asset_name_2"
           echo "::set-output name=asset_path_1::$asset_path_1"
           echo "::set-output name=asset_path_2::$asset_path_2"
-
-
-      - name: Upload mcworld
-        id: upload-mcworld
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
-          asset_path: ${{ steps.create_pack_file.outputs.asset_path_1 }}
-          asset_name: ${{ steps.create_pack_file.outputs.asset_name_1 }}
-          asset_content_type: application/zip
 
       - name: Upload mcaddon
         id: upload-mcaddon

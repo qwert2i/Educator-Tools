@@ -4,22 +4,16 @@ import json
 import sys
 import re
 
-# pip install pillow
-from PIL import Image
-
 # PATH IN TO COPY FILES INTO BEFORE ZIPPING THEM
 ZIP_FILES_PATH = sys.argv[1]
-# PATH TO THE ROOT OF THE WORLD
+# PATH TO THE ROOT OF THE ADDON
 ROOT_PATH = sys.argv[2]
 
 # THE DIRECTORY TO PUT THE MCTEMPLATE FILE INTO
 MCADDON_FILE_ROOT = sys.argv[3]
 
-# THE DIRECTORY TO PUT THE MCWORLD FILE INTO
-MCWORLD_FILE_ROOT = sys.argv[4]
-
 # THE SUFFIX ADDED TO THE ZIP FILE NAME (the version tag of the release)
-ZIP_FILE_SUFFIX = sys.argv[5]
+ZIP_FILE_SUFFIX = sys.argv[4]
 
 LANGUAGES = [  # list of the lang files
     "de_DE",
@@ -76,33 +70,13 @@ def main():
     zip_path = Path(ZIP_FILES_PATH)
     root_path = Path(ROOT_PATH)
     mcaddon_file_root = Path(MCADDON_FILE_ROOT)
-    mcworld_file_root = Path(MCWORLD_FILE_ROOT)
     # Load project config
     with (root_path / "pack/release_config.json").open("r") as f:
         config = json.load(f)
-    world_path = Path(root_path / "regolith" / "worlds" / config["testing_world"])
     product_creator = config["product_creator"]
     product_name = config["product_name"]
     product_key = config["product_key"]
     product_description = config["product_description"]
-    # Change the manifest version
-    with open(world_path / "manifest.json", "r") as f:
-        manifest = json.load(f)
-
-    with open(world_path / "manifest.json", "w") as f:
-        version = ZIP_FILE_SUFFIX.split(".")
-        manifest["header"]["version"] = [
-            1,
-            int(version[1]),
-            int(version[2]),
-        ]
-        json.dump(manifest, f, indent=4)
-
-    random_seed = False
-    # Check if world is a random seed world
-    with open(world_path / "manifest.json", "r") as f:
-        manifest = json.load(f)
-        random_seed = manifest["header"].get("allow_random_seed", False)
     pack_icon_path = None
     # Load pack_icon depending on file ending
     if Path(root_path / "pack/pack_icon.png").exists():
@@ -262,65 +236,7 @@ def main():
             rp_languages.insert(0, "en_US")
             json.dump(rp_languages, f, indent=4)
 
-    # Copy essential dirs from <WORLD>
-    if not random_seed:
-        essential_dirs = ["db"]
-        for ed in essential_dirs:
-            shutil.copytree(world_path / ed, zip_path / ed)
-
-    # Copy essential files from <WORLD>
-    essential_files = ["level.dat", "levelname.txt", "manifest.json"]
-    for ef in essential_files:
-        shutil.copy(world_path / ef, zip_path / ef)
-
-    # Copy other files
-    other_files = (
-        "world_behavior_packs.json",
-        "world_resource_packs.json",
-    )
-    for of in other_files:
-        try:
-            shutil.copy(world_path / of, zip_path / of)
-        except:
-            pass
-    # if keyart does exist, then paste it into world folder
-    if keyart_path is not None:
-        img = Image.open(root_path / "pack/keyart.png").convert("RGB")
-        img = img.resize((800, 450), resample=Image.BILINEAR)
-        img.save(zip_path / "world_icon.jpeg")
-
-    mcworld_file_path = (
-        mcworld_file_root / f"{product_creator}_{product_key}_{ZIP_FILE_SUFFIX}"
-    )
-    print(
-        f"package_release.py: Creating mcworld file at {mcworld_file_path.as_posix()}"
-    )
-    mcworld_file_root.mkdir(exist_ok=True, parents=True)
-
-    shutil.make_archive(mcworld_file_path, "zip", zip_path)
-    shutil.move(
-        f"{mcworld_file_path.as_posix()}.zip", f"{mcworld_file_path.as_posix()}.mcworld"
-    )
-
-    files_to_unlink = [
-        "world_behavior_packs.json",
-        "world_behavior_pack_history.json",
-        "world_resource_packs.json",
-        "world_resource_pack_history.json",
-        "level.dat",
-        "levelname.txt",
-        "manifest.json",
-        "world_icon.jpeg",
-    ]
-
     dir_to_unlink = ["texts", "db"]
-
-    for path in files_to_unlink:
-        try:
-            (zip_path / path).unlink()
-        except:
-            print("Could not remove the path " + path)
-            pass
 
     for path in dir_to_unlink:
         try:
