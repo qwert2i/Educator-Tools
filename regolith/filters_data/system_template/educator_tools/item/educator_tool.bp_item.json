@@ -4,7 +4,7 @@
 		"description": {
 			"identifier": "edu_tools:educator_tool",
 			"menu_category": {
-				"category": "equipment"
+				"category": "items"
 			}
 		},
 		"components": {
