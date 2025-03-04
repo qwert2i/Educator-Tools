@@ -181,18 +181,21 @@ def main():
         with open(rp_path / "manifest.json", "r") as f:
             manifest = json.load(f)
         with open(rp_path / "manifest.json", "w") as f:
-            version = ZIP_FILE_SUFFIX.split(".")
-            manifest["header"]["version"] = [
-                1,
-                int(version[1]),
-                int(version[2]),
-            ]
+            # Remove a leading "v" if present and extract numeric version before any "-" suffix.
+            version_str = ZIP_FILE_SUFFIX
+            if version_str.startswith("v"):
+                version_str = version_str[1:]
+            version_core = version_str.split("-")[0]
+            version_components = version_core.split(".")
+            # Convert version components to integers
+            numeric_version = [int(num) for num in version_components]
+            manifest["header"]["version"] = numeric_version
             if "dependencies" in manifest and len(manifest["dependencies"]) > 0:
-                manifest["dependencies"][0]["version"] = [
-                    1,
-                    int(version[1]),
-                    int(version[2]),
-                ]
+                manifest["dependencies"][0]["version"] = numeric_version
+            for module in manifest["modules"]:
+                if "language" in module:
+                    if module["language"] == "javascript":
+                        module["version"] = numeric_version
             json.dump(manifest, f, indent=4)
         # changing pack.name and pack.description in the lang file based on config
         zip_texts_path = rp_path / "texts"
