@@ -104,8 +104,11 @@ def main():
         with open(bp_path / "manifest.json", "r") as f:
             manifest = json.load(f)
         with open(bp_path / "manifest.json", "w") as f:
-            # Extract numeric version from ZIP_FILE_SUFFIX (e.g., "1.1.0-preview" -> "1.1.0")
-            version_core = ZIP_FILE_SUFFIX.split("-")[0]
+            # Remove a leading "v" if present and extract numeric version before any "-" suffix.
+            version_str = ZIP_FILE_SUFFIX
+            if version_str.startswith("v"):
+                version_str = version_str[1:]
+            version_core = version_str.split("-")[0]
             version_components = version_core.split(".")
             # Convert version components to integers
             numeric_version = [int(num) for num in version_components]
