@@ -91,20 +91,6 @@ def main():
             "- pack/pack_icon.jpg\n"
         )
 
-    keyart_path = None
-    # Load keyart depending on file ending
-    if Path(root_path / "pack/keyart.png").exists():
-        keyart_path = root_path / "pack/keyart.png"
-    elif Path(root_path / "pack/keyart.jpg").exists():
-        keyart_path = root_path / "pack/keyart.jpg"
-    else:
-        print(
-            "Unable to find keyart file.\n"
-            "The keyart should be in one of the locations:\n"
-            "- pack/keyart.png\n"
-            "- pack/keyart.jpg\n"
-        )
-
     # Copy BP
     # Get a list of all the directories in the directory
     dir_list = [item for item in root_path.glob("behavior_packs/*") if item.is_dir()]
@@ -118,22 +104,18 @@ def main():
         with open(bp_path / "manifest.json", "r") as f:
             manifest = json.load(f)
         with open(bp_path / "manifest.json", "w") as f:
-            version = ZIP_FILE_SUFFIX.split(".")
-            manifest["header"]["version"] = [
-                1,
-                int(version[1]),
-                int(version[2]),
-            ]
+            # Extract numeric version from ZIP_FILE_SUFFIX (e.g., "1.1.0-preview" -> "1.1.0")
+            version_core = ZIP_FILE_SUFFIX.split("-")[0]
+            version_components = version_core.split(".")
+            # Convert version components to integers
+            numeric_version = [int(num) for num in version_components]
+            manifest["header"]["version"] = numeric_version
             if "dependencies" in manifest and len(manifest["dependencies"]) > 0:
-                manifest["dependencies"][0]["version"] = [
-                    1,
-                    int(version[1]),
-                    int(version[2]),
-                ]
+                manifest["dependencies"][0]["version"] = numeric_version
             for module in manifest["modules"]:
                 if "language" in module:
                     if module["language"] == "javascript":
-                        module["version"] = [1, int(version[1]), int(version[2])]
+                        module["version"] = numeric_version
             json.dump(manifest, f, indent=4)
         # changing pack.name and pack.description in the lang file based on config
         zip_texts_path = bp_path / "texts"
