@@ -7,24 +7,25 @@ assignees: ''
 
 ---
 
-**Minecraft version and device**
-Ex: 1.18.20.56 [DEV] Win10
+### Minecraft Education version and device
+Ex: 1.21.06. Win10
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## 🐛 Bug Report
+A clear and concise description of the bug.
 
-**To Reproduce**
+
+### 🔍 Steps to Reproduce
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+### 🧐 Expected Behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### 📷 Screenshots & Logs
+If applicable, add screenshots or error logs to help explain the issue.
 
-**Additional context**
-Add any other context about the problem here.
+### ⚡ Additional Context
+Any other information that might help us diagnose and fix the issue.

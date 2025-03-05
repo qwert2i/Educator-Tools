@@ -7,8 +7,8 @@ assignees: ''
 
 ---
 
-**Describe of issue**
+### Description of issue
 
-**Why is this a problem?**
+### Why is this a problem?
 
-**How should this be solved?**
+### How should this be solved?
