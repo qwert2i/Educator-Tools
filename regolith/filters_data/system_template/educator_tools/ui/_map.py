@@ -22,4 +22,10 @@
         "on_conflict": "append_end",
         "subfunctions": True,
     },
+    {
+        "source": "languages.json",
+        "target": "RP/texts/languages.json",
+        "on_conflict": "merge",
+        "json_template": True,
+    },
 ]
