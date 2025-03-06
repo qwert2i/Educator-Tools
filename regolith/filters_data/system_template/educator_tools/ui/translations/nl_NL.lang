@@ -100,6 +100,13 @@ edu_tools.ui.timer.chat.2_seconds_left=§d[Timer]§r 2 Seconden resterend!
 edu_tools.ui.timer.chat.1_second_left=§d[Timer]§r 1 Seconde resterend!
 edu_tools.ui.timer.chat.time_is_up=§d[Timer]§r Tijd is om!
 
+edu_tools.ui.timer.time.second=Seconde
+edu_tools.ui.timer.time.seconds=Seconden
+edu_tools.ui.timer.time.minute=Minuut
+edu_tools.ui.timer.time.minutes=Minuten
+edu_tools.ui.timer.time.hour=Uur
+edu_tools.ui.timer.time.hours=Uur
+
 ### Edit Timer UI Scene
 edu_tools.ui.edit_timer.title=§fBewerk Timer
 edu_tools.ui.create_timer.title=§fBewerk Timer
