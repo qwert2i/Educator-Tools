@@ -20,11 +20,6 @@ jobs:
       - name: Pull lfs data, if not cached
         run: git lfs pull
 
-      - name: setup-git-credentials
-        uses: de-vri-es/setup-git-credentials@v2.0.8
-        with:
-          credentials: ${{ secrets.SHAPESCAPE_BOT_PERSONAL_ACCESS_TOKEN }}
-
       - name: Get upload URL
         id: get_upload_url
         uses: bruceadams/get-release@v1.3.2
