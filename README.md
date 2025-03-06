@@ -47,9 +47,9 @@ For detailed setup instructions and feature explanations, visit our **[Documenta
 
 ## Contributing
 
-We welcome contributions from the community! Check out our **[GitHub repository](https://github.com/shapescape/Educator-Tools)** to get started.
+We welcome contributions from the community! Check out our **[GitHub repository](https://github.com/ShapescapeMC/Educator-Tools)** to get started.
 
-💡 Have a suggestion? Open a **[feature request](https://github.com/shapescape/Educator-Tools/issues)**.
+💡 Have a suggestion? Open a **[feature request](https://github.com/ShapescapeMC/Educator-Tools/issues)**.
 
 ## License
 
@@ -57,6 +57,6 @@ Educator Tools is licensed under the **[LGPL v3 License](LICENSE)**.
 
 ## Support
 
-If you encounter issues or have questions, **[report an issue](https://github.com/shapescape/Educator-Tools/issues)** on our GitHub Issues page.
+If you encounter issues or have questions, **[report an issue](https://github.com/ShapescapeMC/Educator-Tools/issues)** on our GitHub Issues page.
 
 Thank you for using **Educator Tools** to enhance your Minecraft Education experience! 🎮📚
