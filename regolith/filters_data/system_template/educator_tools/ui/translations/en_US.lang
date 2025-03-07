@@ -135,6 +135,7 @@ edu_tools.message.too_far_push=You are moving to far away.
 edu_tools.message.too_far_teleport_area=You were teleported back to the area, as you moved to far away.
 edu_tools.message.too_far_teleport_center=You were teleported back to the center, as you moved to far away.
 
+edu_tools.ui.lock_players_settings.title=§fLock Players Configuration
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode=Select the mode
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Center
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Around Me
