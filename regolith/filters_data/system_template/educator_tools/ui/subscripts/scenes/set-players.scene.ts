@@ -28,7 +28,7 @@ export class SetPlayersScene extends ActionUIScene {
 				);
 
 				this.addButton(
-					"You",
+					"edu_tools.ui.set_players.buttons.you",
 					(): void => {
 						sceneManager.setSubjectPlayersType("self");
 						sceneManager.openScene("set_players", "teleport");
@@ -36,7 +36,7 @@ export class SetPlayersScene extends ActionUIScene {
 					"textures/edu_tools/ui/icons/set_players/self",
 				);
 				this.addButton(
-					"All",
+					"edu_tools.ui.set_players.buttons.all",
 					(): void => {
 						sceneManager.setSubjectPlayersType("all");
 						sceneManager.openScene("set_players", "teleport");
@@ -185,7 +185,7 @@ export class SetPlayersScene extends ActionUIScene {
 			);
 
 			this.addButton(
-				"You",
+				"edu_tools.ui.set_players.buttons.you",
 				(): void => {
 					sceneManager.setSubjectPlayersType("self");
 					sceneManager.openScene("set_gamemode");
@@ -193,7 +193,7 @@ export class SetPlayersScene extends ActionUIScene {
 				"textures/edu_tools/ui/icons/set_players/self",
 			);
 			this.addButton(
-				"All",
+				"edu_tools.ui.set_players.buttons.all",
 				(): void => {
 					sceneManager.setSubjectPlayersType("all");
 					sceneManager.openScene("set_gamemode");
