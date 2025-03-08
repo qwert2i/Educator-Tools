@@ -23,7 +23,7 @@ edu_tools.ui.set_players.teleport.target.title=§fテレポート先のユーザ
 edu_tools.ui.set_players.gamemode.title=§fゲームモードの変更
 edu_tools.ui.set_players.select_subject_for_teleport.body=§9テレポート対象§rのユーザーを選択する
 edu_tools.ui.set_players.select_target_for_teleport.body=§cテレポート先§rのユーザーを選択する
-edu_tools.ui.set_players.buttons.you=あなた
+edu_tools.ui.set_players.buttons.you=自分自身
 edu_tools.ui.set_players.buttons.all=全員
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=§9ゲームモードを変更するユーザー§rを選択する
@@ -127,7 +127,7 @@ edu_tools.ui.edit_timer.time.90_minutes=90分
 ### Lock Players
 edu_tools.ui.lock_players.title=§fプレイヤーをロックする
 edu_tools.ui.lock_players.body=プレイヤーを特定のエリアに閉じ込めます
-edu_tools.ui.lock_players.buttons.configure=設定
+edu_tools.ui.lock_players.buttons.configure=詳細設定
 edu_tools.ui.lock_players.buttons.set_center=中心を設定
 edu_tools.ui.lock_players.buttons.teleport_to_center=中心にテレポートする
 
@@ -137,8 +137,9 @@ edu_tools.message.too_far_push=あなたは遠くに移動しようとしてい�
 edu_tools.message.too_far_teleport_area=あなたはテレポートでエリアに戻されました
 edu_tools.message.too_far_teleport_center=遠くに移動したため、中心にテレポートされました
 
+edu_tools.ui.lock_players_settings.title=§fプレイヤーロックの詳細設定
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode=モード選択
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=中心
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=私の周り
-edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=エリア
-edu_tools.ui.lock_players_settings.sliders.distance_from_center=周囲
+edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=特定のエリア
+edu_tools.ui.lock_players_settings.sliders.distance_from_center=プレイヤーを閉じ込めるエリアの大きさ(中心からのブロック数)
