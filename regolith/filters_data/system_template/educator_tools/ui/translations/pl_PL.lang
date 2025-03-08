@@ -1,0 +1,143 @@
+## Educator Tools
+### General
+edu_tools.ui.buttons.back=Cofnij
+edu_tools.ui.buttons.exit=Wyjdź
+edu_tools.ui.buttons.continue=Kontynuuj
+edu_tools.ui.buttons.apply=Zastosuj
+edu_tools.message.no_host=Musisz być gospodarzem świata, aby użyć tego narzędzia
+
+### Main UI Scene
+edu_tools.ui.main.title=§fNarzędzia dla Nauczyciela
+edu_tools.ui.main.body=Wybierz narzędzie z którego chcesz skorzystać
+edu_tools.ui.main.buttons.teleport=Teleportacja
+edu_tools.ui.main.buttons.gamemode=Zmiana Trybu Gry
+edu_tools.ui.main.buttons.manage_teams=Zarządzaj Drużynami
+edu_tools.ui.main.buttons.timer=Stoper
+edu_tools.ui.main.buttons.world_settings=Ustawienia Świata
+edu_tools.ui.main.buttons.lock_players=Blokada Graczy
+
+### Set Players UI Scene
+edu_tools.ui.set_players.teleport.subject.title=§fWybierz Obiekt Teleportacji
+edu_tools.ui.set_players.teleport.target.title=§fWybierz Cel
+edu_tools.ui.set_players.gamemode.title=§fWybierz Gracza 
+edu_tools.ui.set_players.select_subject_for_teleport.body=Wybierz §9kogo§r chcesz przeteleportować
+edu_tools.ui.set_players.select_target_for_teleport.body=Wybierz §ccel§r do którego chcesz przeteleportować
+edu_tools.ui.set_players.buttons.you=Ty
+edu_tools.ui.set_players.buttons.all=Wszyscy
+
+edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Wybierz §9gracza§r którego tryb gry chcesz zmienić
+
+
+### Gamemode UI Scene
+edu_tools.ui.set_gamemode.title=§fZmiana Trybu Gry
+edu_tools.ui.set_gamemode.self.body=Zmiana trybu gry dla
+edu_tools.ui.set_gamemode.self.body2=na
+edu_tools.ui.set_gamemode.specific.body=Zmiana trybu gry dla
+edu_tools.ui.set_gamemode.specific.body2=na
+edu_tools.ui.set_gamemode.all.body=Zmień tryb gry wszystkich §9graczy§r na
+
+edu_tools.ui.set_gamemode.buttons.adventure=Przygodowy (Adventure)
+edu_tools.ui.set_gamemode.buttons.survival=Przetrwania (Survival)
+edu_tools.ui.set_gamemode.buttons.creative=Kreatywny (Creative)
+
+### Confirm UI Scene
+edu_tools.ui.confirm.teleport.title=§fPotwierdź Teleportację
+edu_tools.ui.confirm.teleport.title=§fPrzetelportowano
+edu_tools.ui.confirm.teleport.self.body=Pomyślnie przeteleportowano
+edu_tools.ui.confirm.teleport.self.body2=do
+edu_tools.ui.confirm.teleport.specific.body= Pomyślnie przeteleportowano
+edu_tools.ui.confirm.teleport.specific.body2=do
+edu_tools.ui.confirm.teleport.all.body=Pomyślnie przeteleportowano wszystkich §9graczy§r do
+
+edu_tools.ui.confirm.gamemode.title=§fPotwierdź Zmianę Trybu Gry
+edu_tools.ui.confirm.gamemode.self.body=Pomyślnie zmieniono §9twój§r tryb gry 
+edu_tools.ui.confirm.gamemode.specific.body=Pomyślnie zmieniono tryb gry
+edu_tools.ui.confirm.gamemode.all.body=Pomyślnie zmieniono tryb gry wszystkich §9graczy§r
+
+edu_tools.ui.confirm.world_settings.title=§fPotwierdź Zmianę Ustawień Świata
+edu_tools.ui.confirm.world_settings.body=Pomyślnie zmieniono ustawienia świata
+
+edu_tools.ui.confirm.reset_timer.title=§fPotwierdź Reset Stopera
+edu_tools.ui.confirm.reset_timer.body=Czy na pewno chcesz zresetować stoper? Spowoduje to zatrzymanie bieżącego stopera.
+
+edu_tools.ui.confirm.stop_timer.title=§fPotwierdź Zatrzymanie Stopera
+edu_tools.ui.confirm.stop_timer.body=Czy na pewno chcesz zatrzymać stoper? Spowoduje to usunięcie bieżącego stopera.
+
+edu_tools.ui.confirm.edit_timer.title=§fPotwierdź Edycję Stopera
+edu_tools.ui.confirm.edit_timer.body=Czy na pewno chcesz edytować stoper? Spowoduje to nadpisanie bieżącego stopera.
+
+### World Settings UI Scene
+edu_tools.ui.world_settings.title=§fUstawienia Świata
+edu_tools.ui.world_settings.toggles.mob_spawning=Odradzanie mobów
+edu_tools.ui.world_settings.toggles.mob_griefing=Destrukcyjność mobów
+edu_tools.ui.world_settings.toggles.keep_inventory=Zachowaj ekwipunek
+edu_tools.ui.world_settings.toggles.daylight_cycle=Cykl dnia i nocy
+edu_tools.ui.world_settings.toggles.weather_cycle=Cykl pogodowy
+edu_tools.ui.world_settings.toggles.immediate_respawn=Natychmiastowe odrodzenie
+edu_tools.ui.world_settings.toggles.command_blocks=Bloki poleceń
+edu_tools.ui.world_settings.toggles.world_damage=Destrukcja świata
+
+### Timer Scene
+edu_tools.ui.timer.title=§fStoper
+edu_tools.ui.timer.buttons.create=Stwórz
+edu_tools.ui.timer.buttons.edit=Edytuj
+edu_tools.ui.timer.buttons.pause=Pauza
+edu_tools.ui.timer.buttons.reset=Reset
+edu_tools.ui.timer.buttons.resume=Wznów
+edu_tools.ui.timer.buttons.start=Start
+edu_tools.ui.timer.buttons.stop=Usuń
+edu_tools.ui.timer.buttons.hide_timer=Ukryj Stoper
+edu_tools.ui.timer.buttons.show_timer=Pokaż Stoper
+
+### Timer
+edu_tools.ui.timer.chat.30_seconds_left=§d[Stoper]§r Pozostało 30 sekund!
+edu_tools.ui.timer.chat.10_seconds_left=§d[Stoper]§r Pozostało 10 sekund!
+edu_tools.ui.timer.chat.5_seconds_left=§d[Stoper]§r Pozostało 5 sekund!
+edu_tools.ui.timer.chat.4_seconds_left=§d[Stoper]§r Pozostały 4 sekundy!
+edu_tools.ui.timer.chat.3_seconds_left=§d[Stoper]§r Pozostały 3 sekundy!
+edu_tools.ui.timer.chat.2_seconds_left=§d[Stoper]§r Pozostały 2 sekundy!
+edu_tools.ui.timer.chat.1_second_left=§d[Stoper]§r Pozostała 1 sekunda!
+edu_tools.ui.timer.chat.time_is_up=§d[Stoper]§r Koniec czasu!
+
+edu_tools.ui.timer.time.second=Sekunda
+edu_tools.ui.timer.time.seconds=Sekundy
+edu_tools.ui.timer.time.minute=Minuta
+edu_tools.ui.timer.time.minutes=Minuty
+edu_tools.ui.timer.time.hour=Godzina
+edu_tools.ui.timer.time.hours=Godziny
+
+### Edit Timer UI Scene
+edu_tools.ui.edit_timer.title=§fEdytuj Stoper
+edu_tools.ui.create_timer.title=§fStwórz Stoper
+edu_tools.ui.edit_timer.time=Wybierz czas
+edu_tools.ui.edit_timer.time.30_seconds=30 Sekund
+edu_tools.ui.edit_timer.time.1_minute=1 Minuta
+edu_tools.ui.edit_timer.time.2_minutes=2 Minuty
+edu_tools.ui.edit_timer.time.3_minutes=3 Minuty
+edu_tools.ui.edit_timer.time.5_minutes=5 Minut
+edu_tools.ui.edit_timer.time.10_minutes=10 Minut
+edu_tools.ui.edit_timer.time.15_minutes=15 Minut
+edu_tools.ui.edit_timer.time.30_minutes=30 Minut
+edu_tools.ui.edit_timer.time.45_minutes=45 Minut
+edu_tools.ui.edit_timer.time.60_minutes=60 Minut
+edu_tools.ui.edit_timer.time.90_minutes=90 Minut
+
+### Lock Players
+edu_tools.ui.lock_players.title=§fBlokada Graczy
+edu_tools.ui.lock_players.body=Zablokuj graczy w określonym obszarze
+edu_tools.ui.lock_players.buttons.configure=Konfiguruj
+edu_tools.ui.lock_players.buttons.set_center=Ustaw Centrum
+edu_tools.ui.lock_players.buttons.teleport_to_center=Teleportuj do Centrum
+
+edu_tools.ui.lock_players_settings.toggles.lock_players=Zablokuj Graczy
+edu_tools.ui.lock_players_settings.toggles.teleport_to_center=Gry aktywne, gracze z poza obszaru będą teleportowani do jego centrum a nie do krawędzi.
+edu_tools.message.too_far_push=Jesteś za daleko.
+edu_tools.message.too_far_teleport_area=Jesteś za daleko, teleportujemy cię do obszaru wyznaczonego przez nauczyciela.
+edu_tools.message.too_far_teleport_center=Jesteś za daleko, teleportujemy cię do centrum obszaru wyznaczonego przez nauczyciela.
+
+edu_tools.ui.lock_players_settings.title=§fKonfiguracja Blokady Graczy
+edu_tools.ui.lock_players_settings.dropdowns.lock_mode=Tryb Blokady
+edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Centrum
+edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Dookoła mnie
+edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Obszar
+edu_tools.ui.lock_players_settings.sliders.distance_from_center=Promień

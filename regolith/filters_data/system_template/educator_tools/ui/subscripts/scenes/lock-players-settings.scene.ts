@@ -13,7 +13,11 @@ export class LockPlayersSettingsScene extends ModalUIScene {
 	 * @param sceneManager - The SceneManager instance.
 	 */
 	constructor(sceneManager: SceneManager) {
-		super("world_settings", sceneManager.getSourcePlayer(), "lock_players");
+		super(
+			"lock_players_settings",
+			sceneManager.getSourcePlayer(),
+			"lock_players",
+		);
 
 		this.addToggle(
 			"edu_tools.ui.lock_players_settings.toggles.lock_players",

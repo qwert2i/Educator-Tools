@@ -40,10 +40,7 @@ The **Educator Tools** Add-On introduces several key functionalities for classro
 ## Usage
 
 Once installed, educators can use the **Educator Tool** item in their Minecraft world to access the in-game UI and manage gameplay seamlessly.
-
-## Documentation
-
-For detailed setup instructions and feature explanations, visit our **[Documentation Page](https://github.com/ShapescapeMC/Educator-Tools/wiki)**.
+For more details about the Add-On's features, visit our **[Wiki page](https://github.com/ShapescapeMC/Educator-Tools/wiki/Usage)**.
 
 ## Contributing
 

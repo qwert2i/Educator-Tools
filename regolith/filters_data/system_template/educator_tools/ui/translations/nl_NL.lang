@@ -136,6 +136,7 @@ edu_tools.message.too_far_push=Je gaat te ver weg.
 edu_tools.message.too_far_teleport_area=Je bent terug naar het gebied gebracht omdat je te ver weg ging.
 edu_tools.message.too_far_teleport_center=Je bent terug naar het middelpunt gebracht omdat je te ver weg ging.
 
+edu_tools.ui.lock_players_settings.title=§fConfigureren Spelers Vergrendeling
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode=Selecteer modus
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Middelpunt
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Rond mij
