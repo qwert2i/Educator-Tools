@@ -4,38 +4,38 @@ edu_tools.ui.buttons.back=戻る
 edu_tools.ui.buttons.exit=やめる
 edu_tools.ui.buttons.continue=続ける
 edu_tools.ui.buttons.apply=適応する
-edu_tools.message.no_host=このツールを使用するには、世界のホストである必要があります
+edu_tools.message.no_host=このツールを使用するためには、ワールドのホストである必要があります
 
 ### Main UI Scene
-# main.titleは、固有名詞であるため、原タイトルを使用
+# main.titleは、固有名詞であるため、原題を使用
 edu_tools.ui.main.title=§fEducator Tools
-edu_tools.ui.main.body=使用するツールを選択する
+edu_tools.ui.main.body=使用するツールを選択してください
 edu_tools.ui.main.buttons.teleport=テレポート
 edu_tools.ui.main.buttons.gamemode=ゲームモードの変更
 edu_tools.ui.main.buttons.manage_teams=チーム管理
 edu_tools.ui.main.buttons.timer=タイマー
 edu_tools.ui.main.buttons.world_settings=ワールド設定
-edu_tools.ui.main.buttons.lock_players=プレイヤーをロックする
+edu_tools.ui.main.buttons.lock_players=プレイヤーをロック
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fテレポート対象のユーザー
 edu_tools.ui.set_players.teleport.target.title=§fテレポート先のユーザー
 edu_tools.ui.set_players.gamemode.title=§fゲームモードの変更
-edu_tools.ui.set_players.select_subject_for_teleport.body=§9テレポート対象§rのユーザーを選択する
-edu_tools.ui.set_players.select_target_for_teleport.body=§cテレポート先§rのユーザーを選択する
+edu_tools.ui.set_players.select_subject_for_teleport.body=§9テレポート対象§rのユーザーを選択してください
+edu_tools.ui.set_players.select_target_for_teleport.body=§cテレポート先§rのユーザーを選択してください
 edu_tools.ui.set_players.buttons.you=自分自身
-edu_tools.ui.set_players.buttons.all=全員
+edu_tools.ui.set_players.buttons.all=全てのプレイヤー
 
-edu_tools.ui.set_players.select_subject_for_gamemode_change.body=§9ゲームモードを変更するユーザー§rを選択する
+edu_tools.ui.set_players.select_subject_for_gamemode_change.body=§9ゲームモードを変更するユーザー§rを選択してください
 
 
 ### Gamemode UI Scene
-edu_tools.ui.set_gamemode.title=§fゲームモードを選択する
+edu_tools.ui.set_gamemode.title=§fゲームモードを選択
 edu_tools.ui.set_gamemode.self.body=ユーザー「
-edu_tools.ui.set_gamemode.self.body2=」のゲームモードを次のように変更する：
+edu_tools.ui.set_gamemode.self.body2=」のゲームモードを何に変更するか選択してください
 edu_tools.ui.set_gamemode.specific.body=ユーザー「
-edu_tools.ui.set_gamemode.specific.body2=」のゲームモードを次のように変更する：
-edu_tools.ui.set_gamemode.all.body=全ての§9プレイヤー§rのゲームモードを次のように変更する：
+edu_tools.ui.set_gamemode.specific.body2=」のゲームモードを何に変更するか選択してください
+edu_tools.ui.set_gamemode.all.body=全ての§9プレイヤー§rのゲームモードを何に変更するか選択してください
 
 edu_tools.ui.set_gamemode.buttons.adventure=アドベンチャーモード
 edu_tools.ui.set_gamemode.buttons.survival=サバイバルモード
@@ -52,7 +52,7 @@ edu_tools.ui.confirm.teleport.all.body=全ての§9プレイヤー§rのテレ�
 
 edu_tools.ui.confirm.gamemode.title=§fゲームモードの設定の変更
 edu_tools.ui.confirm.gamemode.self.body=§9あなた§rのゲームモードの変更に成功しました 
-edu_tools.ui.confirm.gamemode.specific.body=ゲームモードの変更に成功しました：
+edu_tools.ui.confirm.gamemode.specific.body=ゲームモードの変更に成功しました
 edu_tools.ui.confirm.gamemode.all.body=全ての§9プレイヤー§rのゲームモードの変更に成功しました
 
 edu_tools.ui.confirm.world_settings.title=§fワールド設定変更の確認
@@ -87,19 +87,19 @@ edu_tools.ui.timer.buttons.pause=一時停止
 edu_tools.ui.timer.buttons.reset=リセット
 edu_tools.ui.timer.buttons.resume=一時停止の再開
 edu_tools.ui.timer.buttons.start=開始
-edu_tools.ui.timer.buttons.stop=停止
+edu_tools.ui.timer.buttons.stop=削除
 edu_tools.ui.timer.buttons.hide_timer=タイマーのエンティティを非表示する
 edu_tools.ui.timer.buttons.show_timer=タイマーのエンティティを表示する
 
 ### Timer
-edu_tools.ui.timer.chat.30_seconds_left=§d[タイマー]§r 残り30秒！
-edu_tools.ui.timer.chat.10_seconds_left=§d[タイマー]§r 残り10秒！
-edu_tools.ui.timer.chat.5_seconds_left=§d[タイマー]§r 残り5秒！
-edu_tools.ui.timer.chat.4_seconds_left=§d[タイマー]§r 残り4秒！
-edu_tools.ui.timer.chat.3_seconds_left=§d[タイマー]§r 残り3秒！
-edu_tools.ui.timer.chat.2_seconds_left=§d[タイマー]§r 残り2秒！
-edu_tools.ui.timer.chat.1_second_left=§d[タイマー]§r 残り1秒！
-edu_tools.ui.timer.chat.time_is_up=§d[タイマー]§r 時間切れ！
+edu_tools.ui.timer.chat.30_seconds_left=§d[タイマー]§r 残り30秒!
+edu_tools.ui.timer.chat.10_seconds_left=§d[タイマー]§r 残り10秒!
+edu_tools.ui.timer.chat.5_seconds_left=§d[タイマー]§r 残り5秒!
+edu_tools.ui.timer.chat.4_seconds_left=§d[タイマー]§r 残り4秒!
+edu_tools.ui.timer.chat.3_seconds_left=§d[タイマー]§r 残り3秒!
+edu_tools.ui.timer.chat.2_seconds_left=§d[タイマー]§r 残り2秒!
+edu_tools.ui.timer.chat.1_second_left=§d[タイマー]§r 残り1秒!
+edu_tools.ui.timer.chat.time_is_up=§d[タイマー]§r 終了しました!
 
 edu_tools.ui.timer.time.second=秒
 edu_tools.ui.timer.time.seconds=秒
@@ -132,9 +132,9 @@ edu_tools.ui.lock_players.buttons.set_center=中心を設定
 edu_tools.ui.lock_players.buttons.teleport_to_center=中心にテレポートする
 
 edu_tools.ui.lock_players_settings.toggles.lock_players=プレイヤーのロックを有効化
-edu_tools.ui.lock_players_settings.toggles.teleport_to_center=エリアから遠く離れた場所にいるプレイヤーは、テレポートされるとエリアの端ではなく中央に移動します
-edu_tools.message.too_far_push=決められたエリアから離れようとしています！
-edu_tools.message.too_far_teleport_area=エリアに戻されました
+edu_tools.ui.lock_players_settings.toggles.teleport_to_center=エリアから離れたプレイヤーを中心にテレポートする(オフにした場合は、最も近いエリアの端にテレポートします)
+edu_tools.message.too_far_push=あなたは遠くに移動しようとしています
+edu_tools.message.too_far_teleport_area=あなたはテレポートでエリアに戻されました
 edu_tools.message.too_far_teleport_center=遠くに移動したため、中心にテレポートされました
 
 edu_tools.ui.lock_players_settings.title=§fプレイヤーロックの詳細設定
