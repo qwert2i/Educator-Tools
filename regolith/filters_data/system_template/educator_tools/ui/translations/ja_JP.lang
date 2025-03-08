@@ -35,7 +35,7 @@ edu_tools.ui.set_gamemode.self.body=ユーザー「
 edu_tools.ui.set_gamemode.self.body2=」のゲームモードを何に変更するか選択してください
 edu_tools.ui.set_gamemode.specific.body=ユーザー「
 edu_tools.ui.set_gamemode.specific.body2=」のゲームモードを何に変更するか選択してください
-edu_tools.ui.set_gamemode.all.body=全ての§9プレイヤー§rのゲームモードを何に変更するか選択してください
+edu_tools.ui.set_gamemode.all.body=自分自身以外の全ての§9プレイヤー§rのゲームモードを何に変更するか選択してください
 
 edu_tools.ui.set_gamemode.buttons.adventure=アドベンチャーモード
 edu_tools.ui.set_gamemode.buttons.survival=サバイバルモード
