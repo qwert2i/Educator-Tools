@@ -55,3 +55,12 @@ Educator Tools is licensed under the **[LGPL v3 License](LICENSE)**.
 ## Support
 
 If you encounter issues or have questions, **[report an issue](https://github.com/ShapescapeMC/Educator-Tools/issues)** on our GitHub Issues page.
+
+## Languages
+
+![American English](https://img.shields.io/badge/American_English-blue)
+![Dutch](https://img.shields.io/badge/Dutch-orange)
+![Polish](https://img.shields.io/badge/Polish-red)
+![Spanish](https://img.shields.io/badge/Spanish-yellow)
+![Latin American Spanish](https://img.shields.io/badge/Latin_American_Spanish-green)
+![Japanese](https://img.shields.io/badge/Japanese-purple)
