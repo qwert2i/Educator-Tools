@@ -8,7 +8,7 @@ const wd: WorldData = new WorldData();
 world.afterEvents.itemUse.subscribe((event: ItemUseAfterEvent) => {
 	// Check if the used item is the educator tool
 	if (event.itemStack.typeId === "edu_tools:educator_tool") {
-		if (event.source === wd.getHostPlayer() || true) {
+		if (event.source === wd.getHostPlayer()) {
 			// Create a new SceneManager instance and open the main scene
 			const sceneManager = new SceneManager(wd, event.source as Player);
 			sceneManager.openScene("main");
