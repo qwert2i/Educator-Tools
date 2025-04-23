@@ -1,5 +1,14 @@
 (
     [
+        # Generate letter images using our plugin - direct call method
+        generate_letter_images(
+            map_py_item={"source": "*.block.png", "target": AUTO},
+            letters=letters,
+            output_dir=".",
+            font_size=font_size,
+            text_color=tuple(text_color),  # Convert list to tuple
+            font_path=font_path
+        ),
         # Textures
         {"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
         # Item texture / Terrain Texture for block and item icon

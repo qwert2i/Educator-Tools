@@ -1,1 +1,6 @@
-{}
+{
+	"letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+	"font_size": 48,
+	"text_color": [10, 10, 10, 255],
+	"font_path": null
+}
