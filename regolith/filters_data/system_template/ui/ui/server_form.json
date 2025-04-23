@@ -14,7 +14,22 @@
 			}
 		]
 	},
-	"custom_long_form_background": {
+
+	"custom_form": {
+		"modifications": [
+			{
+				"array_name": "bindings",
+				"operation": "insert_back",
+				"value": [
+					{
+						"binding_name": "#title_text"
+					}
+				]
+			}
+		]
+	},
+
+	"edu_tools_form_background": {
 		"type": "panel", // We can use any types but we will use panels for simplicity
 		"bindings": [
 			{
@@ -33,7 +48,7 @@
 					"bindings": [
 						{
 							"binding_type": "view",
-							"source_control_name": "custom_long_form_background", // The name of our parent where we could get the #title_text binding
+							"source_control_name": "edu_tools_form_background", // The name of our parent where we could get the #title_text binding
 							"source_property_name": "(not ((#title_text - $title_needs_to_contain) = #title_text))",
 							"target_property_name": "#visible"
 						}
@@ -50,7 +65,7 @@
 					"bindings": [
 						{
 							"binding_type": "view",
-							"source_control_name": "custom_long_form_background", // The name of our parent where we could get the #title_text binding
+							"source_control_name": "edu_tools_form_background", // The name of our parent where we could get the #title_text binding
 							"source_property_name": "(not ((#title_text - $title_needs_to_contain) = #title_text))",
 							"target_property_name": "#visible"
 						}
@@ -72,7 +87,8 @@
 							"factory": {
 								"name": "server_form_factory", // Required, this name is binded to the data given to long_form
 								"control_ids": {
-									"long_form": "@server_form.custom_long_form_background"
+									"long_form": "@server_form.edu_tools_form_background",
+									"custom_form": "@server_form.edu_tools_form_background"
 								}
 							}
 						}
