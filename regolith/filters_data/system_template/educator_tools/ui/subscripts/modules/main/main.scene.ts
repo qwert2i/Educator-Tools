@@ -1,5 +1,6 @@
-import { SceneManager } from "../scene-manager";
-import { ActionUIScene } from "../ui-scene";
+import { SceneManager } from "../scene_manager/scene-manager";
+import { ActionUIScene } from "../scene_manager/ui-scene";
+import { SceneContext } from "../scene_manager/scene-context";
 
 const SceneName = "main";
 
@@ -10,45 +11,47 @@ export class MainScene extends ActionUIScene {
 	/**
 	 * Creates an instance of MainScene.
 	 * @param sceneManager - The SceneManager instance.
+	 * @param context - The SceneContext instance.
 	 */
-	constructor(sceneManager: SceneManager) {
-		sceneManager.addToSceneHistory(SceneName);
+	constructor(sceneManager: SceneManager, context: SceneContext) {
+		super("main", context.getSourcePlayer());
 
-		super("main", sceneManager.getSourcePlayer());
+		// Set the context for this scene
+		this.setContext(context);
 
 		this.setSimpleBody("edu_tools.ui.main.body");
 		this.addButton(
 			"edu_tools.ui.main.buttons.teleport",
 			(): void => {
-				sceneManager.openScene("set_players", "teleport");
+				sceneManager.openSceneWithContext(context, "set_players", "teleport");
 			},
 			"textures/edu_tools/ui/icons/main/teleport",
 		);
 		this.addButton(
 			"edu_tools.ui.main.buttons.gamemode",
 			(): void => {
-				sceneManager.openScene("set_players", "gamemode");
+				sceneManager.openSceneWithContext(context, "set_players", "gamemode");
 			},
 			"textures/edu_tools/ui/icons/main/gamemode",
 		);
 		this.addButton(
 			"edu_tools.ui.main.buttons.timer",
 			(): void => {
-				sceneManager.openScene("timer");
+				sceneManager.openSceneWithContext(context, "timer");
 			},
 			"textures/edu_tools/ui/icons/main/timer",
 		);
 		this.addButton(
 			"edu_tools.ui.main.buttons.world_settings",
 			(): void => {
-				sceneManager.openScene("world_settings");
+				sceneManager.openSceneWithContext(context, "world_settings");
 			},
 			"textures/edu_tools/ui/icons/main/world_settings",
 		);
 		this.addButton(
 			"edu_tools.ui.main.buttons.lock_players",
 			(): void => {
-				sceneManager.openScene("lock_players");
+				sceneManager.openSceneWithContext(context, "lock_players");
 			},
 			"textures/edu_tools/ui/icons/main/lock_players",
 		);
@@ -58,6 +61,7 @@ export class MainScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/_general/exit",
 		);
 
-		this.show(sceneManager.getSourcePlayer());
+		// Show the UI to the source player
+		this.show(context.getSourcePlayer(), sceneManager);
 	}
 }

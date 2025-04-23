@@ -1,6 +1,6 @@
 import { Timer } from "../mechanics/timer.mechanic";
 import { SceneManager } from "../scene-manager";
-import { ModalUIScene } from "../ui-scene";
+import { ModalUIScene } from "../modules/scene_manager/ui-scene";
 
 const SceneName = "edit_timer";
 

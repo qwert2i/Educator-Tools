@@ -4,9 +4,9 @@ import {
 	ModalFormData,
 } from "@minecraft/server-ui";
 import { Player, RawMessage, RawMessageScore } from "@minecraft/server";
-import { titleCase } from "./utils/title-case";
 import { SceneManager } from "./scene-manager";
-import { ConfirmSceneConfig } from "./scenes/confirm.scene";
+import { SceneContext } from "./scene-context";
+import { ConfirmSceneConfig } from "../confirm/confirm.scene";
 
 /**
  * Interface representing a RawTextElement.
@@ -31,6 +31,9 @@ export class ActionUIScene {
 	protected form: ActionFormData;
 	protected buttonHandlers: (() => void)[];
 	protected player: Player;
+	protected next_scene_default?: string;
+	protected next_scene_config?: ConfirmSceneConfig;
+	protected context: SceneContext;
 
 	/**
 	 * Creates an instance of ActionUIScene.
@@ -76,13 +79,40 @@ export class ActionUIScene {
 	}
 
 	/**
+	 * Sets the next scene to open.
+	 * @param scene_name - The name of the next scene.
+	 * @param config - Optional configuration for the next scene.
+	 */
+	setNextScene(scene_name: string, config?: ConfirmSceneConfig): void {
+		this.next_scene_default = scene_name;
+		this.next_scene_config = config;
+	}
+
+	/**
+	 * Sets the context for this scene.
+	 * @param context - The scene context.
+	 */
+	setContext(context: SceneContext): void {
+		this.context = context;
+	}
+
+	/**
 	 * Shows the UI to a player.
 	 * @param player - The Player object the UI is shown to.
+	 * @param sceneManager - Optional SceneManager instance for scene navigation.
 	 */
-	show(player: Player): void {
+	show(player: Player, sceneManager?: SceneManager): void {
 		this.form.show(player).then((r) => {
 			if (!r.canceled && r.selection !== undefined) {
 				this.buttonHandlers[r.selection]();
+
+				if (sceneManager && this.next_scene_default && this.context) {
+					sceneManager.openSceneWithContext(
+						this.context,
+						this.next_scene_default,
+						this.next_scene_config,
+					);
+				}
 			}
 		});
 	}
@@ -96,6 +126,9 @@ export class MessageUIScene {
 	protected body: string;
 	protected buttonHandlers: (() => void)[];
 	protected player: Player;
+	protected next_scene_default?: string;
+	protected next_scene_config?: ConfirmSceneConfig;
+	protected context?: SceneContext;
 
 	/**
 	 * Creates an instance of MessageUIScene.
@@ -146,13 +179,40 @@ export class MessageUIScene {
 	}
 
 	/**
+	 * Sets the next scene to open.
+	 * @param scene_name - The name of the next scene.
+	 * @param config - Optional configuration for the next scene.
+	 */
+	setNextScene(scene_name: string, config?: ConfirmSceneConfig): void {
+		this.next_scene_default = scene_name;
+		this.next_scene_config = config;
+	}
+
+	/**
+	 * Sets the context for this scene.
+	 * @param context - The scene context.
+	 */
+	setContext(context: SceneContext): void {
+		this.context = context;
+	}
+
+	/**
 	 * Shows the UI to a player.
 	 * @param player - The Player object the UI is shown to.
+	 * @param sceneManager - Optional SceneManager instance for scene navigation.
 	 */
-	show(player: Player): void {
+	show(player: Player, sceneManager?: SceneManager): void {
 		this.form.show(player).then((r) => {
 			if (!r.canceled && r.selection !== undefined) {
 				this.buttonHandlers[r.selection]();
+
+				if (sceneManager && this.next_scene_default && this.context) {
+					sceneManager.openSceneWithContext(
+						this.context,
+						this.next_scene_default,
+						this.next_scene_config,
+					);
+				}
 			}
 		});
 	}
@@ -168,6 +228,7 @@ export class ModalUIScene {
 	protected player: Player;
 	protected next_scene_default: string;
 	protected next_scene_config?: ConfirmSceneConfig;
+	protected context?: SceneContext;
 
 	/**
 	 * Creates an instance of ModalUIScene.
@@ -268,11 +329,19 @@ export class ModalUIScene {
 	}
 
 	/**
+	 * Sets the context for this scene.
+	 * @param context - The scene context.
+	 */
+	setContext(context: SceneContext): void {
+		this.context = context;
+	}
+
+	/**
 	 * Shows the UI to a player.
 	 * @param player - The Player object the UI is shown to.
-	 * @param SceneManager - The SceneManager instance.
+	 * @param sceneManager - The SceneManager instance.
 	 */
-	show(player: Player, SceneManager: SceneManager): void {
+	show(player: Player, sceneManager: SceneManager): void {
 		this.form.show(player).then((r) => {
 			if (r.canceled) {
 				return;
@@ -282,7 +351,13 @@ export class ModalUIScene {
 					this.buttonHandlers[i](r.formValues[i]);
 				}
 			}
-			SceneManager.openScene(this.next_scene_default, this.next_scene_config);
+			if (this.next_scene_default && this.context) {
+				sceneManager.openSceneWithContext(
+					this.context,
+					this.next_scene_default,
+					this.next_scene_config,
+				);
+			}
 		});
 	}
 }
