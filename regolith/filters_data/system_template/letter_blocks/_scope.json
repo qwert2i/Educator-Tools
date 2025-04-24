@@ -1,6 +1,7 @@
 {
-	"letters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-	"font_size": 48,
+	"letters": "abcdefghijklmnopqrstuvwxyz0123456789.,;:!?¡¿-_@#$%^&*+=<>~€£¥§°áàâäãåæçéèêëíìîïñóòôöõøúùûüýÿßΔπΣ÷×√∞",
+	"font_size": 40,
 	"text_color": [10, 10, 10, 255],
-	"font_path": null
+	"font_path": null,
+	"background_image_path": "letter_blocks/punctuation/blank.block.png"
 }
