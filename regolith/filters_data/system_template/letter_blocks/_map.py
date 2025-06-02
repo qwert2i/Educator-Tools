@@ -80,7 +80,7 @@
             "target": f"BP/items/{p.stem.removesuffix('.block')}.bp_item.json",
             "scope": {
                 "letter": p.stem.removesuffix(".block"),
-                "category": p.parent.name,
+                "group": p.parent.name,
             },
             "json_template": True,
         }
