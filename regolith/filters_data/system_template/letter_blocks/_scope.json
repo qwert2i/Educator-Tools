@@ -455,16 +455,6 @@
 					"group": "diacritic"
 				},
 				{
-					"char": "\\u00bb",
-					"safe_name": "right_pointing_double_angle",
-					"group": "symbol"
-				},
-				{
-					"char": "\\u00bc",
-					"safe_name": "vulgar_fraction_one_quarter",
-					"group": "diacritic"
-				},
-				{
 					"char": "\\u00bd",
 					"safe_name": "vulgar_fraction_one_half",
 					"group": "diacritic"
@@ -622,6 +612,27 @@
 				{
 					"char": "\\u00DC",
 					"safe_name": "U_diaeresis",
+					"group": "diacritic"
+				}
+			]
+		},
+		{
+			"id": "bigger_symbols",
+			"font_size": 48,
+			"text_color": [10, 10, 10, 255],
+			"font_path": "AzeretMono-Black.ttf",
+			"background_image_path": "letter_blocks/blank.block.png",
+			"suffix": null,
+			"antialias": true,
+			"letters": [
+				{
+					"char": "\\u00bc",
+					"safe_name": "vulgar_fraction_one_quarter",
+					"group": "diacritic"
+				},
+				{
+					"char": "\\u00bd",
+					"safe_name": "vulgar_fraction_one_half",
 					"group": "diacritic"
 				}
 			]
