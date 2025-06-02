@@ -10,6 +10,12 @@ import re
 
 from array import array
 
+def escape_to_char(escape_str):
+    try:
+        return escape_str.encode('utf-8').decode('unicode_escape')
+    except Exception as e:
+        raise ValueError(f"Error while decoding '{escape_str}': {e}")
+
 def safe_filename(character: str) -> str:
     """
     Convert a character to a safe filename string using Unicode code point.
@@ -26,7 +32,7 @@ def safe_filename(character: str) -> str:
 
 def generate_letter_images(
         map_py_item: dict[str, Any],
-        letters: str,
+        letters: list[dict[str, Any]],
         output_dir: str = ".",
         font_path: str = None,
         font_size: int = 64,
@@ -54,9 +60,14 @@ def generate_letter_images(
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
     
-    # Create a mapping of characters to safe filenames for reference
-    char_to_filename = {char: safe_filename(char) for char in set(letters)}
-    
+    # Adapt letters array [{char, safe_name}, …] → actual chars and filename map
+    # decode any escaped Unicode and build mappings
+    decoded = [(escape_to_char(item["char"]), item.get("safe_name")) for item in letters]
+    char_to_filename = {
+        char: (safe_name or safe_filename(char))
+        for char, safe_name in decoded
+    }
+
     # Create a reverse mapping for debugging and reference
     mapping_file_path = output_path / "character_mapping.txt"
     with open(mapping_file_path, "w", encoding="utf-8") as f:
@@ -115,11 +126,7 @@ def generate_letter_images(
         # Some versions of PIL don't support resizing the default font
     
     # Generate an image for each unique letter
-    print ("a")
-    unique_letters = set(letters)
-    print(f"Unique letters to process: {unique_letters}")
-    for letter in unique_letters:
-        print(f"Processing letter '{letter}'")
+    for letter, safe_name in char_to_filename.items():
         if letter.strip():  # Skip empty or whitespace-only characters
             if background_image:
                 # Use the background image by creating a copy
@@ -151,15 +158,14 @@ def generate_letter_images(
                     # Fallback to simple centering if offset isn't available
                     position = ((image_size[0] - text_width) // 2, (image_size[1] - text_height) // 2)
             
+            print(f"Drawing letter '{safe_name}' at position {position} with size {text_width}x{text_height}")
             # Draw the letter
             draw.text(position, letter, font=font, fill=text_color)
-            
-            # Save the image with a safe filename
-            safe_name = char_to_filename[letter]
             img_path = output_path / f"{safe_name}.block.png"
             img.save(img_path)
-            print(f"Generated image for letter '{letter}' at {img_path.resolve()}")
     
+    # Print a summary of all characters generated
+    print("Generated characters: " + "".join(char_to_filename.keys()))
+
     # Return unmodified map_py_item
-    print("Returning unmodified map_py_item")
     return map_py_item
