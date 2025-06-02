@@ -497,8 +497,8 @@
 			"safe_name": "U_diaeresis"
 		}
 	],
-	"font_size": 40,
+	"font_size": 64,
 	"text_color": [10, 10, 10, 255],
-	"font_path": null,
+	"font_path": "AzeretMono-Black.ttf",
 	"background_image_path": "letter_blocks/blank.block.png"
 }
