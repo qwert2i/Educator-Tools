@@ -4,7 +4,7 @@
 		"description": {
 			"identifier": "`f'edu_tools:letter_block_{letter}_placer'`",
 			"name": "`f\"{letter.replace('_', ' ').title()}\"`",
-			"description": "Places a coresponding letter block",
+			"description": "Places a corresponding letter block",
 			"player_facing": true,
 			"menu_category": {
 				"category": "construction",
