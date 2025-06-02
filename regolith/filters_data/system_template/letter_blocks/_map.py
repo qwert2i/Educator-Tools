@@ -3,7 +3,7 @@
         # Generate letter images for each letter_set
         *[
             generate_letter_images(
-                map_py_item={"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
+                map_py_item={"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER,"on_conflict": "skip"},
                 letters=ls["letters"],
                 output_dir="./letter_blocks",
                 font_size=ls["font_size"],
