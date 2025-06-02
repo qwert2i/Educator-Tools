@@ -2,7 +2,7 @@
 This script generates 64x64 images with transparent backgrounds for each letter
 in a string provided in the scope. It uses the Pillow library for image manipulation.
 '''
-from typing import Any, Dict
+from typing import Any, Dict, TypedDict
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import os
@@ -30,9 +30,14 @@ def safe_filename(character: str) -> str:
     code_point = ord(character)
     return f"char_{format(code_point, 'x')}"
 
+class LetterItem(TypedDict):
+    char: str
+    safe_name: str
+    group: str
+
 def generate_letter_images(
         map_py_item: dict[str, Any],
-        letters: list[dict[str, str, str]],
+        letters: list[LetterItem],
         output_dir: str = ".",
         font_path: str = None,
         font_size: int = 64,
