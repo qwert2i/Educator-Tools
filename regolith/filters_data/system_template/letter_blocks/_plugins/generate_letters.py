@@ -83,13 +83,15 @@ def generate_letter_images(
             f.write(f"{char}\t{filename}\t{ord(char)}\t{group}\n")
     print(f"Created character mapping reference at {mapping_file_path}")
     
+    # Determine oversampling factor and working size before any image ops
+    scale = 4 if antialias else 1
+    work_size = (image_size[0] * scale, image_size[1] * scale)
+
     # Load background image if provided
     background_image = None
     if background_image_path and os.path.exists(background_image_path):
         try:
             background_image = Image.open(background_image_path).convert('RGBA')
-            scale = 4 if antialias else 1           # oversampling factor
-            work_size = (image_size[0] * scale, image_size[1] * scale)
             background_image = background_image.resize(work_size)
             print(f"Using background image: {background_image_path}")
         except Exception as e:
