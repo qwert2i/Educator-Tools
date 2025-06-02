@@ -158,7 +158,6 @@ def generate_letter_images(
                     # Fallback to simple centering if offset isn't available
                     position = ((image_size[0] - text_width) // 2, (image_size[1] - text_height) // 2)
             
-            print(f"Drawing letter '{safe_name}' at position {position} with size {text_width}x{text_height}")
             # Draw the letter
             draw.text(position, letter, font=font, fill=text_color)
             img_path = output_path / f"{safe_name}.block.png"
