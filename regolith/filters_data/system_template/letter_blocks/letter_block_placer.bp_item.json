@@ -7,8 +7,8 @@
 			"description": "Places a coresponding letter block",
 			"player_facing": true,
 			"menu_category": {
-				"category": "construction"
-				//"group": "`f'itemGroup.name.{category}'`"
+				"category": "construction",
+				"group": "`f'shapescape:itemGroup.name.{group}'`"
 			}
 		},
 		"components": {

@@ -32,13 +32,15 @@ def safe_filename(character: str) -> str:
 
 def generate_letter_images(
         map_py_item: dict[str, Any],
-        letters: list[dict[str, Any]],
+        letters: list[dict[str, str, str]],
         output_dir: str = ".",
         font_path: str = None,
         font_size: int = 64,
         text_color: tuple = (255, 255, 255, 255),
         image_size: tuple = (64, 64),
-        background_image_path: str = None
+        background_image_path: str = None,
+        background_suffix: str = None,
+        antialias: bool = False
     ) -> dict[str, Any]:
     '''
     Generates an image for each letter in the provided string with transparent background.
@@ -52,6 +54,7 @@ def generate_letter_images(
         text_color: RGBA color tuple for the text.
         image_size: Tuple with (width, height) of the output image.
         background_image_path: Path to background image. If None, transparent background will be used.
+        antialias: Enable antialiasing via oversampling and downsampling
         
     Returns:
         The unmodified map_py_item.
@@ -60,20 +63,24 @@ def generate_letter_images(
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
     
-    # Adapt letters array [{char, safe_name}, …] → actual chars and filename map
-    # decode any escaped Unicode and build mappings
-    decoded = [(escape_to_char(item["char"]), item.get("safe_name")) for item in letters]
-    char_to_filename = {
-        char: (safe_name or safe_filename(char))
-        for char, safe_name in decoded
+    # Adapt letters array → actual chars, filename and group
+    decoded = [
+        (escape_to_char(item["char"]),
+         item.get("safe_name"),
+         item.get("group"))
+        for item in letters
+    ]
+    char_map = {
+        char: ((safe_name or safe_filename(char)), group)
+        for char, safe_name, group in decoded
     }
 
     # Create a reverse mapping for debugging and reference
     mapping_file_path = output_path / "character_mapping.txt"
     with open(mapping_file_path, "w", encoding="utf-8") as f:
-        f.write("Character\tFilename\tUnicode\n")
-        for char, filename in char_to_filename.items():
-            f.write(f"{char}\t{filename}\t{ord(char)}\n")
+        f.write("Character\tFilename\tUnicode\tGroup\n")
+        for char, (filename, group) in char_map.items():
+            f.write(f"{char}\t{filename}\t{ord(char)}\t{group}\n")
     print(f"Created character mapping reference at {mapping_file_path}")
     
     # Load background image if provided
@@ -81,7 +88,9 @@ def generate_letter_images(
     if background_image_path and os.path.exists(background_image_path):
         try:
             background_image = Image.open(background_image_path).convert('RGBA')
-            background_image = background_image.resize(image_size)
+            scale = 4 if antialias else 1           # oversampling factor
+            work_size = (image_size[0] * scale, image_size[1] * scale)
+            background_image = background_image.resize(work_size)
             print(f"Using background image: {background_image_path}")
         except Exception as e:
             print(f"Error loading background image: {e}")
@@ -94,9 +103,10 @@ def generate_letter_images(
     font = None
     
     # Try to load the specified custom font
+    font_size_used = font_size * (4 if antialias else 1)
     if font_path and os.path.exists(font_path):
         try:
-            font = ImageFont.truetype(font_path, font_size)
+            font = ImageFont.truetype(font_path, font_size_used)
             print(f"Successfully loaded custom font '{font_path}' with size {font_size}")
         except Exception as e:
             print(f"Error loading custom font '{font_path}': {e}")
@@ -113,7 +123,7 @@ def generate_letter_images(
         
         for system_font in system_fonts:
             try:
-                font = ImageFont.truetype(system_font, font_size)
+                font = ImageFont.truetype(system_font, font_size_used)
                 print(f"Using system font '{system_font}' with size {font_size}")
                 break
             except Exception:
@@ -126,45 +136,55 @@ def generate_letter_images(
         # Some versions of PIL don't support resizing the default font
     
     # Generate an image for each unique letter
-    for letter, safe_name in char_to_filename.items():
-        if letter.strip():  # Skip empty or whitespace-only characters
+    for char, (filename, group) in char_map.items():
+        if char.strip():  # Skip whitespace-only characters
+            output_path_group = output_path
+            if group:
+                output_path_group = output_path / group
+                output_path_group.mkdir(parents=True, exist_ok=True)
+
+            # create the oversampled image
             if background_image:
-                # Use the background image by creating a copy
                 img = background_image.copy()
             else:
-                # Create a transparent image
-                img = Image.new('RGBA', image_size, (0, 0, 0, 0))
-            
+                img = Image.new('RGBA', work_size, (0, 0, 0, 0))
+
             draw = ImageDraw.Draw(img)
             
             # Calculate text size to center it
             try:
                 # For newer Pillow versions
-                left, top, right, bottom = draw.textbbox((0, 0), letter, font=font)
+                left, top, right, bottom = draw.textbbox((0, 0), char, font=font)
                 text_width = right - left
                 text_height = bottom - top
                 
                 # Account for the text's position relative to the origin for proper centering
-                position = ((image_size[0] - text_width) // 2 - left, (image_size[1] - text_height) // 2 - top)
+                position = ((img.width - text_width) // 2 - left, (img.height - text_height) // 2 - top)
             except AttributeError:
                 # For older Pillow versions
-                text_width, text_height = draw.textsize(letter, font=font)
+                text_width, text_height = draw.textsize(char, font=font)
                 
                 # Try to get offset information if available
                 try:
-                    offset_x, offset_y = font.getoffset(letter)
-                    position = ((image_size[0] - text_width) // 2 - offset_x, (image_size[1] - text_height) // 2 - offset_y)
+                    offset_x, offset_y = font.getoffset(char)
+                    position = ((img.width - text_width) // 2 - offset_x, (img.height - text_height) // 2 - offset_y)
                 except (AttributeError, TypeError):
                     # Fallback to simple centering if offset isn't available
-                    position = ((image_size[0] - text_width) // 2, (image_size[1] - text_height) // 2)
+                    position = ((img.width - text_width) // 2, (img.height - text_height) // 2)
             
             # Draw the letter
-            draw.text(position, letter, font=font, fill=text_color)
-            img_path = output_path / f"{safe_name}.block.png"
-            img.save(img_path)
-    
+            draw.text(position, char, font=font, fill=text_color)
+
+            # downsample to final size with antialias
+            if antialias:
+                img = img.resize(image_size, resample=Image.NEAREST)
+
+            # Determine filename with optional background suffix
+            name = f"{filename}{background_suffix}.block.png" if background_suffix else f"{filename}.block.png"
+            img.save(output_path_group / name)
+
     # Print a summary of all characters generated
-    print("Generated characters: " + "".join(char_to_filename.keys()))
+    print("Generated characters: " + "".join(char_map.keys()))
 
     # Return unmodified map_py_item
     return map_py_item

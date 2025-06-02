@@ -9,6 +9,8 @@
             text_color=tuple(text_color),  # Convert list to tuple
             font_path=font_path,
             background_image_path=background_image_path,
+            background_suffix=None,
+            antialias=True
         ),
         # Textures
         #{"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
