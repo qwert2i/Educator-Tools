@@ -1,17 +1,22 @@
 (
     [
-        # Generate letter images using our plugin - direct call method
-        generate_letter_images(
-            map_py_item={"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
-            letters=letters,
-            output_dir="./letter_blocks",
-            font_size=font_size,
-            text_color=tuple(text_color),  # Convert list to tuple
-            font_path=font_path,
-            background_image_path=background_image_path,
-            background_suffix=None,
-            antialias=True
-        ),
+        # Generate letter images for each letter_set
+        *[
+            generate_letter_images(
+                map_py_item={"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
+                letters=ls["letters"],
+                output_dir="./letter_blocks",
+                font_size=ls["font_size"],
+                text_color=tuple(ls["text_color"]),
+                font_path=ls["font_path"],
+                background_image_path=ls["background_image_path"],
+                suffix=ls["suffix"],
+                antialias=ls["antialias"]
+            )
+            for ls in letter_sets
+        ]
+    ]
+    + [
         # Textures
         #{"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
         # Item texture / Terrain Texture for block and item icon

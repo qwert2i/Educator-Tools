@@ -39,7 +39,7 @@ def generate_letter_images(
         text_color: tuple = (255, 255, 255, 255),
         image_size: tuple = (64, 64),
         background_image_path: str = None,
-        background_suffix: str = None,
+        suffix: str = None,
         antialias: bool = False
     ) -> dict[str, Any]:
     '''
@@ -180,7 +180,7 @@ def generate_letter_images(
                 img = img.resize(image_size, resample=Image.NEAREST)
 
             # Determine filename with optional background suffix
-            name = f"{filename}{background_suffix}.block.png" if background_suffix else f"{filename}.block.png"
+            name = f"{filename}{suffix}.block.png" if suffix else f"{filename}.block.png"
             img.save(output_path_group / name)
 
     # Print a summary of all characters generated
