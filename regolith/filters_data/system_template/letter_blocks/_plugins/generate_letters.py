@@ -97,7 +97,7 @@ def generate_letter_images(
     if background_image_path and os.path.exists(background_image_path):
         try:
             background_image = Image.open(background_image_path).convert('RGBA')
-            background_image = background_image.resize(work_size)
+            background_image = background_image.resize(work_size, resample=Image.NEAREST)
             print(f"Using background image: {background_image_path}")
         except Exception as e:
             print(f"Error loading background image: {e}")

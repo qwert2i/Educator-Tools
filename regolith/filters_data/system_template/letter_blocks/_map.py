@@ -8,6 +8,7 @@
                 output_dir="./letter_blocks",
                 font_size=ls["font_size"],
                 text_color=tuple(ls["text_color"]),
+                image_size=tuple(ls["image_size"]),
                 font_path=ls["font_path"],
                 background_image_path=ls["background_image_path"],
                 suffix=ls["suffix"],
