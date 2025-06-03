@@ -3,7 +3,7 @@ import { PropertyStorage } from "@shapescape/storage";
 import { ModuleManager, Module } from "../../module-manager";
 import { TeamsService } from "../teams/teams.service";
 import { SceneContext } from "./scene-context";
-import { ConfirmSceneConfig } from "../confirm/confirm.scene";
+import { ConfirmSceneConfig } from "../confirm/confirm-scene-config";
 
 type SceneFactory = (
 	manager: SceneManager,

@@ -321,6 +321,14 @@ export class ModalUIScene {
 	}
 
 	/**
+	 * Sets the title of the UI window.
+	 * @param id - The ID for the translation key that will be used as title.
+	 */
+	setTitle(id: string): void {
+		this.form.title(`edu_tools.ui.${id}.title`);
+	}
+
+	/**
 	 * Sets the next scene to open.
 	 * @param scene_name - The name of the next scene.
 	 */
