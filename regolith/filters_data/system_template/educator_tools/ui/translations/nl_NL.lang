@@ -89,7 +89,6 @@ edu_tools.ui.timer.buttons.stop=Verwijderen
 edu_tools.ui.timer.buttons.hide_timer=Verberg Timer Entiteit
 edu_tools.ui.timer.buttons.show_timer=Toon Timer Entiteit
 
-
 ### Timer
 edu_tools.ui.timer.chat.30_seconds_left=§d[Timer]§r 30 Seconden resterend!
 edu_tools.ui.timer.chat.10_seconds_left=§d[Timer]§r 10 Seconden resterend!

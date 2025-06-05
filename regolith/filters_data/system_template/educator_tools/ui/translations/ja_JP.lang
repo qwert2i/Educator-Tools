@@ -51,7 +51,7 @@ edu_tools.ui.confirm.teleport.specific.body2=へ
 edu_tools.ui.confirm.teleport.all.body=全ての§9プレイヤー§rのテレポートに成功しました
 
 edu_tools.ui.confirm.gamemode.title=§fゲームモードの設定の変更
-edu_tools.ui.confirm.gamemode.self.body=§9あなた§rのゲームモードの変更に成功しました 
+edu_tools.ui.confirm.gamemode.self.body=§9あなた§rのゲームモードの変更に成功しました
 edu_tools.ui.confirm.gamemode.specific.body=ゲームモードの変更に成功しました
 edu_tools.ui.confirm.gamemode.all.body=全ての§9プレイヤー§rのゲームモードの変更に成功しました
 

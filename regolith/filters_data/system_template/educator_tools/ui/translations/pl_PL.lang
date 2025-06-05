@@ -45,12 +45,12 @@ edu_tools.ui.confirm.teleport.title=§fPotwierdź Teleportację
 edu_tools.ui.confirm.teleport.title=§fPrzetelportowano
 edu_tools.ui.confirm.teleport.self.body=Pomyślnie przeteleportowano
 edu_tools.ui.confirm.teleport.self.body2=do
-edu_tools.ui.confirm.teleport.specific.body= Pomyślnie przeteleportowano
+edu_tools.ui.confirm.teleport.specific.body=Pomyślnie przeteleportowano
 edu_tools.ui.confirm.teleport.specific.body2=do
 edu_tools.ui.confirm.teleport.all.body=Pomyślnie przeteleportowano wszystkich §9graczy§r do
 
 edu_tools.ui.confirm.gamemode.title=§fPotwierdź Zmianę Trybu Gry
-edu_tools.ui.confirm.gamemode.self.body=Pomyślnie zmieniono §9twój§r tryb gry 
+edu_tools.ui.confirm.gamemode.self.body=Pomyślnie zmieniono §9twój§r tryb gry
 edu_tools.ui.confirm.gamemode.specific.body=Pomyślnie zmieniono tryb gry
 edu_tools.ui.confirm.gamemode.all.body=Pomyślnie zmieniono tryb gry wszystkich §9graczy§r
 

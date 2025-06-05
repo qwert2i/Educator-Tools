@@ -45,12 +45,12 @@ edu_tools.ui.confirm.teleport.title=§fΕπιβεβαίωση τηλεμεταφ
 edu_tools.ui.confirm.teleport.title=§fΤηλεμεταφέρθηκε
 edu_tools.ui.confirm.teleport.self.body=Τηλεμεταφέρθηκε επιτυχώς
 edu_tools.ui.confirm.teleport.self.body2=προς
-edu_tools.ui.confirm.teleport.specific.body= Τηλεμεταφέρθηκε επιτυχώς
+edu_tools.ui.confirm.teleport.specific.body=Τηλεμεταφέρθηκε επιτυχώς
 edu_tools.ui.confirm.teleport.specific.body2=προς
 edu_tools.ui.confirm.teleport.all.body=Τηλεμεταφέρθηκαν επιτυχώς όλοι οι §9παίκτες§r τηλεμεταφέρθηκαν προς
 
 edu_tools.ui.confirm.gamemode.title=§fΕπιβεβαίωση τύπου παιχνιδιού
-edu_tools.ui.confirm.gamemode.self.body=Ο τύπος παιχνιδιού §9σου§r τέθηκε με επιτυχία 
+edu_tools.ui.confirm.gamemode.self.body=Ο τύπος παιχνιδιού §9σου§r τέθηκε με επιτυχία
 edu_tools.ui.confirm.gamemode.specific.body=Ο τύπος παιχνιδιού τέθηκε με επιτυχία για
 edu_tools.ui.confirm.gamemode.all.body=Ο τύπος παιχνιδιού τέθηκε με επιτυχία για όλους τους §9παίκτες§r
 
@@ -68,7 +68,7 @@ edu_tools.ui.confirm.edit_timer.body=Θέλετε πραγματικά να επ
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fΡυθμίσεις κόσμου
-edu_tools.ui.world_settings.toggles.mob_spawning=Εμφάνιση ζώων/τεράτων 
+edu_tools.ui.world_settings.toggles.mob_spawning=Εμφάνιση ζώων/τεράτων
 edu_tools.ui.world_settings.toggles.mob_griefing=Καταστροφή κόσμου από τέρατα
 edu_tools.ui.world_settings.toggles.keep_inventory=Διατήρηση αντικειμένων παίκτη
 edu_tools.ui.world_settings.toggles.daylight_cycle=Εναλλαγή ημέρας/νύχτας
