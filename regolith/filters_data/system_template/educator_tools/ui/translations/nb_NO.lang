@@ -15,17 +15,20 @@ edu_tools.ui.main.buttons.manage_teams=Administrer lag
 edu_tools.ui.main.buttons.timer=Timer
 edu_tools.ui.main.buttons.world_settings=Verdensinnstillinger
 edu_tools.ui.main.buttons.lock_players=Lås spillere
+edu_tools.ui.main.buttons.manage_health=Administrer Helse
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fVelg Spiller
 edu_tools.ui.set_players.teleport.target.title=§fVelg Mål
 edu_tools.ui.set_players.gamemode.title=§fVelg Fag
+edu_tools.ui.set_players.manage_health.title=§fAdminister Helse
 edu_tools.ui.set_players.select_subject_for_teleport.body=Velg en §9spiller§r å teleportere
 edu_tools.ui.set_players.select_target_for_teleport.body=Velg et §cmål§r å teleportere til
 edu_tools.ui.set_players.buttons.you=Deg
 edu_tools.ui.set_players.buttons.all=Alle
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Velg en §9spiller§r å endre spillemodus for
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Velg en §9spiller§r å administrere helse for
 
 
 ### Gamemode UI Scene
@@ -65,6 +68,28 @@ edu_tools.ui.confirm.stop_timer.body=Er du sikker på at du vil stoppe timeren? 
 
 edu_tools.ui.confirm.edit_timer.title=§fBekreft Timer Endring
 edu_tools.ui.confirm.edit_timer.body=Er du sikker på at du vil endre timeren? Dette vil overskrive den eksisterende timeren.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fBekreft Deaktivering av Sult
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Er du sikker på at du vil deaktivere sulten din?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Bekreft at du ønsker å deaktivere sult for
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Er du sikker på at du vil deaktivere sult for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fBekreft Aktivering av Sult
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Er du sikker på at du vil aktivere sulten din?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Bekreft at du ønsker å aktivere sult for
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Er du sikker på at du vil aktivere sult for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fBekreft Deaktivering av Helse
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Er du sikker på at du vil deaktivere helsen din?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Bekreft at du ønsker å deaktivere helse for
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Er du sikker på at du vil deaktivere helse for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fBekreft Aktivering av Helse
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Er du sikker på at du vil aktivere helsen din?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Bekreft at du ønsker å aktivere helse for
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Er du sikker på at du vil aktivere helse for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fBekreft Helbredelse
+edu_tools.ui.confirm.manage_health.self.heal.body=Er du sikker på at du vil helbrede deg selv?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Bekreft at du ønsker å helbrede
+edu_tools.ui.confirm.manage_health.all.heal.body=Er du sikker på at du vil helbrede alle §9spillere§r
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fVerdensinnstillinger
@@ -141,3 +166,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Sentr
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Rundt Meg
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Område
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Radien av området
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Administrer Helse
+edu_tools.ui.manage_health.self.body=Administrer helse for
+edu_tools.ui.manage_health.specific.body=Administrer helse for
+edu_tools.ui.manage_health.all.body=Administrer helse for alle §9spillere§r
+edu_tools.ui.manage_health.buttons.disable_health=Deaktiver Helse
+edu_tools.ui.manage_health.buttons.enable_health=Aktiver Helse
+edu_tools.ui.manage_health.buttons.disable_hunger=Deaktiver Sult
+edu_tools.ui.manage_health.buttons.enable_hunger=Aktiver Sult
+edu_tools.ui.manage_health.buttons.heal=Helbred
