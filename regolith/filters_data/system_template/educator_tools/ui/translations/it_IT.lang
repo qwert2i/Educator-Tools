@@ -14,7 +14,7 @@ edu_tools.ui.main.buttons.gamemode=Modalità di gioco
 edu_tools.ui.main.buttons.manage_teams=Gestisci Squadre
 edu_tools.ui.main.buttons.timer=Timer
 edu_tools.ui.main.buttons.world_settings=Impostazioni del Mondo
-edu_tools.ui.main.buttons.lock_players=Lock Players
+edu_tools.ui.main.buttons.lock_players=Blocco Giocatori
 edu_tools.ui.main.buttons.manage_health=Gestisci Salute
 
 ### Set Players UI Scene
@@ -23,7 +23,7 @@ edu_tools.ui.set_players.teleport.target.title=§fSelect il target
 edu_tools.ui.set_players.gamemode.title=§fSeleziona il target
 edu_tools.ui.set_players.manage_health.title=§fGestisci Salute
 edu_tools.ui.set_players.select_subject_for_teleport.body=Seleziona il §9target§r da teletrasportare
-edu_tools.ui.set_players.select_target_for_teleport.body=Seleziona un §ctarget§r a cui teletrasportarsi 
+edu_tools.ui.set_players.select_target_for_teleport.body=Seleziona un §ctarget§r a cui teletrasportarsi
 edu_tools.ui.set_players.buttons.you=Tu
 edu_tools.ui.set_players.buttons.all=Tutti
 
@@ -44,16 +44,16 @@ edu_tools.ui.set_gamemode.buttons.survival=Sopravvivenza
 edu_tools.ui.set_gamemode.buttons.creative=Creativa
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fConfirma Teletrasporto
+edu_tools.ui.confirm.teleport.title=§fTeletrasportato
 edu_tools.ui.confirm.teleport.title=§fTeletrasportato
 edu_tools.ui.confirm.teleport.self.body=Teletrasportato con successo
 edu_tools.ui.confirm.teleport.self.body2=a
-edu_tools.ui.confirm.teleport.specific.body= Teletrasportato con successo
+edu_tools.ui.confirm.teleport.specific.body=Teletrasportato con successo
 edu_tools.ui.confirm.teleport.specific.body2=a
 edu_tools.ui.confirm.teleport.all.body=Teletrasportato con successo tutti i  §9players§r teletrasportati a
 
 edu_tools.ui.confirm.gamemode.title=§fConferma il cambio di modalità di gioco
-edu_tools.ui.confirm.gamemode.self.body=La §9tua§r modalità di gioco è stata cambiata con successo 
+edu_tools.ui.confirm.gamemode.self.body=La §9tua§r modalità di gioco è stata cambiata con successo
 edu_tools.ui.confirm.gamemode.specific.body=Impostata con successo la modalità di gioco di
 edu_tools.ui.confirm.gamemode.all.body=Impostata con successo la modalità di gioco di tutti i §9players§r
 
@@ -102,7 +102,6 @@ edu_tools.ui.world_settings.toggles.immediate_respawn=Respawn Immediato
 edu_tools.ui.world_settings.toggles.command_blocks=Blocchi Comando
 edu_tools.ui.world_settings.toggles.world_damage=Danni al Mondo
 
-
 ### Timer Scene
 edu_tools.ui.timer.title=§fTimer
 edu_tools.ui.timer.buttons.create=Crea
@@ -124,7 +123,6 @@ edu_tools.ui.timer.chat.3_seconds_left=§d[Timer]§r 3 secondi rimasti!
 edu_tools.ui.timer.chat.2_seconds_left=§d[Timer]§r 2 secondi rimasti!
 edu_tools.ui.timer.chat.1_second_left=§d[Timer]§r 1 secondo rimasto!
 edu_tools.ui.timer.chat.time_is_up=§d[Timer]§r Tempo scaduto!
-
 
 edu_tools.ui.timer.time.second=Secondo
 edu_tools.ui.timer.time.seconds=Secondi
@@ -149,14 +147,12 @@ edu_tools.ui.edit_timer.time.45_minutes=45 minuti
 edu_tools.ui.edit_timer.time.60_minutes=60 minuti
 edu_tools.ui.edit_timer.time.90_minutes=90 minuti
 
-
 ### Lock Players
-edu_tools.ui.lock_players.title=§fBlocca Giocatori
+edu_tools.ui.lock_players.title=§fBlocco Giocatori
 edu_tools.ui.lock_players.body=Blocca i giocatori nell'area
 edu_tools.ui.lock_players.buttons.configure=Configura
 edu_tools.ui.lock_players.buttons.set_center=Imposta il Centro
 edu_tools.ui.lock_players.buttons.teleport_to_center=Teletrasporta al Centro
-
 
 edu_tools.ui.lock_players_settings.toggles.lock_players=Attiva Blocco Giocatori
 edu_tools.ui.lock_players_settings.toggles.teleport_to_center=Quando attivato, i giocatori che si allontanano troppo dall'area verranno teletrasportati al centro invece che al bordo dell'area.
@@ -164,7 +160,7 @@ edu_tools.message.too_far_push=Ti stai allontanando troppo.
 edu_tools.message.too_far_teleport_area=Sei stato teletrasportato indietro nell'area perché ti sei allontanato troppo.
 edu_tools.message.too_far_teleport_center=Sei stato teletrasportato al centro perché ti sei allontanato troppo.
 
-
+edu_tools.ui.lock_players_settings.title=§fConfigurazione Blocco Giocatori
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode=Seleziona la modalità
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Attorno a me
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=A

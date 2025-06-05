@@ -33,7 +33,7 @@ edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Velg en §
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fEndre Spillemodus
-edu_tools.ui.set_gamemode.self.body=Endre spillemodus for 
+edu_tools.ui.set_gamemode.self.body=Endre spillemodus for
 edu_tools.ui.set_gamemode.self.body2=til
 edu_tools.ui.set_gamemode.specific.body=Endre spillemodus for
 edu_tools.ui.set_gamemode.specific.body2=til
@@ -53,7 +53,7 @@ edu_tools.ui.confirm.teleport.specific.body2=til
 edu_tools.ui.confirm.teleport.all.body=Alle §9spillere§r ble teleportert til
 
 edu_tools.ui.confirm.gamemode.title=§fBekreft spillemodus endring
-edu_tools.ui.confirm.gamemode.self.body=Endret §9din egen§r spillemodus 
+edu_tools.ui.confirm.gamemode.self.body=Endret §9din egen§r spillemodus
 edu_tools.ui.confirm.gamemode.specific.body=Endret spillemudus for
 edu_tools.ui.confirm.gamemode.all.body=Endret spillemodus for alle §9spillere§r
 
@@ -61,7 +61,7 @@ edu_tools.ui.confirm.world_settings.title=§fBekreft Verdensinnstillinger
 edu_tools.ui.confirm.world_settings.body=Verdensinnstillingene ble endret
 
 edu_tools.ui.confirm.reset_timer.title=§fBekreft Timer Tilbakestilling
-edu_tools.ui.confirm.reset_timer.body= Er du sikker på at du vil tilbakestille timeren? Dette vil nullstille timeren.
+edu_tools.ui.confirm.reset_timer.body=Er du sikker på at du vil tilbakestille timeren? Dette vil nullstille timeren.
 
 edu_tools.ui.confirm.stop_timer.title=§fBekreft Timer Stopp
 edu_tools.ui.confirm.stop_timer.body=Er du sikker på at du vil stoppe timeren? Dette vil slette timeren.

@@ -53,7 +53,7 @@ edu_tools.ui.confirm.teleport.specific.body2=至
 edu_tools.ui.confirm.teleport.all.body=已经成功传送所有§9玩家§r至目标
 
 edu_tools.ui.confirm.gamemode.title=§f确认游戏模式改变
-edu_tools.ui.confirm.gamemode.self.body=成功设置§9你§r的游戏模式 
+edu_tools.ui.confirm.gamemode.self.body=成功设置§9你§r的游戏模式
 edu_tools.ui.confirm.gamemode.specific.body=成功设置游戏模式
 edu_tools.ui.confirm.gamemode.all.body=成功设置所有§9玩家§r的游戏模式
 
