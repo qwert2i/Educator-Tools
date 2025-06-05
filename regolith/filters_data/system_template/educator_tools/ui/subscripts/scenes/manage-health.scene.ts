@@ -71,10 +71,6 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										const health = player.getComponent(
 											EntityHealthComponent.componentId,
@@ -86,7 +82,12 @@ export class ManageHealthScene extends ActionUIScene {
 											showParticles: false,
 											amplifier: 10,
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -99,10 +100,6 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										world.getPlayers().forEach((player: Player) => {
 											const health = player.getComponent(
@@ -116,7 +113,12 @@ export class ManageHealthScene extends ActionUIScene {
 												amplifier: 10,
 											});
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -129,10 +131,6 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										const specificPlayer: Player = options as Player;
 										const health = specificPlayer.getComponent(
@@ -145,7 +143,12 @@ export class ManageHealthScene extends ActionUIScene {
 											showParticles: false,
 											amplifier: 10,
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -174,16 +177,17 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										player.addEffect("regeneration", 1000000, {
 											showParticles: false,
 											amplifier: 10,
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -196,10 +200,6 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										world.getPlayers().forEach((player: Player) => {
 											player.addEffect("regeneration", 1000000, {
@@ -207,7 +207,12 @@ export class ManageHealthScene extends ActionUIScene {
 												amplifier: 10,
 											});
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -220,10 +225,6 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										const specificPlayer: Player = options as Player;
 
@@ -231,7 +232,12 @@ export class ManageHealthScene extends ActionUIScene {
 											showParticles: false,
 											amplifier: 10,
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -260,16 +266,17 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										player.addEffect("saturation", 1000000, {
 											showParticles: false,
 											amplifier: 10,
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -282,10 +289,6 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										world.getPlayers().forEach((player: Player) => {
 											player.addEffect("saturation", 1000000, {
@@ -293,7 +296,12 @@ export class ManageHealthScene extends ActionUIScene {
 												amplifier: 10,
 											});
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -306,17 +314,18 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										const specificPlayer: Player = options as Player;
 										specificPlayer.addEffect("saturation", 1000000, {
 											showParticles: false,
 											amplifier: 10,
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -345,13 +354,14 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
+									handler: () => {
+										player.removeEffect("regeneration");
+										sceneManager.openScene("main");
+									},
 								},
 								{
 									label: "edu_tools.ui.buttons.exit",
-									handler: () => {
-										player.removeEffect("regeneration");
-									},
+									handler: () => {},
 								},
 							],
 						};
@@ -364,15 +374,16 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										world.getPlayers().forEach((player: Player) => {
 											player.removeEffect("regeneration");
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -385,14 +396,15 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										const specificPlayer: Player = options as Player;
 										specificPlayer.removeEffect("regeneration");
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -421,13 +433,14 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
+									handler: () => {
+										player.removeEffect("saturation");
+										sceneManager.openScene("main");
+									},
 								},
 								{
 									label: "edu_tools.ui.buttons.exit",
-									handler: () => {
-										player.removeEffect("saturation");
-									},
+									handler: () => {},
 								},
 							],
 						};
@@ -440,15 +453,16 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										world.getPlayers().forEach((player: Player) => {
 											player.removeEffect("saturation");
 										});
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
@@ -461,14 +475,15 @@ export class ManageHealthScene extends ActionUIScene {
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
-									handler: () => sceneManager.openScene("main"),
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
 									handler: () => {
 										const specificPlayer: Player = options as Player;
 										specificPlayer.removeEffect("saturation");
+										sceneManager.openScene("main");
 									},
+								},
+								{
+									label: "edu_tools.ui.buttons.exit",
+									handler: () => {},
 								},
 							],
 						};
