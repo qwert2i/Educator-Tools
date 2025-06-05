@@ -23,11 +23,11 @@
 			},
 			"system_template": {
 				"url": "github.com/Nusiq/regolith-filters",
-				"version": "3.15.0"
+				"version": "3.16.0"
 			},
 			"system_template_esbuild": {
 				"url": "github.com/Nusiq/regolith-filters",
-				"version": "2.1.0"
+				"version": "3.0.0"
 			},
 			"texture_list": {
 				"url": "github.com/Bedrock-OSS/regolith-filters",
