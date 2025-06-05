@@ -1,6 +1,6 @@
 import { SceneManager } from "../scene-manager";
 import { ActionUIScene } from "../ui-scene";
-import { Player, world } from "@minecraft/server";
+import { EntityInventoryComponent, Player, world } from "@minecraft/server";
 
 const SceneName = "set_players";
 
@@ -222,9 +222,149 @@ export class SetPlayersScene extends ActionUIScene {
 			});
 
 			this.show(sceneManager.getSourcePlayer());
+		} else if (operation === "copy_inventory") {
+			const [SUBJECT_PLAYER_TYPE, OPTIONS] =
+				sceneManager.getSubjectPlayersType();
+
+			if (SUBJECT_PLAYER_TYPE == null) {
+				// Subject not selected: select subject.
+				super(
+					"set_players.copy_inventory.subject",
+					sceneManager.getSourcePlayer(),
+				);
+				this.setSimpleBody(
+					"edu_tools.ui.set_players.select_subject_for_copy_inventory.body",
+				);
+
+				world.getPlayers().forEach((player: Player): void => {
+					this.addButton(
+						player.name,
+						(): void => {
+							sceneManager.setSubjectPlayersType(
+								"specific_player",
+								null,
+								player,
+							);
+							sceneManager.openScene("set_players", "copy_inventory");
+						},
+						"textures/edu_tools/ui/icons/set_players/player",
+					);
+				});
+
+				this.addButton("edu_tools.ui.buttons.back", (): void => {
+					sceneManager.openScene("main");
+				});
+
+				this.show(sceneManager.getSourcePlayer());
+			} else {
+				// Subject already selected: choose target.
+				super(
+					"set_players.copy_inventory.target",
+					sceneManager.getSourcePlayer(),
+				);
+				this.setSimpleBody(
+					"edu_tools.ui.set_players.select_target_for_copy_inventory.body",
+				);
+
+				if (SUBJECT_PLAYER_TYPE === "specific_player") {
+					const specificPlayer = OPTIONS as Player;
+					world.getPlayers().forEach((player: Player): void => {
+						if (player !== specificPlayer) {
+							this.addButton(
+								player.name,
+								(): void => {
+									sceneManager.setTargetPlayersType(
+										"specific_player",
+										null,
+										player,
+									);
+									SetPlayersScene.copyInventory(specificPlayer, player);
+									const config = {
+										title: "confirm.copy_inventory",
+										body: "edu_tools.ui.confirm.copy_inventory.specific.body",
+										buttons: [
+											{
+												label: "edu_tools.ui.buttons.continue",
+												handler: () => {
+													sceneManager.openScene("main");
+												},
+											},
+											{
+												label: "edu_tools.ui.buttons.exit",
+												handler: () => {},
+											},
+										],
+									};
+									sceneManager.openScene("confirm", config);
+								},
+								"textures/edu_tools/ui/icons/set_players/player",
+							);
+						}
+					});
+
+					this.addButton(
+						"edu_tools.ui.set_players.buttons.all",
+						(): void => {
+							world.getPlayers().forEach((player: Player): void => {
+								if (player !== specificPlayer) {
+									SetPlayersScene.copyInventory(specificPlayer, player);
+								}
+							});
+							const config = {
+								title: "confirm.copy_inventory",
+								body: "edu_tools.ui.confirm.copy_inventory.all.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", config);
+						},
+						"textures/edu_tools/ui/icons/set_players/all",
+					);
+				}
+
+				this.addButton("edu_tools.ui.buttons.back", (): void => {
+					sceneManager.setSubjectPlayersType(null, null, null);
+					sceneManager.goBack();
+				});
+
+				this.show(sceneManager.getSourcePlayer());
+			}
 		} else {
 			console.error("Invalid operation");
 			sceneManager.openScene("main");
+		}
+	}
+
+	private static copyInventory(source: Player, target: Player): void {
+		const sComponents = source.getComponent(
+			EntityInventoryComponent.componentId,
+		) as EntityInventoryComponent;
+		const tComponents = target.getComponent(
+			EntityInventoryComponent.componentId,
+		) as EntityInventoryComponent;
+		if (
+			sComponents &&
+			tComponents &&
+			sComponents.container &&
+			tComponents.container
+		) {
+			tComponents.container.clearAll();
+			for (let i = 0; i < sComponents.container.size; i++) {
+				const item = sComponents.container.getItem(i);
+				if (item && tComponents.container.size > i) {
+					tComponents.container.setItem(i, item);
+				}
+			}
 		}
 	}
 }
