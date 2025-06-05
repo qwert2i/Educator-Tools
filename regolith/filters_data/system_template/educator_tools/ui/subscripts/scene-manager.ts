@@ -9,6 +9,7 @@ import { EditTimerScene } from "./scenes/edit-timer.scene";
 import { WorldData } from "./world-data";
 import { LockPlayersScene } from "./scenes/lock-players.scene";
 import { LockPlayersSettingsScene } from "./scenes/lock-players-settings.scene";
+import { ManageHealthScene } from "./scenes/manage-health.scene";
 
 type SceneFactory = (manager: SceneManager, ...args: any[]) => void;
 
@@ -87,6 +88,9 @@ export class SceneManager {
 		});
 		this.registerScene("lock_players_settings", (manager: SceneManager) => {
 			new LockPlayersSettingsScene(manager);
+		});
+		this.registerScene("manage_health", (manager: SceneManager) => {
+			new ManageHealthScene(manager);
 		});
 	}
 
