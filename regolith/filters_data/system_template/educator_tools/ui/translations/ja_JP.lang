@@ -11,6 +11,7 @@ edu_tools.message.no_host=このツールを使用するためには、ワール
 edu_tools.ui.main.title=§fEducator Tools
 edu_tools.ui.main.body=使用するツールを選択してください
 edu_tools.ui.main.buttons.teleport=テレポート
+edu_tools.ui.main.buttons.copy_inventory=インベントリをコピー
 edu_tools.ui.main.buttons.gamemode=ゲームモードの変更
 edu_tools.ui.main.buttons.manage_teams=チーム管理
 edu_tools.ui.main.buttons.timer=タイマー
@@ -27,6 +28,10 @@ edu_tools.ui.set_players.buttons.you=自分自身
 edu_tools.ui.set_players.buttons.all=全てのプレイヤー
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=§9ゲームモードを変更するユーザー§rを選択してください
+edu_tools.ui.set_players.copy_inventory.subject.title=§f対象を選択
+edu_tools.ui.set_players.copy_inventory.target.title=§fコピー先を選択
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=インベントリをコピーする§9対象§rを選択してください
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=インベントリをコピーする§cコピー先§rを選択してください
 
 
 ### Gamemode UI Scene
@@ -49,6 +54,11 @@ edu_tools.ui.confirm.teleport.self.body2=へ
 edu_tools.ui.confirm.teleport.specific.body=テレポートに成功しました
 edu_tools.ui.confirm.teleport.specific.body2=へ
 edu_tools.ui.confirm.teleport.all.body=全ての§9プレイヤー§rのテレポートに成功しました
+
+edu_tools.ui.confirm.copy_inventory.title=§fインベントリコピーの確認
+edu_tools.ui.confirm.copy_inventory.specific.body=インベントリのコピーに成功しました
+edu_tools.ui.confirm.copy_inventory.all.body=すべての§9プレイヤー§rにインベントリを正常にコピーしました
+
 
 edu_tools.ui.confirm.gamemode.title=§fゲームモードの設定の変更
 edu_tools.ui.confirm.gamemode.self.body=§9あなた§rのゲームモードの変更に成功しました

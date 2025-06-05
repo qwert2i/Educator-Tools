@@ -10,6 +10,7 @@ edu_tools.message.no_host=Debes ser el anfitrión del mundo para usar esta herra
 edu_tools.ui.main.title=§fHerramientas para Educadores
 edu_tools.ui.main.body=Selecciona una herramienta para usar
 edu_tools.ui.main.buttons.teleport=Teletransportar
+edu_tools.ui.main.buttons.copy_inventory=Copiar Inventario
 edu_tools.ui.main.buttons.gamemode=Modo de juego
 edu_tools.ui.main.buttons.manage_teams=Gestionar equipos
 edu_tools.ui.main.buttons.timer=Temporizador
@@ -26,6 +27,11 @@ edu_tools.ui.set_players.buttons.you=Tú
 edu_tools.ui.set_players.buttons.all=Todos
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Selecciona un §9sujeto§r para cambiar su modo de juego
+edu_tools.ui.set_players.copy_inventory.subject.title=§fSeleccionar Sujeto
+edu_tools.ui.set_players.copy_inventory.target.title=§fSeleccionar Destino
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Selecciona un §9sujeto§r para copiar el inventario
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Selecciona un §cdestino§r para copiar el inventario
+
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fEstablecer modo de juego
@@ -47,6 +53,11 @@ edu_tools.ui.confirm.teleport.self.body2=a
 edu_tools.ui.confirm.teleport.specific.body=Teletransportado exitosamente
 edu_tools.ui.confirm.teleport.specific.body2=a
 edu_tools.ui.confirm.teleport.all.body=Todos los §9jugadores§r fueron teletransportados exitosamente a
+
+edu_tools.ui.confirm.copy_inventory.title=§fConfirmar Copia de Inventario
+edu_tools.ui.confirm.copy_inventory.specific.body=Copia de inventario exitosa
+edu_tools.ui.confirm.copy_inventory.all.body=Inventario copiado exitosamente a todos los §9jugadores§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fConfirmar cambio de modo de juego
 edu_tools.ui.confirm.gamemode.self.body=Modo de juego de §9tu§r personaje cambiado exitosamente

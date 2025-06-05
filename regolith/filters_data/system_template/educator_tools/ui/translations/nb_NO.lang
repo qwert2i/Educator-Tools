@@ -10,6 +10,7 @@ edu_tools.message.no_host=Do må være verten for verden for å bruke dette verk
 edu_tools.ui.main.title=§fVerktøy for lærere
 edu_tools.ui.main.body=Velg et verktøy å bruke
 edu_tools.ui.main.buttons.teleport=Teleporter
+edu_tools.ui.main.buttons.copy_inventory=Kopier inventar
 edu_tools.ui.main.buttons.gamemode=Spillemodus
 edu_tools.ui.main.buttons.manage_teams=Administrer lag
 edu_tools.ui.main.buttons.timer=Timer
@@ -26,6 +27,10 @@ edu_tools.ui.set_players.buttons.you=Deg
 edu_tools.ui.set_players.buttons.all=Alle
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Velg en §9spiller§r å endre spillemodus for
+edu_tools.ui.set_players.copy_inventory.subject.title=§fVelg emne
+edu_tools.ui.set_players.copy_inventory.target.title=§fVelg mål
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Velg en §9emne§r å kopiere inventar fra
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Velg et §cmål§r å kopiere inventar til
 
 
 ### Gamemode UI Scene
@@ -48,6 +53,11 @@ edu_tools.ui.confirm.teleport.self.body2=til
 edu_tools.ui.confirm.teleport.specific.body=Teleportasjon vellykket
 edu_tools.ui.confirm.teleport.specific.body2=til
 edu_tools.ui.confirm.teleport.all.body=Alle §9spillere§r ble teleportert til
+
+edu_tools.ui.confirm.copy_inventory.title=§fBekreft kopiering av inventar
+edu_tools.ui.confirm.copy_inventory.specific.body=Inventar kopiert vellykket
+edu_tools.ui.confirm.copy_inventory.all.body=Inventar kopiert vellykket til alle §9spillere§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fBekreft spillemodus endring
 edu_tools.ui.confirm.gamemode.self.body=Endret §9din egen§r spillemodus

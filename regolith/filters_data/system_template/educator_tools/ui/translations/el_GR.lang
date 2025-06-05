@@ -10,6 +10,7 @@ edu_tools.message.no_host=Χρειάζεται να είστε ο οικοδεσ
 edu_tools.ui.main.title=§fΕργαλεία Εκπαιδευτή
 edu_tools.ui.main.body=Επέλεξε ένα εργαλείο για να χρησιμοποιήσετε
 edu_tools.ui.main.buttons.teleport=Τηλεμεταφορά
+edu_tools.ui.main.buttons.copy_inventory=Αντιγραφή Αποθέματος
 edu_tools.ui.main.buttons.gamemode=Τύπος Παιχνιδιού
 edu_tools.ui.main.buttons.manage_teams=Διαχείριση Ομάδων
 edu_tools.ui.main.buttons.timer=Χρονοδιακόπτης
@@ -26,6 +27,10 @@ edu_tools.ui.set_players.buttons.you=Εσύ
 edu_tools.ui.set_players.buttons.all=Όλοι
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Επέλεξε ένα §9υποκείμενο§r για αλλαγή του τρόπου παιχνιδιού
+edu_tools.ui.set_players.copy_inventory.subject.title=§fΕπιλέξτε Θέμα
+edu_tools.ui.set_players.copy_inventory.target.title=§fΕπιλέξτε Στόχο
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Επιλέξτε ένα §9θέμα§r για να αντιγράψετε το απόθεμα
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Επιλέξτε έναν §cστόχο§r για να αντιγράψετε το απόθεμα
 
 
 ### Gamemode UI Scene
@@ -48,6 +53,11 @@ edu_tools.ui.confirm.teleport.self.body2=προς
 edu_tools.ui.confirm.teleport.specific.body=Τηλεμεταφέρθηκε επιτυχώς
 edu_tools.ui.confirm.teleport.specific.body2=προς
 edu_tools.ui.confirm.teleport.all.body=Τηλεμεταφέρθηκαν επιτυχώς όλοι οι §9παίκτες§r τηλεμεταφέρθηκαν προς
+
+edu_tools.ui.confirm.copy_inventory.title=§fΕπιβεβαίωση Αντιγραφής Αποθέματος
+edu_tools.ui.confirm.copy_inventory.specific.body=Το απόθεμα αντιγράφηκε με επιτυχία
+edu_tools.ui.confirm.copy_inventory.all.body=Το απόθεμα αντιγράφηκε με επιτυχία σε όλους τους §9παίκτες§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fΕπιβεβαίωση τύπου παιχνιδιού
 edu_tools.ui.confirm.gamemode.self.body=Ο τύπος παιχνιδιού §9σου§r τέθηκε με επιτυχία
