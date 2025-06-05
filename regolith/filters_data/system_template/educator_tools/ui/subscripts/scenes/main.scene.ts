@@ -53,6 +53,13 @@ export class MainScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/main/lock_players",
 		);
 		this.addButton(
+			"edu_tools.ui.main.buttons.copy_inventory",
+			(): void => {
+				sceneManager.openScene("set_players", "copy_inventory");
+			},
+			"textures/edu_tools/ui/icons/main/copy_inventory",
+		);
+		this.addButton(
 			"edu_tools.ui.buttons.exit",
 			(): void => {},
 			"textures/edu_tools/ui/icons/_general/exit",
