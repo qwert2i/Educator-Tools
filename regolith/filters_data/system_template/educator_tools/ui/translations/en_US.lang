@@ -15,17 +15,20 @@ edu_tools.ui.main.buttons.manage_teams=Manage Teams
 edu_tools.ui.main.buttons.timer=Timer
 edu_tools.ui.main.buttons.world_settings=World Settings
 edu_tools.ui.main.buttons.lock_players=Lock Players
+edu_tools.ui.main.buttons.manage_health=Manage Health
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fSelect Subject
 edu_tools.ui.set_players.teleport.target.title=§fSelect Target
 edu_tools.ui.set_players.gamemode.title=§fSelect Subject
+edu_tools.ui.set_players.manage_health.title=§fManage Health
 edu_tools.ui.set_players.select_subject_for_teleport.body=Select a §9subject§r to teleport
 edu_tools.ui.set_players.select_target_for_teleport.body=Select a §ctarget§r to teleport to
 edu_tools.ui.set_players.buttons.you=You
 edu_tools.ui.set_players.buttons.all=All
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Select a §9subject§r to change gamemode for
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Select a §9subject§r to manage health for
 
 
 ### Gamemode UI Scene
@@ -64,6 +67,28 @@ edu_tools.ui.confirm.stop_timer.body=Do you really want to stop the timer? This 
 
 edu_tools.ui.confirm.edit_timer.title=§fConfirm Timer Edit
 edu_tools.ui.confirm.edit_timer.body=Do you really want to edit the timer? This will overwrite the current timer.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fConfirm Hunger Disable
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Do you really want to disable your hunger?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Please confirm that you want to disable hunger for
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Do you really want to disable hunger for all §9players§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fConfirm Hunger Enable
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Do you really want to enable your hunger?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Please confirm that you want to enable hunger for
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Do you really want to enable hunger for all §9players§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fConfirm Health Disable
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Do you really want to disable your health?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Please confirm that you want to disable health for
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Do you really want to disable health for all §9players§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fConfirm Health Enable
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Do you really want to enable your health?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Please confirm that you want to enable health for
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Do you really want to enable health for all §9players§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fConfirm Heal
+edu_tools.ui.confirm.manage_health.self.heal.body=Do you really want to heal yourself?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Please confirm that you want to heal
+edu_tools.ui.confirm.manage_health.all.heal.body=Do you really want to heal all §9players§r?
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fWorld Settings
@@ -140,3 +165,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Cente
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Around Me
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Area
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Radius
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Manage Health
+edu_tools.ui.manage_health.self.body=Manage health of
+edu_tools.ui.manage_health.specific.body=Manage health of
+edu_tools.ui.manage_health.all.body=Manage health of all §9players§r
+edu_tools.ui.manage_health.buttons.disable_health=Disable Health
+edu_tools.ui.manage_health.buttons.enable_health=Enable Health
+edu_tools.ui.manage_health.buttons.disable_hunger=Disable Hunger
+edu_tools.ui.manage_health.buttons.enable_hunger=Enable Hunger
+edu_tools.ui.manage_health.buttons.heal=Heal

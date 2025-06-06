@@ -222,6 +222,50 @@ export class SetPlayersScene extends ActionUIScene {
 			});
 
 			this.show(sceneManager.getSourcePlayer());
+		} else if (operation === "manage_health") {
+			super("set_players.manage_health", sceneManager.getSourcePlayer());
+			this.setSimpleBody(
+				"edu_tools.ui.set_players.select_subject_for_manage_health_change.body",
+			);
+
+			this.addButton(
+				"edu_tools.ui.set_players.buttons.you",
+				(): void => {
+					sceneManager.setSubjectPlayersType("self");
+					sceneManager.openScene("manage_health");
+				},
+				"textures/edu_tools/ui/icons/set_players/self",
+			);
+			this.addButton(
+				"edu_tools.ui.set_players.buttons.all",
+				(): void => {
+					sceneManager.setSubjectPlayersType("all");
+					sceneManager.openScene("manage_health");
+				},
+				"textures/edu_tools/ui/icons/set_players/all",
+			);
+			world.getPlayers().forEach((player: Player): void => {
+				if (player !== sceneManager.getSourcePlayer()) {
+					this.addButton(
+						player.name,
+						(): void => {
+							sceneManager.setSubjectPlayersType(
+								"specific_player",
+								null,
+								player,
+							);
+							sceneManager.openScene("manage_health");
+						},
+						"textures/edu_tools/ui/icons/set_players/player",
+					);
+				}
+			});
+
+			this.addButton("edu_tools.ui.buttons.back", (): void => {
+				sceneManager.openScene("main");
+			});
+
+			this.show(sceneManager.getSourcePlayer());
 		} else {
 			console.error("Invalid operation");
 			sceneManager.openScene("main");

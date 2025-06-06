@@ -15,17 +15,20 @@ edu_tools.ui.main.buttons.manage_teams=Διαχείριση Ομάδων
 edu_tools.ui.main.buttons.timer=Χρονοδιακόπτης
 edu_tools.ui.main.buttons.world_settings=Ρυθμίσεις κόσμου
 edu_tools.ui.main.buttons.lock_players=Κλείδωμα παικτών
+edu_tools.ui.main.buttons.manage_health=Διαχείριση Υγείας
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fΕπέλεξε υποκείμενο
 edu_tools.ui.set_players.teleport.target.title=§fΕπέλεξε στόχο
 edu_tools.ui.set_players.gamemode.title=§fΕπέλεξε υποκείμενο
-edu_tools.ui.set_players.select_subject_for_teleport.body=Επέλεξε ένα §9υποκείμενο§r για τηλεμεταφορά 
+edu_tools.ui.set_players.manage_health.title=§fΔιαχείριση Υγείας
+edu_tools.ui.set_players.select_subject_for_teleport.body=Επέλεξε ένα §9υποκείμενο§r για τηλεμεταφορά
 edu_tools.ui.set_players.select_target_for_teleport.body=Επέλεξε έναν §cστόχο§r προς τηλεμεταφορά
 edu_tools.ui.set_players.buttons.you=Εσύ
 edu_tools.ui.set_players.buttons.all=Όλοι
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Επέλεξε ένα §9υποκείμενο§r για αλλαγή του τρόπου παιχνιδιού
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Επιλέξτε ένα §9υποκείμενο§r για να διαχειριστείτε την υγεία
 
 
 ### Gamemode UI Scene
@@ -65,6 +68,28 @@ edu_tools.ui.confirm.stop_timer.body=Θέλετε πραγματικά να στ
 
 edu_tools.ui.confirm.edit_timer.title=§fΕπιβεβαίωση επεξεργασίας χρονοδιακόπτη
 edu_tools.ui.confirm.edit_timer.body=Θέλετε πραγματικά να επεξεργαστείτε το χρονόμετρο; Αυτό θα αντικαταστήσει το τρέχον χρονόμετρο.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fΕπιβεβαίωση Απενεργοποίησης Πείνας
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Θέλετε πραγματικά να απενεργοποιήσετε την πείνα σας;
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να απενεργοποιήσετε την πείνα για
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Θέλετε πραγματικά να απενεργοποιήσετε την πείνα για όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fΕπιβεβαίωση Ενεργοποίησης Πείνας
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Θέλετε πραγματικά να ενεργοποιήσετε την πείνα σας;
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να ενεργοποιήσετε την πείνα για
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Θέλετε πραγματικά να ενεργοποιήσετε την πείνα για όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.disable_health.title=§fΕπιβεβαίωση Απενεργοποίησης Υγείας
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Θέλετε πραγματικά να απενεργοποιήσετε την υγεία σας;
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να απενεργοποιήσετε την υγεία για
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Θέλετε πραγματικά να απενεργοποιήσετε την υγεία για όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.enable_health.title=§fΕπιβεβαίωση Ενεργοποίησης Υγείας
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Θέλετε πραγματικά να ενεργοποιήσετε την υγεία σας;
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να ενεργοποιήσετε την υγεία για
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Θέλετε πραγματικά να ενεργοποιήσετε την υγεία για όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.heal.title=§fΕπιβεβαίωση Θεραπείας
+edu_tools.ui.confirm.manage_health.self.heal.body=Θέλετε πραγματικά να θεραπευτείτε;
+edu_tools.ui.confirm.manage_health.specific.heal.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να θεραπεύσετε
+edu_tools.ui.confirm.manage_health.all.heal.body=Θέλετε πραγματικά να θεραπεύσετε όλους τους §9παίκτες§r;
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fΡυθμίσεις κόσμου
@@ -141,3 +166,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Κέ�
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Γύρω από εμένα
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Περιοχή
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Ακτίνα
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Διαχείριση Υγείας
+edu_tools.ui.manage_health.self.body=Διαχείριση υγείας του
+edu_tools.ui.manage_health.specific.body=Διαχείριση υγείας του
+edu_tools.ui.manage_health.all.body=Διαχείριση υγείας όλων των §9παίκτες§r
+edu_tools.ui.manage_health.buttons.disable_health=Απενεργοποίηση Υγείας
+edu_tools.ui.manage_health.buttons.enable_health=Ενεργοποίηση Υγείας
+edu_tools.ui.manage_health.buttons.disable_hunger=Απενεργοποίηση Πείνας
+edu_tools.ui.manage_health.buttons.enable_hunger=Ενεργοποίηση Πείνας
+edu_tools.ui.manage_health.buttons.heal=Θεραπεία

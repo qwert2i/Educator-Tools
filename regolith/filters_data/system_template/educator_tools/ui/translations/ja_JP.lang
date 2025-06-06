@@ -16,17 +16,20 @@ edu_tools.ui.main.buttons.manage_teams=チーム管理
 edu_tools.ui.main.buttons.timer=タイマー
 edu_tools.ui.main.buttons.world_settings=ワールド設定
 edu_tools.ui.main.buttons.lock_players=プレイヤーをロック
+edu_tools.ui.main.buttons.manage_health=体力管理
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fテレポート対象のユーザー
 edu_tools.ui.set_players.teleport.target.title=§fテレポート先のユーザー
 edu_tools.ui.set_players.gamemode.title=§fゲームモードの変更
+edu_tools.ui.set_players.manage_health.title=§f体力管理
 edu_tools.ui.set_players.select_subject_for_teleport.body=§9テレポート対象§rのユーザーを選択してください
 edu_tools.ui.set_players.select_target_for_teleport.body=§cテレポート先§rのユーザーを選択してください
 edu_tools.ui.set_players.buttons.you=自分自身
 edu_tools.ui.set_players.buttons.all=全てのプレイヤー
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=§9ゲームモードを変更するユーザー§rを選択してください
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=体力を管理する§9対象§rを選択してください
 
 
 ### Gamemode UI Scene
@@ -66,6 +69,28 @@ edu_tools.ui.confirm.stop_timer.body=本当にタイマーを止めますか？�
 
 edu_tools.ui.confirm.edit_timer.title=§fタイマー編集の確認
 edu_tools.ui.confirm.edit_timer.body=本当にタイマーを編集しますか？現在のタイマーを上書きします
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§f空腹度の無効化の確認
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=本当にあなたの空腹度を無効にしますか？
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=次のプレイヤーの空腹度を無効にすることを確認してください
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=本当に全ての§9プレイヤー§rの空腹度を無効にしますか？
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§f空腹度の有効化の確認
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=本当にあなたの空腹度を有効にしますか？
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=次のプレイヤーの空腹度を有効にすることを確認してください
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=本当に全ての§9プレイヤー§rの空腹度を有効にしますか？
+edu_tools.ui.confirm.manage_health.disable_health.title=§f体力の無効化の確認
+edu_tools.ui.confirm.manage_health.self.disable_health.body=本当にあなたの体力を無効にしますか？
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=次のプレイヤーの体力を無効にすることを確認してください
+edu_tools.ui.confirm.manage_health.all.disable_health.body=本当に全ての§9プレイヤー§rの体力を無効にしますか？
+edu_tools.ui.confirm.manage_health.enable_health.title=§f体力の有効化の確認
+edu_tools.ui.confirm.manage_health.self.enable_health.body=本当にあなたの体力を有効にしますか？
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=次のプレイヤーの体力を有効にすることを確認してください
+edu_tools.ui.confirm.manage_health.all.enable_health.body=本当に全ての§9プレイヤー§rの体力を有効にしますか？
+edu_tools.ui.confirm.manage_health.heal.title=§f回復の確認
+edu_tools.ui.confirm.manage_health.self.heal.body=本当に自分自身を回復しますか？
+edu_tools.ui.confirm.manage_health.specific.heal.body=次のプレイヤーを回復することを確認してください
+edu_tools.ui.confirm.manage_health.all.heal.body=本当に全ての§9プレイヤー§rを回復しますか？
+
 
 ### World Settings UI Scene
 ### 日本語翻訳において、マイクラに詳しくないユーザーが利用することを考慮し、翻訳を調整しています
@@ -143,3 +168,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=中�
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=私の周り
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=特定のエリア
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=プレイヤーを閉じ込めるエリアの大きさ(中心からのブロック数)
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=体力管理
+edu_tools.ui.manage_health.self.body=体力の管理
+edu_tools.ui.manage_health.specific.body=体力の管理
+edu_tools.ui.manage_health.all.body=全ての§9プレイヤー§rの体力を管理
+edu_tools.ui.manage_health.buttons.disable_health=体力を無効化
+edu_tools.ui.manage_health.buttons.enable_health=体力を有効化
+edu_tools.ui.manage_health.buttons.disable_hunger=空腹度を無効化
+edu_tools.ui.manage_health.buttons.enable_hunger=空腹度を有効化
+edu_tools.ui.manage_health.buttons.heal=回復

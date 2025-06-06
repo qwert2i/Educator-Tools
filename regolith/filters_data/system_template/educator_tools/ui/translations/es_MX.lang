@@ -15,17 +15,21 @@ edu_tools.ui.main.buttons.manage_teams=Gestionar equipos
 edu_tools.ui.main.buttons.timer=Temporizador
 edu_tools.ui.main.buttons.world_settings=Configuración del mundo
 edu_tools.ui.main.buttons.lock_players=Bloquear jugadores
+edu_tools.ui.main.buttons.manage_health=Administrar Salud
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fSeleccionar sujeto
 edu_tools.ui.set_players.teleport.target.title=§fSeleccionar destino
 edu_tools.ui.set_players.gamemode.title=§fSeleccionar sujeto
+edu_tools.ui.set_players.manage_health.title=§fAdministrar Salud
 edu_tools.ui.set_players.select_subject_for_teleport.body=Selecciona un §9sujeto§r para teletransportar
 edu_tools.ui.set_players.select_target_for_teleport.body=Selecciona un §cdestino§r al que teletransportar
 edu_tools.ui.set_players.buttons.you=Tú
 edu_tools.ui.set_players.buttons.all=Todos
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Selecciona un §9sujeto§r para cambiar su modo de juego
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Selecciona un §9sujeto§r para administrar la salud
+
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fEstablecer modo de juego
@@ -64,6 +68,28 @@ edu_tools.ui.confirm.stop_timer.body=¿Seguro que quieres detener el temporizado
 
 edu_tools.ui.confirm.edit_timer.title=§fConfirmar edición del temporizador
 edu_tools.ui.confirm.edit_timer.body=¿Seguro que quieres editar el temporizador? Esto sobrescribirá el temporizador actual.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fConfirmar Desactivación de Hambre
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=¿Realmente quieres desactivar tu hambre?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Por favor confirma que quieres desactivar el hambre para
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=¿Realmente quieres desactivar el hambre para todos los §9jugadores§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fConfirmar Activación de Hambre
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=¿Realmente quieres activar tu hambre?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Por favor confirma que quieres activar el hambre para
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=¿Realmente quieres activar el hambre para todos los §9jugadores§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fConfirmar Desactivación de Salud
+edu_tools.ui.confirm.manage_health.self.disable_health.body=¿Realmente quieres desactivar tu salud?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Por favor confirma que quieres desactivar la salud para
+edu_tools.ui.confirm.manage_health.all.disable_health.body=¿Realmente quieres desactivar la salud para todos los §9jugadores§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fConfirmar Activación de Salud
+edu_tools.ui.confirm.manage_health.self.enable_health.body=¿Realmente quieres activar tu salud?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Por favor confirma que quieres activar la salud para
+edu_tools.ui.confirm.manage_health.all.enable_health.body=¿Realmente quieres activar la salud para todos los §9jugadores§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fConfirmar Curación
+edu_tools.ui.confirm.manage_health.self.heal.body=¿Realmente quieres curarte?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Por favor confirma que quieres curar a
+edu_tools.ui.confirm.manage_health.all.heal.body=¿Realmente quieres curar a todos los §9jugadores§r?
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fConfiguración del mundo
@@ -140,3 +166,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Centr
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=A mi alrededor
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Área
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Radio
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Administrar Salud
+edu_tools.ui.manage_health.self.body=Administrar la salud de
+edu_tools.ui.manage_health.specific.body=Administrar la salud de
+edu_tools.ui.manage_health.all.body=Administrar la salud de todos los §9jugadores§r
+edu_tools.ui.manage_health.buttons.disable_health=Desactivar Salud
+edu_tools.ui.manage_health.buttons.enable_health=Activar Salud
+edu_tools.ui.manage_health.buttons.disable_hunger=Desactivar Hambre
+edu_tools.ui.manage_health.buttons.enable_hunger=Activar Hambre
+edu_tools.ui.manage_health.buttons.heal=Curar
