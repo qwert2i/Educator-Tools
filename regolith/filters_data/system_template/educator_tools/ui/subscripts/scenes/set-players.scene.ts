@@ -13,7 +13,7 @@ export class SetPlayersScene extends ActionUIScene {
 	 * @param sceneManager - The SceneManager instance.
 	 * @param operation - The current operation ("teleport" or "gamemode").
 	 */
-	constructor(sceneManager: SceneManager, operation: string) {
+	constructor(private readonly sceneManager: SceneManager, operation: string) {
 		sceneManager.addToSceneHistory(SceneName);
 
 		if (operation === "teleport") {
@@ -389,7 +389,7 @@ export class SetPlayersScene extends ActionUIScene {
 		}
 	}
 
-	private static copyInventory(source: Player, target: Player): void {
+	private copyInventory(source: Player, target: Player): void {
 		const sComponents = source.getComponent(
 			EntityInventoryComponent.componentId,
 		) as EntityInventoryComponent;
@@ -406,6 +406,14 @@ export class SetPlayersScene extends ActionUIScene {
 			for (let i = 0; i < sComponents.container.size; i++) {
 				const item = sComponents.container.getItem(i);
 				if (item && tComponents.container.size > i) {
+					if (
+						item.typeId === "edu_tools:educator_tool" &&
+						this.sceneManager.getWorldData().getHostPlayer() &&
+						this.sceneManager.getWorldData().getHostPlayer().id !== target.id
+					) {
+						// Do not copy the Educator Tool if the target player is not the host player
+						continue;
+					}
 					tComponents.container.setItem(i, item);
 				}
 			}
