@@ -16,11 +16,13 @@ edu_tools.ui.main.buttons.manage_teams=管理团队
 edu_tools.ui.main.buttons.timer=计时器
 edu_tools.ui.main.buttons.world_settings=世界设置
 edu_tools.ui.main.buttons.lock_players=锁定玩家
+edu_tools.ui.main.buttons.manage_health=管理健康
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§f选择主体
 edu_tools.ui.set_players.teleport.target.title=§f选择目标
 edu_tools.ui.set_players.gamemode.title=§f选择主体
+edu_tools.ui.set_players.manage_health.title=§f管理健康
 edu_tools.ui.set_players.select_subject_for_teleport.body=选择传送§9谁§r
 edu_tools.ui.set_players.select_target_for_teleport.body=选择传送至§c何处§r
 edu_tools.ui.set_players.buttons.you=你
@@ -31,6 +33,7 @@ edu_tools.ui.set_players.copy_inventory.subject.title=§f选择主体
 edu_tools.ui.set_players.copy_inventory.target.title=§f选择目标
 edu_tools.ui.set_players.select_subject_for_copy_inventory.body=选择一个§9主体§r以复制物品栏
 edu_tools.ui.set_players.select_target_for_copy_inventory.body=选择一个§c目标§r以粘贴物品栏
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=选择要管理健康的§9玩家§r
 
 
 ### Gamemode UI Scene
@@ -75,6 +78,28 @@ edu_tools.ui.confirm.stop_timer.body=你确定要停止计时器吗？这将会�
 
 edu_tools.ui.confirm.edit_timer.title=§f确认计时器编辑
 edu_tools.ui.confirm.edit_timer.body=你确定要编辑计时器吗？这将会覆盖当前的计时器。
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§f确认禁用饥饿
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=你确定要禁用你的饥饿度吗？
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=请确认你想禁用以下玩家的饥饿度
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=你确定要禁用所有§9玩家§r的饥饿度吗？
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§f确认启用饥饿
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=你确定要启用你的饥饿度吗？
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=请确认你想启用以下玩家的饥饿度
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=你确定要启用所有§9玩家§r的饥饿度吗？
+edu_tools.ui.confirm.manage_health.disable_health.title=§f确认禁用健康
+edu_tools.ui.confirm.manage_health.self.disable_health.body=你确定要禁用你的健康吗？
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=请确认你想禁用以下玩家的健康
+edu_tools.ui.confirm.manage_health.all.disable_health.body=你确定要禁用所有§9玩家§r的健康吗？
+edu_tools.ui.confirm.manage_health.enable_health.title=§f确认启用健康
+edu_tools.ui.confirm.manage_health.self.enable_health.body=你确定要启用你的健康吗？
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=请确认你想启用以下玩家的健康
+edu_tools.ui.confirm.manage_health.all.enable_health.body=你确定要启用所有§9玩家§r的健康吗？
+edu_tools.ui.confirm.manage_health.heal.title=§f确认治疗
+edu_tools.ui.confirm.manage_health.self.heal.body=你确定要治疗自己吗？
+edu_tools.ui.confirm.manage_health.specific.heal.body=请确认你想治疗
+edu_tools.ui.confirm.manage_health.all.heal.body=你确定要治疗所有§9玩家§r吗？
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§f世界设置
@@ -151,3 +176,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=中�
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=在我周围
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=区域
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=半径
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=管理健康
+edu_tools.ui.manage_health.self.body=管理健康状态
+edu_tools.ui.manage_health.specific.body=管理健康状态
+edu_tools.ui.manage_health.all.body=管理所有§9玩家§r的健康状态
+edu_tools.ui.manage_health.buttons.disable_health=禁用健康
+edu_tools.ui.manage_health.buttons.enable_health=启用健康
+edu_tools.ui.manage_health.buttons.disable_hunger=禁用饥饿
+edu_tools.ui.manage_health.buttons.enable_hunger=启用饥饿
+edu_tools.ui.manage_health.buttons.heal=治疗

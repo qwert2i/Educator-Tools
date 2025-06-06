@@ -9,6 +9,10 @@
 	"regolith": {
 		"dataPath": "filters_data",
 		"filterDefinitions": {
+			"python_modules": {
+				"runWith": "python",
+				"script": "./local_filters/python_modules/python_modules.py"
+			},
 			"debug_say_function_name": {
 				"url": "github.com/Nusiq/regolith-filters",
 				"version": "2.0.0"
@@ -130,6 +134,7 @@
 					"target": "development"
 				},
 				"filters": [
+					{"filter": "python_modules"},
 					{
 						"filter": "system_template",
 						"settings": {

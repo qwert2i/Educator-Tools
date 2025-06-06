@@ -16,11 +16,13 @@ edu_tools.ui.main.buttons.manage_teams=Gestisci Squadre
 edu_tools.ui.main.buttons.timer=Timer
 edu_tools.ui.main.buttons.world_settings=Impostazioni del Mondo
 edu_tools.ui.main.buttons.lock_players=Blocco Giocatori
+edu_tools.ui.main.buttons.manage_health=Gestisci Salute
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fSeleziona il target
 edu_tools.ui.set_players.teleport.target.title=§fSelect il target
 edu_tools.ui.set_players.gamemode.title=§fSeleziona il target
+edu_tools.ui.set_players.manage_health.title=§fGestisci Salute
 edu_tools.ui.set_players.select_subject_for_teleport.body=Seleziona il §9target§r da teletrasportare
 edu_tools.ui.set_players.select_target_for_teleport.body=Seleziona un §ctarget§r a cui teletrasportarsi
 edu_tools.ui.set_players.buttons.you=Tu
@@ -31,6 +33,7 @@ edu_tools.ui.set_players.copy_inventory.subject.title=§fSeleziona Soggetto
 edu_tools.ui.set_players.copy_inventory.target.title=§fSeleziona Destinatario
 edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Seleziona un §9soggetto§r da cui copiare l'inventario
 edu_tools.ui.set_players.select_target_for_copy_inventory.body=Seleziona un §cdestinazione§r a cui copiare l'inventario
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Seleziona un §9soggetto§r per gestire la salute
 
 
 ### Gamemode UI Scene
@@ -75,6 +78,28 @@ edu_tools.ui.confirm.stop_timer.body=Vuoi veramente fermare il timer ?Quest'azio
 
 edu_tools.ui.confirm.edit_timer.title=§fConferma il Cambiamento del Timer
 edu_tools.ui.confirm.edit_timer.body=Vuoi veramente modificare il timer? Quest'azione sovrascriverà il timer corrente.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fConferma Disabilitazione Fame
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Vuoi davvero disabilitare la tua fame?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Conferma di voler disabilitare la fame per
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Vuoi davvero disabilitare la fame per tutti i §9giocatori§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fConferma Abilitazione Fame
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Vuoi davvero abilitare la tua fame?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Conferma di voler abilitare la fame per
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Vuoi davvero abilitare la fame per tutti i §9giocatori§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fConferma Disabilitazione Salute
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Vuoi davvero disabilitare la tua salute?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Conferma di voler disabilitare la salute per
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Vuoi davvero disabilitare la salute per tutti i §9giocatori§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fConferma Abilitazione Salute
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Vuoi davvero abilitare la tua salute?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Conferma di voler abilitare la salute per
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Vuoi davvero abilitare la salute per tutti i §9giocatori§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fConferma Cura
+edu_tools.ui.confirm.manage_health.self.heal.body=Vuoi davvero curarti?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Conferma di voler curare
+edu_tools.ui.confirm.manage_health.all.heal.body=Vuoi davvero curare tutti i §9giocatori§r?
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fImpostazioni del Mondo
@@ -151,3 +176,14 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Attor
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=A
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Area
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Raggio
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Gestisci Salute
+edu_tools.ui.manage_health.self.body=Gestisci la salute di
+edu_tools.ui.manage_health.specific.body=Gestisci la salute di
+edu_tools.ui.manage_health.all.body=Gestisci la salute di tutti i §9giocatori§r
+edu_tools.ui.manage_health.buttons.disable_health=Disabilita Salute
+edu_tools.ui.manage_health.buttons.enable_health=Abilita Salute
+edu_tools.ui.manage_health.buttons.disable_hunger=Disabilita Fame
+edu_tools.ui.manage_health.buttons.enable_hunger=Abilita Fame
+edu_tools.ui.manage_health.buttons.heal=Guarisci

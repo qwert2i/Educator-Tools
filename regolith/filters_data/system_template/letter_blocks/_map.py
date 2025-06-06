@@ -1,7 +1,25 @@
 (
     [
+        # Generate letter images for each letter_set
+        *[
+            generate_letter_images(
+                map_py_item={"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER,"on_conflict": "skip"},
+                letters=ls["letters"],
+                output_dir="./letter_blocks",
+                font_size=ls["font_size"],
+                text_color=tuple(ls["text_color"]),
+                image_size=tuple(ls["image_size"]),
+                font_path=ls["font_path"],
+                background_image_path=ls["background_image_path"],
+                suffix=ls["suffix"],
+                antialias=ls["antialias"]
+            )
+            for ls in letter_sets
+        ]
+    ]
+    + [
         # Textures
-        {"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
+        #{"source": "letter_blocks/**/*.block.png", "target": AUTO_FLAT_SUBFOLDER},
         # Item texture / Terrain Texture for block and item icon
         {
             "source": "item_texture.json",
@@ -68,7 +86,7 @@
             "target": f"BP/items/{p.stem.removesuffix('.block')}.bp_item.json",
             "scope": {
                 "letter": p.stem.removesuffix(".block"),
-                "category": p.parent.name,
+                "group": p.parent.name,
             },
             "json_template": True,
         }

@@ -60,6 +60,13 @@ export class MainScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/main/copy_inventory",
 		);
 		this.addButton(
+			"edu_tools.ui.main.buttons.manage_health",
+			(): void => {
+				sceneManager.openScene("set_players", "manage_health");
+			},
+			"textures/edu_tools/ui/icons/main/manage_health",
+		);
+		this.addButton(
 			"edu_tools.ui.buttons.exit",
 			(): void => {},
 			"textures/edu_tools/ui/icons/_general/exit",
