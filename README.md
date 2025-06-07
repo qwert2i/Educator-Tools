@@ -64,3 +64,7 @@ If you encounter issues or have questions, **[report an issue](https://github.co
 ![Spanish](https://img.shields.io/badge/Spanish-yellow)
 ![Latin American Spanish](https://img.shields.io/badge/Latin_American_Spanish-green)
 ![Japanese](https://img.shields.io/badge/Japanese-purple)
+![Norwegian Bokmål](https://img.shields.io/badge/Norwegian_Bokm%C3%A5l-violet)
+![Italian](https://img.shields.io/badge/Italian-white)
+![Chinese](https://img.shields.io/badge/Chinese-gold)
+![Greek](https://img.shields.io/badge/Greek-royalblue)

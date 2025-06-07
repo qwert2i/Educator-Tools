@@ -7,7 +7,7 @@ edu_tools.ui.buttons.apply=適応する
 edu_tools.message.no_host=このツールを使用するためには、ワールドのホストである必要があります
 
 ### Main UI Scene
-# main.titleは、固有名詞であるため、原題を使用
+### main.titleは、固有名詞であるため、原題を使用
 edu_tools.ui.main.title=§fEducator Tools
 edu_tools.ui.main.body=使用するツールを選択してください
 edu_tools.ui.main.buttons.teleport=テレポート
@@ -68,7 +68,7 @@ edu_tools.ui.confirm.edit_timer.title=§fタイマー編集の確認
 edu_tools.ui.confirm.edit_timer.body=本当にタイマーを編集しますか？現在のタイマーを上書きします
 
 ### World Settings UI Scene
-# 日本語翻訳において、マイクラに詳しくないユーザーが利用することを考慮し、翻訳を調整しています
+### 日本語翻訳において、マイクラに詳しくないユーザーが利用することを考慮し、翻訳を調整しています
 edu_tools.ui.world_settings.title=§fワールド設定
 edu_tools.ui.world_settings.toggles.mob_spawning=モブの出現
 edu_tools.ui.world_settings.toggles.mob_griefing=モブによるブロックの破壊
