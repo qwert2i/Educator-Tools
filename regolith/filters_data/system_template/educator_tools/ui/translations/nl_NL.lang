@@ -44,7 +44,6 @@ edu_tools.ui.set_gamemode.buttons.survival=Overleven
 edu_tools.ui.set_gamemode.buttons.creative=Creatief
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fBevestig Teleportatie
 edu_tools.ui.confirm.teleport.title=§fGeteleporteerd
 edu_tools.ui.confirm.teleport.self.body=Succesvol geteleporteerd
 edu_tools.ui.confirm.teleport.self.body2=naar

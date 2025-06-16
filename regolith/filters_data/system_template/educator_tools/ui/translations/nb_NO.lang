@@ -44,7 +44,6 @@ edu_tools.ui.set_gamemode.buttons.survival=Overleveses Modus
 edu_tools.ui.set_gamemode.buttons.creative=Kreativ Modus
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fBekreft Teleportasjon
 edu_tools.ui.confirm.teleport.title=§fTeleportert!
 edu_tools.ui.confirm.teleport.self.body=Teleportasjon vellykket
 edu_tools.ui.confirm.teleport.self.body2=til

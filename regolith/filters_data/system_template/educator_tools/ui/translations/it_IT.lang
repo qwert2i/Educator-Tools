@@ -45,7 +45,6 @@ edu_tools.ui.set_gamemode.buttons.creative=Creativa
 
 ### Confirm UI Scene
 edu_tools.ui.confirm.teleport.title=§fTeletrasportato
-edu_tools.ui.confirm.teleport.title=§fTeletrasportato
 edu_tools.ui.confirm.teleport.self.body=Teletrasportato con successo
 edu_tools.ui.confirm.teleport.self.body2=a
 edu_tools.ui.confirm.teleport.specific.body=Teletrasportato con successo

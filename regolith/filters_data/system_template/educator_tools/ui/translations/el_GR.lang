@@ -44,7 +44,6 @@ edu_tools.ui.set_gamemode.buttons.survival=Επιβίωση
 edu_tools.ui.set_gamemode.buttons.creative=Δημιουργικό
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fΕπιβεβαίωση τηλεμεταφορά
 edu_tools.ui.confirm.teleport.title=§fΤηλεμεταφέρθηκε
 edu_tools.ui.confirm.teleport.self.body=Τηλεμεταφέρθηκε επιτυχώς
 edu_tools.ui.confirm.teleport.self.body2=προς

@@ -44,7 +44,6 @@ edu_tools.ui.set_gamemode.buttons.survival=Supervivencia
 edu_tools.ui.set_gamemode.buttons.creative=Creativo
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fConfirmar teletransporte
 edu_tools.ui.confirm.teleport.title=§fTeletransportado
 edu_tools.ui.confirm.teleport.self.body=Teletransportado exitosamente
 edu_tools.ui.confirm.teleport.self.body2=a

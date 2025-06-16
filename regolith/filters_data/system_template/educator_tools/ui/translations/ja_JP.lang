@@ -45,7 +45,6 @@ edu_tools.ui.set_gamemode.buttons.survival=サバイバルモード
 edu_tools.ui.set_gamemode.buttons.creative=クリエイティブモード
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fテレポート設定
 edu_tools.ui.confirm.teleport.title=§fテレポート対象ユーザー
 edu_tools.ui.confirm.teleport.self.body=テレポートに成功しました
 edu_tools.ui.confirm.teleport.self.body2=へ

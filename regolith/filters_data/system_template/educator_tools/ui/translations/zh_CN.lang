@@ -44,7 +44,6 @@ edu_tools.ui.set_gamemode.buttons.survival=生存
 edu_tools.ui.set_gamemode.buttons.creative=创造
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§f确认传送
 edu_tools.ui.confirm.teleport.title=§f已经传送
 edu_tools.ui.confirm.teleport.self.body=已经成功传送
 edu_tools.ui.confirm.teleport.self.body2=至
