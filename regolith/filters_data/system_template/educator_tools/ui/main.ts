@@ -14,7 +14,9 @@ world.afterEvents.itemUse.subscribe((event: ItemUseAfterEvent) => {
 			sceneManager.openScene("main");
 		} else {
 			// Send a message to the player that they are not allowed to use the educator tool
-			event.source.sendMessage("edu_tools.message.no_host");
+			event.source.sendMessage({
+				translate: "edu_tools.message.no_host",
+			});
 		}
 	}
 });
