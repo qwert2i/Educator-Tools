@@ -21,6 +21,7 @@ export class ManageHealthScene extends ActionUIScene {
 			string | Player | null,
 		] = sceneManager.getSubjectPlayersType();
 
+		let player: Player | null = null;
 		if (SUBJECT_PLAYER_TYPE == "self") {
 			this.setRawBody([
 				{
@@ -33,6 +34,7 @@ export class ManageHealthScene extends ActionUIScene {
 					text: sceneManager.getSourcePlayer().name,
 				},
 			]);
+			player = sceneManager.getSourcePlayer();
 		} else if (SUBJECT_PLAYER_TYPE == "all") {
 			this.setRawBody([
 				{
@@ -51,6 +53,7 @@ export class ManageHealthScene extends ActionUIScene {
 					text: (OPTIONS as Player).name,
 				},
 			]);
+			player = OPTIONS as Player;
 		}
 
 		// Add button to heal players
@@ -159,186 +162,357 @@ export class ManageHealthScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/manage_health/heal",
 		);
 
-		// Add button to disable health
-		this.addButton(
-			"edu_tools.ui.manage_health.buttons.disable_health",
-			(): void => {
-				let [selectedPlayersType, options]: [
-					string | null,
-					string | Player | null,
-				] = sceneManager.getSubjectPlayersType();
+		const hasDisabledHealth =
+			(player?.getEffect("regeneration")?.duration || 0) > 100000;
 
-				switch (selectedPlayersType) {
-					case "self":
-						let player: Player = sceneManager.getSourcePlayer();
-						const configSelfDisableHealth = {
-							title: "confirm.manage_health.disable_health",
-							body: "edu_tools.ui.confirm.manage_health.self.disable_health.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										player.addEffect("regeneration", 1000000, {
-											showParticles: false,
-											amplifier: 10,
-										});
-										sceneManager.openScene("main");
-									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configSelfDisableHealth);
-						break;
-					case "all":
-						const configAllDisableHealth = {
-							title: "confirm.manage_health.disable_health",
-							body: "edu_tools.ui.confirm.manage_health.all.disable_health.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										world.getPlayers().forEach((player: Player) => {
+		if (!player || !hasDisabledHealth) {
+			// Add button to disable health
+			this.addButton(
+				"edu_tools.ui.manage_health.buttons.disable_health",
+				(): void => {
+					let [selectedPlayersType, options]: [
+						string | null,
+						string | Player | null,
+					] = sceneManager.getSubjectPlayersType();
+
+					switch (selectedPlayersType) {
+						case "self":
+							let player: Player = sceneManager.getSourcePlayer();
+							const configSelfDisableHealth = {
+								title: "confirm.manage_health.disable_health",
+								body: "edu_tools.ui.confirm.manage_health.self.disable_health.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
 											player.addEffect("regeneration", 1000000, {
 												showParticles: false,
 												amplifier: 10,
 											});
-										});
-										sceneManager.openScene("main");
+											sceneManager.openScene("main");
+										},
 									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configAllDisableHealth);
-						break;
-					case "specific_player":
-						const configSpecificDisableHealth = {
-							title: "confirm.manage_health.disable_health",
-							body: "edu_tools.ui.confirm.manage_health.specific.disable_health.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										const specificPlayer: Player = options as Player;
-
-										specificPlayer.addEffect("regeneration", 1000000, {
-											showParticles: false,
-											amplifier: 10,
-										});
-										sceneManager.openScene("main");
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
 									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configSpecificDisableHealth);
-						break;
-				}
-			},
-			"textures/edu_tools/ui/icons/manage_health/disable_health",
-		);
-
-		// Add button to disable hunger
-		this.addButton(
-			"edu_tools.ui.manage_health.buttons.disable_hunger",
-			(): void => {
-				let [selectedPlayersType, options]: [
-					string | null,
-					string | Player | null,
-				] = sceneManager.getSubjectPlayersType();
-
-				switch (selectedPlayersType) {
-					case "self":
-						let player: Player = sceneManager.getSourcePlayer();
-						const configSelfDisableHunger = {
-							title: "confirm.manage_health.disable_hunger",
-							body: "edu_tools.ui.confirm.manage_health.self.disable_hunger.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										player.addEffect("saturation", 1000000, {
-											showParticles: false,
-											amplifier: 10,
-										});
-										sceneManager.openScene("main");
+								],
+							};
+							sceneManager.openScene("confirm", configSelfDisableHealth);
+							break;
+						case "all":
+							const configAllDisableHealth = {
+								title: "confirm.manage_health.disable_health",
+								body: "edu_tools.ui.confirm.manage_health.all.disable_health.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											world.getPlayers().forEach((player: Player) => {
+												player.addEffect("regeneration", 1000000, {
+													showParticles: false,
+													amplifier: 10,
+												});
+											});
+											sceneManager.openScene("main");
+										},
 									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configSelfDisableHunger);
-						break;
-					case "all":
-						const configAllDisableHunger = {
-							title: "confirm.manage_health.disable_hunger",
-							body: "edu_tools.ui.confirm.manage_health.all.disable_hunger.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										world.getPlayers().forEach((player: Player) => {
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configAllDisableHealth);
+							break;
+						case "specific_player":
+							const configSpecificDisableHealth = {
+								title: "confirm.manage_health.disable_health",
+								body: "edu_tools.ui.confirm.manage_health.specific.disable_health.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											const specificPlayer: Player = options as Player;
+
+											specificPlayer.addEffect("regeneration", 1000000, {
+												showParticles: false,
+												amplifier: 10,
+											});
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configSpecificDisableHealth);
+							break;
+					}
+				},
+				"textures/edu_tools/ui/icons/manage_health/disable_health",
+			);
+		}
+		if (!player || hasDisabledHealth) {
+			// Add button to enable health
+			this.addButton(
+				"edu_tools.ui.manage_health.buttons.enable_health",
+				(): void => {
+					let [selectedPlayersType, options]: [
+						string | null,
+						string | Player | null,
+					] = sceneManager.getSubjectPlayersType();
+
+					switch (selectedPlayersType) {
+						case "self":
+							let player: Player = sceneManager.getSourcePlayer();
+							const configSelfEnableHealth = {
+								title: "confirm.manage_health.enable_health",
+								body: "edu_tools.ui.confirm.manage_health.self.enable_health.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											player.removeEffect("regeneration");
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configSelfEnableHealth);
+							break;
+						case "all":
+							const configAllEnableHealth = {
+								title: "confirm.manage_health.enable_health",
+								body: "edu_tools.ui.confirm.manage_health.all.enable_health.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											world.getPlayers().forEach((player: Player) => {
+												player.removeEffect("regeneration");
+											});
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configAllEnableHealth);
+							break;
+						case "specific_player":
+							const configSpecificEnableHealth = {
+								title: "confirm.manage_health.enable_health",
+								body: "edu_tools.ui.confirm.manage_health.specific.enable_health.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											const specificPlayer: Player = options as Player;
+											specificPlayer.removeEffect("regeneration");
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configSpecificEnableHealth);
+							break;
+					}
+				},
+				"textures/edu_tools/ui/icons/manage_health/enable_health",
+			);
+		}
+
+		const hasDisabledHunger =
+			(player?.getEffect("saturation")?.duration || 0) > 100000;
+
+		if (!player || !hasDisabledHunger) {
+			// Add button to disable hunger
+			this.addButton(
+				"edu_tools.ui.manage_health.buttons.disable_hunger",
+				(): void => {
+					let [selectedPlayersType, options]: [
+						string | null,
+						string | Player | null,
+					] = sceneManager.getSubjectPlayersType();
+
+					switch (selectedPlayersType) {
+						case "self":
+							let player: Player = sceneManager.getSourcePlayer();
+							const configSelfDisableHunger = {
+								title: "confirm.manage_health.disable_hunger",
+								body: "edu_tools.ui.confirm.manage_health.self.disable_hunger.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
 											player.addEffect("saturation", 1000000, {
 												showParticles: false,
 												amplifier: 10,
 											});
-										});
-										sceneManager.openScene("main");
+											sceneManager.openScene("main");
+										},
 									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configAllDisableHunger);
-						break;
-					case "specific_player":
-						const configSpecificDisableHunger = {
-							title: "confirm.manage_health.disable_hunger",
-							body: "edu_tools.ui.confirm.manage_health.specific.disable_hunger.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										const specificPlayer: Player = options as Player;
-										specificPlayer.addEffect("saturation", 1000000, {
-											showParticles: false,
-											amplifier: 10,
-										});
-										sceneManager.openScene("main");
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
 									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configSpecificDisableHunger);
-						break;
-				}
-			},
-			"textures/edu_tools/ui/icons/manage_health/disable_hunger",
-		);
+								],
+							};
+							sceneManager.openScene("confirm", configSelfDisableHunger);
+							break;
+						case "all":
+							const configAllDisableHunger = {
+								title: "confirm.manage_health.disable_hunger",
+								body: "edu_tools.ui.confirm.manage_health.all.disable_hunger.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											world.getPlayers().forEach((player: Player) => {
+												player.addEffect("saturation", 1000000, {
+													showParticles: false,
+													amplifier: 10,
+												});
+											});
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configAllDisableHunger);
+							break;
+						case "specific_player":
+							const configSpecificDisableHunger = {
+								title: "confirm.manage_health.disable_hunger",
+								body: "edu_tools.ui.confirm.manage_health.specific.disable_hunger.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											const specificPlayer: Player = options as Player;
+											specificPlayer.addEffect("saturation", 1000000, {
+												showParticles: false,
+												amplifier: 10,
+											});
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configSpecificDisableHunger);
+							break;
+					}
+				},
+				"textures/edu_tools/ui/icons/manage_health/disable_hunger",
+			);
+		}
 
-		// Add button to enable health
+		if (!player || hasDisabledHunger) {
+			// Add button to enable hunger
+			this.addButton(
+				"edu_tools.ui.manage_health.buttons.enable_hunger",
+				(): void => {
+					let [selectedPlayersType, options]: [
+						string | null,
+						string | Player | null,
+					] = sceneManager.getSubjectPlayersType();
+
+					switch (selectedPlayersType) {
+						case "self":
+							let player: Player = sceneManager.getSourcePlayer();
+							const configSelfEnableHunger = {
+								title: "confirm.manage_health.enable_hunger",
+								body: "edu_tools.ui.confirm.manage_health.self.enable_hunger.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											player.removeEffect("saturation");
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configSelfEnableHunger);
+							break;
+						case "all":
+							const configAllEnableHunger = {
+								title: "confirm.manage_health.enable_hunger",
+								body: "edu_tools.ui.confirm.manage_health.all.enable_hunger.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											world.getPlayers().forEach((player: Player) => {
+												player.removeEffect("saturation");
+											});
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configAllEnableHunger);
+							break;
+						case "specific_player":
+							const configSpecificEnableHunger = {
+								title: "confirm.manage_health.enable_hunger",
+								body: "edu_tools.ui.confirm.manage_health.specific.enable_hunger.body",
+								buttons: [
+									{
+										label: "edu_tools.ui.buttons.continue",
+										handler: () => {
+											const specificPlayer: Player = options as Player;
+											specificPlayer.removeEffect("saturation");
+											sceneManager.openScene("main");
+										},
+									},
+									{
+										label: "edu_tools.ui.buttons.exit",
+										handler: () => {},
+									},
+								],
+							};
+							sceneManager.openScene("confirm", configSpecificEnableHunger);
+							break;
+					}
+				},
+				"textures/edu_tools/ui/icons/manage_health/enable_hunger",
+			);
+		}
+
+		// Add button to reset
 		this.addButton(
-			"edu_tools.ui.manage_health.buttons.enable_health",
+			"edu_tools.ui.manage_health.buttons.reset",
 			(): void => {
 				let [selectedPlayersType, options]: [
 					string | null,
@@ -348,13 +522,14 @@ export class ManageHealthScene extends ActionUIScene {
 				switch (selectedPlayersType) {
 					case "self":
 						let player: Player = sceneManager.getSourcePlayer();
-						const configSelfEnableHealth = {
-							title: "confirm.manage_health.enable_health",
-							body: "edu_tools.ui.confirm.manage_health.self.enable_health.body",
+						const configSelfReset = {
+							title: "confirm.manage_health.reset",
+							body: "edu_tools.ui.confirm.manage_health.self.reset.body",
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
 									handler: () => {
+										player.removeEffect("saturation");
 										player.removeEffect("regeneration");
 										sceneManager.openScene("main");
 									},
@@ -365,17 +540,18 @@ export class ManageHealthScene extends ActionUIScene {
 								},
 							],
 						};
-						sceneManager.openScene("confirm", configSelfEnableHealth);
+						sceneManager.openScene("confirm", configSelfReset);
 						break;
 					case "all":
-						const configAllEnableHealth = {
-							title: "confirm.manage_health.enable_health",
-							body: "edu_tools.ui.confirm.manage_health.all.enable_health.body",
+						const configAllReset = {
+							title: "confirm.manage_health.reset",
+							body: "edu_tools.ui.confirm.manage_health.all.reset.body",
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
 									handler: () => {
 										world.getPlayers().forEach((player: Player) => {
+											player.removeEffect("saturation");
 											player.removeEffect("regeneration");
 										});
 										sceneManager.openScene("main");
@@ -387,17 +563,18 @@ export class ManageHealthScene extends ActionUIScene {
 								},
 							],
 						};
-						sceneManager.openScene("confirm", configAllEnableHealth);
+						sceneManager.openScene("confirm", configAllReset);
 						break;
 					case "specific_player":
-						const configSpecificEnableHealth = {
-							title: "confirm.manage_health.enable_health",
-							body: "edu_tools.ui.confirm.manage_health.specific.enable_health.body",
+						const configSpecificReset = {
+							title: "confirm.manage_health.reset",
+							body: "edu_tools.ui.confirm.manage_health.specific.reset.body",
 							buttons: [
 								{
 									label: "edu_tools.ui.buttons.continue",
 									handler: () => {
 										const specificPlayer: Player = options as Player;
+										specificPlayer.removeEffect("saturation");
 										specificPlayer.removeEffect("regeneration");
 										sceneManager.openScene("main");
 									},
@@ -408,90 +585,11 @@ export class ManageHealthScene extends ActionUIScene {
 								},
 							],
 						};
-						sceneManager.openScene("confirm", configSpecificEnableHealth);
+						sceneManager.openScene("confirm", configSpecificReset);
 						break;
 				}
 			},
-			"textures/edu_tools/ui/icons/manage_health/enable_health",
-		);
-
-		// Add button to enable hunger
-		this.addButton(
-			"edu_tools.ui.manage_health.buttons.enable_hunger",
-			(): void => {
-				let [selectedPlayersType, options]: [
-					string | null,
-					string | Player | null,
-				] = sceneManager.getSubjectPlayersType();
-
-				switch (selectedPlayersType) {
-					case "self":
-						let player: Player = sceneManager.getSourcePlayer();
-						const configSelfEnableHunger = {
-							title: "confirm.manage_health.enable_hunger",
-							body: "edu_tools.ui.confirm.manage_health.self.enable_hunger.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										player.removeEffect("saturation");
-										sceneManager.openScene("main");
-									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configSelfEnableHunger);
-						break;
-					case "all":
-						const configAllEnableHunger = {
-							title: "confirm.manage_health.enable_hunger",
-							body: "edu_tools.ui.confirm.manage_health.all.enable_hunger.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										world.getPlayers().forEach((player: Player) => {
-											player.removeEffect("saturation");
-										});
-										sceneManager.openScene("main");
-									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configAllEnableHunger);
-						break;
-					case "specific_player":
-						const configSpecificEnableHunger = {
-							title: "confirm.manage_health.enable_hunger",
-							body: "edu_tools.ui.confirm.manage_health.specific.enable_hunger.body",
-							buttons: [
-								{
-									label: "edu_tools.ui.buttons.continue",
-									handler: () => {
-										const specificPlayer: Player = options as Player;
-										specificPlayer.removeEffect("saturation");
-										sceneManager.openScene("main");
-									},
-								},
-								{
-									label: "edu_tools.ui.buttons.exit",
-									handler: () => {},
-								},
-							],
-						};
-						sceneManager.openScene("confirm", configSpecificEnableHunger);
-						break;
-				}
-			},
-			"textures/edu_tools/ui/icons/manage_health/enable_hunger",
+			"textures/edu_tools/ui/icons/manage_health/reset",
 		);
 
 		this.show(sceneManager.getSourcePlayer());

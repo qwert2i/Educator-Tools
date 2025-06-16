@@ -173,7 +173,8 @@ export class SetPlayersScene extends ActionUIScene {
 
 				this.addButton("edu_tools.ui.buttons.back", (): void => {
 					sceneManager.setSubjectPlayersType(null, null, null);
-					sceneManager.goBack();
+					//sceneManager.goBack(); // TODO: Context is lost here, so we need to open the main scene again.
+					sceneManager.openScene("main");
 				});
 
 				this.show(sceneManager.getSourcePlayer());
@@ -267,7 +268,7 @@ export class SetPlayersScene extends ActionUIScene {
 
 			this.show(sceneManager.getSourcePlayer());
 		} else {
-			console.error("Invalid operation");
+			console.error("Invalid operation: " + operation);
 			sceneManager.openScene("main");
 		}
 	}
