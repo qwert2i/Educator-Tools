@@ -34,7 +34,7 @@ edu_tools.ui.set_players.copy_inventory.target.title=§fSeleccionar Destino
 edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Selecciona un §9sujeto§r para copiar el inventario
 edu_tools.ui.set_players.select_target_for_copy_inventory.body=Selecciona un §cdestino§r para copiar el inventario
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Selecciona un §9sujeto§r para administrar la salud
-
+edu_tools.message.no_space_for_educator_tool=§cNo había espacio para la Herramienta Educador en tu inventario.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fEstablecer modo de juego

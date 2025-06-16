@@ -34,7 +34,7 @@ edu_tools.ui.set_players.copy_inventory.target.title=§fVelg mål
 edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Velg en §9emne§r å kopiere inventar fra
 edu_tools.ui.set_players.select_target_for_copy_inventory.body=Velg et §cmål§r å kopiere inventar til
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Velg en §9spiller§r å administrere helse for
-
+edu_tools.message.no_space_for_educator_tool=§cDet var ikke plass til lærerverktøyet i inventaret ditt.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fEndre Spillemodus

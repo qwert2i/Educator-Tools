@@ -34,7 +34,7 @@ edu_tools.ui.set_players.copy_inventory.target.title=§fWybierz cel
 edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Wybierz §9podmiot§r, z którego chcesz skopiować ekwipunek
 edu_tools.ui.set_players.select_target_for_copy_inventory.body=Wybierz §rcel§r, do którego chcesz skopiować ekwipunek
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Wybierz §9gracza§r, którego zdrowiem chcesz zarządzać
-
+edu_tools.message.no_space_for_educator_tool=§cNie było miejsca w ekwipunku na Narzędzie Edukatora.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fZmiana Trybu Gry

@@ -1,6 +1,12 @@
 import { SceneManager } from "../scene-manager";
 import { ActionUIScene } from "../ui-scene";
-import { EntityInventoryComponent, Player, world } from "@minecraft/server";
+import {
+	EntityInventoryComponent,
+	ItemStack,
+	Player,
+	system,
+	world,
+} from "@minecraft/server";
 
 const SceneName = "set_players";
 
@@ -322,7 +328,7 @@ export class SetPlayersScene extends ActionUIScene {
 										null,
 										player,
 									);
-									SetPlayersScene.copyInventory(specificPlayer, player);
+									this.copyInventory(specificPlayer, player);
 									const config = {
 										title: "confirm.copy_inventory",
 										body: "edu_tools.ui.confirm.copy_inventory.specific.body",
@@ -351,7 +357,7 @@ export class SetPlayersScene extends ActionUIScene {
 						(): void => {
 							world.getPlayers().forEach((player: Player): void => {
 								if (player !== specificPlayer) {
-									SetPlayersScene.copyInventory(specificPlayer, player);
+									this.copyInventory(specificPlayer, player);
 								}
 							});
 							const config = {
@@ -403,10 +409,12 @@ export class SetPlayersScene extends ActionUIScene {
 			tComponents.container
 		) {
 			tComponents.container.clearAll();
+			let spaceLeft = false;
 			for (let i = 0; i < sComponents.container.size; i++) {
 				const item = sComponents.container.getItem(i);
-				if (item && tComponents.container.size > i) {
+				if (tComponents.container.size > i) {
 					if (
+						item &&
 						item.typeId === "edu_tools:educator_tool" &&
 						this.sceneManager.getWorldData().getHostPlayer() &&
 						this.sceneManager.getWorldData().getHostPlayer().id !== target.id
@@ -414,7 +422,30 @@ export class SetPlayersScene extends ActionUIScene {
 						// Do not copy the Educator Tool if the target player is not the host player
 						continue;
 					}
+					if (!item || item.typeId === "minecraft:air") spaceLeft = true;
 					tComponents.container.setItem(i, item);
+				}
+			}
+			if (
+				//this.sceneManager.getWorldData().getHostPlayer() &&
+				//this.sceneManager.getWorldData().getHostPlayer().id !== target.id
+				true
+			) {
+				if (!spaceLeft) {
+					world.sendMessage({
+						translate: "edu_tools.message.no_space_for_educator_tool",
+					});
+				} else {
+					for (let i = 0; i < tComponents.container.size; i++) {
+						const item = tComponents.container.getItem(i);
+						if (!item || item.typeId === "minecraft:air") {
+							tComponents.container.setItem(
+								i,
+								new ItemStack("edu_tools:educator_tool"),
+							);
+							break;
+						}
+					}
 				}
 			}
 		}

@@ -35,7 +35,7 @@ edu_tools.ui.set_players.copy_inventory.target.title=§fコピー先を選択
 edu_tools.ui.set_players.select_subject_for_copy_inventory.body=インベントリをコピーする§9対象§rを選択してください
 edu_tools.ui.set_players.select_target_for_copy_inventory.body=インベントリをコピーする§cコピー先§rを選択してください
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=体力を管理する§9対象§rを選択してください
-
+edu_tools.message.no_space_for_educator_tool=§cインベントリにEduツールの空きがありませんでした。
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fゲームモードを選択
