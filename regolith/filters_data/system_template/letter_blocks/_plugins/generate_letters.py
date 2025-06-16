@@ -11,10 +11,26 @@ import re
 from array import array
 
 def escape_to_char(escape_str):
-    try:
-        return escape_str.encode('utf-8').decode('unicode_escape')
-    except Exception as e:
-        raise ValueError(f"Error while decoding '{escape_str}': {e}")
+    """
+    Convert a string that might contain Unicode escape sequences to a character.
+    If the string is already a direct character, it returns it unchanged.
+    
+    Args:
+        escape_str: String that might contain Unicode escape sequences (e.g., '\u0041')
+                   or a direct character (e.g., 'g')
+                   
+    Returns:
+        The corresponding character
+    """
+    # Check if the string looks like it contains Unicode escape sequences
+    if isinstance(escape_str, str) and re.search(r'\\u[0-9a-fA-F]{4}', escape_str):
+        try:
+            return escape_str.encode('utf-8').decode('unicode_escape')
+        except Exception as e:
+            raise ValueError(f"Error while decoding '{escape_str}': {e}")
+    else:
+        # If it doesn't contain escape sequences, return it as is
+        return escape_str
 
 def safe_filename(character: str) -> str:
     """
