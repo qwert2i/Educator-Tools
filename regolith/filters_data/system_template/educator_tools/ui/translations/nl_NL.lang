@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§fBevestig Genezen
 edu_tools.ui.confirm.manage_health.self.heal.body=Wil je jezelf echt genezen?
 edu_tools.ui.confirm.manage_health.specific.heal.body=Bevestig dat je wilt genezen
 edu_tools.ui.confirm.manage_health.all.heal.body=Wil je echt alle §9spelers§r genezen?
+edu_tools.ui.confirm.manage_health.reset=§fBevestig Status Resetten
+edu_tools.ui.confirm.manage_health.self.reset.body=Wil je je status echt resetten?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Bevestig dat je de status wilt resetten van
+edu_tools.ui.confirm.manage_health.all.reset.body=Wil je de status van alle §9spelers§r echt resetten?
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=Schade inschakelen
 edu_tools.ui.manage_health.buttons.disable_hunger=Honger Uitschakelen
 edu_tools.ui.manage_health.buttons.enable_hunger=Honger Inschakelen
 edu_tools.ui.manage_health.buttons.heal=Genezen
+edu_tools.ui.manage_health.buttons.reset=Resetten

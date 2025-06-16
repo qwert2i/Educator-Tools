@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§fConfirm Heal
 edu_tools.ui.confirm.manage_health.self.heal.body=Do you really want to heal yourself?
 edu_tools.ui.confirm.manage_health.specific.heal.body=Please confirm that you want to heal
 edu_tools.ui.confirm.manage_health.all.heal.body=Do you really want to heal all §9players§r?
+edu_tools.ui.confirm.manage_health.reset=§fConfirm Reset Status
+edu_tools.ui.confirm.manage_health.self.reset.body=Do you really want to reset your status?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Please confirm that you want to reset the status of
+edu_tools.ui.confirm.manage_health.all.reset.body=Do you really want to reset the status of all §9players§r?
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=Enable Damage
 edu_tools.ui.manage_health.buttons.disable_hunger=Disable Hunger
 edu_tools.ui.manage_health.buttons.enable_hunger=Enable Hunger
 edu_tools.ui.manage_health.buttons.heal=Heal
+edu_tools.ui.manage_health.buttons.reset=Reset

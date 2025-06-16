@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§fBekreft Helbredelse
 edu_tools.ui.confirm.manage_health.self.heal.body=Er du sikker på at du vil helbrede deg selv?
 edu_tools.ui.confirm.manage_health.specific.heal.body=Bekreft at du ønsker å helbrede
 edu_tools.ui.confirm.manage_health.all.heal.body=Er du sikker på at du vil helbrede alle §9spillere§r
+edu_tools.ui.confirm.manage_health.reset=§fBekreft tilbakestilling av status
+edu_tools.ui.confirm.manage_health.self.reset.body=Vil du virkelig tilbakestille statusen din?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Vennligst bekreft at du vil tilbakestille statusen til
+edu_tools.ui.confirm.manage_health.all.reset.body=Vil du virkelig tilbakestille statusen til alle §9spillere§r?
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=Aktiver skade
 edu_tools.ui.manage_health.buttons.disable_hunger=Deaktiver Sult
 edu_tools.ui.manage_health.buttons.enable_hunger=Aktiver Sult
 edu_tools.ui.manage_health.buttons.heal=Helbred
+edu_tools.ui.manage_health.buttons.reset=Tilbakestill

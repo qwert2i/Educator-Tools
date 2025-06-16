@@ -89,6 +89,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§f回復の確認
 edu_tools.ui.confirm.manage_health.self.heal.body=本当に自分自身を回復しますか？
 edu_tools.ui.confirm.manage_health.specific.heal.body=次のプレイヤーを回復することを確認してください
 edu_tools.ui.confirm.manage_health.all.heal.body=本当に全ての§9プレイヤー§rを回復しますか？
+edu_tools.ui.confirm.manage_health.reset=§fステータスのリセットを確認
+edu_tools.ui.confirm.manage_health.self.reset.body=本当に自分のステータスをリセットしますか？
+edu_tools.ui.confirm.manage_health.specific.reset.body=以下のステータスをリセットすることを確認してください:
+edu_tools.ui.confirm.manage_health.all.reset.body=本当にすべての§9プレイヤー§rのステータスをリセットしますか？
 
 
 ### World Settings UI Scene
@@ -178,3 +182,4 @@ edu_tools.ui.manage_health.buttons.enable_health=ダメージを有効にする
 edu_tools.ui.manage_health.buttons.disable_hunger=空腹度を無効化
 edu_tools.ui.manage_health.buttons.enable_hunger=空腹度を有効化
 edu_tools.ui.manage_health.buttons.heal=回復
+edu_tools.ui.manage_health.buttons.reset=リセット

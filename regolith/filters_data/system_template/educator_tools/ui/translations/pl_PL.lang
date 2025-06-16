@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§fPotwierdź Leczenie
 edu_tools.ui.confirm.manage_health.self.heal.body=Czy na pewno chcesz się uleczyć?
 edu_tools.ui.confirm.manage_health.specific.heal.body=Potwierdź, że chcesz uleczyć
 edu_tools.ui.confirm.manage_health.all.heal.body=Czy na pewno chcesz uleczyć wszystkich §9graczy§r?
+edu_tools.ui.confirm.manage_health.reset=§fPotwierdź resetowanie statusu
+edu_tools.ui.confirm.manage_health.self.reset.body=Czy na pewno chcesz zresetować swój status?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Proszę potwierdzić, że chcesz zresetować status
+edu_tools.ui.confirm.manage_health.all.reset.body=Czy na pewno chcesz zresetować status wszystkich §9graczy§r?
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=Włącz obrażenia
 edu_tools.ui.manage_health.buttons.disable_hunger=Wyłącz Głód
 edu_tools.ui.manage_health.buttons.enable_hunger=Włącz Głód
 edu_tools.ui.manage_health.buttons.heal=Ulecz
+edu_tools.ui.manage_health.buttons.reset=Resetuj

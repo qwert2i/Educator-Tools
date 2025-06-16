@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§f确认治疗
 edu_tools.ui.confirm.manage_health.self.heal.body=你确定要治疗自己吗？
 edu_tools.ui.confirm.manage_health.specific.heal.body=请确认你想治疗
 edu_tools.ui.confirm.manage_health.all.heal.body=你确定要治疗所有§9玩家§r吗？
+edu_tools.ui.confirm.manage_health.reset=§f确认重置状态
+edu_tools.ui.confirm.manage_health.self.reset.body=您真的想要重置您的状态吗？
+edu_tools.ui.confirm.manage_health.specific.reset.body=请确认您想要重置以下的状态
+edu_tools.ui.confirm.manage_health.all.reset.body=您真的想要重置所有§9玩家§r的状态吗？
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=开启伤害
 edu_tools.ui.manage_health.buttons.disable_hunger=禁用饥饿
 edu_tools.ui.manage_health.buttons.enable_hunger=启用饥饿
 edu_tools.ui.manage_health.buttons.heal=治疗
+edu_tools.ui.manage_health.buttons.reset=重置

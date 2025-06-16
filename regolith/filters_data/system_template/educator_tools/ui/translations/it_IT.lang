@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§fConferma Cura
 edu_tools.ui.confirm.manage_health.self.heal.body=Vuoi davvero curarti?
 edu_tools.ui.confirm.manage_health.specific.heal.body=Conferma di voler curare
 edu_tools.ui.confirm.manage_health.all.heal.body=Vuoi davvero curare tutti i §9giocatori§r?
+edu_tools.ui.confirm.manage_health.reset=§fConferma Reset Stato
+edu_tools.ui.confirm.manage_health.self.reset.body=Vuoi davvero resettare il tuo stato?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Per favore conferma che vuoi resettare lo stato di
+edu_tools.ui.confirm.manage_health.all.reset.body=Vuoi davvero resettare lo stato di tutti i §9giocatori§r?
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=Abilita Danno
 edu_tools.ui.manage_health.buttons.disable_hunger=Disabilita Fame
 edu_tools.ui.manage_health.buttons.enable_hunger=Abilita Fame
 edu_tools.ui.manage_health.buttons.heal=Guarisci
+edu_tools.ui.manage_health.buttons.reset=Resetta

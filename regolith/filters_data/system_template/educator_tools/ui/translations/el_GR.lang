@@ -88,6 +88,10 @@ edu_tools.ui.confirm.manage_health.heal.title=§fΕπιβεβαίωση Θερα
 edu_tools.ui.confirm.manage_health.self.heal.body=Θέλετε πραγματικά να θεραπευτείτε;
 edu_tools.ui.confirm.manage_health.specific.heal.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να θεραπεύσετε
 edu_tools.ui.confirm.manage_health.all.heal.body=Θέλετε πραγματικά να θεραπεύσετε όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.reset=§fΕπιβεβαίωση Επαναφοράς Κατάστασης
+edu_tools.ui.confirm.manage_health.self.reset.body=Θέλεις πραγματικά να επαναφέρεις την κατάστασή σου;
+edu_tools.ui.confirm.manage_health.specific.reset.body=Παρακαλώ επιβεβαίωσε ότι θέλεις να επαναφέρεις την κατάσταση του/της
+edu_tools.ui.confirm.manage_health.all.reset.body=Θέλεις πραγματικά να επαναφέρεις την κατάσταση όλων των §9παικτών§r;
 
 
 ### World Settings UI Scene
@@ -176,3 +180,4 @@ edu_tools.ui.manage_health.buttons.enable_health=Ενεργοποίηση Ζημ
 edu_tools.ui.manage_health.buttons.disable_hunger=Απενεργοποίηση Πείνας
 edu_tools.ui.manage_health.buttons.enable_hunger=Ενεργοποίηση Πείνας
 edu_tools.ui.manage_health.buttons.heal=Θεραπεία
+edu_tools.ui.manage_health.buttons.reset=Επαναφορά
