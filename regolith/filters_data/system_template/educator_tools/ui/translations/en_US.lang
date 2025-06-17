@@ -10,6 +10,7 @@ edu_tools.message.no_host=You need to be the host of the world to use this tool
 edu_tools.ui.main.title=§fEducator Tools
 edu_tools.ui.main.body=Select a tool to use
 edu_tools.ui.main.buttons.teleport=Teleport
+edu_tools.ui.main.buttons.copy_inventory=Copy Inventory
 edu_tools.ui.main.buttons.gamemode=Gamemode
 edu_tools.ui.main.buttons.manage_teams=Manage Teams
 edu_tools.ui.main.buttons.timer=Timer
@@ -28,8 +29,12 @@ edu_tools.ui.set_players.buttons.you=You
 edu_tools.ui.set_players.buttons.all=All
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Select a §9subject§r to change gamemode for
+edu_tools.ui.set_players.copy_inventory.subject.title=§fSelect Subject
+edu_tools.ui.set_players.copy_inventory.target.title=§fSelect Target
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Select a §9subject§r to copy inventory from
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Select a §ctarget§r to copy inventory to
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Select a §9subject§r to manage health for
-
+edu_tools.message.no_space_for_educator_tool=§cThere was no space for the Educator Tool in your inventory.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fSet Gamemode
@@ -50,6 +55,11 @@ edu_tools.ui.confirm.teleport.self.body2=to
 edu_tools.ui.confirm.teleport.specific.body= Successfully teleported
 edu_tools.ui.confirm.teleport.specific.body2=to
 edu_tools.ui.confirm.teleport.all.body=Successfully teleported all §9players§r teleported to
+
+edu_tools.ui.confirm.copy_inventory.title=§fConfirm Inventory Copy
+edu_tools.ui.confirm.copy_inventory.specific.body=Successfully copied inventory
+edu_tools.ui.confirm.copy_inventory.all.body=Successfully copied inventory to all §9players§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fConfirm Gamemode Change
 edu_tools.ui.confirm.gamemode.self.body=Successfully set §9your§r gamemode 

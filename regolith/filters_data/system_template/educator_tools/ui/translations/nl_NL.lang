@@ -10,6 +10,7 @@ edu_tools.message.no_host=Je moet de host van de wereld zijn om deze tool te geb
 edu_tools.ui.main.title=§fEducator Tools
 edu_tools.ui.main.body=Selecteer een tool om te gebruiken
 edu_tools.ui.main.buttons.teleport=Teleporteer
+edu_tools.ui.main.buttons.copy_inventory=Voorraad kopiëren
 edu_tools.ui.main.buttons.gamemode=Spelmodus
 edu_tools.ui.main.buttons.manage_teams=Beheer Teams
 edu_tools.ui.main.buttons.timer=Timer
@@ -28,8 +29,12 @@ edu_tools.ui.set_players.buttons.you=Jij
 edu_tools.ui.set_players.buttons.all=Allen
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Selecteer een §9speler§r om de spelmodus voor te wijzigen
+edu_tools.ui.set_players.copy_inventory.subject.title=§fSelecteer Onderwerp
+edu_tools.ui.set_players.copy_inventory.target.title=§fSelecteer Doel
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Selecteer een §9onderwerp§r om de voorraad van te kopiëren
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Selecteer een §cdoel§r om de voorraad naar te kopiëren
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Selecteer een §9speler§r om gezondheid voor te beheren
-
+edu_tools.message.no_space_for_educator_tool=§cEr was geen ruimte voor het Educator Tool in je inventaris.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fStel Spelmodus in
@@ -50,6 +55,11 @@ edu_tools.ui.confirm.teleport.self.body2=naar
 edu_tools.ui.confirm.teleport.specific.body=Succesvol geteleporteerd
 edu_tools.ui.confirm.teleport.specific.body2=naar
 edu_tools.ui.confirm.teleport.all.body=Succesvol alle §9spelers§r geteleporteerd naar
+
+edu_tools.ui.confirm.copy_inventory.title=§fBevestig het kopiëren van de voorraad
+edu_tools.ui.confirm.copy_inventory.specific.body=Voorraad succesvol gekopieerd
+edu_tools.ui.confirm.copy_inventory.all.body=Voorraad succesvol gekopieerd naar alle §9spelers§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fBevestig Wijziging Spelmodus
 edu_tools.ui.confirm.gamemode.self.body=Succesvol §9jouw§r spelmodus ingesteld

@@ -10,6 +10,7 @@ edu_tools.message.no_host=你需要成为世界的主人才能使用这个工具
 edu_tools.ui.main.title=§f教育工具
 edu_tools.ui.main.body=选择要使用的工具
 edu_tools.ui.main.buttons.teleport=传送
+edu_tools.ui.main.buttons.copy_inventory=复制物品栏
 edu_tools.ui.main.buttons.gamemode=游戏模式
 edu_tools.ui.main.buttons.manage_teams=管理团队
 edu_tools.ui.main.buttons.timer=计时器
@@ -28,8 +29,12 @@ edu_tools.ui.set_players.buttons.you=你
 edu_tools.ui.set_players.buttons.all=所有人
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=选择要改变游戏模式的§9玩家§r
+edu_tools.ui.set_players.copy_inventory.subject.title=§f选择主体
+edu_tools.ui.set_players.copy_inventory.target.title=§f选择目标
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=选择一个§9主体§r以复制物品栏
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=选择一个§c目标§r以粘贴物品栏
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=选择要管理健康的§9玩家§r
-
+edu_tools.message.no_space_for_educator_tool=§c你的物品栏中没有足够空间放置教育工具。
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§设置游戏模式
@@ -50,6 +55,11 @@ edu_tools.ui.confirm.teleport.self.body2=至
 edu_tools.ui.confirm.teleport.specific.body=已经成功传送
 edu_tools.ui.confirm.teleport.specific.body2=至
 edu_tools.ui.confirm.teleport.all.body=已经成功传送所有§9玩家§r至目标
+
+edu_tools.ui.confirm.copy_inventory.title=§f确认物品栏复制
+edu_tools.ui.confirm.copy_inventory.specific.body=成功复制物品栏
+edu_tools.ui.confirm.copy_inventory.all.body=成功将物品栏复制到所有§9玩家§r
+
 
 edu_tools.ui.confirm.gamemode.title=§f确认游戏模式改变
 edu_tools.ui.confirm.gamemode.self.body=成功设置§9你§r的游戏模式

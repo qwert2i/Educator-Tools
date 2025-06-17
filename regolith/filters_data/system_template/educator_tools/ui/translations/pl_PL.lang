@@ -10,6 +10,7 @@ edu_tools.message.no_host=Musisz być gospodarzem świata, aby użyć tego narz�
 edu_tools.ui.main.title=§fNarzędzia dla Nauczyciela
 edu_tools.ui.main.body=Wybierz narzędzie z którego chcesz skorzystać
 edu_tools.ui.main.buttons.teleport=Teleportacja
+edu_tools.ui.main.buttons.copy_inventory=Kopiuj ekwipunek
 edu_tools.ui.main.buttons.gamemode=Zmiana Trybu Gry
 edu_tools.ui.main.buttons.manage_teams=Zarządzaj Drużynami
 edu_tools.ui.main.buttons.timer=Stoper
@@ -28,8 +29,12 @@ edu_tools.ui.set_players.buttons.you=Ty
 edu_tools.ui.set_players.buttons.all=Wszyscy
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Wybierz §9gracza§r którego tryb gry chcesz zmienić
+edu_tools.ui.set_players.copy_inventory.subject.title=§fWybierz podmiot
+edu_tools.ui.set_players.copy_inventory.target.title=§fWybierz cel
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Wybierz §9podmiot§r, z którego chcesz skopiować ekwipunek
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Wybierz §rcel§r, do którego chcesz skopiować ekwipunek
 edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Wybierz §9gracza§r, którego zdrowiem chcesz zarządzać
-
+edu_tools.message.no_space_for_educator_tool=§cNie było miejsca w ekwipunku na Narzędzie Edukatora.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fZmiana Trybu Gry
@@ -50,6 +55,11 @@ edu_tools.ui.confirm.teleport.self.body2=do
 edu_tools.ui.confirm.teleport.specific.body=Pomyślnie przeteleportowano
 edu_tools.ui.confirm.teleport.specific.body2=do
 edu_tools.ui.confirm.teleport.all.body=Pomyślnie przeteleportowano wszystkich §9graczy§r do
+
+edu_tools.ui.confirm.copy_inventory.title=§fPotwierdź kopiowanie ekwipunku
+edu_tools.ui.confirm.copy_inventory.specific.body=Pomyślnie skopiowano ekwipunek
+edu_tools.ui.confirm.copy_inventory.all.body=Pomyślnie skopiowano ekwipunek do wszystkich §9graczy§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fPotwierdź Zmianę Trybu Gry
 edu_tools.ui.confirm.gamemode.self.body=Pomyślnie zmieniono §9twój§r tryb gry
