@@ -84,6 +84,14 @@ def generate_letter_images(
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
     
+    # Extract background image name if provided
+    background_subfolder = None
+    if background_image_path:
+        # Get the filename without directory path
+        bg_filename = os.path.basename(background_image_path)
+        # Remove .block.png suffix if present
+        background_subfolder = bg_filename.replace('.block.png', '')
+    
     # Adapt letters array → actual chars, filename and group
     decoded = [
         (escape_to_char(item["char"]),
@@ -164,6 +172,11 @@ def generate_letter_images(
             output_path_group = output_path
             if group:
                 output_path_group = output_path / group
+                output_path_group.mkdir(parents=True, exist_ok=True)
+
+            # Add background subfolder if available
+            if background_subfolder:
+                output_path_group = output_path_group / background_subfolder
                 output_path_group.mkdir(parents=True, exist_ok=True)
 
             # create the oversampled image

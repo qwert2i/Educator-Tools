@@ -64,7 +64,7 @@
         {
             "source": "block/letter_block.block.json",
             "target": f"BP/blocks/{p.stem.removesuffix('.block')}.block.json",
-            "scope": {"letter": p.stem.removesuffix(".block")},
+            "scope": {"letter": p.stem.removesuffix(".block"), "background": p.parent.name},
             "json_template": True,
         }
         for p in Path("letter_blocks").glob("**/*.png")
@@ -86,7 +86,7 @@
             "target": f"BP/items/{p.stem.removesuffix('.block')}.bp_item.json",
             "scope": {
                 "letter": p.stem.removesuffix(".block"),
-                "group": p.parent.name,
+                "group": p.parent.parent.name,
             },
             "json_template": True,
         }
