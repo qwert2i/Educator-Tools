@@ -10,23 +10,31 @@ edu_tools.message.no_host=Χρειάζεται να είστε ο οικοδεσ
 edu_tools.ui.main.title=§fΕργαλεία Εκπαιδευτή
 edu_tools.ui.main.body=Επέλεξε ένα εργαλείο για να χρησιμοποιήσετε
 edu_tools.ui.main.buttons.teleport=Τηλεμεταφορά
+edu_tools.ui.main.buttons.copy_inventory=Αντιγραφή Αποθέματος
 edu_tools.ui.main.buttons.gamemode=Τύπος Παιχνιδιού
 edu_tools.ui.main.buttons.manage_teams=Διαχείριση Ομάδων
 edu_tools.ui.main.buttons.timer=Χρονοδιακόπτης
 edu_tools.ui.main.buttons.world_settings=Ρυθμίσεις κόσμου
 edu_tools.ui.main.buttons.lock_players=Κλείδωμα παικτών
+edu_tools.ui.main.buttons.manage_health=Διαχείριση Υγείας
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fΕπέλεξε υποκείμενο
 edu_tools.ui.set_players.teleport.target.title=§fΕπέλεξε στόχο
 edu_tools.ui.set_players.gamemode.title=§fΕπέλεξε υποκείμενο
-edu_tools.ui.set_players.select_subject_for_teleport.body=Επέλεξε ένα §9υποκείμενο§r για τηλεμεταφορά 
+edu_tools.ui.set_players.manage_health.title=§fΔιαχείριση Υγείας
+edu_tools.ui.set_players.select_subject_for_teleport.body=Επέλεξε ένα §9υποκείμενο§r για τηλεμεταφορά
 edu_tools.ui.set_players.select_target_for_teleport.body=Επέλεξε έναν §cστόχο§r προς τηλεμεταφορά
 edu_tools.ui.set_players.buttons.you=Εσύ
 edu_tools.ui.set_players.buttons.all=Όλοι
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Επέλεξε ένα §9υποκείμενο§r για αλλαγή του τρόπου παιχνιδιού
-
+edu_tools.ui.set_players.copy_inventory.subject.title=§fΕπιλέξτε Θέμα
+edu_tools.ui.set_players.copy_inventory.target.title=§fΕπιλέξτε Στόχο
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Επιλέξτε ένα §9θέμα§r για να αντιγράψετε το απόθεμα
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Επιλέξτε έναν §cστόχο§r για να αντιγράψετε το απόθεμα
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Επιλέξτε ένα §9υποκείμενο§r για να διαχειριστείτε την υγεία
+edu_tools.message.no_space_for_educator_tool=§cΔεν υπήρχε χώρος για το Εργαλείο Εκπαιδευτή στο απόθεμά σου.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fΟρισμός τύπου παιχνιδιού
@@ -41,16 +49,20 @@ edu_tools.ui.set_gamemode.buttons.survival=Επιβίωση
 edu_tools.ui.set_gamemode.buttons.creative=Δημιουργικό
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fΕπιβεβαίωση τηλεμεταφορά
 edu_tools.ui.confirm.teleport.title=§fΤηλεμεταφέρθηκε
 edu_tools.ui.confirm.teleport.self.body=Τηλεμεταφέρθηκε επιτυχώς
 edu_tools.ui.confirm.teleport.self.body2=προς
-edu_tools.ui.confirm.teleport.specific.body= Τηλεμεταφέρθηκε επιτυχώς
+edu_tools.ui.confirm.teleport.specific.body=Τηλεμεταφέρθηκε επιτυχώς
 edu_tools.ui.confirm.teleport.specific.body2=προς
 edu_tools.ui.confirm.teleport.all.body=Τηλεμεταφέρθηκαν επιτυχώς όλοι οι §9παίκτες§r τηλεμεταφέρθηκαν προς
 
+edu_tools.ui.confirm.copy_inventory.title=§fΕπιβεβαίωση Αντιγραφής Αποθέματος
+edu_tools.ui.confirm.copy_inventory.specific.body=Το απόθεμα αντιγράφηκε με επιτυχία
+edu_tools.ui.confirm.copy_inventory.all.body=Το απόθεμα αντιγράφηκε με επιτυχία σε όλους τους §9παίκτες§r
+
+
 edu_tools.ui.confirm.gamemode.title=§fΕπιβεβαίωση τύπου παιχνιδιού
-edu_tools.ui.confirm.gamemode.self.body=Ο τύπος παιχνιδιού §9σου§r τέθηκε με επιτυχία 
+edu_tools.ui.confirm.gamemode.self.body=Ο τύπος παιχνιδιού §9σου§r τέθηκε με επιτυχία
 edu_tools.ui.confirm.gamemode.specific.body=Ο τύπος παιχνιδιού τέθηκε με επιτυχία για
 edu_tools.ui.confirm.gamemode.all.body=Ο τύπος παιχνιδιού τέθηκε με επιτυχία για όλους τους §9παίκτες§r
 
@@ -66,9 +78,35 @@ edu_tools.ui.confirm.stop_timer.body=Θέλετε πραγματικά να στ
 edu_tools.ui.confirm.edit_timer.title=§fΕπιβεβαίωση επεξεργασίας χρονοδιακόπτη
 edu_tools.ui.confirm.edit_timer.body=Θέλετε πραγματικά να επεξεργαστείτε το χρονόμετρο; Αυτό θα αντικαταστήσει το τρέχον χρονόμετρο.
 
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fΕπιβεβαίωση Απενεργοποίησης Πείνας
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Θέλετε πραγματικά να απενεργοποιήσετε την πείνα σας;
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να απενεργοποιήσετε την πείνα για
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Θέλετε πραγματικά να απενεργοποιήσετε την πείνα για όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fΕπιβεβαίωση Ενεργοποίησης Πείνας
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Θέλετε πραγματικά να ενεργοποιήσετε την πείνα σας;
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να ενεργοποιήσετε την πείνα για
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Θέλετε πραγματικά να ενεργοποιήσετε την πείνα για όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.disable_health.title=§fΕπιβεβαίωση Απενεργοποίησης Ζημιάς
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Θέλεις πραγματικά να απενεργοποιήσεις τη ζημιά σου;
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Παρακαλώ επιβεβαίωσε ότι θέλεις να απενεργοποιήσεις τη ζημιά για
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Θέλεις πραγματικά να απενεργοποιήσεις τη ζημιά για όλους §9τους παίκτες§r;
+edu_tools.ui.confirm.manage_health.enable_health.title=§fΕπιβεβαίωση Ενεργοποίησης Ζημιάς
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Θέλεις πραγματικά να ενεργοποιήσεις τη ζημιά σου;
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Παρακαλώ επιβεβαίωσε ότι θέλεις να ενεργοποιήσεις τη ζημιά για
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Θέλεις πραγματικά να ενεργοποιήσεις τη ζημιά για όλους §9τους παίκτες§r;
+edu_tools.ui.confirm.manage_health.heal.title=§fΕπιβεβαίωση Θεραπείας
+edu_tools.ui.confirm.manage_health.self.heal.body=Θέλετε πραγματικά να θεραπευτείτε;
+edu_tools.ui.confirm.manage_health.specific.heal.body=Παρακαλώ επιβεβαιώστε ότι θέλετε να θεραπεύσετε
+edu_tools.ui.confirm.manage_health.all.heal.body=Θέλετε πραγματικά να θεραπεύσετε όλους τους §9παίκτες§r;
+edu_tools.ui.confirm.manage_health.reset=§fΕπιβεβαίωση Επαναφοράς Κατάστασης
+edu_tools.ui.confirm.manage_health.self.reset.body=Θέλεις πραγματικά να επαναφέρεις την κατάστασή σου;
+edu_tools.ui.confirm.manage_health.specific.reset.body=Παρακαλώ επιβεβαίωσε ότι θέλεις να επαναφέρεις την κατάσταση του/της
+edu_tools.ui.confirm.manage_health.all.reset.body=Θέλεις πραγματικά να επαναφέρεις την κατάσταση όλων των §9παικτών§r;
+
+
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fΡυθμίσεις κόσμου
-edu_tools.ui.world_settings.toggles.mob_spawning=Εμφάνιση ζώων/τεράτων 
+edu_tools.ui.world_settings.toggles.mob_spawning=Εμφάνιση ζώων/τεράτων
 edu_tools.ui.world_settings.toggles.mob_griefing=Καταστροφή κόσμου από τέρατα
 edu_tools.ui.world_settings.toggles.keep_inventory=Διατήρηση αντικειμένων παίκτη
 edu_tools.ui.world_settings.toggles.daylight_cycle=Εναλλαγή ημέρας/νύχτας
@@ -141,3 +179,15 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Κέ�
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Γύρω από εμένα
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Περιοχή
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Ακτίνα
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Διαχείριση Υγείας
+edu_tools.ui.manage_health.self.body=Διαχείριση υγείας του
+edu_tools.ui.manage_health.specific.body=Διαχείριση υγείας του
+edu_tools.ui.manage_health.all.body=Διαχείριση υγείας όλων των §9παίκτες§r
+edu_tools.ui.manage_health.buttons.disable_health=Απενεργοποίηση Ζημιάς
+edu_tools.ui.manage_health.buttons.enable_health=Ενεργοποίηση Ζημιάς
+edu_tools.ui.manage_health.buttons.disable_hunger=Απενεργοποίηση Πείνας
+edu_tools.ui.manage_health.buttons.enable_hunger=Ενεργοποίηση Πείνας
+edu_tools.ui.manage_health.buttons.heal=Θεραπεία
+edu_tools.ui.manage_health.buttons.reset=Επαναφορά

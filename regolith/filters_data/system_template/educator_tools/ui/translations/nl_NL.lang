@@ -10,23 +10,31 @@ edu_tools.message.no_host=Je moet de host van de wereld zijn om deze tool te geb
 edu_tools.ui.main.title=§fEducator Tools
 edu_tools.ui.main.body=Selecteer een tool om te gebruiken
 edu_tools.ui.main.buttons.teleport=Teleporteer
+edu_tools.ui.main.buttons.copy_inventory=Voorraad kopiëren
 edu_tools.ui.main.buttons.gamemode=Spelmodus
 edu_tools.ui.main.buttons.manage_teams=Beheer Teams
 edu_tools.ui.main.buttons.timer=Timer
 edu_tools.ui.main.buttons.world_settings=Wereldinstellingen
 edu_tools.ui.main.buttons.lock_players=Vergrendel Spelers
+edu_tools.ui.main.buttons.manage_health=Beheer Gezondheid
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fSelecteer Speler
 edu_tools.ui.set_players.teleport.target.title=§fSelecteer Doelwit
 edu_tools.ui.set_players.gamemode.title=§fSelecteer Speler
+edu_tools.ui.set_players.manage_health.title=§fBeheer Gezondheid
 edu_tools.ui.set_players.select_subject_for_teleport.body=Selecteer een §9Speler§r om te teleporteren
 edu_tools.ui.set_players.select_target_for_teleport.body=Selecteer een §cdoelwit§r om naar te teleporteren
 edu_tools.ui.set_players.buttons.you=Jij
 edu_tools.ui.set_players.buttons.all=Allen
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Selecteer een §9speler§r om de spelmodus voor te wijzigen
-
+edu_tools.ui.set_players.copy_inventory.subject.title=§fSelecteer Onderwerp
+edu_tools.ui.set_players.copy_inventory.target.title=§fSelecteer Doel
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Selecteer een §9onderwerp§r om de voorraad van te kopiëren
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Selecteer een §cdoel§r om de voorraad naar te kopiëren
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Selecteer een §9speler§r om gezondheid voor te beheren
+edu_tools.message.no_space_for_educator_tool=§cEr was geen ruimte voor het Educator Tool in je inventaris.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fStel Spelmodus in
@@ -41,13 +49,17 @@ edu_tools.ui.set_gamemode.buttons.survival=Overleven
 edu_tools.ui.set_gamemode.buttons.creative=Creatief
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fBevestig Teleportatie
 edu_tools.ui.confirm.teleport.title=§fGeteleporteerd
 edu_tools.ui.confirm.teleport.self.body=Succesvol geteleporteerd
 edu_tools.ui.confirm.teleport.self.body2=naar
 edu_tools.ui.confirm.teleport.specific.body=Succesvol geteleporteerd
 edu_tools.ui.confirm.teleport.specific.body2=naar
 edu_tools.ui.confirm.teleport.all.body=Succesvol alle §9spelers§r geteleporteerd naar
+
+edu_tools.ui.confirm.copy_inventory.title=§fBevestig het kopiëren van de voorraad
+edu_tools.ui.confirm.copy_inventory.specific.body=Voorraad succesvol gekopieerd
+edu_tools.ui.confirm.copy_inventory.all.body=Voorraad succesvol gekopieerd naar alle §9spelers§r
+
 
 edu_tools.ui.confirm.gamemode.title=§fBevestig Wijziging Spelmodus
 edu_tools.ui.confirm.gamemode.self.body=Succesvol §9jouw§r spelmodus ingesteld
@@ -65,6 +77,32 @@ edu_tools.ui.confirm.stop_timer.body=Wil je echt de timer stoppen? Dit zal de hu
 
 edu_tools.ui.confirm.edit_timer.title=§fBevestig Timer wijzigen
 edu_tools.ui.confirm.edit_timer.body=Ben je zeker dat je de timer wil wijzigen? Dit zal de huidige timer overschrijven.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fBevestig Honger Uitschakelen
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Wil je echt je honger uitschakelen?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Bevestig dat je honger wilt uitschakelen voor
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Wil je echt honger uitschakelen voor alle §9spelers§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fBevestig Honger Inschakelen
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Wil je echt je honger inschakelen?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Bevestig dat je honger wilt inschakelen voor
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Wil je echt honger inschakelen voor alle §9spelers§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fBevestig het uitschakelen van schade
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Wil je echt je schade uitschakelen?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Bevestig dat je schade wilt uitschakelen voor
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Wil je echt schade uitschakelen voor alle §9spelers§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fBevestig het inschakelen van schade
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Wil je echt je schade inschakelen?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Bevestig dat je schade wilt inschakelen voor
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Wil je echt schade inschakelen voor alle §9spelers§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fBevestig Genezen
+edu_tools.ui.confirm.manage_health.self.heal.body=Wil je jezelf echt genezen?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Bevestig dat je wilt genezen
+edu_tools.ui.confirm.manage_health.all.heal.body=Wil je echt alle §9spelers§r genezen?
+edu_tools.ui.confirm.manage_health.reset=§fBevestig Status Resetten
+edu_tools.ui.confirm.manage_health.self.reset.body=Wil je je status echt resetten?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Bevestig dat je de status wilt resetten van
+edu_tools.ui.confirm.manage_health.all.reset.body=Wil je de status van alle §9spelers§r echt resetten?
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fWereldinstellingen
@@ -88,7 +126,6 @@ edu_tools.ui.timer.buttons.start=Starten
 edu_tools.ui.timer.buttons.stop=Verwijderen
 edu_tools.ui.timer.buttons.hide_timer=Verberg Timer Entiteit
 edu_tools.ui.timer.buttons.show_timer=Toon Timer Entiteit
-
 
 ### Timer
 edu_tools.ui.timer.chat.30_seconds_left=§d[Timer]§r 30 Seconden resterend!
@@ -142,3 +179,15 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Midde
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Rond mij
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Oppervlakte
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Radius
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Beheer Gezondheid
+edu_tools.ui.manage_health.self.body=Beheer gezondheid van
+edu_tools.ui.manage_health.specific.body=Beheer gezondheid van
+edu_tools.ui.manage_health.all.body=Beheer gezondheid van alle §9spelers§r
+edu_tools.ui.manage_health.buttons.disable_health=Schade uitschakelen
+edu_tools.ui.manage_health.buttons.enable_health=Schade inschakelen
+edu_tools.ui.manage_health.buttons.disable_hunger=Honger Uitschakelen
+edu_tools.ui.manage_health.buttons.enable_hunger=Honger Inschakelen
+edu_tools.ui.manage_health.buttons.heal=Genezen
+edu_tools.ui.manage_health.buttons.reset=Resetten
