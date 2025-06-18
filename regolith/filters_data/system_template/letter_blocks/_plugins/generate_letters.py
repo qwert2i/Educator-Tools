@@ -225,7 +225,7 @@ def generate_letter_images(
     
     # Move files to backgrounds subdirectory
     output_path = Path(output_dir)
-    backgrounds_dir = output_path / "backgrounds"
+    backgrounds_dir = output_path / "custom"
     
     # Create backgrounds directory if it doesn't exist
     backgrounds_dir.mkdir(exist_ok=True)
