@@ -10,23 +10,31 @@ edu_tools.message.no_host=Musisz być gospodarzem świata, aby użyć tego narz�
 edu_tools.ui.main.title=§fNarzędzia dla Nauczyciela
 edu_tools.ui.main.body=Wybierz narzędzie z którego chcesz skorzystać
 edu_tools.ui.main.buttons.teleport=Teleportacja
+edu_tools.ui.main.buttons.copy_inventory=Kopiuj ekwipunek
 edu_tools.ui.main.buttons.gamemode=Zmiana Trybu Gry
 edu_tools.ui.main.buttons.manage_teams=Zarządzaj Drużynami
 edu_tools.ui.main.buttons.timer=Stoper
 edu_tools.ui.main.buttons.world_settings=Ustawienia Świata
 edu_tools.ui.main.buttons.lock_players=Blokada Graczy
+edu_tools.ui.main.buttons.manage_health=Zarządzaj Zdrowiem
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fWybierz Obiekt Teleportacji
 edu_tools.ui.set_players.teleport.target.title=§fWybierz Cel
-edu_tools.ui.set_players.gamemode.title=§fWybierz Gracza 
+edu_tools.ui.set_players.gamemode.title=§fWybierz Gracza
+edu_tools.ui.set_players.manage_health.title=§fZarządzaj Zdrowiem
 edu_tools.ui.set_players.select_subject_for_teleport.body=Wybierz §9kogo§r chcesz przeteleportować
 edu_tools.ui.set_players.select_target_for_teleport.body=Wybierz §ccel§r do którego chcesz przeteleportować
 edu_tools.ui.set_players.buttons.you=Ty
 edu_tools.ui.set_players.buttons.all=Wszyscy
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Wybierz §9gracza§r którego tryb gry chcesz zmienić
-
+edu_tools.ui.set_players.copy_inventory.subject.title=§fWybierz podmiot
+edu_tools.ui.set_players.copy_inventory.target.title=§fWybierz cel
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Wybierz §9podmiot§r, z którego chcesz skopiować ekwipunek
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Wybierz §rcel§r, do którego chcesz skopiować ekwipunek
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Wybierz §9gracza§r, którego zdrowiem chcesz zarządzać
+edu_tools.message.no_space_for_educator_tool=§cNie było miejsca w ekwipunku na Narzędzie Edukatora.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fZmiana Trybu Gry
@@ -41,16 +49,20 @@ edu_tools.ui.set_gamemode.buttons.survival=Przetrwania (Survival)
 edu_tools.ui.set_gamemode.buttons.creative=Kreatywny (Creative)
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fPotwierdź Teleportację
 edu_tools.ui.confirm.teleport.title=§fPrzetelportowano
 edu_tools.ui.confirm.teleport.self.body=Pomyślnie przeteleportowano
 edu_tools.ui.confirm.teleport.self.body2=do
-edu_tools.ui.confirm.teleport.specific.body= Pomyślnie przeteleportowano
+edu_tools.ui.confirm.teleport.specific.body=Pomyślnie przeteleportowano
 edu_tools.ui.confirm.teleport.specific.body2=do
 edu_tools.ui.confirm.teleport.all.body=Pomyślnie przeteleportowano wszystkich §9graczy§r do
 
+edu_tools.ui.confirm.copy_inventory.title=§fPotwierdź kopiowanie ekwipunku
+edu_tools.ui.confirm.copy_inventory.specific.body=Pomyślnie skopiowano ekwipunek
+edu_tools.ui.confirm.copy_inventory.all.body=Pomyślnie skopiowano ekwipunek do wszystkich §9graczy§r
+
+
 edu_tools.ui.confirm.gamemode.title=§fPotwierdź Zmianę Trybu Gry
-edu_tools.ui.confirm.gamemode.self.body=Pomyślnie zmieniono §9twój§r tryb gry 
+edu_tools.ui.confirm.gamemode.self.body=Pomyślnie zmieniono §9twój§r tryb gry
 edu_tools.ui.confirm.gamemode.specific.body=Pomyślnie zmieniono tryb gry
 edu_tools.ui.confirm.gamemode.all.body=Pomyślnie zmieniono tryb gry wszystkich §9graczy§r
 
@@ -65,6 +77,32 @@ edu_tools.ui.confirm.stop_timer.body=Czy na pewno chcesz zatrzymać stoper? Spow
 
 edu_tools.ui.confirm.edit_timer.title=§fPotwierdź Edycję Stopera
 edu_tools.ui.confirm.edit_timer.body=Czy na pewno chcesz edytować stoper? Spowoduje to nadpisanie bieżącego stopera.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fPotwierdź Wyłączenie Głodu
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Czy na pewno chcesz wyłączyć swój głód?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Potwierdź, że chcesz wyłączyć głód dla
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Czy na pewno chcesz wyłączyć głód dla wszystkich §9graczy§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fPotwierdź Włączenie Głodu
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Czy na pewno chcesz włączyć swój głód?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Potwierdź, że chcesz włączyć głód dla
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Czy na pewno chcesz włączyć głód dla wszystkich §9graczy§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fPotwierdź wyłączenie obrażeń
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Czy na pewno chcesz wyłączyć swoje obrażenia?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Proszę potwierdź, że chcesz wyłączyć obrażenia dla
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Czy na pewno chcesz wyłączyć obrażenia dla wszystkich §9graczy§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fPotwierdź włączenie obrażeń
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Czy na pewno chcesz włączyć swoje obrażenia?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Proszę potwierdź, że chcesz włączyć obrażenia dla
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Czy na pewno chcesz włączyć obrażenia dla wszystkich §9graczy§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fPotwierdź Leczenie
+edu_tools.ui.confirm.manage_health.self.heal.body=Czy na pewno chcesz się uleczyć?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Potwierdź, że chcesz uleczyć
+edu_tools.ui.confirm.manage_health.all.heal.body=Czy na pewno chcesz uleczyć wszystkich §9graczy§r?
+edu_tools.ui.confirm.manage_health.reset=§fPotwierdź resetowanie statusu
+edu_tools.ui.confirm.manage_health.self.reset.body=Czy na pewno chcesz zresetować swój status?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Proszę potwierdzić, że chcesz zresetować status
+edu_tools.ui.confirm.manage_health.all.reset.body=Czy na pewno chcesz zresetować status wszystkich §9graczy§r?
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fUstawienia Świata
@@ -141,3 +179,15 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Centr
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Dookoła mnie
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Obszar
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Promień
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Zarządzaj Zdrowiem
+edu_tools.ui.manage_health.self.body=Zarządzaj zdrowiem
+edu_tools.ui.manage_health.specific.body=Zarządzaj zdrowiem
+edu_tools.ui.manage_health.all.body=Zarządzaj zdrowiem wszystkich §9graczy§r
+edu_tools.ui.manage_health.buttons.disable_health=Wyłącz obrażenia
+edu_tools.ui.manage_health.buttons.enable_health=Włącz obrażenia
+edu_tools.ui.manage_health.buttons.disable_hunger=Wyłącz Głód
+edu_tools.ui.manage_health.buttons.enable_hunger=Włącz Głód
+edu_tools.ui.manage_health.buttons.heal=Ulecz
+edu_tools.ui.manage_health.buttons.reset=Resetuj

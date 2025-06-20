@@ -182,9 +182,8 @@ export class ModalUIScene {
 		next_scene_config?: ConfirmSceneConfig,
 	) {
 		this.form = new ModalFormData();
-		this.form.title({
-			translate: `edu_tools.ui.${id}.title`,
-		});
+		// This must not be a rawtext, as apparently the title is not translated in the json ui.
+		this.form.title(`edu_tools.ui.${id}.title`);
 		this.buttonHandlers = [];
 		this.player = player;
 		this.next_scene_default = next_scene_default;

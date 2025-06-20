@@ -10,27 +10,35 @@ edu_tools.message.no_host=Do må være verten for verden for å bruke dette verk
 edu_tools.ui.main.title=§fVerktøy for lærere
 edu_tools.ui.main.body=Velg et verktøy å bruke
 edu_tools.ui.main.buttons.teleport=Teleporter
+edu_tools.ui.main.buttons.copy_inventory=Kopier inventar
 edu_tools.ui.main.buttons.gamemode=Spillemodus
 edu_tools.ui.main.buttons.manage_teams=Administrer lag
 edu_tools.ui.main.buttons.timer=Timer
 edu_tools.ui.main.buttons.world_settings=Verdensinnstillinger
 edu_tools.ui.main.buttons.lock_players=Lås spillere
+edu_tools.ui.main.buttons.manage_health=Administrer Helse
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§fVelg Spiller
 edu_tools.ui.set_players.teleport.target.title=§fVelg Mål
 edu_tools.ui.set_players.gamemode.title=§fVelg Fag
+edu_tools.ui.set_players.manage_health.title=§fAdminister Helse
 edu_tools.ui.set_players.select_subject_for_teleport.body=Velg en §9spiller§r å teleportere
 edu_tools.ui.set_players.select_target_for_teleport.body=Velg et §cmål§r å teleportere til
 edu_tools.ui.set_players.buttons.you=Deg
 edu_tools.ui.set_players.buttons.all=Alle
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=Velg en §9spiller§r å endre spillemodus for
-
+edu_tools.ui.set_players.copy_inventory.subject.title=§fVelg emne
+edu_tools.ui.set_players.copy_inventory.target.title=§fVelg mål
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=Velg en §9emne§r å kopiere inventar fra
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=Velg et §cmål§r å kopiere inventar til
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=Velg en §9spiller§r å administrere helse for
+edu_tools.message.no_space_for_educator_tool=§cDet var ikke plass til lærerverktøyet i inventaret ditt.
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fEndre Spillemodus
-edu_tools.ui.set_gamemode.self.body=Endre spillemodus for 
+edu_tools.ui.set_gamemode.self.body=Endre spillemodus for
 edu_tools.ui.set_gamemode.self.body2=til
 edu_tools.ui.set_gamemode.specific.body=Endre spillemodus for
 edu_tools.ui.set_gamemode.specific.body2=til
@@ -41,7 +49,6 @@ edu_tools.ui.set_gamemode.buttons.survival=Overleveses Modus
 edu_tools.ui.set_gamemode.buttons.creative=Kreativ Modus
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§fBekreft Teleportasjon
 edu_tools.ui.confirm.teleport.title=§fTeleportert!
 edu_tools.ui.confirm.teleport.self.body=Teleportasjon vellykket
 edu_tools.ui.confirm.teleport.self.body2=til
@@ -49,8 +56,13 @@ edu_tools.ui.confirm.teleport.specific.body=Teleportasjon vellykket
 edu_tools.ui.confirm.teleport.specific.body2=til
 edu_tools.ui.confirm.teleport.all.body=Alle §9spillere§r ble teleportert til
 
+edu_tools.ui.confirm.copy_inventory.title=§fBekreft kopiering av inventar
+edu_tools.ui.confirm.copy_inventory.specific.body=Inventar kopiert vellykket
+edu_tools.ui.confirm.copy_inventory.all.body=Inventar kopiert vellykket til alle §9spillere§r
+
+
 edu_tools.ui.confirm.gamemode.title=§fBekreft spillemodus endring
-edu_tools.ui.confirm.gamemode.self.body=Endret §9din egen§r spillemodus 
+edu_tools.ui.confirm.gamemode.self.body=Endret §9din egen§r spillemodus
 edu_tools.ui.confirm.gamemode.specific.body=Endret spillemudus for
 edu_tools.ui.confirm.gamemode.all.body=Endret spillemodus for alle §9spillere§r
 
@@ -58,13 +70,39 @@ edu_tools.ui.confirm.world_settings.title=§fBekreft Verdensinnstillinger
 edu_tools.ui.confirm.world_settings.body=Verdensinnstillingene ble endret
 
 edu_tools.ui.confirm.reset_timer.title=§fBekreft Timer Tilbakestilling
-edu_tools.ui.confirm.reset_timer.body= Er du sikker på at du vil tilbakestille timeren? Dette vil nullstille timeren.
+edu_tools.ui.confirm.reset_timer.body=Er du sikker på at du vil tilbakestille timeren? Dette vil nullstille timeren.
 
 edu_tools.ui.confirm.stop_timer.title=§fBekreft Timer Stopp
 edu_tools.ui.confirm.stop_timer.body=Er du sikker på at du vil stoppe timeren? Dette vil slette timeren.
 
 edu_tools.ui.confirm.edit_timer.title=§fBekreft Timer Endring
 edu_tools.ui.confirm.edit_timer.body=Er du sikker på at du vil endre timeren? Dette vil overskrive den eksisterende timeren.
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§fBekreft Deaktivering av Sult
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=Er du sikker på at du vil deaktivere sulten din?
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=Bekreft at du ønsker å deaktivere sult for
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=Er du sikker på at du vil deaktivere sult for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§fBekreft Aktivering av Sult
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=Er du sikker på at du vil aktivere sulten din?
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=Bekreft at du ønsker å aktivere sult for
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=Er du sikker på at du vil aktivere sult for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.disable_health.title=§fBekreft skade deaktivert
+edu_tools.ui.confirm.manage_health.self.disable_health.body=Vil du virkelig deaktivere skaden din?
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=Vennligst bekreft at du vil deaktivere skade for
+edu_tools.ui.confirm.manage_health.all.disable_health.body=Vil du virkelig deaktivere skade for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.enable_health.title=§fBekreft skade aktivert
+edu_tools.ui.confirm.manage_health.self.enable_health.body=Vil du virkelig aktivere skaden din?
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=Vennligst bekreft at du vil aktivere skade for
+edu_tools.ui.confirm.manage_health.all.enable_health.body=Vil du virkelig aktivere skade for alle §9spillere§r?
+edu_tools.ui.confirm.manage_health.heal.title=§fBekreft Helbredelse
+edu_tools.ui.confirm.manage_health.self.heal.body=Er du sikker på at du vil helbrede deg selv?
+edu_tools.ui.confirm.manage_health.specific.heal.body=Bekreft at du ønsker å helbrede
+edu_tools.ui.confirm.manage_health.all.heal.body=Er du sikker på at du vil helbrede alle §9spillere§r
+edu_tools.ui.confirm.manage_health.reset=§fBekreft tilbakestilling av status
+edu_tools.ui.confirm.manage_health.self.reset.body=Vil du virkelig tilbakestille statusen din?
+edu_tools.ui.confirm.manage_health.specific.reset.body=Vennligst bekreft at du vil tilbakestille statusen til
+edu_tools.ui.confirm.manage_health.all.reset.body=Vil du virkelig tilbakestille statusen til alle §9spillere§r?
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§fVerdensinnstillinger
@@ -141,3 +179,15 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=Sentr
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=Rundt Meg
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=Område
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=Radien av området
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=Administrer Helse
+edu_tools.ui.manage_health.self.body=Administrer helse for
+edu_tools.ui.manage_health.specific.body=Administrer helse for
+edu_tools.ui.manage_health.all.body=Administrer helse for alle §9spillere§r
+edu_tools.ui.manage_health.buttons.disable_health=Deaktiver skade
+edu_tools.ui.manage_health.buttons.enable_health=Aktiver skade
+edu_tools.ui.manage_health.buttons.disable_hunger=Deaktiver Sult
+edu_tools.ui.manage_health.buttons.enable_hunger=Aktiver Sult
+edu_tools.ui.manage_health.buttons.heal=Helbred
+edu_tools.ui.manage_health.buttons.reset=Tilbakestill
