@@ -120,7 +120,7 @@
                 "categories": [
                     [
                         f'edu_tools:letter_block_{p.stem.removesuffix(".block")}_placer'
-                        for p in subfolder.glob("*.png")
+                        for p in subfolder.glob("**/*.png")
                     ]
                     for subfolder in Path("letter_blocks").iterdir()
                     if subfolder.is_dir()
