@@ -231,7 +231,7 @@ def generate_letter_images(
     backgrounds_dir.mkdir(exist_ok=True)
     
     # Find all files (not directories) in output_dir
-    for file_path in output_path.glob("**/*.block.png"):
+    for file_path in output_path.glob("letter_blocks/*.block.png"):
         if file_path.is_file() and not str(file_path).startswith(str(backgrounds_dir)):
             # Get filename without .block.png
             base_name = file_path.stem.removesuffix(".block")
