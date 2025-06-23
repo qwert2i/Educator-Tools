@@ -7,6 +7,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import os
 import re
+import shutil
 
 from array import array
 
@@ -83,6 +84,14 @@ def generate_letter_images(
     # Create output directory if it doesn't exist
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
+    
+    # Extract background image name if provided
+    background_subfolder = None
+    if background_image_path:
+        # Get the filename without directory path
+        bg_filename = os.path.basename(background_image_path)
+        # Remove .block.png suffix if present
+        background_subfolder = bg_filename.replace('.block.png', '')
     
     # Adapt letters array → actual chars, filename and group
     decoded = [
@@ -166,6 +175,11 @@ def generate_letter_images(
                 output_path_group = output_path / group
                 output_path_group.mkdir(parents=True, exist_ok=True)
 
+            # Add background subfolder if available
+            if background_subfolder:
+                output_path_group = output_path_group / background_subfolder
+                output_path_group.mkdir(parents=True, exist_ok=True)
+
             # create the oversampled image
             if background_image:
                 img = background_image.copy()
@@ -208,6 +222,31 @@ def generate_letter_images(
 
     # Print a summary of all characters generated
     print("Generated characters: " + "".join(char_map.keys()))
+    
+    # Move files to backgrounds subdirectory
+    output_path = Path(output_dir)
+    backgrounds_dir = output_path / "custom"
+    
+    # Create backgrounds directory if it doesn't exist
+    backgrounds_dir.mkdir(exist_ok=True)
+    
+    # Find all files (not directories) in output_dir
+    for file_path in output_path.glob("letter_blocks/*.block.png"):
+        if file_path.is_file() and not str(file_path).startswith(str(backgrounds_dir)):
+            # Get filename without .block.png
+            base_name = file_path.stem.removesuffix(".block")
+            
+            # Create target directory
+            target_dir = backgrounds_dir / base_name
+            target_dir.mkdir(exist_ok=True)
+            
+            # Create target file path
+            target_file = target_dir / file_path.name
+            
+            # Move the file
+            print(f"Moving {file_path} to {target_file}")
+            shutil.copy2(file_path, target_file)
+            os.remove(file_path)
 
     # Return unmodified map_py_item
     return map_py_item
