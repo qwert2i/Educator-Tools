@@ -115,7 +115,7 @@
 		"components": {
 			"minecraft:material_instances": {
 				"*": {
-					"texture": "`f'letter_block_blank'`",
+					"texture": "`f'letter_block_{background}'`",
 					"render_method": "opaque"
 				},
 				"south": {
