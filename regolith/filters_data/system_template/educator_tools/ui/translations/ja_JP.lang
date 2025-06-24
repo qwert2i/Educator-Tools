@@ -30,12 +30,12 @@ edu_tools.ui.set_players.buttons.you=自分自身
 edu_tools.ui.set_players.buttons.all=全てのプレイヤー
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=§9ゲームモードを変更するユーザー§rを選択してください
-edu_tools.ui.set_players.copy_inventory.subject.title=§f対象を選択
-edu_tools.ui.set_players.copy_inventory.target.title=§fコピー先を選択
-edu_tools.ui.set_players.select_subject_for_copy_inventory.body=インベントリをコピーする§9対象§rを選択してください
-edu_tools.ui.set_players.select_target_for_copy_inventory.body=インベントリをコピーする§cコピー先§rを選択してください
-edu_tools.ui.set_players.select_subject_for_manage_health_change.body=体力を管理する§9対象§rを選択してください
-edu_tools.message.no_space_for_educator_tool=§cインベントリにEduツールの空きがありませんでした。
+edu_tools.ui.set_players.copy_inventory.subject.title=§fインベントリをコピーするユーザー
+edu_tools.ui.set_players.copy_inventory.target.title=§fインベントリのコピー先ユーザー
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=§9インベントリをコピーしたいユーザー§rを選択してください
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=§9インベントリのコピー先§rとなるユーザーを選択してください
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=体力を管理したい§9ユーザー§rを選択してください
+edu_tools.message.no_space_for_educator_tool=§cインベントリにEducator Toolsを入れる空きスペースがありませんでした
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§fゲームモードを選択
@@ -59,7 +59,7 @@ edu_tools.ui.confirm.teleport.all.body=全ての§9プレイヤー§rのテレ�
 
 edu_tools.ui.confirm.copy_inventory.title=§fインベントリコピーの確認
 edu_tools.ui.confirm.copy_inventory.specific.body=インベントリのコピーに成功しました
-edu_tools.ui.confirm.copy_inventory.all.body=すべての§9プレイヤー§rにインベントリを正常にコピーしました
+edu_tools.ui.confirm.copy_inventory.all.body=全ての§9プレイヤー§rにインベントリの内容を正常にコピーしました
 
 
 edu_tools.ui.confirm.gamemode.title=§fゲームモードの設定の変更
@@ -81,28 +81,28 @@ edu_tools.ui.confirm.edit_timer.body=本当にタイマーを編集しますか�
 
 edu_tools.ui.confirm.manage_health.disable_hunger.title=§f空腹度の無効化の確認
 edu_tools.ui.confirm.manage_health.self.disable_hunger.body=本当にあなたの空腹度を無効にしますか？
-edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=次のプレイヤーの空腹度を無効にすることを確認してください
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=本当に次のプレイヤーの空腹度を無効にしますか？対象のプレイヤー：
 edu_tools.ui.confirm.manage_health.all.disable_hunger.body=本当に全ての§9プレイヤー§rの空腹度を無効にしますか？
 edu_tools.ui.confirm.manage_health.enable_hunger.title=§f空腹度の有効化の確認
 edu_tools.ui.confirm.manage_health.self.enable_hunger.body=本当にあなたの空腹度を有効にしますか？
-edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=次のプレイヤーの空腹度を有効にすることを確認してください
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=本当に次のプレイヤーの空腹度を有効にしますか？対象のプレイヤー：
 edu_tools.ui.confirm.manage_health.all.enable_hunger.body=本当に全ての§9プレイヤー§rの空腹度を有効にしますか？
 edu_tools.ui.confirm.manage_health.disable_health.title=§fダメージ無効化の確認
-edu_tools.ui.confirm.manage_health.self.disable_health.body=本当に自分のダメージを無効にしますか？
-edu_tools.ui.confirm.manage_health.specific.disable_health.body=ダメージを無効にすることを確認してください
-edu_tools.ui.confirm.manage_health.all.disable_health.body=全ての§9プレイヤー§rのダメージを無効にしてもよろしいですか？
+edu_tools.ui.confirm.manage_health.self.disable_health.body=本当にあなたへのダメージを無効にしますか？
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=本当に次のプレイヤーへのダメージを無効にしますか？対象のプレイヤー：
+edu_tools.ui.confirm.manage_health.all.disable_health.body=全ての§9プレイヤー§rへのダメージを無効にしますか？
 edu_tools.ui.confirm.manage_health.enable_health.title=§fダメージ有効化の確認
-edu_tools.ui.confirm.manage_health.self.enable_health.body=本当に自分のダメージを有効にしますか？
-edu_tools.ui.confirm.manage_health.specific.enable_health.body=ダメージを有効にすることを確認してください
-edu_tools.ui.confirm.manage_health.all.enable_health.body=全ての§9プレイヤー§rのダメージを有効にしてもよろしいですか？
+edu_tools.ui.confirm.manage_health.self.enable_health.body=本当にあなたへのダメージを有効にしますか？
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=本当に次のプレイヤーへのダメージを有効にしますか？対象のプレイヤー：
+edu_tools.ui.confirm.manage_health.all.enable_health.body=全ての§9プレイヤー§rへのダメージを有効にしますか？
 edu_tools.ui.confirm.manage_health.heal.title=§f回復の確認
-edu_tools.ui.confirm.manage_health.self.heal.body=本当に自分自身を回復しますか？
-edu_tools.ui.confirm.manage_health.specific.heal.body=次のプレイヤーを回復することを確認してください
+edu_tools.ui.confirm.manage_health.self.heal.body=本当にあなたを回復しますか？
+edu_tools.ui.confirm.manage_health.specific.heal.body=本当に次のプレイヤーを回復しますか？対象のプレイヤー：
 edu_tools.ui.confirm.manage_health.all.heal.body=本当に全ての§9プレイヤー§rを回復しますか？
-edu_tools.ui.confirm.manage_health.reset=§fステータスのリセットを確認
-edu_tools.ui.confirm.manage_health.self.reset.body=本当に自分のステータスをリセットしますか？
-edu_tools.ui.confirm.manage_health.specific.reset.body=以下のステータスをリセットすることを確認してください:
-edu_tools.ui.confirm.manage_health.all.reset.body=本当にすべての§9プレイヤー§rのステータスをリセットしますか？
+edu_tools.ui.confirm.manage_health.reset=§f体力管理のリセットの確認
+edu_tools.ui.confirm.manage_health.self.reset.body=本当にあなたの体力管理設定をリセットしますか？
+edu_tools.ui.confirm.manage_health.specific.reset.body=本当に次のプレイヤーの体力管理設定をリセットしますか？対象のプレイヤー：
+edu_tools.ui.confirm.manage_health.all.reset.body=本当に全ての§9プレイヤー§rの体力管理設定をリセットしますか？
 
 
 ### World Settings UI Scene
@@ -184,12 +184,12 @@ edu_tools.ui.lock_players_settings.sliders.distance_from_center=プレイヤー�
 
 ### Manage Health Scene
 edu_tools.ui.manage_health.title=体力管理
-edu_tools.ui.manage_health.self.body=体力の管理
-edu_tools.ui.manage_health.specific.body=体力の管理
-edu_tools.ui.manage_health.all.body=全ての§9プレイヤー§rの体力を管理
+edu_tools.ui.manage_health.self.body=あなたの体力管理設定を行います
+edu_tools.ui.manage_health.specific.body=次のプレイヤーの体力管理設定を行います：
+edu_tools.ui.manage_health.all.body=全ての§9プレイヤー§rの体力管理設定を行います
 edu_tools.ui.manage_health.buttons.disable_health=ダメージを無効にする
 edu_tools.ui.manage_health.buttons.enable_health=ダメージを有効にする
 edu_tools.ui.manage_health.buttons.disable_hunger=空腹度を無効化
 edu_tools.ui.manage_health.buttons.enable_hunger=空腹度を有効化
-edu_tools.ui.manage_health.buttons.heal=回復
+edu_tools.ui.manage_health.buttons.heal=体力回復
 edu_tools.ui.manage_health.buttons.reset=リセット
