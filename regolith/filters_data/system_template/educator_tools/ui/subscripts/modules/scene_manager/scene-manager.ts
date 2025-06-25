@@ -5,6 +5,7 @@ import { TeamsService } from "../teams/teams.service";
 import { SceneContext } from "./scene-context";
 import { ConfirmSceneConfig } from "../confirm/confirm-scene-config";
 import { MainScene } from "../main/main.scene";
+import { ConfirmScene } from "../confirm/confirm.scene";
 
 type SceneFactory = (
 	manager: SceneManager,
@@ -73,12 +74,9 @@ export class SceneManager {
 				context: SceneContext,
 				config: ConfirmSceneConfig,
 			) => {
-				// Implementation would create a new ConfirmScene instance with the config
-				// new ConfirmScene(manager, context, config);
+				new ConfirmScene(manager, context, config);
 			},
 		);
-
-		// Other core scenes...
 	}
 
 	/**
@@ -142,12 +140,7 @@ export class SceneManager {
 		const previousScene = context.getPreviousScene();
 		if (previousScene) {
 			// Remove the current scene from history first
-			const history = context.getHistory();
-			history.pop();
-			context.clearHistory();
-
-			// Add back all except the last one
-			history.forEach((scene) => context.addToHistory(scene));
+			context.getHistory().pop();
 
 			// Now open the previous scene
 			const sceneFactory = this.sceneRegistry.get(previousScene);
