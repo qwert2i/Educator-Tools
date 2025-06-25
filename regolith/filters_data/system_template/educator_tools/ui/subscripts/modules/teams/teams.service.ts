@@ -33,7 +33,12 @@ export class TeamsService implements Module {
 	createTeam(
 		teamId: string,
 		name: string,
-		options: { color?: string; description?: string; editable?: boolean } = {},
+		options: {
+			color?: string;
+			icon?: string;
+			description?: string;
+			editable?: boolean;
+		} = {},
 	): Team {
 		if (this.getTeam(teamId)) {
 			throw new Error(`Team with ID '${teamId}' already exists`);
@@ -45,6 +50,8 @@ export class TeamsService implements Module {
 			description: options.description,
 			memberIds: [],
 			editable: options.editable !== undefined ? options.editable : true,
+			isSystem: false,
+			icon: options.icon || "default_icon",
 		};
 		this.storage.set(teamId, newTeam);
 		return newTeam;
