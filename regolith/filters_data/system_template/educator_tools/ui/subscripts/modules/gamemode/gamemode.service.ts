@@ -59,20 +59,4 @@ export class GamemodeService implements Module {
 			this.setPlayerGamemode(player, gamemode);
 		});
 	}
-
-	/**
-	 * Sets gamemode for all online players.
-	 * @param gamemode - The gamemode to set (survival, creative, adventure)
-	 * @param exceptPlayer - Optional player to exclude from the change
-	 */
-	setAllPlayersGamemode(gamemode: string, exceptPlayer?: Player): void {
-		const players = world.getPlayers();
-
-		players.forEach((player) => {
-			if (exceptPlayer && player.id === exceptPlayer.id) {
-				return;
-			}
-			this.setPlayerGamemode(player, gamemode);
-		});
-	}
 }
