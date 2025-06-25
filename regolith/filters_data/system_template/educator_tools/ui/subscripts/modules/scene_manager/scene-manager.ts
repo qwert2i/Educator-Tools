@@ -170,23 +170,6 @@ export class SceneManager {
 	}
 
 	/**
-	 * Gets the teams service.
-	 * @returns The teams service.
-	 */
-	public getTeamsService(): TeamsService {
-		return this.teamsService;
-	}
-
-	/**
-	 * Gets a module by its ID.
-	 * @param id - The ID of the module to retrieve.
-	 * @returns The module if found, otherwise undefined.
-	 */
-	public getModule<T extends Module>(id: string): T | undefined {
-		return this.moduleManager.getModule<T>(id);
-	}
-
-	/**
 	 * Gets the module manager.
 	 * @returns The module manager.
 	 */
