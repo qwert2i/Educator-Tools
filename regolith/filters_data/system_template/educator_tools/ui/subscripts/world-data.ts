@@ -33,7 +33,7 @@ export class WorldData {
 		// Delaying activation until a player fully spawns and making sure
 		// that the data is only read once
 		world.afterEvents.playerSpawn.subscribe((event) => {
-			if (!this.startSavingData && event.initialSpawn) {
+			if (!this.startSavingData && event.initialSpawn && !this.hostPlayer) {
 				let location: [location: Vector3, dimension: Dimension] | null = null;
 				// remove all timer entities and get the location of last timer
 				world
