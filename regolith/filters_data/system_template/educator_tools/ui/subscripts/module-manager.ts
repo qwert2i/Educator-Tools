@@ -9,6 +9,7 @@ import { SceneManager } from "./modules/scene_manager/scene-manager";
  * Modules have an ID property that uniquely identifies them in the system.
  */
 export interface Module {
+	readonly id: string;
 	/**
 	 * Optional method for modules to register their scenes with the SceneManager.
 	 * @param sceneManager - The SceneManager instance to register scenes with.
