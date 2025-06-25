@@ -33,7 +33,7 @@ export class GamemodeService implements Module {
 	 * @param gamemode - The gamemode to set (survival, creative, adventure)
 	 */
 	setPlayerGamemode(player: Player, gamemode: string): void {
-		player.runCommand(`gamemode ${gamemode}`);
+		player.setGameMode(GameMode[gamemode.toLowerCase()]);
 	}
 
 	/**
