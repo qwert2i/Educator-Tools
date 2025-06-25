@@ -10,9 +10,12 @@ import { SceneManager } from "../scene_manager/scene-manager";
  */
 export class TeamsService implements Module {
 	public static readonly id = "teams";
+	public readonly id = TeamsService.id;
 	private readonly TEAMS_KEY = "teams";
 	private readonly ALL_PLAYERS_TEAM_ID = "system_all_players";
 	private readonly PLAYER_TEAM_PREFIX = "system_player_";
+	private readonly TEACHERS_TEAM_ID = "system_teachers";
+	private readonly STUDENTS_TEAM_ID = "system_students";
 
 	constructor(private readonly storage: PropertyStorage) {
 		// Initialize teams storage if it doesn't exist
@@ -166,6 +169,10 @@ export class TeamsService implements Module {
 		// Check for system teams first and generate them on demand
 		if (teamId === this.ALL_PLAYERS_TEAM_ID) {
 			return this.generateAllPlayersTeam();
+		} else if (teamId === this.TEACHERS_TEAM_ID) {
+			return this.generateTeachersTeam();
+		} else if (teamId === this.STUDENTS_TEAM_ID) {
+			return this.generateStudentsTeam();
 		} else if (teamId.startsWith(this.PLAYER_TEAM_PREFIX)) {
 			const playerId = teamId.replace(this.PLAYER_TEAM_PREFIX, "");
 			return this.generatePlayerTeam(playerId);
@@ -198,6 +205,12 @@ export class TeamsService implements Module {
 		// Add All Players team
 		systemTeams.push(this.generateAllPlayersTeam());
 
+		// Add Teachers team
+		systemTeams.push(this.generateTeachersTeam());
+
+		// Add Students team
+		systemTeams.push(this.generateStudentsTeam());
+
 		// Add individual player teams
 		for (const player of onlinePlayers) {
 			const team = this.generatePlayerTeam(player.id);
@@ -207,15 +220,6 @@ export class TeamsService implements Module {
 		}
 
 		return systemTeams;
-	}
-
-	/**
-	 * Gets all user-created teams (excluding system teams).
-	 * @returns Array of user-created teams
-	 */
-	public getUserTeams(): Team[] {
-		const teamsData = this.getAllTeamsData();
-		return Object.values(teamsData);
 	}
 
 	/**
@@ -253,6 +257,44 @@ export class TeamsService implements Module {
 			name: player.name,
 			description: `Individual team for ${player.name}`,
 			memberIds: [playerId],
+			isSystem: true,
+			editable: false,
+		};
+	}
+
+	/**
+	 * Generates the Teachers team on demand.
+	 * @returns The Teachers team
+	 */
+	private generateTeachersTeam(): Team {
+		// Teachers team is empty by default, but can be managed by adding/removing members
+		const teams = this.getAllTeamsData();
+		const teachers = teams[this.TEACHERS_TEAM_ID]?.memberIds || [];
+		return {
+			id: this.TEACHERS_TEAM_ID,
+			name: "Teachers",
+			description: "All teacher players (manually assigned)",
+			memberIds: teachers,
+			isSystem: true,
+			editable: true,
+		};
+	}
+
+	/**
+	 * Generates the Students team on demand.
+	 * @returns The Students team
+	 */
+	private generateStudentsTeam(): Team {
+		const onlinePlayers = world.getAllPlayers();
+		const teachers = this.getTeam(this.TEACHERS_TEAM_ID)?.memberIds || [];
+		const studentIds = onlinePlayers
+			.map((player) => player.id)
+			.filter((id) => !teachers.includes(id));
+		return {
+			id: this.STUDENTS_TEAM_ID,
+			name: "Students",
+			description: "All online players not in Teachers team",
+			memberIds: studentIds,
 			isSystem: true,
 			editable: false,
 		};
@@ -326,6 +368,8 @@ export class TeamsService implements Module {
 	public isSystemTeam(teamId: string): boolean {
 		return (
 			teamId === this.ALL_PLAYERS_TEAM_ID ||
+			teamId === this.TEACHERS_TEAM_ID ||
+			teamId === this.STUDENTS_TEAM_ID ||
 			teamId.startsWith(this.PLAYER_TEAM_PREFIX)
 		);
 	}
