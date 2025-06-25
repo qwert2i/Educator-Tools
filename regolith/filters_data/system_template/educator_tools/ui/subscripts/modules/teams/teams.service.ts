@@ -1,7 +1,7 @@
 import { PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
 import { world, Player } from "@minecraft/server";
-import { Team } from "./interfaces/team.interface";
+import { Team, TeamsData } from "./interfaces/team.interface";
 import { SceneManager } from "../scene_manager/scene-manager";
 
 /**
@@ -10,18 +10,15 @@ import { SceneManager } from "../scene_manager/scene-manager";
  */
 export class TeamsService implements Module {
 	public static readonly id = "teams";
+	private readonly storage: PropertyStorage;
 	public readonly id = TeamsService.id;
-	private readonly TEAMS_KEY = "teams";
 	private readonly ALL_PLAYERS_TEAM_ID = "system_all_players";
 	private readonly PLAYER_TEAM_PREFIX = "system_player_";
 	private readonly TEACHERS_TEAM_ID = "system_teachers";
 	private readonly STUDENTS_TEAM_ID = "system_students";
 
-	constructor(private readonly storage: PropertyStorage) {
-		// Initialize teams storage if it doesn't exist
-		if (!this.storage.get(this.TEAMS_KEY)) {
-			this.storage.set(this.TEAMS_KEY, {});
-		}
+	constructor(storage: PropertyStorage) {
+		this.storage = storage.getSubStorage(TeamsService.id);
 	}
 
 	registerScenes?(sceneManager: SceneManager): void {}
@@ -38,12 +35,9 @@ export class TeamsService implements Module {
 		name: string,
 		options: { color?: string; description?: string; editable?: boolean } = {},
 	): Team {
-		const teams = this.getAllTeamsData();
-
-		if (teams[teamId]) {
+		if (this.getTeam(teamId)) {
 			throw new Error(`Team with ID '${teamId}' already exists`);
 		}
-
 		const newTeam: Team = {
 			id: teamId,
 			name,
@@ -52,10 +46,7 @@ export class TeamsService implements Module {
 			memberIds: [],
 			editable: options.editable !== undefined ? options.editable : true,
 		};
-
-		teams[teamId] = newTeam;
-		this.storage.set(this.TEAMS_KEY, teams);
-
+		this.storage.set(teamId, newTeam);
 		return newTeam;
 	}
 
@@ -65,26 +56,17 @@ export class TeamsService implements Module {
 	 * @returns True if team was deleted, false if team wasn't found
 	 */
 	deleteTeam(teamId: string): boolean {
-		// Check if team is a system team (generated on-demand)
 		if (this.isSystemTeam(teamId)) {
 			throw new Error(`Cannot delete system team '${teamId}'`);
 		}
-
-		const teams = this.getAllTeamsData();
-		const team = teams[teamId];
-
+		const team = this.getTeam(teamId);
 		if (!team) {
 			return false;
 		}
-
-		// Check if team is editable
 		if (team.editable === false) {
 			throw new Error(`Team '${teamId}' is not editable`);
 		}
-
-		delete teams[teamId];
-		this.storage.set(this.TEAMS_KEY, teams);
-
+		this.storage.drop(teamId);
 		return true;
 	}
 
@@ -95,32 +77,21 @@ export class TeamsService implements Module {
 	 * @returns True if player was added, false if player was already in the team
 	 */
 	addPlayerToTeam(teamId: string, playerId: string): boolean {
-		// Check if team is a system team (generated on-demand)
 		if (this.isSystemTeam(teamId)) {
 			throw new Error(`Cannot modify system team '${teamId}'`);
 		}
-
-		const teams = this.getAllTeamsData();
-		const team = teams[teamId];
-
+		const team = this.getTeam(teamId);
 		if (!team) {
 			throw new Error(`Team with ID '${teamId}' doesn't exist`);
 		}
-
-		// Check if team is editable
 		if (team.editable === false) {
 			throw new Error(`Team '${teamId}' is not editable`);
 		}
-
-		// Check if player is already in the team
 		if (team.memberIds.includes(playerId)) {
 			return false;
 		}
-
-		// Add player to team
 		team.memberIds.push(playerId);
-		this.storage.set(this.TEAMS_KEY, teams);
-
+		this.storage.set(teamId, team);
 		return true;
 	}
 
@@ -131,32 +102,22 @@ export class TeamsService implements Module {
 	 * @returns True if player was removed, false if player wasn't in the team
 	 */
 	removePlayerFromTeam(teamId: string, playerId: string): boolean {
-		// Check if team is a system team (generated on-demand)
 		if (this.isSystemTeam(teamId)) {
 			throw new Error(`Cannot modify system team '${teamId}'`);
 		}
-
-		const teams = this.getAllTeamsData();
-		const team = teams[teamId];
-
+		const team = this.getTeam(teamId);
 		if (!team) {
 			throw new Error(`Team with ID '${teamId}' doesn't exist`);
 		}
-
-		// Check if team is editable
 		if (team.editable === false) {
 			throw new Error(`Team '${teamId}' is not editable`);
 		}
-
 		const memberIndex = team.memberIds.indexOf(playerId);
 		if (memberIndex === -1) {
 			return false;
 		}
-
-		// Remove player from team
 		team.memberIds.splice(memberIndex, 1);
-		this.storage.set(this.TEAMS_KEY, teams);
-
+		this.storage.set(teamId, team);
 		return true;
 	}
 
@@ -166,7 +127,6 @@ export class TeamsService implements Module {
 	 * @returns The team object or null if not found
 	 */
 	getTeam(teamId: string): Team | null {
-		// Check for system teams first and generate them on demand
 		if (teamId === this.ALL_PLAYERS_TEAM_ID) {
 			return this.generateAllPlayersTeam();
 		} else if (teamId === this.TEACHERS_TEAM_ID) {
@@ -177,10 +137,8 @@ export class TeamsService implements Module {
 			const playerId = teamId.replace(this.PLAYER_TEAM_PREFIX, "");
 			return this.generatePlayerTeam(playerId);
 		}
-
-		// Check stored teams
-		const teams = this.getAllTeamsData();
-		return teams[teamId] || null;
+		const team = this.storage.get(teamId) as Team | undefined;
+		return team || null;
 	}
 
 	/**
@@ -188,10 +146,9 @@ export class TeamsService implements Module {
 	 * @returns Array of all teams (stored and system teams)
 	 */
 	getAllTeams(): Team[] {
-		const storedTeams = Object.values(this.getAllTeamsData());
 		const systemTeams = this.getSystemTeams();
-
-		return [...storedTeams, ...systemTeams];
+		const storedTeams = this.getAllTeamsData();
+		return [...systemTeams, ...storedTeams];
 	}
 
 	/**
@@ -201,16 +158,12 @@ export class TeamsService implements Module {
 	public getSystemTeams(): Team[] {
 		const systemTeams: Team[] = [];
 		const onlinePlayers = world.getAllPlayers();
-
 		// Add All Players team
 		systemTeams.push(this.generateAllPlayersTeam());
-
 		// Add Teachers team
 		systemTeams.push(this.generateTeachersTeam());
-
 		// Add Students team
 		systemTeams.push(this.generateStudentsTeam());
-
 		// Add individual player teams
 		for (const player of onlinePlayers) {
 			const team = this.generatePlayerTeam(player.id);
@@ -218,7 +171,6 @@ export class TeamsService implements Module {
 				systemTeams.push(team);
 			}
 		}
-
 		return systemTeams;
 	}
 
@@ -237,6 +189,7 @@ export class TeamsService implements Module {
 			memberIds: playerIds,
 			isSystem: true,
 			editable: false,
+			icon: "all_players_icon",
 		};
 	}
 
@@ -259,6 +212,7 @@ export class TeamsService implements Module {
 			memberIds: [playerId],
 			isSystem: true,
 			editable: false,
+			icon: "player_icon",
 		};
 	}
 
@@ -267,17 +221,20 @@ export class TeamsService implements Module {
 	 * @returns The Teachers team
 	 */
 	private generateTeachersTeam(): Team {
-		// Teachers team is empty by default, but can be managed by adding/removing members
-		const teams = this.getAllTeamsData();
-		const teachers = teams[this.TEACHERS_TEAM_ID]?.memberIds || [];
-		return {
-			id: this.TEACHERS_TEAM_ID,
-			name: "Teachers",
-			description: "All teacher players (manually assigned)",
-			memberIds: teachers,
-			isSystem: true,
-			editable: true,
-		};
+		let team = this.storage.get(this.TEACHERS_TEAM_ID) as Team | undefined;
+		if (!team) {
+			team = {
+				id: this.TEACHERS_TEAM_ID,
+				name: "Teachers",
+				description: "All teacher players (manually assigned)",
+				memberIds: [],
+				isSystem: true,
+				editable: true,
+				icon: "teacher_icon",
+			};
+			this.storage.set(this.TEACHERS_TEAM_ID, team);
+		}
+		return team;
 	}
 
 	/**
@@ -297,6 +254,7 @@ export class TeamsService implements Module {
 			memberIds: studentIds,
 			isSystem: true,
 			editable: false,
+			icon: "student_icon",
 		};
 	}
 
@@ -323,28 +281,17 @@ export class TeamsService implements Module {
 	 * @param properties - Object with properties to update
 	 * @returns The updated team
 	 */
-	updateTeam(
-		teamId: string,
-		properties: { name?: string; color?: string; description?: string },
-	): Team {
-		// Check if team is a system team (generated on-demand)
+	updateTeam(teamId: string, properties: TeamsData): Team {
 		if (this.isSystemTeam(teamId)) {
 			throw new Error(`Cannot modify system team '${teamId}'`);
 		}
-
-		const teams = this.getAllTeamsData();
-		const team = teams[teamId];
-
+		const team = this.getTeam(teamId);
 		if (!team) {
 			throw new Error(`Team with ID '${teamId}' doesn't exist`);
 		}
-
-		// Check if team is editable
 		if (team.editable === false) {
 			throw new Error(`Team '${teamId}' is not editable`);
 		}
-
-		// Update properties
 		if (properties.name !== undefined) {
 			team.name = properties.name;
 		}
@@ -354,9 +301,7 @@ export class TeamsService implements Module {
 		if (properties.description !== undefined) {
 			team.description = properties.description;
 		}
-
-		this.storage.set(this.TEAMS_KEY, teams);
-
+		this.storage.set(teamId, team);
 		return team;
 	}
 
@@ -409,14 +354,20 @@ export class TeamsService implements Module {
 	 * @returns Array of team IDs
 	 */
 	getAllTeamIds(): string[] {
-		return Object.keys(this.getAllTeamsData());
+		return this.getAllTeamsData().map((team) => team.id);
 	}
 
 	/**
 	 * Gets all teams data as an object.
 	 * @returns Object with team IDs as keys and team objects as values
 	 */
-	private getAllTeamsData(): Record<string, Team> {
-		return (this.storage.get(this.TEAMS_KEY) as Record<string, Team>) || {};
+	private getAllTeamsData(): Team[] {
+		const allKeys: Record<string, any>[] = this.storage.getAll();
+		return allKeys
+			.map((key) => {
+				const team = this.storage.get(key.id) as Team | undefined;
+				return team || null;
+			})
+			.filter((team): team is Team => team !== null);
 	}
 }
