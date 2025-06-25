@@ -3,14 +3,37 @@ import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
 import { TeamsService } from "./teams.service";
 
+// TeamSelectScene handles the UI for selecting a team (subject or target) in the educator tools module
 export class TeamSelectScene extends ActionUIScene {
 	static readonly id = "team_select";
+
 	constructor(sceneManager: SceneManager, context: SceneContext) {
-		//context.addToHistory(TeamSelectScene.id);
+		// Call parent constructor with scene id and source player
 		super(TeamSelectScene.id, context.getSourcePlayer());
 
+		// Store the context for later use
 		this.setContext(context);
+		// Set the body text depending on which team selection is required
+		this.setBodyByContext(context);
 
+		// Get the TeamsService module to access team data
+		const teamsService = sceneManager
+			.getModuleManager()
+			.getModule("teams") as TeamsService;
+
+		// For each team, add a button to the UI
+		teamsService.getAllTeams().forEach((team) => {
+			this.addButton(
+				"edu_tools.ui.team.name." + team.id,
+				() => this.handleTeamButton(sceneManager, context, team),
+				// Set the icon for the team button
+				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id),
+			);
+		});
+	}
+
+	// Set the body text based on which team is required
+	private setBodyByContext(context: SceneContext): void {
 		if (context.isSubjectTeamRequired()) {
 			this.setSimpleBody("edu_tools.ui.team_select.get_subject.body");
 		} else if (context.isTargetTeamRequired()) {
@@ -21,38 +44,36 @@ export class TeamSelectScene extends ActionUIScene {
 			);
 			this.setSimpleBody("edu_tools.ui.team_select.default.body");
 		}
+	}
 
-		const teamsService = sceneManager
-			.getModuleManager()
-			.getModule("teams") as TeamsService;
-		teamsService.getAllTeams().forEach((team) => {
-			this.addButton(
-				"edu_tools.ui.team.name." + team.id,
-				(): void => {
-					if (context.isSubjectTeamRequired()) {
-						context.setSubjectTeam(team);
-						context.setSubjectTeamRequired(false);
-						if (context.isTargetTeamRequired()) {
-							sceneManager.openSceneWithContext(context, TeamSelectScene.id);
-							return;
-						}
-					} else if (context.isTargetTeamRequired()) {
-						context.setTargetTeam(team);
-						context.setTargetTeamRequired(false);
-					}
-					const nextScene = context.getNextScene();
-					if (!nextScene || !nextScene[0] || nextScene.length < 2) {
-						console.error("TeamSelectScene: No or invalid next scene defined in context.");
-						return;
-					}
-					sceneManager.openSceneWithContext(
-						context,
-						nextScene[0],
-						nextScene[1],
-					);
-				},
-				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id),
+	// Handle logic when a team button is pressed
+	private handleTeamButton(
+		sceneManager: SceneManager,
+		context: SceneContext,
+		team: any,
+	): void {
+		// If subject team is required, set it and check if target team is next
+		if (context.isSubjectTeamRequired()) {
+			context.setSubjectTeam(team);
+			context.setSubjectTeamRequired(false);
+			if (context.isTargetTeamRequired()) {
+				sceneManager.openSceneWithContext(context, TeamSelectScene.id);
+				return;
+			}
+		} else if (context.isTargetTeamRequired()) {
+			// If target team is required, set it
+			context.setTargetTeam(team);
+			context.setTargetTeamRequired(false);
+		}
+		// Get the next scene to open from context
+		const nextScene = context.getNextScene();
+		if (!nextScene || !nextScene[0] || nextScene.length < 2) {
+			console.error(
+				"TeamSelectScene: No or invalid next scene defined in context.",
 			);
-		});
+			return;
+		}
+		// Open the next scene with the updated context
+		sceneManager.openSceneWithContext(context, nextScene[0], nextScene[1]);
 	}
 }
