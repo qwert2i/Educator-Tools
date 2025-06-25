@@ -7,7 +7,6 @@ import { ConfirmSceneConfig } from "./confirm-scene-config";
  * Class representing the Confirmation Scene.
  */
 export class ConfirmScene extends ActionUIScene {
-	private config: ConfirmSceneConfig;
 
 	constructor(
 		sceneManager: SceneManager,
@@ -20,7 +19,6 @@ export class ConfirmScene extends ActionUIScene {
 		// Create the scene
 		super(config.title || "confirm", context.getSourcePlayer());
 		this.context = context;
-		this.config = config;
 
 		// Set the body text
 		this.setSimpleBody(config.body);
@@ -45,4 +43,4 @@ export class ConfirmScene extends ActionUIScene {
 }
 
 // Export the interface for use in other files
-export { ConfirmSceneConfig } from "./confirm-scene-config";
+export { ConfirmSceneConfig as Config } from "./confirm-scene-config";
