@@ -7,15 +7,11 @@ import { ConfirmSceneConfig } from "./confirm-scene-config";
  * Class representing the Confirmation Scene.
  */
 export class ConfirmScene extends ActionUIScene {
-
 	constructor(
 		sceneManager: SceneManager,
 		context: SceneContext,
 		config: ConfirmSceneConfig,
 	) {
-		// Add the current scene to the context history
-		context.addToHistory("confirm");
-
 		// Create the scene
 		super(config.title || "confirm", context.getSourcePlayer());
 		this.context = context;

@@ -9,8 +9,6 @@ export class SetGamemodeScene extends ActionUIScene {
 	private gamemodeService: GamemodeService;
 
 	constructor(sceneManager: SceneManager, context: SceneContext) {
-		// Add the current scene to the context history
-		context.addToHistory(SetGamemodeScene.id);
 
 		// Create the scene
 		super(SetGamemodeScene.id, context.getSourcePlayer());

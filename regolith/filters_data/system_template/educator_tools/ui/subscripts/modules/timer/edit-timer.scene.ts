@@ -12,9 +12,6 @@ export class EditTimerScene extends ModalUIScene {
 	private timerService: TimerService;
 
 	constructor(sceneManager: SceneManager, context: SceneContext) {
-		// Add the current scene to the context history
-		context.addToHistory(sceneName);
-
 		// Create the scene
 		super("edit_timer", context.getSourcePlayer());
 		this.context = context;
