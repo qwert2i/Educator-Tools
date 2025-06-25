@@ -10,7 +10,7 @@ export class MainService implements Module {
 	/**
 	 * Unique identifier for the module.
 	 */
-	public static readonly id: string = "main";
+	readonly id: string = "main";
 
 	/**
 	 * Registers all scenes related to the main menu.
@@ -18,7 +18,7 @@ export class MainService implements Module {
 	 */
 	public registerScenes(sceneManager: SceneManager): void {
 		sceneManager.registerScene(
-			"main",
+			MainScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				// Create a new instance of MainScene
 				new MainScene(manager, context);

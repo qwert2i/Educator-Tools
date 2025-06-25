@@ -1,5 +1,5 @@
 import { Module } from "../../module-manager";
-import { Player, world } from "@minecraft/server";
+import { GameMode, Player, world } from "@minecraft/server";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { Team } from "../teams/interfaces/team.interface";
 import { SetGamemodeScene } from "./set-gamemode.scene";
@@ -10,7 +10,7 @@ import { SceneContext } from "../scene_manager/scene-context";
  * This service allows setting gamemodes for players and teams.
  */
 export class GamemodeService implements Module {
-	public static readonly id = "gamemode";
+	public readonly id = "gamemode";
 
 	constructor() {}
 
@@ -20,7 +20,7 @@ export class GamemodeService implements Module {
 	 */
 	registerScenes(sceneManager: SceneManager): void {
 		sceneManager.registerScene(
-			"set_gamemode",
+			SetGamemodeScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new SetGamemodeScene(manager, context);
 			},

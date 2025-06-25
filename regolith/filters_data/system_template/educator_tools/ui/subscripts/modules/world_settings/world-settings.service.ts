@@ -20,7 +20,7 @@ interface GameRuleItem {
  * Service class to manage world game rules
  */
 export class WorldSettingsService implements Module {
-	static readonly id = "world_settings";
+	readonly id = "world_settings";
 	private gameRules: Map<string, GameRuleItem> = new Map();
 
 	constructor(private readonly storage: PropertyStorage) {

@@ -2,19 +2,18 @@ import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
 import { SceneContext } from "../scene_manager/scene-context";
 
-const SceneName = "main";
-
 /**
  * Class representing the Main Scene.
  */
 export class MainScene extends ActionUIScene {
+	static readonly id = "main";
 	/**
 	 * Creates an instance of MainScene.
 	 * @param sceneManager - The SceneManager instance.
 	 * @param context - The SceneContext instance.
 	 */
 	constructor(sceneManager: SceneManager, context: SceneContext) {
-		super("main", context.getSourcePlayer());
+		super(MainScene.id, context.getSourcePlayer());
 
 		// Set the context for this scene
 		this.setContext(context);

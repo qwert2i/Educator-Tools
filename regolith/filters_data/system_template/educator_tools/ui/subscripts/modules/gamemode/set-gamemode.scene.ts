@@ -4,17 +4,16 @@ import { GamemodeService } from "./gamemode.service";
 import { Team } from "../teams/interfaces/team.interface";
 import { SceneContext } from "../scene_manager/scene-context";
 
-const sceneName = "set_gamemode";
-
 export class SetGamemodeScene extends ActionUIScene {
+	public static readonly id = "set_gamemode";
 	private gamemodeService: GamemodeService;
 
 	constructor(sceneManager: SceneManager, context: SceneContext) {
 		// Add the current scene to the context history
-		context.addToHistory(sceneName);
+		context.addToHistory(SetGamemodeScene.id);
 
 		// Create the scene
-		super("set_gamemode", context.getSourcePlayer());
+		super(SetGamemodeScene.id, context.getSourcePlayer());
 		this.context = context;
 
 		// Get the gamemode service
