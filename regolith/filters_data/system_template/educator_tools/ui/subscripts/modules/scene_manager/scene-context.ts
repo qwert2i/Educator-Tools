@@ -123,6 +123,22 @@ export class SceneContext {
 		return this.targetTeam;
 	}
 
+	public isSubjectTeamRequired(): boolean {
+		return this.getData("get_subject") === true;
+	}
+
+	public isTargetTeamRequired(): boolean {
+		return this.getData("get_target") === true;
+	}
+
+	public setSubjectTeamRequired(required: boolean): void {
+		this.setData("get_subject", required);
+	}
+
+	public setTargetTeamRequired(required: boolean): void {
+		this.setData("get_target", required);
+	}
+
 	/**
 	 * Stores data in the context.
 	 * @param key - The key to store the data under.
