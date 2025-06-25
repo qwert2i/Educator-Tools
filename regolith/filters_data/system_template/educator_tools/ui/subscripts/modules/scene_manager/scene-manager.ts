@@ -4,6 +4,7 @@ import { ModuleManager, Module } from "../../module-manager";
 import { TeamsService } from "../teams/teams.service";
 import { SceneContext } from "./scene-context";
 import { ConfirmSceneConfig } from "../confirm/confirm-scene-config";
+import { MainScene } from "../main/main.scene";
 
 type SceneFactory = (
 	manager: SceneManager,
@@ -17,16 +18,33 @@ type SceneFactory = (
  * to required services.
  */
 export class SceneManager {
+	private static instance: SceneManager | undefined;
 	private sceneRegistry: Map<string, SceneFactory> = new Map();
 	private readonly storage: PropertyStorage;
 	private moduleManager: ModuleManager;
 	private teamsService: TeamsService;
 
 	/**
-	 * Creates an instance of SceneManager.
+	 * Returns the singleton instance of SceneManager.
+	 * @param storage - The base storage for the application (only used on first call).
+	 */
+	public static getInstance(storage?: PropertyStorage): SceneManager {
+		if (!SceneManager.instance) {
+			if (!storage) {
+				throw new Error(
+					"SceneManager not initialized: storage required on first call.",
+				);
+			}
+			SceneManager.instance = new SceneManager(storage);
+		}
+		return SceneManager.instance;
+	}
+
+	/**
+	 * Private constructor for singleton pattern.
 	 * @param storage - The base storage for the application.
 	 */
-	constructor(storage: PropertyStorage) {
+	private constructor(storage: PropertyStorage) {
 		this.storage = storage;
 
 		// Use the singleton ModuleManager instead of creating a new one
@@ -48,16 +66,6 @@ export class SceneManager {
 	 * Registers core scenes that don't belong to specific modules.
 	 */
 	private registerCoreScenes(): void {
-		this.registerScene(
-			"main",
-			(manager: SceneManager, context: SceneContext) => {
-				// When opening the main scene, reset the context
-				context.reset();
-				// Implementation would create a new MainScene instance with the context
-				// new MainScene(manager, context);
-			},
-		);
-
 		this.registerScene(
 			"confirm",
 			(
