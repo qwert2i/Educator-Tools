@@ -1,4 +1,4 @@
-import { world, GameRule } from "@minecraft/server";
+import { world, GameRule, GameRules } from "@minecraft/server";
 import { PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
 import { SceneManager } from "../scene_manager/scene-manager";
@@ -97,13 +97,22 @@ export class WorldSettingsService implements Module {
 				this.gameRules.set(ruleName, {
 					translationKey,
 					value: (world.gameRules as any)[ruleName],
-					toggle: (value: boolean) =>
-						((world.gameRules as any)[ruleName] = value),
+					toggle: (value: boolean) => {
+						(world.gameRules as GameRules)[ruleName] = value;
+						this.updateGameRule(ruleName);
+					},
 				});
 			}
 		} catch (e) {
 			// Handle the case where a rule doesn't exist
 			console.warn(`Game rule ${ruleName} not available in this version`);
+		}
+	}
+
+	private updateGameRule(ruleName: string): void {
+		const rule = this.gameRules.get(ruleName);
+		if (rule) {
+			rule.value = (world.gameRules as any)[ruleName];
 		}
 	}
 
