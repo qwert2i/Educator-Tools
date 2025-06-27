@@ -3,6 +3,8 @@ import { Module } from "../../module-manager";
 import { world, Player } from "@minecraft/server";
 import { Team, TeamsData } from "./interfaces/team.interface";
 import { SceneManager } from "../scene_manager/scene-manager";
+import { TeamSelectScene } from "./team-select.scene";
+import { SceneContext } from "../scene_manager/scene-context";
 
 /**
  * Service for managing player teams.
@@ -21,7 +23,15 @@ export class TeamsService implements Module {
 		this.storage = storage.getSubStorage(TeamsService.id);
 	}
 
-	registerScenes?(sceneManager: SceneManager): void {}
+	registerScenes(sceneManager: SceneManager): void {
+		sceneManager.registerScene(
+			TeamSelectScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamSelectScene(manager, context);
+			},
+		);
+	}
 
 	/**
 	 * Creates a new team.
