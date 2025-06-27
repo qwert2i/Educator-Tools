@@ -3,21 +3,23 @@ import { ActionUIScene } from "../scene_manager/ui-scene";
 import { GamemodeService } from "./gamemode.service";
 import { Team } from "../teams/interfaces/team.interface";
 import { SceneContext } from "../scene_manager/scene-context";
+import { ModuleManager } from "../../module-manager";
+import { GameMode } from "@minecraft/server";
 
 export class SetGamemodeScene extends ActionUIScene {
 	public static readonly id = "set_gamemode";
 	private gamemodeService: GamemodeService;
 
 	constructor(sceneManager: SceneManager, context: SceneContext) {
-
 		// Create the scene
 		super(SetGamemodeScene.id, context.getSourcePlayer());
 		this.context = context;
 
 		// Get the gamemode service
-		this.gamemodeService = sceneManager.getModule<GamemodeService>(
-			GamemodeService.id,
-		)!;
+		this.gamemodeService =
+			ModuleManager.getInstance().getModule<GamemodeService>(
+				GamemodeService.id,
+			)!;
 
 		// Get the target team
 		const subjectTeam = context.getSubjectTeam();
@@ -67,32 +69,15 @@ export class SetGamemodeScene extends ActionUIScene {
 		sceneManager: SceneManager,
 		subjectTeam: Team,
 	): void {
-		// Survival Button
-		this.addButton(
-			"edu_tools.ui.set_gamemode.buttons.survival",
-			(): void => {
-				this.applyGamemode("survival", sceneManager, subjectTeam);
-			},
-			"textures/edu_tools/ui/icons/set_gamemode/survival",
-		);
-
-		// Adventure Button
-		this.addButton(
-			"edu_tools.ui.set_gamemode.buttons.adventure",
-			(): void => {
-				this.applyGamemode("adventure", sceneManager, subjectTeam);
-			},
-			"textures/edu_tools/ui/icons/set_gamemode/adventure",
-		);
-
-		// Creative Button
-		this.addButton(
-			"edu_tools.ui.set_gamemode.buttons.creative",
-			(): void => {
-				this.applyGamemode("creative", sceneManager, subjectTeam);
-			},
-			"textures/edu_tools/ui/icons/set_gamemode/creative",
-		);
+		Object.values(GameMode).forEach((gamemode) => {
+			this.addButton(
+				"edu_tools.ui.set_gamemode.buttons." + gamemode.toLowerCase(),
+				(): void => {
+					this.applyGamemode(gamemode.toLowerCase(), sceneManager, subjectTeam);
+				},
+				"textures/edu_tools/ui/icons/set_gamemode/" + gamemode.toLowerCase(),
+			);
+		});
 	}
 
 	private applyGamemode(

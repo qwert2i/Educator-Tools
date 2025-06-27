@@ -5,6 +5,7 @@ import { WorldSettingsService } from "./modules/world_settings/world-settings.se
 import { SceneManager } from "./modules/scene_manager/scene-manager";
 import { ItemService } from "./modules/item/item.service";
 import { ButtonConfig, MainService } from "./modules/main/main.service";
+import { GamemodeService } from "./modules/gamemode/gamemode.service";
 
 /**
  * Interface that all modules must implement.
@@ -58,6 +59,7 @@ export class ModuleManager {
 		const itemService = new ItemService(this);
 		const sceneManager = SceneManager.getInstance(this, this.storage);
 		const mainService = new MainService();
+		const gamemodeService = new GamemodeService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -65,11 +67,12 @@ export class ModuleManager {
 
 		// Register services
 		this.registerModule(teamsService);
-		this.registerModule(worldSettingsService);
 		this.registerModule(itemService);
 		// Register the SceneManager with the main storage
 		this.registerModule(sceneManager);
 		this.registerModule(mainService);
+		this.registerModule(worldSettingsService);
+		this.registerModule(gamemodeService);
 
 		// Initialize all modules
 		this.initializeModules();
