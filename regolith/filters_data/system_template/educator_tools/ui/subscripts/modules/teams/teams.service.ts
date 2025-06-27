@@ -84,9 +84,6 @@ export class TeamsService implements Module {
 	 * @returns True if player was added, false if player was already in the team
 	 */
 	addPlayerToTeam(teamId: string, playerId: string): boolean {
-		if (this.isSystemTeam(teamId)) {
-			throw new Error(`Cannot modify system team '${teamId}'`);
-		}
 		const team = this.getTeam(teamId);
 		if (!team) {
 			throw new Error(`Team with ID '${teamId}' doesn't exist`);
@@ -109,9 +106,6 @@ export class TeamsService implements Module {
 	 * @returns True if player was removed, false if player wasn't in the team
 	 */
 	removePlayerFromTeam(teamId: string, playerId: string): boolean {
-		if (this.isSystemTeam(teamId)) {
-			throw new Error(`Cannot modify system team '${teamId}'`);
-		}
 		const team = this.getTeam(teamId);
 		if (!team) {
 			throw new Error(`Team with ID '${teamId}' doesn't exist`);
@@ -289,9 +283,6 @@ export class TeamsService implements Module {
 	 * @returns The updated team
 	 */
 	updateTeam(teamId: string, properties: TeamsData): Team {
-		if (this.isSystemTeam(teamId)) {
-			throw new Error(`Cannot modify system team '${teamId}'`);
-		}
 		const team = this.getTeam(teamId);
 		if (!team) {
 			throw new Error(`Team with ID '${teamId}' doesn't exist`);
