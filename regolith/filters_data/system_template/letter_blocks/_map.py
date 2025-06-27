@@ -73,7 +73,7 @@
         # Block loot
         {
             "source": "block/letter_block.loot.json",
-            "target": f"BP/loot_tables/shapecape/{p.stem.removesuffix('.block')}.loot.json",
+            "target": f"BP/loot_tables/edu_tools/{p.stem.removesuffix('.block')}.loot.json",
             "scope": {"letter": p.stem.removesuffix(".block")},
             "json_template": True,
         }
