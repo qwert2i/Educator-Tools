@@ -64,7 +64,7 @@
         {
             "source": "block/letter_block.block.json",
             "target": f"BP/blocks/{p.stem.removesuffix('.block')}.block.json",
-            "scope": {"letter": p.stem.removesuffix(".block"), "background": p.parent.name},
+            "scope": {"letter": p.stem.removesuffix(".block"), "background": p.parent.name if p.parent.name != "letter_blocks" else p.name.removesuffix('.block.png')},
             "json_template": True,
         }
         for p in Path("letter_blocks").glob("**/*.png")
