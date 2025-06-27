@@ -2,6 +2,9 @@ import {
 	MessageFormData,
 	ActionFormData,
 	ModalFormData,
+	ModalFormResponse,
+	MessageFormResponse,
+	ActionFormResponse,
 } from "@minecraft/server-ui";
 import { Player, RawMessage, RawMessageScore } from "@minecraft/server";
 import { SceneManager } from "./scene-manager";
@@ -101,8 +104,11 @@ export class ActionUIScene {
 	 * @param player - The Player object the UI is shown to.
 	 * @param sceneManager - Optional SceneManager instance for scene navigation.
 	 */
-	show(player: Player, sceneManager?: SceneManager): void {
-		this.form.show(player).then((r) => {
+	async show(
+		player: Player,
+		sceneManager?: SceneManager,
+	): Promise<ActionFormResponse> {
+		return this.form.show(player).then((r) => {
 			if (!r.canceled && r.selection !== undefined) {
 				this.buttonHandlers[r.selection]();
 
@@ -114,6 +120,7 @@ export class ActionUIScene {
 					);
 				}
 			}
+			return r;
 		});
 	}
 }
@@ -201,8 +208,11 @@ export class MessageUIScene {
 	 * @param player - The Player object the UI is shown to.
 	 * @param sceneManager - Optional SceneManager instance for scene navigation.
 	 */
-	show(player: Player, sceneManager?: SceneManager): void {
-		this.form.show(player).then((r) => {
+	async show(
+		player: Player,
+		sceneManager?: SceneManager,
+	): Promise<MessageFormResponse> {
+		return this.form.show(player).then((r) => {
 			if (!r.canceled && r.selection !== undefined) {
 				this.buttonHandlers[r.selection]();
 
@@ -214,6 +224,7 @@ export class MessageUIScene {
 					);
 				}
 			}
+			return r;
 		});
 	}
 }
@@ -349,10 +360,13 @@ export class ModalUIScene {
 	 * @param player - The Player object the UI is shown to.
 	 * @param sceneManager - The SceneManager instance.
 	 */
-	show(player: Player, sceneManager: SceneManager): void {
-		this.form.show(player).then((r) => {
+	async show(
+		player: Player,
+		sceneManager: SceneManager,
+	): Promise<ModalFormResponse> {
+		return this.form.show(player).then((r) => {
 			if (r.canceled) {
-				return;
+				return r;
 			}
 			if (r.formValues != undefined) {
 				for (let i = 0; i < this.buttonHandlers.length; i++) {
@@ -366,6 +380,7 @@ export class ModalUIScene {
 					this.next_scene_config,
 				);
 			}
+			return r;
 		});
 	}
 }
