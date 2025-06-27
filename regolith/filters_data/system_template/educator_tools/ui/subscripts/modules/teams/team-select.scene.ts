@@ -1,3 +1,4 @@
+import { Player, world } from "@minecraft/server";
 import { SceneContext } from "../scene_manager/scene-context";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
@@ -23,13 +24,28 @@ export class TeamSelectScene extends ActionUIScene {
 
 		// For each team, add a button to the UI
 		teamsService.getAllTeams().forEach((team) => {
+			let buttonText = "edu_tools.ui.team.name." + team.id;
+			if (teamsService.isPlayerTeam(team.id)) {
+				const player = world.getEntity(team.memberIds[0]) as Player;
+				buttonText = player.name;
+				team.icon = "player";
+			}
+			if (
+				!context.isSubjectTeamRequired() &&
+				context.isTargetTeamRequired() &&
+				team.memberIds.length > 1
+			) {
+				return; // Target team selection only includes teams with a single member
+			}
 			this.addButton(
-				"edu_tools.ui.team.name." + team.id,
+				buttonText,
 				() => this.handleTeamButton(sceneManager, context, team),
 				// Set the icon for the team button
 				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id),
 			);
 		});
+
+		this.show(context.getSourcePlayer(), sceneManager);
 	}
 
 	// Set the body text based on which team is required
