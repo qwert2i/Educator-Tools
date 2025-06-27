@@ -4,13 +4,15 @@ import { SceneManager } from "../scene_manager/scene-manager";
 import { Team } from "../teams/interfaces/team.interface";
 import { SetGamemodeScene } from "./set-gamemode.scene";
 import { SceneContext } from "../scene_manager/scene-context";
+import { ButtonConfig } from "../main/main.service";
 
 /**
  * Service for managing player gamemodes.
  * This service allows setting gamemodes for players and teams.
  */
 export class GamemodeService implements Module {
-	public readonly id = "gamemode";
+	static readonly id = "gamemode";
+	public readonly id = GamemodeService.id;
 
 	constructor() {}
 
@@ -25,6 +27,19 @@ export class GamemodeService implements Module {
 				new SetGamemodeScene(manager, context);
 			},
 		);
+	}
+
+	getMainButton(): ButtonConfig {
+		return {
+			labelKey: "edu_tools.ui.main.buttons.gamemode",
+			iconPath: "textures/edu_tools/ui/icons/main/gamemode",
+			handler: (sceneManager: SceneManager, context: SceneContext) => {
+				context.setSubjectTeamRequired(true);
+				context.setNextScene("set_gamemode");
+				sceneManager.openSceneWithContext(context, "team_select");
+			},
+			weight: 50,
+		};
 	}
 
 	/**

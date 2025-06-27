@@ -74,6 +74,16 @@ export class ModuleManager {
 		this.initializeModules();
 		// Register scenes for all modules that implement registerScenes
 		this.registerAllModuleScenes(sceneManager);
+
+		// Register main button for the main service
+		for (const module of this.modules.values()) {
+			if (typeof module.getMainButton === "function") {
+				const buttonConfig = module.getMainButton();
+				if (buttonConfig) {
+					mainService.registerButton(module.id, buttonConfig);
+				}
+			}
+		}
 	}
 
 	private initializeModules(): void {

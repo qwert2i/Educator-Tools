@@ -1,6 +1,7 @@
 import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
 import { SceneContext } from "../scene_manager/scene-context";
+import { MainService } from "./main.service";
 
 /**
  * Class representing the Main Scene.
@@ -11,25 +12,54 @@ export class MainScene extends ActionUIScene {
 	 * Creates an instance of MainScene.
 	 * @param sceneManager - The SceneManager instance.
 	 * @param context - The SceneContext instance.
+	 * @param mainService - The MainService instance for button registration.
 	 */
-	constructor(sceneManager: SceneManager, context: SceneContext) {
+	constructor(
+		sceneManager: SceneManager,
+		context: SceneContext,
+		mainService: MainService,
+	) {
 		super(MainScene.id, context.getSourcePlayer());
 
 		// Set the context for this scene
 		this.setContext(context);
 
 		this.setSimpleBody("edu_tools.ui.main.body");
+
+		// Add buttons from the service registry
+		const registeredButtons = mainService.getRegisteredButtons();
+		for (const [buttonId, config] of registeredButtons) {
+			this.addButton(
+				config.labelKey,
+				(): void => {
+					config.handler(sceneManager, context);
+				},
+				config.iconPath,
+			);
+		}
+
+		// Show the UI to the source player
+		this.show(context.getSourcePlayer(), sceneManager);
+	}
+}
+/* 
+this.setSimpleBody("edu_tools.ui.main.body");
 		this.addButton(
 			"edu_tools.ui.main.buttons.teleport",
 			(): void => {
-				sceneManager.openSceneWithContext(context, "set_players", "teleport");
+				context.setSubjectTeamRequired(true);
+				context.setTargetTeamRequired(true);
+				context.setNextScene("teleport");
+				sceneManager.openSceneWithContext(context, "team_select");
 			},
 			"textures/edu_tools/ui/icons/main/teleport",
 		);
 		this.addButton(
 			"edu_tools.ui.main.buttons.gamemode",
 			(): void => {
-				sceneManager.openSceneWithContext(context, "set_players", "gamemode");
+				context.setSubjectTeamRequired(true);
+				context.setNextScene("set_gamemode");
+				sceneManager.openSceneWithContext(context, "team_select");
 			},
 			"textures/edu_tools/ui/icons/main/gamemode",
 		);
@@ -73,8 +103,4 @@ export class MainScene extends ActionUIScene {
 			(): void => {},
 			"textures/edu_tools/ui/icons/_general/exit",
 		);
-
-		// Show the UI to the source player
-		this.show(context.getSourcePlayer(), sceneManager);
-	}
-}
+*/
