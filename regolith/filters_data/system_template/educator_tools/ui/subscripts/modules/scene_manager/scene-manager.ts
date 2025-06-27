@@ -52,11 +52,6 @@ export class SceneManager implements Module {
 		this.storage = storage;
 		this.moduleManager = moduleManager;
 
-		// Get the TeamsService using the generic getModule method
-		this.teamsService = this.moduleManager.getModule<TeamsService>(
-			TeamsService.id,
-		)!;
-
 		// Register core scenes
 		this.registerCoreScenes();
 
