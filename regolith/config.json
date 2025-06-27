@@ -63,6 +63,18 @@
 					}
 				]
 			},
+			"bedrock": {
+				"export": {
+					"build": "standard",
+					"readOnly": false,
+					"target": "development"
+				},
+				"filters": [
+					{
+						"profile": "default"
+					}
+				]
+			},
 			"debugger": {
 				"export": {
 					"bpPath": "../debugger/bp",
