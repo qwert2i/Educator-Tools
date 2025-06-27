@@ -4,7 +4,7 @@ import { TeamsService } from "./modules/teams/teams.service";
 import { WorldSettingsService } from "./modules/world_settings/world-settings.service";
 import { SceneManager } from "./modules/scene_manager/scene-manager";
 import { ItemService } from "./modules/item/item.service";
-import { MainService } from "./modules/main/main.service";
+import { ButtonConfig, MainService } from "./modules/main/main.service";
 
 /**
  * Interface that all modules must implement.
