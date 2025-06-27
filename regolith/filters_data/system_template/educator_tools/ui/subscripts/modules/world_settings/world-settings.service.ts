@@ -3,6 +3,8 @@ import { PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { WorldSettingsScene } from "./world-settings.scene";
+import { ButtonConfig } from "../main/main.service";
+import { SceneContext } from "../scene_manager/scene-context";
 
 /**
  * Interface representing a game rule with its current value and update method
@@ -14,6 +16,8 @@ interface GameRuleItem {
 	value: boolean;
 	/** Method to toggle the game rule value */
 	toggle: (value: boolean) => void;
+	/** Optional method to update the UI or perform additional actions */
+	update: () => void;
 }
 
 /**
@@ -78,11 +82,21 @@ export class WorldSettingsService implements Module {
 		// Add special composite rule for world damage
 		this.gameRules.set("worldDamage", {
 			translationKey: "edu_tools.ui.world_settings.toggles.world_damage",
-			value: world.gameRules.mobGriefing,
+			value:
+				world.gameRules.mobGriefing ||
+				world.gameRules.tntExplodes ||
+				world.gameRules.fireDamage,
 			toggle: (value: boolean) => {
 				world.gameRules.mobGriefing = value;
 				world.gameRules.tntExplodes = value;
 				world.gameRules.fireDamage = value;
+			},
+			update: () => {
+				// Update the composite rule value based on individual game rules
+				this.gameRules.get("worldDamage")!.value =
+					world.gameRules.mobGriefing ||
+					world.gameRules.tntExplodes ||
+					world.gameRules.fireDamage;
 			},
 		});
 	}
@@ -99,20 +113,20 @@ export class WorldSettingsService implements Module {
 					value: (world.gameRules as any)[ruleName],
 					toggle: (value: boolean) => {
 						(world.gameRules as GameRules)[ruleName] = value;
-						this.updateGameRule(ruleName);
+						// Update the value in the gameRules map
+						this.gameRules.get(ruleName)!.update();
+					},
+					update: () => {
+						// Update the value from world.gameRules
+						this.gameRules.get(ruleName)!.value = (world.gameRules as any)[
+							ruleName
+						];
 					},
 				});
 			}
 		} catch (e) {
 			// Handle the case where a rule doesn't exist
 			console.warn(`Game rule ${ruleName} not available in this version`);
-		}
-	}
-
-	private updateGameRule(ruleName: string): void {
-		const rule = this.gameRules.get(ruleName);
-		if (rule) {
-			rule.value = (world.gameRules as any)[ruleName];
 		}
 	}
 
