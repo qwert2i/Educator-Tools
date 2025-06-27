@@ -55,10 +55,6 @@ export class WorldSettingsService implements Module {
 			"edu_tools.ui.world_settings.toggles.mob_spawning",
 		);
 		this.addGameRule(
-			"mobGriefing",
-			"edu_tools.ui.world_settings.toggles.mob_griefing",
-		);
-		this.addGameRule(
 			"keepInventory",
 			"edu_tools.ui.world_settings.toggles.keep_inventory",
 		);
