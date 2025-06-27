@@ -18,6 +18,7 @@ export interface Module {
 	 * @param sceneManager - The SceneManager instance to register scenes with.
 	 */
 	registerScenes?(sceneManager: SceneManager): void;
+	getMainButton?(): ButtonConfig;
 }
 
 export class ModuleManager {
