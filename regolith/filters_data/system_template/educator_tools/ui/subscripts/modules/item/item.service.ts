@@ -14,15 +14,23 @@ import { TeamsService } from "../teams/teams.service";
 
 export class ItemService implements Module {
 	readonly id: string = "item";
-	private readonly teamsService: TeamsService;
+	private readonly moduleManager: ModuleManager;
+	private teamsService: TeamsService;
 
 	constructor(moduleManager: ModuleManager) {
-		this.teamsService = moduleManager.getModule<TeamsService>(TeamsService.id)!;
+		this.moduleManager = moduleManager;
+	}
+
+	initialize(): void {
+		this.teamsService = this.moduleManager.getModule<TeamsService>(
+			TeamsService.id,
+		)!;
 
 		this.registerEvents();
 	}
 
 	private registerEvents(): void {
+		world.sendMessage("ItemService: Registering events...");
 		world.afterEvents.itemUse.subscribe((event: ItemUseAfterEvent) => {
 			if (event.itemStack.typeId === "edu_tools:educator_tool") {
 				this.onEducatorToolUse(event);
@@ -36,7 +44,7 @@ export class ItemService implements Module {
 
 	private onEducatorToolUse(event: ItemUseAfterEvent): void {
 		const player = event.source as Player;
-		const teacherTeam = this.teamsService.getTeam("teachers");
+		const teacherTeam = this.teamsService.getTeam("system_teachers");
 		if (teacherTeam?.memberIds.includes(player.id)) {
 			// Create a new SceneManager instance with our PropertyStorage
 			const sceneManager = SceneManager.getInstance();
@@ -81,9 +89,9 @@ export class ItemService implements Module {
 
 	private onPlayerSpawn(event: PlayerSpawnAfterEvent): void {
 		if (world.getAllPlayers().length === 1) {
-			this.teamsService.addPlayerToTeam("teachers", event.player.id);
+			this.teamsService.addPlayerToTeam("system_teachers", event.player.id);
 		}
-		const teacherTeam = this.teamsService.getTeam("teachers");
+		const teacherTeam = this.teamsService.getTeam("system_teachers");
 		if (teacherTeam?.memberIds.includes(event.player.id)) {
 			this.giveEducatorTool(event.player);
 		}

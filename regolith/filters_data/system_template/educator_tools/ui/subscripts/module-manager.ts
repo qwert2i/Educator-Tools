@@ -3,6 +3,8 @@ import { world } from "@minecraft/server";
 import { TeamsService } from "./modules/teams/teams.service";
 import { WorldSettingsService } from "./modules/world_settings/world-settings.service";
 import { SceneManager } from "./modules/scene_manager/scene-manager";
+import { ItemService } from "./modules/item/item.service";
+import { MainService } from "./modules/main/main.service";
 
 /**
  * Interface that all modules must implement.
@@ -10,6 +12,7 @@ import { SceneManager } from "./modules/scene_manager/scene-manager";
  */
 export interface Module {
 	readonly id: string;
+	initialize?(): void; // Optional method for module initialization
 	/**
 	 * Optional method for modules to register their scenes with the SceneManager.
 	 * @param sceneManager - The SceneManager instance to register scenes with.
@@ -28,7 +31,7 @@ export class ModuleManager {
 	 */
 	private constructor(storage: PropertyStorage) {
 		this.storage = storage;
-		this.initializeDefaultModules();
+		this.loadDefaultModules();
 	}
 
 	/**
@@ -47,10 +50,13 @@ export class ModuleManager {
 	/**
 	 * Initialize default modules like TeamsService.
 	 */
-	private initializeDefaultModules(): void {
+	private loadDefaultModules(): void {
 		// Create TeamsService with a scoped storage
 		const teamsStorage = this.storage.getSubStorage("teams");
 		const teamsService = new TeamsService(teamsStorage);
+		const itemService = new ItemService(this);
+		const sceneManager = SceneManager.getInstance(this, this.storage);
+		const mainService = new MainService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -59,6 +65,23 @@ export class ModuleManager {
 		// Register services
 		this.registerModule(teamsService);
 		this.registerModule(worldSettingsService);
+		this.registerModule(itemService);
+		// Register the SceneManager with the main storage
+		this.registerModule(sceneManager);
+		this.registerModule(mainService);
+
+		// Initialize all modules
+		this.initializeModules();
+		// Register scenes for all modules that implement registerScenes
+		this.registerAllModuleScenes(sceneManager);
+	}
+
+	private initializeModules(): void {
+		for (const module of this.modules.values()) {
+			if (typeof module.initialize === "function") {
+				module.initialize();
+			}
+		}
 	}
 
 	/**

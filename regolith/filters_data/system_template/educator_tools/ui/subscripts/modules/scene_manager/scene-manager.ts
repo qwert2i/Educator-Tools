@@ -18,25 +18,28 @@ type SceneFactory = (
  * This class is responsible for managing scene navigation and storing references
  * to required services.
  */
-export class SceneManager {
+export class SceneManager implements Module {
+	readonly id: string = "scene_manager";
 	private static instance: SceneManager | undefined;
 	private sceneRegistry: Map<string, SceneFactory> = new Map();
 	private readonly storage: PropertyStorage;
 	private moduleManager: ModuleManager;
-	private teamsService: TeamsService;
 
 	/**
 	 * Returns the singleton instance of SceneManager.
 	 * @param storage - The base storage for the application (only used on first call).
 	 */
-	public static getInstance(storage?: PropertyStorage): SceneManager {
+	public static getInstance(
+		moduleManager?: ModuleManager,
+		storage?: PropertyStorage,
+	): SceneManager {
 		if (!SceneManager.instance) {
-			if (!storage) {
+			if (!storage || !moduleManager) {
 				throw new Error(
-					"SceneManager not initialized: storage required on first call.",
+					"SceneManager not initialized: storage and module manager required on first call.",
 				);
 			}
-			SceneManager.instance = new SceneManager(storage);
+			SceneManager.instance = new SceneManager(moduleManager, storage);
 		}
 		return SceneManager.instance;
 	}
@@ -45,11 +48,9 @@ export class SceneManager {
 	 * Private constructor for singleton pattern.
 	 * @param storage - The base storage for the application.
 	 */
-	private constructor(storage: PropertyStorage) {
+	private constructor(moduleManager: ModuleManager, storage: PropertyStorage) {
 		this.storage = storage;
-
-		// Use the singleton ModuleManager instead of creating a new one
-		this.moduleManager = ModuleManager.getInstance();
+		this.moduleManager = moduleManager;
 
 		// Get the TeamsService using the generic getModule method
 		this.teamsService = this.moduleManager.getModule<TeamsService>(
