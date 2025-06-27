@@ -53,6 +53,11 @@ export class TeamsService implements Module {
 		if (this.getTeam(teamId)) {
 			throw new Error(`Team with ID '${teamId}' already exists`);
 		}
+		if (teamId.startsWith("system_")) {
+			throw new Error(
+				`Cannot create team with ID '${teamId}' - reserved prefix`,
+			);
+		}
 		const newTeam: Team = {
 			id: teamId,
 			name,
@@ -325,6 +330,10 @@ export class TeamsService implements Module {
 			teamId === this.STUDENTS_TEAM_ID ||
 			teamId.startsWith(this.PLAYER_TEAM_PREFIX)
 		);
+	}
+
+	public isPlayerTeam(teamId: string): boolean {
+		return teamId.startsWith(this.PLAYER_TEAM_PREFIX);
 	}
 
 	/**
