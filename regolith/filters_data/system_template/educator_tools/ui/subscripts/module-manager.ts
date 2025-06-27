@@ -6,6 +6,7 @@ import { SceneManager } from "./modules/scene_manager/scene-manager";
 import { ItemService } from "./modules/item/item.service";
 import { ButtonConfig, MainService } from "./modules/main/main.service";
 import { GamemodeService } from "./modules/gamemode/gamemode.service";
+import { TeleportService } from "./modules/teleport/teleport.service";
 
 /**
  * Interface that all modules must implement.
@@ -60,6 +61,7 @@ export class ModuleManager {
 		const sceneManager = SceneManager.getInstance(this, this.storage);
 		const mainService = new MainService();
 		const gamemodeService = new GamemodeService();
+		const teleportService = new TeleportService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -73,6 +75,7 @@ export class ModuleManager {
 		this.registerModule(mainService);
 		this.registerModule(worldSettingsService);
 		this.registerModule(gamemodeService);
+		this.registerModule(teleportService);
 
 		// Initialize all modules
 		this.initializeModules();
