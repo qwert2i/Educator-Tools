@@ -50,7 +50,7 @@ export class WorldSettingsService implements Module {
 			labelKey: "edu_tools.ui.main.buttons.world_settings",
 			iconPath: "textures/edu_tools/ui/icons/main/world_settings",
 			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				sceneManager.openSceneWithContext(context, "world_settings");
+				sceneManager.openSceneWithContext(context, "world_settings", true);
 			},
 			weight: 150,
 		};

@@ -73,7 +73,7 @@ export class TeamSelectScene extends ActionUIScene {
 			context.setSubjectTeam(team);
 			context.setSubjectTeamRequired(false);
 			if (context.isTargetTeamRequired()) {
-				sceneManager.openSceneWithContext(context, TeamSelectScene.id);
+				sceneManager.openSceneWithContext(context, TeamSelectScene.id, false);
 				return;
 			}
 		} else if (context.isTargetTeamRequired()) {
@@ -90,6 +90,11 @@ export class TeamSelectScene extends ActionUIScene {
 			return;
 		}
 		// Open the next scene with the updated context
-		sceneManager.openSceneWithContext(context, nextScene[0], nextScene[1]);
+		sceneManager.openSceneWithContext(
+			context,
+			nextScene[0],
+			true,
+			nextScene[1],
+		);
 	}
 }

@@ -95,7 +95,8 @@ export class SetGamemodeScene extends ActionUIScene {
 				{
 					label: "edu_tools.ui.buttons.continue",
 					handler: (context: SceneContext, manager: SceneManager) => {
-						manager.openSceneWithContext(context, "main");
+						context.clearHistory();
+						manager.openSceneWithContext(context, "main", true);
 					},
 				},
 				{
@@ -104,6 +105,11 @@ export class SetGamemodeScene extends ActionUIScene {
 				},
 			],
 		};
-		sceneManager.openSceneWithContext(this.context!, "confirm", configTeam);
+		sceneManager.openSceneWithContext(
+			this.context!,
+			"confirm",
+			false,
+			configTeam,
+		);
 	}
 }

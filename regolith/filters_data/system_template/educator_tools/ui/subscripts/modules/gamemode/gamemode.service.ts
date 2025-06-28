@@ -36,7 +36,7 @@ export class GamemodeService implements Module {
 			handler: (sceneManager: SceneManager, context: SceneContext) => {
 				context.setSubjectTeamRequired(true);
 				context.setNextScene("set_gamemode");
-				sceneManager.openSceneWithContext(context, "team_select");
+				sceneManager.openSceneWithContext(context, "team_select", false);
 			},
 			weight: 50,
 		};

@@ -101,7 +101,7 @@ export class SceneManager implements Module {
 		...args: any[]
 	): SceneContext {
 		const context = new SceneContext(sourcePlayer);
-		return this.openSceneWithContext(context, sceneName, ...args);
+		return this.openSceneWithContext(context, sceneName, true, ...args);
 	}
 
 	/**
@@ -114,9 +114,12 @@ export class SceneManager implements Module {
 	public openSceneWithContext(
 		context: SceneContext,
 		sceneName: string,
+		addToHistory: boolean,
 		...args: any[]
 	): SceneContext {
-		context.addToHistory(sceneName);
+		if (addToHistory) {
+			context.addToHistory(sceneName);
+		}
 		const sceneFactory = this.sceneRegistry.get(sceneName);
 
 		if (sceneFactory) {
@@ -153,7 +156,7 @@ export class SceneManager implements Module {
 	public submitScene(context: SceneContext): void {
 		const [nextScene, nextSceneArgs] = context.getNextScene();
 		if (nextScene) {
-			this.openSceneWithContext(context, nextScene, ...nextSceneArgs);
+			this.openSceneWithContext(context, nextScene, true, ...nextSceneArgs);
 			context.clearNextScene();
 		}
 	}
