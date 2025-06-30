@@ -39,6 +39,7 @@ export class TeamsService implements Module {
 	 * @param name - Display name for the team
 	 * @param options - Additional team options like color and description
 	 * @returns The created team
+	 * @throws Error if team with the same ID already exists or if trying to create a system team
 	 */
 	createTeam(
 		teamId: string,
@@ -76,6 +77,7 @@ export class TeamsService implements Module {
 	 * Deletes a team.
 	 * @param teamId - ID of the team to delete
 	 * @returns True if team was deleted, false if team wasn't found
+	 * @throws Error if trying to delete a system team or a non-editable team
 	 */
 	deleteTeam(teamId: string): boolean {
 		if (this.isSystemTeam(teamId)) {
@@ -97,6 +99,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @param playerId - ID of the player
 	 * @returns True if player was added, false if player was already in the team
+	 * @throws Error if team doesn't exist or is not editable, or if minimum members requirement is not met
 	 */
 	addPlayerToTeam(teamId: string, playerId: string): boolean {
 		const team = this.getTeam(teamId);
@@ -124,6 +127,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @param playerId - ID of the player
 	 * @returns True if player was removed, false if player wasn't in the team
+	 * @throws Error if team is not editable or minimum members requirement is not met
 	 */
 	removePlayerFromTeam(teamId: string, playerId: string): boolean {
 		const team = this.getTeam(teamId);
@@ -307,6 +311,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @param properties - Object with properties to update
 	 * @returns The updated team
+	 * @throws Error if team doesn't exist or is not editable
 	 */
 	updateTeam(teamId: string, properties: TeamsData): Team {
 		const team = this.getTeam(teamId);
