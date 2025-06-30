@@ -12,4 +12,5 @@ export interface TeamsData {
 	color?: string;
 	icon?: string; // Optional icon for the team
 	description?: string;
+	host_auto_assign?: boolean; // Whether the team should auto-assign members
 }

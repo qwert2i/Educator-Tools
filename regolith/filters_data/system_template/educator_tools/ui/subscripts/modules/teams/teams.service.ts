@@ -1,6 +1,6 @@
 import { PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
-import { world, Player } from "@minecraft/server";
+import { world, Player, PlayerSpawnAfterEvent } from "@minecraft/server";
 import { Team, TeamsData } from "./interfaces/team.interface";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { TeamSelectScene } from "./team-select.scene";
@@ -31,6 +31,23 @@ export class TeamsService implements Module {
 				new TeamSelectScene(manager, context);
 			},
 		);
+	}
+
+	initialize(): void {
+		world.afterEvents.playerSpawn.subscribe((event: PlayerSpawnAfterEvent) => {
+			this.onPlayerSpawn(event);
+		});
+	}
+
+	private onPlayerSpawn(event: PlayerSpawnAfterEvent): void {
+		if (world.getAllPlayers().length === 1) {
+			for (const team of this.getAllTeams()) {
+				if (team.host_auto_assign) {
+					// If the team is set to auto-assign and has no members, add the player
+					this.addPlayerToTeam(team.id, event.player.id);
+				}
+			}
+		}
 	}
 
 	/**
@@ -262,6 +279,7 @@ export class TeamsService implements Module {
 				editable: true,
 				icon: "teacher_icon",
 				minimumMembers: 1, // At least one teacher required
+				host_auto_assign: true, // Auto-assign teachers when they join
 			};
 			this.storage.set(this.TEACHERS_TEAM_ID, team);
 		}
