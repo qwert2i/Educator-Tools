@@ -43,7 +43,7 @@ export class TeleportService implements Module {
 		const playerAmount = world.getPlayers().length;
 		if (playerAmount === 1) {
 			// If no players are online, show the no players teleport scene
-			sceneManager.openSceneWithContext(context, "not_enough_players", false);
+			sceneManager.openSceneWithContext(context, "not_enough_players", true);
 		} else {
 			context.setSubjectTeamRequired(true);
 			context.setTargetTeamRequired(true);
