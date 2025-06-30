@@ -31,7 +31,6 @@ export class ItemService implements Module {
 	}
 
 	private registerEvents(): void {
-		world.sendMessage("ItemService: Registering events...");
 		world.afterEvents.itemUse.subscribe((event: ItemUseAfterEvent) => {
 			if (event.itemStack.typeId === "edu_tools:educator_tool") {
 				this.onEducatorToolUse(event);
