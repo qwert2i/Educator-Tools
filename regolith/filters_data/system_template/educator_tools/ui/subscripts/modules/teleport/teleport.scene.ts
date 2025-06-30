@@ -12,7 +12,7 @@ export class TeleportScene extends ActionUIScene {
 		context: SceneContext,
 		private teleportService: TeleportService,
 	) {
-		super("world_settings", context.getSourcePlayer());
+		super(TeleportScene.id, context.getSourcePlayer());
 		const targetPlayer = world.getEntity(
 			context.getTargetTeam()!.memberIds[0],
 		) as Player;
