@@ -38,7 +38,7 @@ export class WorldSettingsService implements Module {
 	 */
 	registerScenes(sceneManager: SceneManager): void {
 		sceneManager.registerScene(
-			"world_settings",
+			this.id,
 			(manager: SceneManager, context: any) => {
 				new WorldSettingsScene(manager, context, this);
 			},
