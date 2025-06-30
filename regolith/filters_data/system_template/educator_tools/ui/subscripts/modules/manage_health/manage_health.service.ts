@@ -1,5 +1,10 @@
 import { Module } from "../../module-manager";
-import { GameMode, Player, world } from "@minecraft/server";
+import {
+	EntityHealthComponent,
+	GameMode,
+	Player,
+	world,
+} from "@minecraft/server";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { Team } from "../teams/interfaces/team.interface";
 import { SceneContext } from "../scene_manager/scene-context";
@@ -209,10 +214,12 @@ export class ManageHealthService implements Module {
 			showParticles: false,
 		});
 		this.checkHealthProperties(player);
-		player.addEffect("minecraft:instant_health", 1, {
-			amplifier: 100,
-			showParticles: false,
-		});
+		const healthComponent = player.getComponent(
+			EntityHealthComponent.componentId,
+		) as EntityHealthComponent;
+		if (healthComponent) {
+			healthComponent.resetToMaxValue();
+		}
 	}
 
 	clearEffects(player: Player): void {
