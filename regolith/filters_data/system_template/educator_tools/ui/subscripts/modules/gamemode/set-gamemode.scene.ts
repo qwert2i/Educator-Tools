@@ -22,43 +22,27 @@ export class SetGamemodeScene extends ActionUIScene {
 			)!;
 
 		// Get the target team
-		const subjectTeam = context.getSubjectTeam();
+		const subjectTeam = context.getSubjectTeam()!;
+		this.setRawBody([
+			{
+				translate: "edu_tools.ui.set_gamemode.team.body",
+			},
+			{
+				text: " §9",
+			},
+			{
+				text: subjectTeam.name,
+			},
+			{
+				text: " §r",
+			},
+			{
+				translate: "edu_tools.ui.set_gamemode.team.body2",
+			},
+		]);
 
-		if (!subjectTeam) {
-			// If no team is selected, show an error message
-			this.setRawBody([
-				{
-					translate: "edu_tools.ui.set_gamemode.no_team_selected",
-				},
-			]);
-
-			// Add a single button to go back
-			this.addButton("edu_tools.ui.buttons.back", (): void => {
-				sceneManager.goBack(context);
-			});
-		} else {
-			// Team is selected, show the gamemode options
-			this.setRawBody([
-				{
-					translate: "edu_tools.ui.set_gamemode.team.body",
-				},
-				{
-					text: " §9",
-				},
-				{
-					text: subjectTeam.name,
-				},
-				{
-					text: " §r",
-				},
-				{
-					translate: "edu_tools.ui.set_gamemode.team.body2",
-				},
-			]);
-
-			// Add gamemode buttons
-			this.addGamemodeButtons(sceneManager, subjectTeam);
-		}
+		// Add gamemode buttons
+		this.addGamemodeButtons(sceneManager, subjectTeam);
 
 		// Pass the context to the scene to handle navigation
 		this.setContext(context);
