@@ -32,7 +32,7 @@ export interface RawBodyElement {
  */
 export class ActionUIScene {
 	protected form: ActionFormData;
-	protected buttonHandlers: (() => void)[];
+	protected buttonHandlers: ((response: ActionFormResponse) => void)[];
 	protected player: Player;
 	protected next_scene_default?: string;
 	protected next_scene_config?: ConfirmSceneConfig;
@@ -72,7 +72,11 @@ export class ActionUIScene {
 	 * @param handler - Defines the actions when the button is pressed.
 	 * @param iconPath - The path to the item texture.
 	 */
-	addButton(text: string, handler: () => void, iconPath?: string): void {
+	addButton(
+		text: string,
+		handler: (response: ModalFormResponse) => void,
+		iconPath?: string,
+	): void {
 		if (iconPath === undefined) {
 			this.form.button(text);
 		} else {
@@ -110,7 +114,7 @@ export class ActionUIScene {
 	): Promise<ActionFormResponse> {
 		return this.form.show(player).then((r) => {
 			if (!r.canceled && r.selection !== undefined) {
-				this.buttonHandlers[r.selection]();
+				this.buttonHandlers[r.selection](r);
 
 				if (sceneManager && this.next_scene_default && this.context) {
 					sceneManager.openSceneWithContext(
@@ -131,7 +135,7 @@ export class ActionUIScene {
 export class MessageUIScene {
 	protected form: MessageFormData;
 	protected body: string;
-	protected buttonHandlers: (() => void)[];
+	protected buttonHandlers: ((response: MessageFormResponse) => void)[];
 	protected player: Player;
 	protected next_scene_default?: string;
 	protected next_scene_config?: ConfirmSceneConfig;
@@ -154,7 +158,10 @@ export class MessageUIScene {
 	 * @param text - The text that is displayed on the button.
 	 * @param handler - Defines the actions when the button is pressed.
 	 */
-	setButton1(text: string, handler: () => void): void {
+	setButton1(
+		text: string,
+		handler: (response: ModalFormResponse) => void,
+	): void {
 		this.form.button1(text);
 		this.buttonHandlers.push(handler);
 	}
@@ -164,7 +171,10 @@ export class MessageUIScene {
 	 * @param text - The text that is displayed on the button.
 	 * @param handler - Defines the actions when the button is pressed.
 	 */
-	setButton2(text: string, handler: () => void): void {
+	setButton2(
+		text: string,
+		handler: (response: ModalFormResponse) => void,
+	): void {
 		this.form.button2(text);
 		this.buttonHandlers.push(handler);
 	}
@@ -214,7 +224,7 @@ export class MessageUIScene {
 	): Promise<MessageFormResponse> {
 		return this.form.show(player).then((r) => {
 			if (!r.canceled && r.selection !== undefined) {
-				this.buttonHandlers[r.selection]();
+				this.buttonHandlers[r.selection](r);
 
 				if (sceneManager && this.next_scene_default && this.context) {
 					sceneManager.openSceneWithContext(
