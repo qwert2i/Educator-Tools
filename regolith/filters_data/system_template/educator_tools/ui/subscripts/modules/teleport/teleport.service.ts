@@ -5,7 +5,6 @@ import { Team } from "../teams/interfaces/team.interface";
 import { SceneContext } from "../scene_manager/scene-context";
 import { TeleportScene } from "./teleport.scene";
 import { ButtonConfig } from "../main/main.service";
-import { NoPlayersTeleportScene } from "./no-players-teleport.scene";
 
 export class TeleportService implements Module {
 	static readonly id = "teleport";
@@ -22,12 +21,6 @@ export class TeleportService implements Module {
 			TeleportScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new TeleportScene(manager, context, this);
-			},
-		);
-		sceneManager.registerScene(
-			NoPlayersTeleportScene.id,
-			(manager: SceneManager, context: SceneContext) => {
-				new NoPlayersTeleportScene(manager, context);
 			},
 		);
 	}
@@ -50,7 +43,7 @@ export class TeleportService implements Module {
 		const playerAmount = world.getPlayers().length;
 		if (playerAmount === 1) {
 			// If no players are online, show the no players teleport scene
-			sceneManager.openSceneWithContext(context, "no_players_teleport", false);
+			sceneManager.openSceneWithContext(context, "not_enough_players", false);
 		} else {
 			context.setSubjectTeamRequired(true);
 			context.setTargetTeamRequired(true);

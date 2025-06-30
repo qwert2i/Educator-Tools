@@ -7,6 +7,7 @@ import { ItemService } from "./modules/item/item.service";
 import { ButtonConfig, MainService } from "./modules/main/main.service";
 import { GamemodeService } from "./modules/gamemode/gamemode.service";
 import { TeleportService } from "./modules/teleport/teleport.service";
+import { ScenesService } from "./modules/scenes/scenes.service";
 
 /**
  * Interface that all modules must implement.
@@ -62,6 +63,7 @@ export class ModuleManager {
 		const mainService = new MainService();
 		const gamemodeService = new GamemodeService();
 		const teleportService = new TeleportService();
+		const scenesService = new ScenesService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -76,6 +78,7 @@ export class ModuleManager {
 		this.registerModule(worldSettingsService);
 		this.registerModule(gamemodeService);
 		this.registerModule(teleportService);
+		this.registerModule(scenesService);
 
 		// Initialize all modules
 		this.initializeModules();
