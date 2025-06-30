@@ -69,9 +69,7 @@ export class FocusModeService implements Module {
 			labelKey: "edu_tools.ui.main.buttons.focus_mode",
 			iconPath: "textures/edu_tools/ui/icons/main/focus_mode",
 			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				context.setSubjectTeamRequired(true);
-				context.setNextScene("focus_mode");
-				sceneManager.openSceneWithContext(context, "team_select", false);
+				sceneManager.openSceneWithContext(context, "focus_mode", true);
 			},
 			weight: 70,
 		};
