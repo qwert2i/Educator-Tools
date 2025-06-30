@@ -109,6 +109,11 @@ export class TeamsService implements Module {
 		if (team.memberIds.includes(playerId)) {
 			return false;
 		}
+		if (team.maximumMembers && team.memberIds.length >= team.maximumMembers) {
+			throw new Error(
+				`Cannot add player to team '${teamId}' - maximum members limit reached`,
+			);
+		}
 		team.memberIds.push(playerId);
 		this.storage.set(teamId, team);
 		return true;
@@ -131,6 +136,11 @@ export class TeamsService implements Module {
 		const memberIndex = team.memberIds.indexOf(playerId);
 		if (memberIndex === -1) {
 			return false;
+		}
+		if (team.minimumMembers && team.memberIds.length <= team.minimumMembers) {
+			throw new Error(
+				`Cannot remove player from team '${teamId}' - minimum members requirement not met`,
+			);
 		}
 		team.memberIds.splice(memberIndex, 1);
 		this.storage.set(teamId, team);
@@ -247,6 +257,7 @@ export class TeamsService implements Module {
 				isSystem: true,
 				editable: true,
 				icon: "teacher_icon",
+				minimumMembers: 1, // At least one teacher required
 			};
 			this.storage.set(this.TEACHERS_TEAM_ID, team);
 		}
