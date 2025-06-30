@@ -22,13 +22,23 @@ export class TeamSelectScene extends ActionUIScene {
 			.getModuleManager()
 			.getModule("teams") as TeamsService;
 
+		const teamFilter = context.getData("team_filter");
+
 		// For each team, add a button to the UI
 		teamsService.getAllTeams().forEach((team) => {
+			// If a team filter is defined, apply it
+			if (teamFilter && teamFilter instanceof Function && !teamFilter(team)) {
+				return; // Skip teams that do not match the filter
+			}
 			let buttonText = "edu_tools.ui.team.name." + team.id;
-			if (teamsService.isPlayerTeam(team.id)) {
-				const player = world.getEntity(team.memberIds[0]) as Player;
-				buttonText = player.name;
-				team.icon = "player";
+			if (teamsService.isSystemTeam(team.id)) {
+				if (teamsService.isPlayerTeam(team.id)) {
+					const player = world.getEntity(team.memberIds[0]) as Player;
+					buttonText = player.name;
+					team.icon = "player";
+				}
+			} else {
+				buttonText = team.name;
 			}
 			if (
 				!context.isSubjectTeamRequired() &&
@@ -44,6 +54,7 @@ export class TeamSelectScene extends ActionUIScene {
 				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id),
 			);
 		});
+		context.setData("team_filter", undefined);
 
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
