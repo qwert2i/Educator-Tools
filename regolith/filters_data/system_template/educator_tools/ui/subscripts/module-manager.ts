@@ -10,6 +10,7 @@ import { TeleportService } from "./modules/teleport/teleport.service";
 import { ScenesService } from "./modules/scenes/scenes.service";
 import { ManageHealthService } from "./modules/manage_health/manage_health.service";
 import { InventoryManageService } from "./modules/inventory_manage/inventory-manage.service";
+import { EnvironmentService } from "./modules/environment/environment.service";
 
 /**
  * Interface that all modules must implement.
@@ -68,6 +69,7 @@ export class ModuleManager {
 		const scenesService = new ScenesService();
 		const inventoryManageService = new InventoryManageService(this);
 		const manageHealthService = new ManageHealthService();
+		const environmentService = new EnvironmentService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -85,6 +87,7 @@ export class ModuleManager {
 		this.registerModule(scenesService);
 		this.registerModule(inventoryManageService);
 		this.registerModule(manageHealthService);
+		this.registerModule(environmentService);
 
 		// Initialize all modules
 		this.initializeModules();
