@@ -1,6 +1,14 @@
 import { Player, Vector3, world } from "@minecraft/server";
 import { CachedStorage, PropertyStorage } from "@shapescape/storage";
 import { SceneContext } from "../scene_manager/scene-context";
+import { ButtonConfig } from "../main/main.service";
+import { SceneManager } from "../scene_manager/scene-manager";
+import { Team } from "../teams/interfaces/team.interface";
+import { LockPlayerScene } from "./lock_player.scene";
+import { LockPlayerConfirmScene } from "./lock_player_confirm.scene";
+import { LockPlayerEditScene } from "./lock_player_edit.scene";
+import { LockPlayerTeamScene } from "./lock_player_team.scene";
+import { Module } from "../../module-manager";
 
 export interface LockSettings {
 	radius: number; // The radius around the player that will be locked
@@ -11,14 +19,60 @@ export interface LockSettings {
 	showLockMessage: boolean; // Whether to show a message when the player is locked
 }
 
-export class LockPlayerService {
+export class LockPlayerService implements Module {
 	static readonly id = "lock_player";
+	public readonly id = LockPlayerService.id;
 	private readonly storage: PropertyStorage;
 	private readonly lockStorage: PropertyStorage;
 
 	constructor() {
 		this.storage = new CachedStorage(world, "lock_player");
 		this.lockStorage = this.storage.getSubStorage("locks");
+	}
+
+	/**
+	 * Registers scenes related to lock player functionality.
+	 * @param sceneManager - The scene manager
+	 */
+	registerScenes(sceneManager: SceneManager): void {
+		sceneManager.registerScene(
+			LockPlayerScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new LockPlayerScene(manager, context);
+			},
+		);
+		sceneManager.registerScene(
+			LockPlayerEditScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new LockPlayerEditScene(manager, context);
+			},
+		);
+		sceneManager.registerScene(
+			LockPlayerConfirmScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new LockPlayerConfirmScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			LockPlayerTeamScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new LockPlayerTeamScene(manager, context, this);
+			},
+		);
+	}
+
+	/**     * Returns the main button configuration for the lock player module.
+	 * @returns ButtonConfig for the main button
+	 * */
+	getMainButton(): ButtonConfig {
+		return {
+			labelKey: "edu_tools.ui.main.buttons.lock_player",
+			iconPath: "textures/edu_tools/ui/icons/main/lock_player",
+			handler: (sceneManager: SceneManager, context: SceneContext) => {
+				sceneManager.openSceneWithContext(context, "lock_player", false);
+			},
+			weight: 100,
+		};
 	}
 
 	getLockSettings(teamId: string): LockSettings | undefined {

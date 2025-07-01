@@ -11,6 +11,7 @@ import { ScenesService } from "./modules/scenes/scenes.service";
 import { ManageHealthService } from "./modules/manage_health/manage_health.service";
 import { InventoryManageService } from "./modules/inventory_manage/inventory-manage.service";
 import { EnvironmentService } from "./modules/environment/environment.service";
+import { LockPlayerService } from "./modules/lock-player/lock_player.service";
 
 /**
  * Interface that all modules must implement.
@@ -70,6 +71,7 @@ export class ModuleManager {
 		const inventoryManageService = new InventoryManageService(this);
 		const manageHealthService = new ManageHealthService();
 		const environmentService = new EnvironmentService();
+		const lockPlayerService = new LockPlayerService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -88,6 +90,7 @@ export class ModuleManager {
 		this.registerModule(inventoryManageService);
 		this.registerModule(manageHealthService);
 		this.registerModule(environmentService);
+		this.registerModule(lockPlayerService);
 
 		// Initialize all modules
 		this.initializeModules();
