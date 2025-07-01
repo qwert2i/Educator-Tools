@@ -1,4 +1,4 @@
-import { world, GameRule, GameRules } from "@minecraft/server";
+import { world, GameRule, GameRules, Difficulty } from "@minecraft/server";
 import { PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
 import { SceneManager } from "../scene_manager/scene-manager";
@@ -177,5 +177,13 @@ export class WorldSettingsService implements Module {
 	 */
 	getGameRuleValue(id: string): boolean {
 		return this.gameRules.get(id)?.value ?? false;
+	}
+
+	getDifficulty(): Difficulty {
+		return world.getDifficulty();
+	}
+
+	setDifficulty(difficulty: Difficulty): void {
+		world.setDifficulty(difficulty);
 	}
 }
