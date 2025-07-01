@@ -27,7 +27,11 @@ export class TeamSelectScene extends ActionUIScene {
 		// For each team, add a button to the UI
 		teamsService.getAllTeams().forEach((team) => {
 			// If a team filter is defined, apply it
-			if (teamFilter && teamFilter instanceof Function && !teamFilter(team)) {
+			if (
+				teamFilter &&
+				teamFilter instanceof Function &&
+				!teamFilter(team, this)
+			) {
 				return; // Skip teams that do not match the filter
 			}
 			let buttonText = "edu_tools.ui.team.name." + team.id;
@@ -54,7 +58,10 @@ export class TeamSelectScene extends ActionUIScene {
 				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id),
 			);
 		});
-		context.setData("team_filter", undefined);
+
+		if (!context.isSubjectTeamRequired() && !context.isTargetTeamRequired()) {
+			context.setData("team_filter", undefined);
+		}
 
 		this.show(context.getSourcePlayer(), sceneManager);
 	}

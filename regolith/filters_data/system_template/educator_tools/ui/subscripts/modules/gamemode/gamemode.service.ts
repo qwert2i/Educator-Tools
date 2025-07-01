@@ -36,6 +36,16 @@ export class GamemodeService implements Module {
 			handler: (sceneManager: SceneManager, context: SceneContext) => {
 				context.setSubjectTeamRequired(true);
 				context.setNextScene("set_gamemode");
+				context.setData("team_filter", (team: Team): boolean => {
+					if (team.memberIds.length < 1) {
+						return false; // Skip empty teams
+					}
+					for (const memberId of team.memberIds) {
+						const player = world.getEntity(memberId) as Player;
+						if (!!player) return true; // Include teams with at least one online player
+					}
+					return true;
+				});
 				sceneManager.openSceneWithContext(context, "team_select", false);
 			},
 			weight: 50,
