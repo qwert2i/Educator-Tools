@@ -173,7 +173,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @returns The team object or null if not found
 	 */
-	getTeam(teamId: string): Team | null {
+	getTeam(teamId: string): Team | undefined {
 		if (teamId === this.ALL_PLAYERS_TEAM_ID) {
 			return this.generateAllPlayersTeam();
 		} else if (teamId === this.TEACHERS_TEAM_ID) {
@@ -185,7 +185,7 @@ export class TeamsService implements Module {
 			return this.generatePlayerTeam(playerId);
 		}
 		const team = this.storage.get(teamId) as Team | undefined;
-		return team || null;
+		return team;
 	}
 
 	/**
@@ -245,32 +245,31 @@ export class TeamsService implements Module {
 	 * @param playerId - ID of the player
 	 * @returns The player's individual team or null if player not found
 	 */
-	private generatePlayerTeam(playerId: string): Team | null {
+	private generatePlayerTeam(playerId: string): Team | undefined {
 		const player = world.getEntity(playerId) as Player | undefined;
 
-		if (!player) {
-			return null;
-		}
 		const existingTeam = this.storage.get(
 			`${this.PLAYER_TEAM_PREFIX}${playerId}`,
 		) as Team | undefined;
-
-		const team = {
-			id: `${this.PLAYER_TEAM_PREFIX}${playerId}`,
-			name: player.name,
-			description: `Individual team for ${player.name}`,
-			memberIds: [playerId],
-			isSystem: true,
-			editable: false,
-			icon: "player_icon",
-			maximumMembers: 1, // Individual teams can only have one member
-			minimumMembers: 1, // At least one member required
-		};
-		if (
-			!existingTeam ||
-			this.getTeamHash(team) !== this.getTeamHash(existingTeam)
-		) {
-			this.storage.set(team.id, team);
+		let team: Team | undefined = undefined;
+		if (player) {
+			team = {
+				id: `${this.PLAYER_TEAM_PREFIX}${playerId}`,
+				name: player.name,
+				description: `Individual team for ${player.name}`,
+				memberIds: [playerId],
+				isSystem: true,
+				editable: false,
+				icon: "player_icon",
+				maximumMembers: 1, // Individual teams can only have one member
+				minimumMembers: 1, // At least one member required
+			};
+			if (
+				!existingTeam ||
+				this.getTeamHash(team) !== this.getTeamHash(existingTeam)
+			) {
+				this.storage.set(team.id, team);
+			}
 		}
 		return team;
 	}
@@ -336,7 +335,7 @@ export class TeamsService implements Module {
 	 * @param playerId - ID of the player
 	 * @returns The player's individual team or null if not found
 	 */
-	public getPlayerIndividualTeam(playerId: string): Team | null {
+	public getPlayerIndividualTeam(playerId: string): Team | undefined {
 		return this.generatePlayerTeam(playerId);
 	}
 
