@@ -17,11 +17,17 @@ export class EnvironmentDaytimeScene extends ModalUIScene {
 		this.setContext(context);
 
 		const daytimes = Object.keys(TimeOfDay).filter((key) => isNaN(Number(key)));
+		// Add a "no change" option
+		daytimes.unshift("edu_tools.ui.environment_daytime.no_change");
 
 		this.addDropdown(
 			"edu_tools.ui.environment_daytime.select_daytime",
 			daytimes,
 			(selectedDaytime: number): void => {
+				if (selectedDaytime === 0) {
+					// If "no change" is selected, do nothing
+					return;
+				}
 				environmentService.setDayTime(
 					TimeOfDay[daytimes[selectedDaytime] as keyof typeof TimeOfDay],
 				);

@@ -16,13 +16,25 @@ export class EnvironmentWeatherScene extends ModalUIScene {
 
 		this.setContext(context);
 
-		const weatherTypes = Object.values(WeatherType);
+		const weatherTypes = Object.keys(WeatherType).filter((key) =>
+			isNaN(Number(key)),
+		);
+		// Add a "no change" option
+		weatherTypes.unshift("edu_tools.ui.environment_weather.no_change");
 
 		this.addDropdown(
 			"edu_tools.ui.environment_weather.select_weather",
 			weatherTypes,
 			(selectedWeather: number): void => {
-				environmentService.setWeather(weatherTypes[selectedWeather]);
+				if (selectedWeather === 0) {
+					// If "no change" is selected, do nothing
+					return;
+				}
+				environmentService.setWeather(
+					WeatherType[
+						weatherTypes[selectedWeather] as keyof typeof WeatherType
+					],
+				);
 			},
 		);
 
