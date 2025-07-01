@@ -251,8 +251,11 @@ export class TeamsService implements Module {
 		if (!player) {
 			return null;
 		}
+		const existingTeam = this.storage.get(
+			`${this.PLAYER_TEAM_PREFIX}${playerId}`,
+		) as Team | undefined;
 
-		return {
+		const team = {
 			id: `${this.PLAYER_TEAM_PREFIX}${playerId}`,
 			name: player.name,
 			description: `Individual team for ${player.name}`,
@@ -260,7 +263,20 @@ export class TeamsService implements Module {
 			isSystem: true,
 			editable: false,
 			icon: "player_icon",
+			maximumMembers: 1, // Individual teams can only have one member
+			minimumMembers: 1, // At least one member required
 		};
+		if (
+			!existingTeam ||
+			this.getTeamHash(team) !== this.getTeamHash(existingTeam)
+		) {
+			this.storage.set(team.id, team);
+		}
+		return team;
+	}
+
+	private getTeamHash(team: Team): string {
+		return `${team.id}-${team.name}-${team.description}-${team.icon}`;
 	}
 
 	/**
