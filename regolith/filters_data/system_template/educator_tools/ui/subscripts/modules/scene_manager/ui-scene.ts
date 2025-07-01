@@ -6,7 +6,12 @@ import {
 	MessageFormResponse,
 	ActionFormResponse,
 } from "@minecraft/server-ui";
-import { Player, RawMessage, RawMessageScore } from "@minecraft/server";
+import {
+	Player,
+	RawMessage,
+	RawMessageScore,
+	RawText,
+} from "@minecraft/server";
 import { SceneManager } from "./scene-manager";
 import { SceneContext } from "./scene-context";
 import { ConfirmSceneConfig } from "../confirm/confirm.scene";
@@ -247,7 +252,7 @@ export class ModalUIScene {
 	protected body: string;
 	protected buttonHandlers: ((value: any) => void)[];
 	protected player: Player;
-	protected next_scene_default: string;
+	protected next_scene_default?: string;
 	protected next_scene_config?: ConfirmSceneConfig;
 	protected context?: SceneContext;
 
@@ -260,7 +265,7 @@ export class ModalUIScene {
 	constructor(
 		id: string,
 		player: Player,
-		next_scene_default: string,
+		next_scene_default?: string,
 		next_scene_config?: ConfirmSceneConfig,
 	) {
 		this.form = new ModalFormData();
@@ -277,15 +282,15 @@ export class ModalUIScene {
 	 * @param label - The label of the text field.
 	 * @param text - The text of the text field.
 	 * @param handler - Defines the actions when the text field value changes.
-	 * @param default_value - The default value of the text field.
+	 * @param defaultValue - The default value of the text field.
 	 */
 	addTextField(
 		label: string,
 		text: string,
 		handler: (value: any) => void,
-		default_value?: string,
+		defaultValue?: string,
 	): void {
-		this.form.textField(label, text, default_value);
+		this.form.textField(label, text, { defaultValue });
 		this.buttonHandlers.push(handler);
 	}
 
@@ -294,15 +299,15 @@ export class ModalUIScene {
 	 * @param label - The label of the dropdown.
 	 * @param options - The options of the dropdown.
 	 * @param handler - Defines the actions when the dropdown value changes.
-	 * @param default_index - The default selected index of the dropdown.
+	 * @param defaultIndex - The default selected index of the dropdown.
 	 */
 	addDropdown(
 		label: string,
 		options: string[],
 		handler: (value: any) => void,
-		default_index?: number,
+		defaultIndex?: number,
 	): void {
-		this.form.dropdown(label, options, default_index);
+		this.form.dropdown(label, options, { defaultValueIndex: defaultIndex });
 		this.buttonHandlers.push(handler);
 	}
 
@@ -312,7 +317,7 @@ export class ModalUIScene {
 	 * @param min - The minimum value of the slider.
 	 * @param max - The maximum value of the slider.
 	 * @param handler - Defines the actions when the slider value changes.
-	 * @param default_value - The default value of the slider.
+	 * @param defaultValue - The default value of the slider.
 	 */
 	addSlider(
 		label: string,
@@ -320,9 +325,9 @@ export class ModalUIScene {
 		max: number,
 		handler: (value: any) => void,
 		step: number,
-		default_value: number,
+		defaultValue: number,
 	): void {
-		this.form.slider(label, min, max, step, default_value);
+		this.form.slider(label, min, max, { defaultValue, valueStep: step });
 		this.buttonHandlers.push(handler);
 	}
 
@@ -330,14 +335,14 @@ export class ModalUIScene {
 	 * Adds a toggle to the UI.
 	 * @param label - The label of the toggle.
 	 * @param handler - Defines the actions when the toggle value changes.
-	 * @param default_value - The default value of the toggle.
+	 * @param defaultValue - The default value of the toggle.
 	 */
 	addToggle(
 		label: string,
 		handler: (value: boolean) => void,
-		default_value: boolean,
+		defaultValue: boolean,
 	): void {
-		this.form.toggle(label, default_value);
+		this.form.toggle(label, { defaultValue });
 		this.buttonHandlers.push(handler);
 	}
 
@@ -349,11 +354,15 @@ export class ModalUIScene {
 		this.form.title(`edu_tools.ui.${id}.title`);
 	}
 
+	addLabel(label: string | RawMessage): void {
+		this.form.label(label);
+	}
+
 	/**
 	 * Sets the next scene to open.
 	 * @param scene_name - The name of the next scene.
 	 */
-	setNextScene(scene_name: string): void {
+	setNextScene(scene_name?: string): void {
 		this.next_scene_default = scene_name;
 	}
 
