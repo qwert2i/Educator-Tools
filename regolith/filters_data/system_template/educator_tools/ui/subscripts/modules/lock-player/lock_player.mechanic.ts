@@ -1,4 +1,4 @@
-import { Player, system, Vector2, world } from "@minecraft/server";
+import { Player, system, Vector2, Vector3, world } from "@minecraft/server";
 import { LockPlayerService, LockSettings } from "./lock_player.service";
 import { ModuleManager } from "../../module-manager";
 import { TeamsService } from "../teams/teams.service";
@@ -25,6 +25,9 @@ export class LockPlayerMechanic {
 
 	/** Safety margin from the lock radius when teleporting players back */
 	private static readonly TELEPORT_SAFETY_MARGIN = 5;
+
+	private static readonly SPHERE_POINTS_COUNT = 100;
+	private static readonly SPHERE_POINTS_RADIUS = 10;
 
 	constructor(
 		private readonly lockPlayerService: LockPlayerService,
@@ -123,6 +126,10 @@ export class LockPlayerMechanic {
 		// Player is within allowed radius - no action needed
 		if (distance <= lockSettings.radius) {
 			return;
+		}
+
+		if (distance < LockPlayerMechanic.SPHERE_POINTS_RADIUS) {
+			this.displayBoundary(player, lockSettings);
 		}
 
 		// Player is outside radius - apply containment mechanics
@@ -250,6 +257,147 @@ export class LockPlayerMechanic {
 		player.runCommand(
 			`/spreadplayers ${targetPoint.x} ${targetPoint.y} 0 1 @s`,
 		);
+	}
+
+	displayBoundary(player: Player, lockSettings: LockSettings): void {
+		if (!lockSettings) {
+			return;
+		}
+		const center = lockSettings.center;
+		const radius = lockSettings.radius;
+		const spherePoints = this.generateSpherePoints(
+			center,
+			radius,
+			LockPlayerMechanic.SPHERE_POINTS_COUNT,
+			player.location,
+			LockPlayerMechanic.SPHERE_POINTS_RADIUS,
+		);
+		if (spherePoints.length === 0) {
+			return; // No points generated, nothing to display
+		}
+		for (const point of spherePoints) {
+			player.dimension.spawnParticle("minecraft:basic_flame_particle", point);
+		}
+	}
+
+	/**
+	 * Generates a list of points on the surface of a sphere that are within maxDistance from targetPosition.
+	 * Uses optimized angular filtering to avoid generating unnecessary points.
+	 * @param center The center of the sphere.
+	 * @param radius The radius of the sphere.
+	 * @param n The number of points to attempt to generate.
+	 * @param targetPosition The position to filter points around.
+	 * @param maxDistance Maximum distance from targetPosition.
+	 */
+	private generateSpherePoints(
+		center: Vector3,
+		radius: number,
+		n: number,
+		targetPosition: Vector3,
+		maxDistance: number,
+	): Vector3[] {
+		const points: Vector3[] = [];
+
+		// Calculate the direction from sphere center to target position
+		const dirToTarget = {
+			x: targetPosition.x - center.x,
+			y: targetPosition.y - center.y,
+			z: targetPosition.z - center.z,
+		};
+
+		const distToTarget = Math.sqrt(
+			dirToTarget.x * dirToTarget.x +
+				dirToTarget.y * dirToTarget.y +
+				dirToTarget.z * dirToTarget.z,
+		);
+
+		// If target is at center, return all points
+		if (distToTarget < 0.001) {
+			return this.generateAllSpherePoints(center, radius, n);
+		}
+
+		// Normalize direction to target
+		const normalizedDir = {
+			x: dirToTarget.x / distToTarget,
+			y: dirToTarget.y / distToTarget,
+			z: dirToTarget.z / distToTarget,
+		};
+
+		// Calculate the maximum angular deviation (half-angle of cone)
+		// Using law of cosines: cos(angle) = (radius² + distToTarget² - maxDistance²) / (2 * radius * distToTarget)
+		const cosMaxAngle = Math.max(
+			-1,
+			Math.min(
+				1,
+				(radius * radius +
+					distToTarget * distToTarget -
+					maxDistance * maxDistance) /
+					(2 * radius * distToTarget),
+			),
+		);
+		const maxAngle = Math.acos(cosMaxAngle);
+
+		const goldenRatio = (1 + Math.sqrt(5)) / 2;
+		const angleIncrement = 2 * Math.PI * goldenRatio;
+
+		for (let i = 0; i < n; i++) {
+			const t = i / n;
+			const inclination = Math.acos(1 - 2 * t);
+			const azimuth = angleIncrement * i;
+
+			// Calculate point on sphere
+			const spherePoint = {
+				x: Math.sin(inclination) * Math.cos(azimuth),
+				y: Math.sin(inclination) * Math.sin(azimuth),
+				z: Math.cos(inclination),
+			};
+
+			// Calculate angle between this point and target direction
+			const dotProduct =
+				spherePoint.x * normalizedDir.x +
+				spherePoint.y * normalizedDir.y +
+				spherePoint.z * normalizedDir.z;
+			const angle = Math.acos(Math.max(-1, Math.min(1, dotProduct)));
+
+			// Only include points within the angular cone
+			if (angle <= maxAngle) {
+				const worldPoint = {
+					x: center.x + radius * spherePoint.x,
+					y: center.y + radius * spherePoint.y,
+					z: center.z + radius * spherePoint.z,
+				};
+				points.push(worldPoint);
+			}
+		}
+
+		return points;
+	}
+
+	/**
+	 * Generates all points on sphere (fallback for when target is at center)
+	 */
+	private generateAllSpherePoints(
+		center: Vector3,
+		radius: number,
+		n: number,
+	): Vector3[] {
+		const points: Vector3[] = [];
+		const goldenRatio = (1 + Math.sqrt(5)) / 2;
+		const angleIncrement = 2 * Math.PI * goldenRatio;
+
+		for (let i = 0; i < n; i++) {
+			const t = i / n;
+			const inclination = Math.acos(1 - 2 * t);
+			const azimuth = angleIncrement * i;
+
+			const x = center.x + radius * Math.sin(inclination) * Math.cos(azimuth);
+			const y = center.y + radius * Math.sin(inclination) * Math.sin(azimuth);
+			const z = center.z + radius * Math.cos(inclination);
+
+			points.push({ x, y, z });
+		}
+
+		return points;
 	}
 
 	/**
