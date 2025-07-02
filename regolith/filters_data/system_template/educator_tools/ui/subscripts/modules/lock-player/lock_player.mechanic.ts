@@ -15,7 +15,7 @@ export class LockPlayerMechanic {
 	private taskId: number | null = null;
 
 	/** Reference to the teams service for team management */
-	private readonly teamsService: TeamsService;
+	private teamsService: TeamsService;
 
 	/** Maximum impulse force applied to players when pushing them back */
 	private static readonly MAX_IMPULSE = 2;
@@ -29,16 +29,15 @@ export class LockPlayerMechanic {
 	constructor(
 		private readonly lockPlayerService: LockPlayerService,
 		private readonly moduleManager: ModuleManager,
-	) {
-		this.teamsService = this.moduleManager.getModule(
-			TeamsService.id,
-		) as TeamsService;
-	}
+	) {}
 
 	/**
 	 * Initializes the lock player mechanic by starting the main tick loop.
 	 */
 	initialize(): void {
+		this.teamsService = this.moduleManager.getModule(
+			TeamsService.id,
+		) as TeamsService;
 		this.taskId = system.runInterval(() => {
 			this.tick();
 		}, 1);
@@ -83,7 +82,7 @@ export class LockPlayerMechanic {
 			}
 
 			// Skip teachers - they are exempt from lock restrictions
-			if (this.isPlayerTeacher(playerId)) {
+			if (this.lockPlayerService.isPlayerExempted(playerId)) {
 				continue;
 			}
 
@@ -109,18 +108,6 @@ export class LockPlayerMechanic {
 			lockSettings.center = boundPlayer.location;
 			this.lockPlayerService.updateLockSettings(teamId, lockSettings);
 		}
-	}
-
-	/**
-	 * Checks if a player is a teacher (exempt from lock restrictions).
-	 * @param playerId - The player ID to check
-	 * @returns True if the player is a teacher
-	 */
-	private isPlayerTeacher(playerId: string): boolean {
-		const playerTeams = this.teamsService.getPlayerTeams(playerId);
-		return playerTeams
-			.map((team) => team.id)
-			.includes(TeamsService.TEACHERS_TEAM_ID);
 	}
 
 	/**

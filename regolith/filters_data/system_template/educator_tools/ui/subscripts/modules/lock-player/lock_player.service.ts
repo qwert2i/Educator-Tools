@@ -10,6 +10,7 @@ import { LockPlayerEditScene } from "./lock_player_edit.scene";
 import { LockPlayerTeamScene } from "./lock_player_team.scene";
 import { Module, ModuleManager } from "../../module-manager";
 import { LockPlayerMechanic } from "./lock_player.mechanic";
+import { TeamsService } from "../teams/teams.service";
 
 export interface LockSettings {
 	radius: number; // The radius around the player that will be locked
@@ -25,15 +26,19 @@ export class LockPlayerService implements Module {
 	public readonly id = LockPlayerService.id;
 	private readonly storage: PropertyStorage;
 	private readonly lockStorage: PropertyStorage;
-	private readonly lockPlayerMechanic: LockPlayerMechanic;
+	private lockPlayerMechanic: LockPlayerMechanic;
+	private teamsService: TeamsService;
 
-	constructor(moduleManager: ModuleManager) {
+	constructor(private readonly moduleManager: ModuleManager) {
 		this.storage = new CachedStorage(world, "lock_player");
 		this.lockStorage = this.storage.getSubStorage("locks");
-		this.lockPlayerMechanic = new LockPlayerMechanic(this, moduleManager);
+		this.lockPlayerMechanic = new LockPlayerMechanic(this, this.moduleManager);
 	}
 
 	initialize(): void {
+		this.teamsService = this.moduleManager.getModule(
+			TeamsService.id,
+		) as TeamsService;
 		// Register the mechanic for this module
 		this.lockPlayerMechanic.initialize();
 	}
@@ -46,7 +51,7 @@ export class LockPlayerService implements Module {
 		sceneManager.registerScene(
 			LockPlayerScene.id,
 			(manager: SceneManager, context: SceneContext) => {
-				new LockPlayerScene(manager, context);
+				new LockPlayerScene(manager, context, this);
 			},
 		);
 		sceneManager.registerScene(
@@ -69,6 +74,29 @@ export class LockPlayerService implements Module {
 		);
 	}
 
+	/**
+	 * Checks if a player is a teacher (exempt from lock restrictions).
+	 * @param playerId - The player ID to check
+	 * @returns True if the player is a teacher
+	 */
+	isPlayerExempted(playerId: string): boolean {
+		const playerTeams = this.teamsService.getPlayerTeams(playerId);
+		return playerTeams
+			.map((team) => team.id)
+			.includes(TeamsService.TEACHERS_TEAM_ID);
+	}
+
+	/**
+	 * Checks if a player is a teacher (exempt from lock restrictions).
+	 * @param playerId - The player ID to check
+	 * @returns True if the player is a teacher
+	 */
+	private isPlayerTeacher(playerId: string): boolean {
+		const playerTeams = this.teamsService.getPlayerTeams(playerId);
+		return playerTeams
+			.map((team) => team.id)
+			.includes(TeamsService.TEACHERS_TEAM_ID);
+	}
 	/**     * Returns the main button configuration for the lock player module.
 	 * @returns ButtonConfig for the main button
 	 * */

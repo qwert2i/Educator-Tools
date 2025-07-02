@@ -71,7 +71,7 @@ export class ModuleManager {
 		const inventoryManageService = new InventoryManageService(this);
 		const manageHealthService = new ManageHealthService();
 		const environmentService = new EnvironmentService();
-		const lockPlayerService = new LockPlayerService();
+		const lockPlayerService = new LockPlayerService(this);
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
