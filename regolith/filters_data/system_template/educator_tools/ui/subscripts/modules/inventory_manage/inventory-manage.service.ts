@@ -10,12 +10,12 @@ import { SceneContext } from "../scene_manager/scene-context";
 import { ButtonConfig } from "../main/main.service";
 import { Team } from "../teams/interfaces/team.interface";
 import { TeamsService } from "../teams/teams.service";
-import { CopyInventoryScene } from "./copy-inventory.scene";
+import { InventoryManageScene } from "./inventory-manage.scene";
 import { CopyItemScene } from "./copy-item.scene";
 
-export class CopyInventoryService implements Module {
-	static readonly id = "copy_inventory";
-	public readonly id = CopyInventoryService.id;
+export class InventoryManageService implements Module {
+	static readonly id = "inventory_manage";
+	public readonly id = InventoryManageService.id;
 
 	private teamsService: TeamsService;
 
@@ -33,9 +33,9 @@ export class CopyInventoryService implements Module {
 	 */
 	registerScenes(sceneManager: SceneManager): void {
 		sceneManager.registerScene(
-			CopyInventoryScene.id,
+			InventoryManageScene.id,
 			(manager: SceneManager, context: SceneContext) => {
-				new CopyInventoryScene(manager, context, this);
+				new InventoryManageScene(manager, context, this);
 			},
 		);
 		sceneManager.registerScene(
@@ -48,16 +48,16 @@ export class CopyInventoryService implements Module {
 
 	getMainButton(): ButtonConfig {
 		return {
-			labelKey: "edu_tools.ui.main.buttons.copy_inventory",
-			iconPath: "textures/edu_tools/ui/icons/main/copy_inventory",
+			labelKey: "edu_tools.ui.main.buttons.inventory_manage",
+			iconPath: "textures/edu_tools/ui/icons/main/inventory_manage",
 			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				this.startCopyInventoryUI(sceneManager, context);
+				this.startInventoryManageUI(sceneManager, context);
 			},
 			weight: 150,
 		};
 	}
 
-	private startCopyInventoryUI(
+	private startInventoryManageUI(
 		sceneManager: SceneManager,
 		context: SceneContext,
 	): void {
@@ -67,12 +67,22 @@ export class CopyInventoryService implements Module {
 		} else {
 			context.setSubjectTeamRequired(true);
 			context.setTargetTeamRequired(true);
-			context.setNextScene("copy_inventory");
+			context.setNextScene("inventory_manage");
+			context.setData("team_filter", (team: Team): boolean => {
+				if (team.memberIds.length < 1) {
+					return false; // Skip empty teams
+				}
+				for (const memberId of team.memberIds) {
+					const player = world.getEntity(memberId) as Player;
+					if (!!player) return true; // Include teams with at least one online player
+				}
+				return true;
+			});
 			sceneManager.openSceneWithContext(context, "team_select", false);
 		}
 	}
 
-	copyInventoryToTeam(source: Player, target: Team): void {
+	inventoryManageToTeam(source: Player, target: Team): void {
 		if (!target) return;
 
 		// For each member ID in the team
@@ -80,7 +90,7 @@ export class CopyInventoryService implements Module {
 			const player = world.getEntity(playerId) as Player;
 			if (player && player.id !== source.id) {
 				// Copy inventory from source to target player
-				this.copyInventory(source, player);
+				this.inventoryManage(source, player);
 			}
 		});
 	}
@@ -130,7 +140,28 @@ export class CopyInventoryService implements Module {
 		return items;
 	}
 
-	private copyInventory(source: Player, target: Player): void {
+	clearInventory(player: Player): void {
+		const components = player.getComponent(
+			EntityInventoryComponent.componentId,
+		) as EntityInventoryComponent;
+		if (components && components.container) {
+			components.container.clearAll();
+		}
+	}
+
+	clearInventoryOfTeam(team: Team): void {
+		if (!team) return;
+		// For each member ID in the team
+		team.memberIds.forEach((playerId) => {
+			const player = world.getEntity(playerId) as Player;
+			if (player) {
+				// Clear inventory of the player
+				this.clearInventory(player);
+			}
+		});
+	}
+
+	private inventoryManage(source: Player, target: Player): void {
 		const isTeacher = this.teamsService
 			.getTeam("system_teachers")
 			?.memberIds.includes(source.id);

@@ -1,4 +1,4 @@
-import { world } from "@minecraft/server";
+import { Difficulty, world } from "@minecraft/server";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { SceneContext } from "../scene_manager/scene-context";
 import { ModalUIScene } from "../scene_manager/ui-scene";
@@ -33,6 +33,24 @@ export class WorldSettingsScene extends ModalUIScene {
 				rule.value,
 			);
 		}
+
+		const difficulties = Object.keys(Difficulty).filter((key) =>
+			isNaN(Number(key)),
+		);
+
+		this.addDropdown(
+			"edu_tools.ui.world_settings.select_difficulty",
+			difficulties,
+			(selectedDifficulty: number): void => {
+				const difficulty = difficulties[selectedDifficulty];
+				this.worldSettingsService.setDifficulty(
+					Difficulty[difficulty as keyof typeof Difficulty],
+				);
+			},
+			difficulties.indexOf(
+				Difficulty[world.getDifficulty() as keyof typeof Difficulty],
+			), // Set the current difficulty as selected
+		);
 
 		this.show(context.getSourcePlayer(), sceneManager);
 	}

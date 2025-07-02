@@ -73,67 +73,6 @@ export class MainService implements Module {
 	 * Registers the default buttons for the main menu
 	 */
 	private registerDefaultButtons(): void {
-		/*this.registerButton("teleport", {
-			labelKey: "edu_tools.ui.main.buttons.teleport",
-			iconPath: "textures/edu_tools/ui/icons/main/teleport",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				context.setSubjectTeamRequired(true);
-				context.setTargetTeamRequired(true);
-				context.setNextScene("teleport");
-				sceneManager.openSceneWithContext(context, "team_select");
-			},
-		});
-
-		this.registerButton("gamemode", {
-			labelKey: "edu_tools.ui.main.buttons.gamemode",
-			iconPath: "textures/edu_tools/ui/icons/main/gamemode",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				context.setSubjectTeamRequired(true);
-				context.setNextScene("set_gamemode");
-				sceneManager.openSceneWithContext(context, "team_select");
-			},
-		});
-
-		this.registerButton("timer", {
-			labelKey: "edu_tools.ui.main.buttons.timer",
-			iconPath: "textures/edu_tools/ui/icons/main/timer",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				sceneManager.openSceneWithContext(context, "timer");
-			},
-		});
-
-		this.registerButton("world_settings", {
-			labelKey: "edu_tools.ui.main.buttons.world_settings",
-			iconPath: "textures/edu_tools/ui/icons/main/world_settings",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				sceneManager.openSceneWithContext(context, "world_settings");
-			},
-		});
-
-		this.registerButton("lock_players", {
-			labelKey: "edu_tools.ui.main.buttons.lock_players",
-			iconPath: "textures/edu_tools/ui/icons/main/lock_players",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				sceneManager.openSceneWithContext(context, "lock_players");
-			},
-		});
-
-		this.registerButton("copy_inventory", {
-			labelKey: "edu_tools.ui.main.buttons.copy_inventory",
-			iconPath: "textures/edu_tools/ui/icons/main/copy_inventory",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				sceneManager.openScene("set_players", "copy_inventory");
-			},
-		});
-
-		this.registerButton("manage_health", {
-			labelKey: "edu_tools.ui.main.buttons.manage_health",
-			iconPath: "textures/edu_tools/ui/icons/main/manage_health",
-			handler: (sceneManager: SceneManager, context: SceneContext) => {
-				sceneManager.openScene("set_players", "manage_health");
-			},
-		});*/
-
 		this.registerButton("exit", {
 			labelKey: "edu_tools.ui.buttons.exit",
 			iconPath: "textures/edu_tools/ui/icons/_general/exit",

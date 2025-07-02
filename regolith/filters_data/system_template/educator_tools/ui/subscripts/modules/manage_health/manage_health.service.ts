@@ -1,5 +1,10 @@
 import { Module } from "../../module-manager";
-import { GameMode, Player, world } from "@minecraft/server";
+import {
+	EntityHealthComponent,
+	GameMode,
+	Player,
+	world,
+} from "@minecraft/server";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { Team } from "../teams/interfaces/team.interface";
 import { SceneContext } from "../scene_manager/scene-context";
@@ -58,6 +63,16 @@ export class ManageHealthService implements Module {
 			handler: (sceneManager: SceneManager, context: SceneContext) => {
 				context.setSubjectTeamRequired(true);
 				context.setNextScene("manage_health");
+				context.setData("team_filter", (team: Team): boolean => {
+					if (team.memberIds.length < 1) {
+						return false; // Skip empty teams
+					}
+					for (const memberId of team.memberIds) {
+						const player = world.getEntity(memberId) as Player;
+						if (!!player) return true; // Include teams with at least one online player
+					}
+					return true;
+				});
 				sceneManager.openSceneWithContext(context, "team_select", false);
 			},
 			weight: 60,
@@ -209,10 +224,12 @@ export class ManageHealthService implements Module {
 			showParticles: false,
 		});
 		this.checkHealthProperties(player);
-		player.addEffect("minecraft:instant_health", 1, {
-			amplifier: 100,
-			showParticles: false,
-		});
+		const healthComponent = player.getComponent(
+			EntityHealthComponent.componentId,
+		) as EntityHealthComponent;
+		if (healthComponent) {
+			healthComponent.resetToMaxValue();
+		}
 	}
 
 	clearEffects(player: Player): void {

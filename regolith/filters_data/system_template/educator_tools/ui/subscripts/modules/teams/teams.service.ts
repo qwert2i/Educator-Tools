@@ -1,10 +1,14 @@
 import { PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
-import { world, Player } from "@minecraft/server";
+import { world, Player, PlayerSpawnAfterEvent } from "@minecraft/server";
 import { Team, TeamsData } from "./interfaces/team.interface";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { TeamSelectScene } from "./team-select.scene";
 import { SceneContext } from "../scene_manager/scene-context";
+import { TeamsDeleteScene } from "./team-delete.scene";
+import { TeamsEditScene } from "./teams-edit.scene";
+import { TeamsManagementScene } from "./teams-management.scene";
+import { ButtonConfig } from "../main/main.service";
 
 /**
  * Service for managing player teams.
@@ -14,10 +18,18 @@ export class TeamsService implements Module {
 	public static readonly id = "teams";
 	private readonly storage: PropertyStorage;
 	public readonly id = TeamsService.id;
-	private readonly ALL_PLAYERS_TEAM_ID = "system_all_players";
-	private readonly PLAYER_TEAM_PREFIX = "system_player_";
-	private readonly TEACHERS_TEAM_ID = "system_teachers";
-	private readonly STUDENTS_TEAM_ID = "system_students";
+	public static readonly ALL_PLAYERS_TEAM_ID = "system_all_players";
+	private static readonly PLAYER_TEAM_PREFIX = "system_player_";
+	public static readonly TEACHERS_TEAM_ID = "system_teachers";
+	public static readonly STUDENTS_TEAM_ID = "system_students";
+
+	public static readonly availableIcons = [
+		"star",
+		"heart",
+		"diamond",
+		"circle",
+		"square",
+	];
 
 	constructor(storage: PropertyStorage) {
 		this.storage = storage.getSubStorage(TeamsService.id);
@@ -31,6 +43,55 @@ export class TeamsService implements Module {
 				new TeamSelectScene(manager, context);
 			},
 		);
+		sceneManager.registerScene(
+			TeamsManagementScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsManagementScene(manager, context);
+			},
+		);
+		sceneManager.registerScene(
+			TeamsEditScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsEditScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			TeamsDeleteScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsDeleteScene(manager, context, this);
+			},
+		);
+	}
+
+	getMainButton(): ButtonConfig {
+		return {
+			labelKey: "edu_tools.ui.main.buttons.teams_management",
+			iconPath: "textures/edu_tools/ui/icons/main/teams_management",
+			handler: (sceneManager: SceneManager, context: SceneContext) => {
+				sceneManager.openSceneWithContext(context, "teams_management", true);
+			},
+			weight: 150,
+		};
+	}
+
+	initialize(): void {
+		world.afterEvents.playerSpawn.subscribe((event: PlayerSpawnAfterEvent) => {
+			this.onPlayerSpawn(event);
+		});
+	}
+
+	private onPlayerSpawn(event: PlayerSpawnAfterEvent): void {
+		if (world.getAllPlayers().length === 1) {
+			for (const team of this.getAllTeams()) {
+				if (team.host_auto_assign) {
+					// If the team is set to auto-assign and has no members, add the player
+					this.addPlayerToTeam(team.id, event.player.id);
+				}
+			}
+		}
 	}
 
 	/**
@@ -39,6 +100,7 @@ export class TeamsService implements Module {
 	 * @param name - Display name for the team
 	 * @param options - Additional team options like color and description
 	 * @returns The created team
+	 * @throws Error if team with the same ID already exists or if trying to create a system team
 	 */
 	createTeam(
 		teamId: string,
@@ -76,6 +138,7 @@ export class TeamsService implements Module {
 	 * Deletes a team.
 	 * @param teamId - ID of the team to delete
 	 * @returns True if team was deleted, false if team wasn't found
+	 * @throws Error if trying to delete a system team or a non-editable team
 	 */
 	deleteTeam(teamId: string): boolean {
 		if (this.isSystemTeam(teamId)) {
@@ -97,6 +160,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @param playerId - ID of the player
 	 * @returns True if player was added, false if player was already in the team
+	 * @throws Error if team doesn't exist or is not editable, or if minimum members requirement is not met
 	 */
 	addPlayerToTeam(teamId: string, playerId: string): boolean {
 		const team = this.getTeam(teamId);
@@ -109,6 +173,11 @@ export class TeamsService implements Module {
 		if (team.memberIds.includes(playerId)) {
 			return false;
 		}
+		if (team.maximumMembers && team.memberIds.length >= team.maximumMembers) {
+			throw new Error(
+				`Cannot add player to team '${teamId}' - maximum members limit reached`,
+			);
+		}
 		team.memberIds.push(playerId);
 		this.storage.set(teamId, team);
 		return true;
@@ -119,6 +188,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @param playerId - ID of the player
 	 * @returns True if player was removed, false if player wasn't in the team
+	 * @throws Error if team is not editable or minimum members requirement is not met
 	 */
 	removePlayerFromTeam(teamId: string, playerId: string): boolean {
 		const team = this.getTeam(teamId);
@@ -132,6 +202,11 @@ export class TeamsService implements Module {
 		if (memberIndex === -1) {
 			return false;
 		}
+		if (team.minimumMembers && team.memberIds.length <= team.minimumMembers) {
+			throw new Error(
+				`Cannot remove player from team '${teamId}' - minimum members requirement not met`,
+			);
+		}
 		team.memberIds.splice(memberIndex, 1);
 		this.storage.set(teamId, team);
 		return true;
@@ -142,19 +217,19 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @returns The team object or null if not found
 	 */
-	getTeam(teamId: string): Team | null {
-		if (teamId === this.ALL_PLAYERS_TEAM_ID) {
+	getTeam(teamId: string): Team | undefined {
+		if (teamId === TeamsService.ALL_PLAYERS_TEAM_ID) {
 			return this.generateAllPlayersTeam();
-		} else if (teamId === this.TEACHERS_TEAM_ID) {
+		} else if (teamId === TeamsService.TEACHERS_TEAM_ID) {
 			return this.generateTeachersTeam();
-		} else if (teamId === this.STUDENTS_TEAM_ID) {
+		} else if (teamId === TeamsService.STUDENTS_TEAM_ID) {
 			return this.generateStudentsTeam();
-		} else if (teamId.startsWith(this.PLAYER_TEAM_PREFIX)) {
-			const playerId = teamId.replace(this.PLAYER_TEAM_PREFIX, "");
+		} else if (teamId.startsWith(TeamsService.PLAYER_TEAM_PREFIX)) {
+			const playerId = teamId.replace(TeamsService.PLAYER_TEAM_PREFIX, "");
 			return this.generatePlayerTeam(playerId);
 		}
 		const team = this.storage.get(teamId) as Team | undefined;
-		return team || null;
+		return team;
 	}
 
 	/**
@@ -199,7 +274,7 @@ export class TeamsService implements Module {
 		const playerIds = onlinePlayers.map((player) => player.id);
 
 		return {
-			id: this.ALL_PLAYERS_TEAM_ID,
+			id: TeamsService.ALL_PLAYERS_TEAM_ID,
 			name: "All Players",
 			description: "All currently online players",
 			memberIds: playerIds,
@@ -214,22 +289,37 @@ export class TeamsService implements Module {
 	 * @param playerId - ID of the player
 	 * @returns The player's individual team or null if player not found
 	 */
-	private generatePlayerTeam(playerId: string): Team | null {
+	private generatePlayerTeam(playerId: string): Team | undefined {
 		const player = world.getEntity(playerId) as Player | undefined;
 
-		if (!player) {
-			return null;
+		const existingTeam = this.storage.get(
+			`${TeamsService.PLAYER_TEAM_PREFIX}${playerId}`,
+		) as Team | undefined;
+		let team: Team | undefined = undefined;
+		if (player) {
+			team = {
+				id: `${TeamsService.PLAYER_TEAM_PREFIX}${playerId}`,
+				name: player.name,
+				description: `Individual team for ${player.name}`,
+				memberIds: [playerId],
+				isSystem: true,
+				editable: false,
+				icon: "player_icon",
+				maximumMembers: 1, // Individual teams can only have one member
+				minimumMembers: 1, // At least one member required
+			};
+			if (
+				!existingTeam ||
+				this.getTeamHash(team) !== this.getTeamHash(existingTeam)
+			) {
+				this.storage.set(team.id, team);
+			}
 		}
+		return team;
+	}
 
-		return {
-			id: `${this.PLAYER_TEAM_PREFIX}${playerId}`,
-			name: player.name,
-			description: `Individual team for ${player.name}`,
-			memberIds: [playerId],
-			isSystem: true,
-			editable: false,
-			icon: "player_icon",
-		};
+	private getTeamHash(team: Team): string {
+		return `${team.id}-${team.name}-${team.description}-${team.icon}`;
 	}
 
 	/**
@@ -237,18 +327,22 @@ export class TeamsService implements Module {
 	 * @returns The Teachers team
 	 */
 	private generateTeachersTeam(): Team {
-		let team = this.storage.get(this.TEACHERS_TEAM_ID) as Team | undefined;
+		let team = this.storage.get(TeamsService.TEACHERS_TEAM_ID) as
+			| Team
+			| undefined;
 		if (!team) {
 			team = {
-				id: this.TEACHERS_TEAM_ID,
+				id: TeamsService.TEACHERS_TEAM_ID,
 				name: "Teachers",
 				description: "All teacher players (manually assigned)",
 				memberIds: [],
 				isSystem: true,
 				editable: true,
 				icon: "teacher_icon",
+				minimumMembers: 1, // At least one teacher required
+				host_auto_assign: true, // Auto-assign teachers when they join
 			};
-			this.storage.set(this.TEACHERS_TEAM_ID, team);
+			this.storage.set(TeamsService.TEACHERS_TEAM_ID, team);
 		}
 		return team;
 	}
@@ -259,12 +353,13 @@ export class TeamsService implements Module {
 	 */
 	private generateStudentsTeam(): Team {
 		const onlinePlayers = world.getAllPlayers();
-		const teachers = this.getTeam(this.TEACHERS_TEAM_ID)?.memberIds || [];
+		const teachers =
+			this.getTeam(TeamsService.TEACHERS_TEAM_ID)?.memberIds || [];
 		const studentIds = onlinePlayers
 			.map((player) => player.id)
 			.filter((id) => !teachers.includes(id));
 		return {
-			id: this.STUDENTS_TEAM_ID,
+			id: TeamsService.STUDENTS_TEAM_ID,
 			name: "Students",
 			description: "All online players not in Teachers team",
 			memberIds: studentIds,
@@ -287,7 +382,7 @@ export class TeamsService implements Module {
 	 * @param playerId - ID of the player
 	 * @returns The player's individual team or null if not found
 	 */
-	public getPlayerIndividualTeam(playerId: string): Team | null {
+	public getPlayerIndividualTeam(playerId: string): Team | undefined {
 		return this.generatePlayerTeam(playerId);
 	}
 
@@ -296,6 +391,7 @@ export class TeamsService implements Module {
 	 * @param teamId - ID of the team
 	 * @param properties - Object with properties to update
 	 * @returns The updated team
+	 * @throws Error if team doesn't exist or is not editable
 	 */
 	updateTeam(teamId: string, properties: TeamsData): Team {
 		const team = this.getTeam(teamId);
@@ -325,15 +421,15 @@ export class TeamsService implements Module {
 	 */
 	public isSystemTeam(teamId: string): boolean {
 		return (
-			teamId === this.ALL_PLAYERS_TEAM_ID ||
-			teamId === this.TEACHERS_TEAM_ID ||
-			teamId === this.STUDENTS_TEAM_ID ||
-			teamId.startsWith(this.PLAYER_TEAM_PREFIX)
+			teamId === TeamsService.ALL_PLAYERS_TEAM_ID ||
+			teamId === TeamsService.TEACHERS_TEAM_ID ||
+			teamId === TeamsService.STUDENTS_TEAM_ID ||
+			teamId.startsWith(TeamsService.PLAYER_TEAM_PREFIX)
 		);
 	}
 
 	public isPlayerTeam(teamId: string): boolean {
-		return teamId.startsWith(this.PLAYER_TEAM_PREFIX);
+		return teamId.startsWith(TeamsService.PLAYER_TEAM_PREFIX);
 	}
 
 	/**

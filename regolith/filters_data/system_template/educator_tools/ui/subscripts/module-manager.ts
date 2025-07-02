@@ -8,10 +8,12 @@ import { ButtonConfig, MainService } from "./modules/main/main.service";
 import { GamemodeService } from "./modules/gamemode/gamemode.service";
 import { TeleportService } from "./modules/teleport/teleport.service";
 import { ScenesService } from "./modules/scenes/scenes.service";
-import { CopyInventoryService } from "./modules/copy_inventory/copy-inventory.service";
 import { ManageHealthService } from "./modules/manage_health/manage_health.service";
 import { PlayerStatusService } from "./modules/player_status/player_status.service";
 import { FocusModeService } from "./modules/focus_mode/focus_mode.service";
+import { InventoryManageService } from "./modules/inventory_manage/inventory-manage.service";
+import { EnvironmentService } from "./modules/environment/environment.service";
+import { LockPlayerService } from "./modules/lock-player/lock_player.service";
 
 /**
  * Interface that all modules must implement.
@@ -68,10 +70,12 @@ export class ModuleManager {
 		const gamemodeService = new GamemodeService();
 		const teleportService = new TeleportService();
 		const scenesService = new ScenesService();
-		const copyInventoryService = new CopyInventoryService(this);
+		const inventoryManageService = new InventoryManageService(this);
 		const manageHealthService = new ManageHealthService();
 		const focusModeService = new FocusModeService(this);
 		const playerStatusService = new PlayerStatusService();
+		const environmentService = new EnvironmentService();
+		const lockPlayerService = new LockPlayerService(this);
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -87,10 +91,12 @@ export class ModuleManager {
 		this.registerModule(gamemodeService);
 		this.registerModule(teleportService);
 		this.registerModule(scenesService);
-		this.registerModule(copyInventoryService);
+		this.registerModule(inventoryManageService);
 		this.registerModule(manageHealthService);
 		this.registerModule(focusModeService);
 		this.registerModule(playerStatusService);
+		this.registerModule(environmentService);
+		this.registerModule(lockPlayerService);
 
 		// Initialize all modules
 		this.initializeModules();

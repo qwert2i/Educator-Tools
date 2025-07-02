@@ -7,6 +7,7 @@ class EducatorTools {
 		ModuleManager.getInstance();
 	}
 }
-
-// Initialize the Educator Tools
-new EducatorTools();
+world.afterEvents.worldLoad.subscribe(() => {
+	// Initialize the Educator Tools
+	new EducatorTools();
+});

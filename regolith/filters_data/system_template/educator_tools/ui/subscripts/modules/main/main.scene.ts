@@ -22,7 +22,7 @@ export class MainScene extends ActionUIScene {
 		super(MainScene.id, context.getSourcePlayer());
 
 		// Set the context for this scene
-		this.setContext(context);
+		this.setContext(new SceneContext(context.getSourcePlayer()));
 
 		this.setSimpleBody("edu_tools.ui.main.body");
 

@@ -2,7 +2,7 @@ import { Player, world } from "@minecraft/server";
 import { SceneContext } from "../scene_manager/scene-context";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { ModalUIScene } from "../scene_manager/ui-scene";
-import { CopyInventoryService } from "./copy-inventory.service";
+import { InventoryManageService } from "./inventory-manage.service";
 
 export class CopyItemScene extends ModalUIScene {
 	static readonly id = "copy_item";
@@ -10,21 +10,21 @@ export class CopyItemScene extends ModalUIScene {
 	constructor(
 		sceneManager: SceneManager,
 		context: SceneContext,
-		private copyInventoryService: CopyInventoryService,
+		private inventoryManageService: InventoryManageService,
 	) {
 		super(CopyItemScene.id, context.getSourcePlayer(), "confirm");
 		const sourcePlayer = world.getEntity(
 			context.getSubjectTeam()!.memberIds[0],
 		) as Player;
 
-		const items = this.copyInventoryService.getItemsInInventory(sourcePlayer);
+		const items = this.inventoryManageService.getItemsInInventory(sourcePlayer);
 		const itemStacks = items.map((itemData) => itemData.itemName);
 
 		this.addDropdown(
 			"edu_tools.ui.copy_item.select_item",
 			itemStacks,
 			(selectedItem: number): void => {
-				this.copyInventoryService.copyItemToTeam(
+				this.inventoryManageService.copyItemToTeam(
 					sourcePlayer,
 					context.getTargetTeam()!,
 					items[selectedItem].index,
