@@ -128,7 +128,10 @@ export class LockPlayerMechanic {
 			return;
 		}
 
-		if (distance < LockPlayerMechanic.SPHERE_POINTS_RADIUS) {
+		if (
+			lockSettings.showBoundaries &&
+			distance < LockPlayerMechanic.SPHERE_POINTS_RADIUS
+		) {
 			this.displayBoundary(player, lockSettings);
 		}
 
