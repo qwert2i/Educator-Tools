@@ -48,9 +48,7 @@ export class WorldSettingsScene extends ModalUIScene {
 				);
 			},
 			difficulties.indexOf(
-				Difficulty[world.getDifficulty() as keyof typeof Difficulty]
-					.toLowerCase()
-					.replace(/_/g, " "),
+				Difficulty[world.getDifficulty() as keyof typeof Difficulty],
 			), // Set the current difficulty as selected
 		);
 
