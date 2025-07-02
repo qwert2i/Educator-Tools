@@ -8,7 +8,8 @@ import { LockPlayerScene } from "./lock_player.scene";
 import { LockPlayerConfirmScene } from "./lock_player_confirm.scene";
 import { LockPlayerEditScene } from "./lock_player_edit.scene";
 import { LockPlayerTeamScene } from "./lock_player_team.scene";
-import { Module } from "../../module-manager";
+import { Module, ModuleManager } from "../../module-manager";
+import { LockPlayerMechanic } from "./lock_player.mechanic";
 
 export interface LockSettings {
 	radius: number; // The radius around the player that will be locked
@@ -24,10 +25,17 @@ export class LockPlayerService implements Module {
 	public readonly id = LockPlayerService.id;
 	private readonly storage: PropertyStorage;
 	private readonly lockStorage: PropertyStorage;
+	private readonly lockPlayerMechanic: LockPlayerMechanic;
 
-	constructor() {
+	constructor(moduleManager: ModuleManager) {
 		this.storage = new CachedStorage(world, "lock_player");
 		this.lockStorage = this.storage.getSubStorage("locks");
+		this.lockPlayerMechanic = new LockPlayerMechanic(this, moduleManager);
+	}
+
+	initialize(): void {
+		// Register the mechanic for this module
+		this.lockPlayerMechanic.initialize();
 	}
 
 	/**
