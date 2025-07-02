@@ -14,10 +14,10 @@ export class TeamsService implements Module {
 	public static readonly id = "teams";
 	private readonly storage: PropertyStorage;
 	public readonly id = TeamsService.id;
-	private readonly ALL_PLAYERS_TEAM_ID = "system_all_players";
-	private readonly PLAYER_TEAM_PREFIX = "system_player_";
-	private readonly TEACHERS_TEAM_ID = "system_teachers";
-	private readonly STUDENTS_TEAM_ID = "system_students";
+	public static readonly ALL_PLAYERS_TEAM_ID = "system_all_players";
+	private static readonly PLAYER_TEAM_PREFIX = "system_player_";
+	public static readonly TEACHERS_TEAM_ID = "system_teachers";
+	public static readonly STUDENTS_TEAM_ID = "system_students";
 
 	constructor(storage: PropertyStorage) {
 		this.storage = storage.getSubStorage(TeamsService.id);
@@ -174,14 +174,14 @@ export class TeamsService implements Module {
 	 * @returns The team object or null if not found
 	 */
 	getTeam(teamId: string): Team | undefined {
-		if (teamId === this.ALL_PLAYERS_TEAM_ID) {
+		if (teamId === TeamsService.ALL_PLAYERS_TEAM_ID) {
 			return this.generateAllPlayersTeam();
-		} else if (teamId === this.TEACHERS_TEAM_ID) {
+		} else if (teamId === TeamsService.TEACHERS_TEAM_ID) {
 			return this.generateTeachersTeam();
-		} else if (teamId === this.STUDENTS_TEAM_ID) {
+		} else if (teamId === TeamsService.STUDENTS_TEAM_ID) {
 			return this.generateStudentsTeam();
-		} else if (teamId.startsWith(this.PLAYER_TEAM_PREFIX)) {
-			const playerId = teamId.replace(this.PLAYER_TEAM_PREFIX, "");
+		} else if (teamId.startsWith(TeamsService.PLAYER_TEAM_PREFIX)) {
+			const playerId = teamId.replace(TeamsService.PLAYER_TEAM_PREFIX, "");
 			return this.generatePlayerTeam(playerId);
 		}
 		const team = this.storage.get(teamId) as Team | undefined;
@@ -230,7 +230,7 @@ export class TeamsService implements Module {
 		const playerIds = onlinePlayers.map((player) => player.id);
 
 		return {
-			id: this.ALL_PLAYERS_TEAM_ID,
+			id: TeamsService.ALL_PLAYERS_TEAM_ID,
 			name: "All Players",
 			description: "All currently online players",
 			memberIds: playerIds,
@@ -249,12 +249,12 @@ export class TeamsService implements Module {
 		const player = world.getEntity(playerId) as Player | undefined;
 
 		const existingTeam = this.storage.get(
-			`${this.PLAYER_TEAM_PREFIX}${playerId}`,
+			`${TeamsService.PLAYER_TEAM_PREFIX}${playerId}`,
 		) as Team | undefined;
 		let team: Team | undefined = undefined;
 		if (player) {
 			team = {
-				id: `${this.PLAYER_TEAM_PREFIX}${playerId}`,
+				id: `${TeamsService.PLAYER_TEAM_PREFIX}${playerId}`,
 				name: player.name,
 				description: `Individual team for ${player.name}`,
 				memberIds: [playerId],
@@ -283,10 +283,12 @@ export class TeamsService implements Module {
 	 * @returns The Teachers team
 	 */
 	private generateTeachersTeam(): Team {
-		let team = this.storage.get(this.TEACHERS_TEAM_ID) as Team | undefined;
+		let team = this.storage.get(TeamsService.TEACHERS_TEAM_ID) as
+			| Team
+			| undefined;
 		if (!team) {
 			team = {
-				id: this.TEACHERS_TEAM_ID,
+				id: TeamsService.TEACHERS_TEAM_ID,
 				name: "Teachers",
 				description: "All teacher players (manually assigned)",
 				memberIds: [],
@@ -296,7 +298,7 @@ export class TeamsService implements Module {
 				minimumMembers: 1, // At least one teacher required
 				host_auto_assign: true, // Auto-assign teachers when they join
 			};
-			this.storage.set(this.TEACHERS_TEAM_ID, team);
+			this.storage.set(TeamsService.TEACHERS_TEAM_ID, team);
 		}
 		return team;
 	}
@@ -307,12 +309,13 @@ export class TeamsService implements Module {
 	 */
 	private generateStudentsTeam(): Team {
 		const onlinePlayers = world.getAllPlayers();
-		const teachers = this.getTeam(this.TEACHERS_TEAM_ID)?.memberIds || [];
+		const teachers =
+			this.getTeam(TeamsService.TEACHERS_TEAM_ID)?.memberIds || [];
 		const studentIds = onlinePlayers
 			.map((player) => player.id)
 			.filter((id) => !teachers.includes(id));
 		return {
-			id: this.STUDENTS_TEAM_ID,
+			id: TeamsService.STUDENTS_TEAM_ID,
 			name: "Students",
 			description: "All online players not in Teachers team",
 			memberIds: studentIds,
@@ -374,15 +377,15 @@ export class TeamsService implements Module {
 	 */
 	public isSystemTeam(teamId: string): boolean {
 		return (
-			teamId === this.ALL_PLAYERS_TEAM_ID ||
-			teamId === this.TEACHERS_TEAM_ID ||
-			teamId === this.STUDENTS_TEAM_ID ||
-			teamId.startsWith(this.PLAYER_TEAM_PREFIX)
+			teamId === TeamsService.ALL_PLAYERS_TEAM_ID ||
+			teamId === TeamsService.TEACHERS_TEAM_ID ||
+			teamId === TeamsService.STUDENTS_TEAM_ID ||
+			teamId.startsWith(TeamsService.PLAYER_TEAM_PREFIX)
 		);
 	}
 
 	public isPlayerTeam(teamId: string): boolean {
-		return teamId.startsWith(this.PLAYER_TEAM_PREFIX);
+		return teamId.startsWith(TeamsService.PLAYER_TEAM_PREFIX);
 	}
 
 	/**
