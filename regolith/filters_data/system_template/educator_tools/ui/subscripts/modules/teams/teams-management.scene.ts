@@ -15,7 +15,7 @@ export class TeamsManagementScene extends ActionUIScene {
 		this.addButton(
 			"edu_tools.ui.teams_management.buttons.create_team",
 			(): void => {
-				sceneManager.openSceneWithContext(context, "edit_team", true);
+				sceneManager.openSceneWithContext(context, "teams_edit", true);
 			},
 			"textures/edu_tools/ui/icons/teams/create_team",
 		);
@@ -23,7 +23,7 @@ export class TeamsManagementScene extends ActionUIScene {
 		this.addButton(
 			"edu_tools.ui.teams_management.buttons.edit_team",
 			(): void => {
-				context.setNextScene("edit_team");
+				context.setNextScene("teams_edit");
 				context.setSubjectTeamRequired(true);
 				context.setData("team_filter", (team: Team): boolean => {
 					return !!team.editable;
@@ -36,7 +36,7 @@ export class TeamsManagementScene extends ActionUIScene {
 		this.addButton(
 			"edu_tools.ui.teams_management.buttons.delete_team",
 			(): void => {
-				context.setNextScene("delete_team");
+				context.setNextScene("team_delete");
 				context.setSubjectTeamRequired(true);
 				context.setData("team_filter", (team: Team): boolean => {
 					return !!team.editable && !team.isSystem;
@@ -50,6 +50,7 @@ export class TeamsManagementScene extends ActionUIScene {
 			"edu_tools.ui.teams_management.buttons.manage_players",
 			(): void => {
 				context.setNextScene("manage_players");
+				context.setSubjectTeamRequired(true);
 				context.setData("team_filter", (team: Team): boolean => {
 					return !!team.editable;
 				});

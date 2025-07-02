@@ -5,6 +5,10 @@ import { Team, TeamsData } from "./interfaces/team.interface";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { TeamSelectScene } from "./team-select.scene";
 import { SceneContext } from "../scene_manager/scene-context";
+import { TeamsDeleteScene } from "./team-delete.scene";
+import { TeamsEditScene } from "./teams-edit.scene";
+import { TeamsManagementScene } from "./teams-management.scene";
+import { ButtonConfig } from "../main/main.service";
 
 /**
  * Service for managing player teams.
@@ -19,6 +23,14 @@ export class TeamsService implements Module {
 	public static readonly TEACHERS_TEAM_ID = "system_teachers";
 	public static readonly STUDENTS_TEAM_ID = "system_students";
 
+	public static readonly availableIcons = [
+		"star",
+		"heart",
+		"diamond",
+		"circle",
+		"square",
+	];
+
 	constructor(storage: PropertyStorage) {
 		this.storage = storage.getSubStorage(TeamsService.id);
 	}
@@ -31,6 +43,38 @@ export class TeamsService implements Module {
 				new TeamSelectScene(manager, context);
 			},
 		);
+		sceneManager.registerScene(
+			TeamsManagementScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsManagementScene(manager, context);
+			},
+		);
+		sceneManager.registerScene(
+			TeamsEditScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsEditScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			TeamsDeleteScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsDeleteScene(manager, context, this);
+			},
+		);
+	}
+
+	getMainButton(): ButtonConfig {
+		return {
+			labelKey: "edu_tools.ui.main.buttons.teams_management",
+			iconPath: "textures/edu_tools/ui/icons/main/teams_management",
+			handler: (sceneManager: SceneManager, context: SceneContext) => {
+				sceneManager.openSceneWithContext(context, "teams_management", true);
+			},
+			weight: 150,
+		};
 	}
 
 	initialize(): void {
