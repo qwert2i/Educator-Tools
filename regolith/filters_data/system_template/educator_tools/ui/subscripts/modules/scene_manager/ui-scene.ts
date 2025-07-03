@@ -303,7 +303,7 @@ export class ModalUIScene {
 	 */
 	addDropdown(
 		label: string,
-		options: string[],
+		options: (string | RawMessage)[],
 		handler: (value: any) => void,
 		defaultIndex?: number,
 	): void {

@@ -1,125 +1,387 @@
+import { CachedStorage, PropertyStorage } from "@shapescape/storage";
 import { Module } from "../../module-manager";
-import { SceneManager } from "../scene_manager/scene-manager";
-import { SceneContext } from "../scene_manager/scene-context";
-import { Player, Dimension, Vector3 } from "@minecraft/server";
-import { Timer } from "./timer.mechanic";
-import { TimerScene } from "./timer.scene";
-import { EditTimerScene } from "./edit-timer.scene";
+import {
+	Entity,
+	EntityHealthComponent,
+	Player,
+	system,
+	world,
+} from "@minecraft/server";
+import { TimerMechanic } from "./timer.mechanic";
+import { Vec3 } from "@bedrock-oss/bedrock-boost";
 
 /**
- * Service for managing timers.
- * This service allows creating, editing, and controlling timers.
+ * Represents a timer configuration and state
+ */
+export interface Timer {
+	/** The duration of the timer in seconds */
+	duration: TimerDuration;
+	/** Whether the timer has been started at least once */
+	started: boolean;
+	/** Whether the timer is currently paused */
+	isPaused: boolean;
+	/** Game tick when the timer was started */
+	startedAt: number;
+	/** Game tick when the timer was paused (0 if not paused) */
+	pausedAt: number;
+	/** Total duration the timer has been paused (in ticks) */
+	pauseDuration: number;
+	/** Optional entity ID for the visual timer entity */
+	entityId?: string;
+	/** Whether the timer entity is currently visible */
+	entityShown?: boolean;
+}
+
+/**
+ * Predefined timer duration options in seconds
+ */
+export enum TimerDuration {
+	SEC_30 = 30,
+	MIN_1 = 60,
+	MIN_2 = 120,
+	MIN_3 = 180,
+	MIN_5 = 300,
+	MIN_10 = 600,
+	MIN_15 = 900,
+	MIN_30 = 1800,
+	MIN_45 = 2700,
+	MIN_60 = 3600,
+	MIN_90 = 5400,
+}
+
+/**
+ * Service class for managing timer functionality
+ * Handles timer state, persistence, and visual representation
  */
 export class TimerService implements Module {
 	public static readonly id = "timer";
-	private timer: Timer | null = null;
-	private hideTimerEntity: boolean = false;
+	public readonly id = TimerService.id;
+	private timerMechanic: TimerMechanic;
 
-	constructor() {}
+	/** Storage instance for persisting timer data */
+	private readonly storage: PropertyStorage;
 
-	/**
-	 * Registers scenes related to timer management.
-	 * @param sceneManager - The scene manager
-	 */
-	registerScenes(sceneManager: SceneManager): void {
-		sceneManager.registerScene(
-			"timer",
-			(manager: SceneManager, context: SceneContext) => {
-				new TimerScene(manager, context);
-			},
-		);
+	constructor() {
+		this.storage = new CachedStorage(world, "timer");
+	}
 
-		sceneManager.registerScene(
-			"edit_timer",
-			(manager: SceneManager, context: SceneContext) => {
-				new EditTimerScene(manager, context);
-			},
-		);
+	initialize(): void {
+		// Initialize the timer mechanic to handle periodic updates
+		this.timerMechanic = new TimerMechanic(this);
 	}
 
 	/**
-	 * Gets the current timer.
-	 * @returns The current timer or null if no timer is set
+	 * Updates specific properties of the current timer
+	 * @param timer Partial timer object with properties to update
 	 */
-	getTimer(): Timer | null {
-		return this.timer;
+	updateTimer(timer: Partial<Timer>): void {
+		const existingTimer = this.getTimer();
+		if (!existingTimer) {
+			console.warn("[TimerService] No existing timer found to update.");
+			return;
+		}
+
+		const updatedTimer: Timer = {
+			...existingTimer,
+			...timer,
+		};
+
+		this.saveTimer(updatedTimer);
 	}
 
-	/**
-	 * Sets a new timer.
-	 * @param timer - The timer to set
-	 */
-	setTimer(timer: Timer): void {
-		this.timer = timer;
-	}
-
-	/**
-	 * Clears the current timer.
-	 */
-	clearTimer(): void {
-		this.timer = null;
-	}
-
-	/**
-	 * Checks if the timer entity is hidden.
-	 * @returns True if the timer entity is hidden, false otherwise
-	 */
-	getHideTimerEntity(): boolean {
-		return this.hideTimerEntity;
-	}
-
-	/**
-	 * Toggles the visibility of the timer entity.
-	 * @returns The new hide state
-	 */
-	toggleHideTimerEntity(): boolean {
-		this.hideTimerEntity = !this.hideTimerEntity;
-
-		// If we have a timer, update its entity visibility
-		if (this.timer) {
-			if (this.hideTimerEntity) {
-				this.timer.getTimerEntity().triggerEvent("edu_tools:hide_timer");
-			} else {
-				this.timer.getTimerEntity().triggerEvent("edu_tools:show_timer");
+	newTimer(timer: Partial<Timer>, player?: Player): Timer {
+		const newTimer: Timer = {
+			duration: TimerDuration.MIN_1, // Default to 1 minute if not specified
+			started: false,
+			isPaused: false,
+			startedAt: 0,
+			pausedAt: 0,
+			pauseDuration: 0,
+			entityId: undefined,
+			entityShown: false,
+			...timer, // Merge with provided properties
+		};
+		if (!timer.entityId) {
+			const entity = this.summonEntityAtPlayer(
+				player || world.getAllPlayers()[0],
+			);
+			if (entity) {
+				newTimer.entityId = entity.id;
 			}
 		}
-
-		return this.hideTimerEntity;
+		this.saveTimer(newTimer);
+		this.updateTimerEntity(); // Ensure the entity is updated with the new timer state
+		return newTimer;
 	}
 
 	/**
-	 * Creates a new timer.
-	 * @param seconds - The duration of the timer in seconds
-	 * @param player - The player who created the timer
-	 * @param location - Optional location and dimension to spawn the timer
-	 * @returns The created timer
+	 * Persists timer data to storage and updates cache
+	 * @param timer Timer object to save
 	 */
-	createTimer(
-		seconds: number,
-		player: Player,
-		location?: [location: Vector3, dimension: Dimension],
-	): Timer {
-		// If there's an existing timer, despawn it
-		if (this.timer) {
-			this.timer.despawnTimer();
-		}
+	saveTimer(timer: Timer): void {
+		this.storage.set("timer", timer);
+	}
 
-		// Create a new timer
-		const timer = new Timer(seconds, player, this, undefined, location);
-		this.setTimer(timer);
+	/**
+	 * Retrieves the current timer from cache or storage
+	 * @returns Current timer or undefined if no timer exists
+	 */
+	getTimer(): Timer | undefined {
+		return this.storage.get("timer") as Timer | undefined;
+	}
+
+	/**
+	 * Removes the timer from storage and clears cache
+	 */
+	clearTimer(): void {
+		this.storage.drop("timer");
+		this.removeEntity(); // Remove the visual entity if it exists
+	}
+
+	summonEntityAtPlayer(player: Entity): Entity | undefined {
+		this.removeEntity(); // Remove any existing entity first
+		const entity = player.dimension.spawnEntity(
+			"edu_tools:timer",
+			player.location,
+		);
+		if (entity) {
+			const timer = this.getTimer();
+			if (timer) {
+				timer.entityId = entity.id; // Store the entity ID in the timer
+				this.saveTimer(timer);
+			}
+
+			this.updateTimerEntity(); // Update the entity with current timer state
+			entity.triggerEvent("edu_tools:show_timer"); // Trigger event to show the timer
+			return entity;
+		}
+	}
+
+	removeEntity(): void {
+		const entity = this.getEntity();
+		if (entity) {
+			entity.remove(); // Remove the visual entity if it exists
+		}
+	}
+
+	/**
+	 * Creates a new timer with the specified duration
+	 * @param duration Timer duration in seconds
+	 * @returns The newly created timer
+	 */
+	resetTimer(duration: TimerDuration): Timer {
+		const timer: Timer = {
+			duration,
+			started: false,
+			isPaused: false,
+			startedAt: 0,
+			pausedAt: 0,
+			pauseDuration: 0,
+			entityId: undefined,
+			entityShown: false,
+		};
+
+		this.saveTimer(timer);
 		return timer;
 	}
 
 	/**
-	 * Resets the timer.
-	 * @param seconds - The new duration of the timer in seconds
-	 * @returns The reset timer or null if no timer exists
+	 * Pauses the currently running timer
+	 * Only works if timer is running and not already paused
 	 */
-	resetTimer(seconds: number): Timer | null {
-		if (this.timer) {
-			this.timer.resetTimer(seconds);
-			return this.timer;
+	pauseTimer(): void {
+		const timer = this.getTimer();
+
+		// Validate timer state before pausing
+		if (!timer || !this.isTimerRunning()) {
+			console.warn("[TimerService] Cannot pause timer - invalid state");
+			return;
 		}
-		return null;
+
+		this.updateTimer({
+			isPaused: true,
+			pausedAt: system.currentTick,
+		});
+	}
+
+	/**
+	 * Resumes a paused timer
+	 * Only works if timer is currently paused
+	 */
+	resumeTimer(): void {
+		const timer = this.getTimer();
+
+		// Validate timer state before resuming
+		if (!timer || !timer.isPaused) {
+			console.warn("[TimerService] Cannot resume timer - not paused");
+			return;
+		}
+
+		// Calculate how long the timer was paused
+		const pauseTime = system.currentTick - timer.pausedAt;
+
+		this.updateTimer({
+			isPaused: false,
+			pausedAt: 0,
+			pauseDuration: timer.pauseDuration + pauseTime,
+		});
+	}
+
+	/**
+	 * Calculates the remaining time in ticks for the current timer
+	 * Takes into account pause duration for accurate calculation
+	 * @returns Remaining time in ticks (0 if timer expired or doesn't exist)
+	 */
+	getRemainingTime(): number {
+		const timer = this.getTimer();
+		if (!timer || !timer.started) {
+			return 0;
+		}
+
+		let elapsed: number;
+
+		if (timer.isPaused) {
+			// Calculate elapsed time up to when it was paused
+			elapsed = timer.pausedAt - timer.startedAt - timer.pauseDuration;
+		} else {
+			// Calculate current elapsed time (excluding pause duration)
+			elapsed = system.currentTick - timer.startedAt - timer.pauseDuration;
+		}
+
+		const totalDurationTicks = timer.duration * 20; // Convert seconds to ticks
+		const remaining = totalDurationTicks - elapsed;
+
+		return Math.max(0, remaining);
+	}
+
+	/**
+	 * Gets the timer's visual entity from the world
+	 * @returns Entity instance or undefined if not found
+	 */
+	getEntity(): Entity | undefined {
+		const timer = this.getTimer();
+		if (!timer?.entityId) {
+			return undefined;
+		}
+
+		try {
+			return world.getEntity(timer.entityId);
+		} catch (error) {
+			console.warn("[TimerService] Failed to get timer entity:", error);
+			return undefined;
+		}
+	}
+
+	isTimerRunning(): boolean {
+		const timer = this.getTimer();
+		return !!timer && timer.started && !timer.isPaused;
+	}
+
+	startTimer(): void {
+		const timer = this.getTimer();
+		if (!timer) {
+			console.warn("[TimerService] No timer found to start.");
+			return;
+		}
+		if (timer.started) {
+			console.warn("[TimerService] Timer is already running.");
+			return;
+		}
+		// Set the started state and current tick as the start time
+		this.updateTimer({
+			started: true,
+			startedAt: system.currentTick,
+			isPaused: false,
+			pausedAt: 0,
+			pauseDuration: 0,
+		});
+		this.updateTimerEntity(); // Update the entity to reflect the new timer state
+	}
+
+	/**
+	 * Updates the visual representation of the timer entity
+	 * Shows countdown time and updates health bar to represent progress
+	 */
+	updateTimerEntity(): void {
+		const timer = this.getTimer();
+		if (!timer) return;
+
+		const entity = this.getEntity();
+		if (!entity) return;
+
+		const isRunning = this.isTimerRunning();
+
+		// Show blinking display when timer is not running or is paused
+		if (!isRunning) {
+			const shouldShow = Math.floor(system.currentTick / 20) % 2 === 0;
+			entity.nameTag = shouldShow
+				? this.formatTime(this.getRemainingTime())
+				: "--:--:--";
+			return;
+		}
+
+		const remainingTime = this.getRemainingTime();
+
+		// Timer expired - clear it
+		if (remainingTime <= 0) {
+			this.clearTimer();
+			return;
+		}
+
+		// Update display with remaining time
+		entity.nameTag = this.formatTime(remainingTime);
+
+		// Update health bar to show progress
+		this.updateEntityHealth(entity, remainingTime, timer.duration * 20);
+
+		if (!timer.entityShown) {
+			const player = world.getAllPlayers()[0]; // Get the first player
+			if (player) {
+				entity.teleport(Vec3.from(player.location).add(0, 1000, 0)); // Position above the player
+			}
+		}
+	}
+
+	/**
+	 * Formats time in ticks to HH:MM:SS string
+	 * @param ticks Time in game ticks
+	 * @returns Formatted time string
+	 */
+	private formatTime(ticks: number): string {
+		const seconds = Math.floor(ticks / 20);
+		const minutes = Math.floor(seconds / 60);
+		const hours = Math.floor(minutes / 60);
+
+		return `${hours}:${(minutes % 60).toString().padStart(2, "0")}:${(
+			seconds % 60
+		)
+			.toString()
+			.padStart(2, "0")}`;
+	}
+
+	/**
+	 * Updates the entity's health component to represent timer progress
+	 * @param entity The timer entity
+	 * @param remainingTime Remaining time in ticks
+	 * @param totalTime Total timer duration in ticks
+	 */
+	private updateEntityHealth(
+		entity: Entity,
+		remainingTime: number,
+		totalTime: number,
+	): void {
+		try {
+			const healthComponent = entity.getComponent(
+				EntityHealthComponent.componentId,
+			) as EntityHealthComponent;
+
+			if (healthComponent) {
+				const maxHealth = healthComponent.effectiveMax;
+				const proportionalHealth = (remainingTime / totalTime) * maxHealth;
+				healthComponent.setCurrentValue(Math.max(1, proportionalHealth)); // Ensure minimum 1 health
+			}
+		} catch (error) {
+			console.warn("[TimerService] Failed to update entity health:", error);
+		}
 	}
 }
