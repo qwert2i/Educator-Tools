@@ -11,9 +11,9 @@ import { TimerMechanic } from "./timer.mechanic";
 import { Vec3 } from "@bedrock-oss/bedrock-boost";
 import { SceneContext } from "../scene_manager/scene-context";
 import { SceneManager } from "../scene_manager/scene-manager";
-import { EditTimerScene } from "../timer_tmp/edit-timer.scene";
 import { TimerScene } from "./timer.scene";
 import { ButtonConfig } from "../main/main.service";
+import { TimerEditScene } from "./timer-edit.scene";
 
 /**
  * Represents a timer configuration and state
@@ -89,7 +89,7 @@ export class TimerService implements Module {
 		sceneManager.registerScene(
 			"edit_timer",
 			(manager: SceneManager, context: SceneContext) => {
-				new EditTimerScene(manager, context);
+				new TimerEditScene(manager, context, this);
 			},
 		);
 	}
