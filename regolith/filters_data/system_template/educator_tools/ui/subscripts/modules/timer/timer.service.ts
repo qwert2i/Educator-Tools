@@ -9,6 +9,11 @@ import {
 } from "@minecraft/server";
 import { TimerMechanic } from "./timer.mechanic";
 import { Vec3 } from "@bedrock-oss/bedrock-boost";
+import { SceneContext } from "../scene_manager/scene-context";
+import { SceneManager } from "../scene_manager/scene-manager";
+import { EditTimerScene } from "../timer_tmp/edit-timer.scene";
+import { TimerScene } from "./timer.scene";
+import { ButtonConfig } from "../main/main.service";
 
 /**
  * Represents a timer configuration and state
@@ -68,6 +73,40 @@ export class TimerService implements Module {
 	initialize(): void {
 		// Initialize the timer mechanic to handle periodic updates
 		this.timerMechanic = new TimerMechanic(this);
+	}
+
+	/**
+	 * Registers scenes related to timer management
+	 * @param sceneManager Scene manager instance to register scenes with
+	 */
+	registerScenes(sceneManager: SceneManager): void {
+		sceneManager.registerScene(
+			"timer",
+			(manager: SceneManager, context: SceneContext) => {
+				new TimerScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			"edit_timer",
+			(manager: SceneManager, context: SceneContext) => {
+				new EditTimerScene(manager, context);
+			},
+		);
+	}
+
+	/**
+	 * Gets the main button configuration for the timer module
+	 * @returns Button configuration for the main menu
+	 */
+	getMainButton(): ButtonConfig {
+		return {
+			labelKey: "edu_tools.ui.main.buttons.timer",
+			iconPath: "textures/edu_tools/ui/icons/main/timer",
+			handler: (sceneManager: SceneManager, context: SceneContext) => {
+				sceneManager.openSceneWithContext(context, "timer", true);
+			},
+			weight: 100,
+		};
 	}
 
 	/**
