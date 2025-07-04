@@ -57,6 +57,13 @@ export class ManageHealthScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/manage_health/clear_effects",
 		);
 		this.addButton(
+			"edu_tools.ui.manage_health.buttons.reset",
+			(): void => {
+				this.manageHealthService.resetProperties(subjectTeam);
+			},
+			"textures/edu_tools/ui/icons/manage_health/reset",
+		);
+		this.addButton(
 			"edu_tools.ui.manage_health.buttons.settings",
 			(): void => {
 				// Open the settings scene for managing health properties

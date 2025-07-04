@@ -114,6 +114,26 @@ export class ManageHealthService implements Module {
 		return properties;
 	}
 
+	resetProperties(team: Team): void {
+		if (!team) return;
+		// For each member ID in the team
+		team.memberIds.forEach((playerId) => {
+			const player = world.getEntity(playerId) as Player | undefined;
+			// Skip if player is not found
+			if (!player) {
+				return;
+			}
+			// Reset health properties for the player
+			this.setPlayerHealthProperties(player, {
+				health: true,
+				hunger: true,
+				effect_immunity: false,
+			});
+			// Cure the player
+			this.curePlayer(player);
+		});
+	}
+
 	/**
 	 * Cures a team by applying health properties to all members.
 	 * @param team - The team to cure
