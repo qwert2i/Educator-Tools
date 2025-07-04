@@ -44,7 +44,7 @@ export class LockPlayerScene extends ActionUIScene {
 		this.addButton(
 			"edu_tools.ui.lock_player.buttons.view_teams",
 			(): void => {
-				context.setNextScene("lock_player_team");
+				context.setNextScene("lock_player_team_settings");
 				context.setSubjectTeamRequired(true);
 				context.setData("team_filter", (team: Team): boolean => {
 					return !!lockPlayerService.getLockSettings(team.id);

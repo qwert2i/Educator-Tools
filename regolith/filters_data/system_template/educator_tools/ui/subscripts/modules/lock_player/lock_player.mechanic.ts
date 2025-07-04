@@ -204,20 +204,24 @@ export class LockPlayerMechanic {
 				rotation: player.getRotation(),
 			});
 
-			player.sendMessage([
-				{
-					translate: "edu_tools.message.too_far_teleport_center",
-				},
-			]);
+			if (lockSettings.showLockMessage) {
+				player.sendMessage([
+					{
+						translate: "edu_tools.message.too_far_teleport_center",
+					},
+				]);
+			}
 		} else {
 			// Teleport to edge of allowed area
 			this.teleportToAreaEdge(player, center, lockSettings.radius, distance);
 
-			player.sendMessage([
-				{
-					translate: "edu_tools.message.too_far_teleport_area",
-				},
-			]);
+			if (lockSettings.showLockMessage) {
+				player.sendMessage([
+					{
+						translate: "edu_tools.message.too_far_teleport_area",
+					},
+				]);
+			}
 		}
 
 		// Play teleportation sound effect

@@ -86,17 +86,30 @@ export class LockPlayerService implements Module {
 			.includes(TeamsService.TEACHERS_TEAM_ID);
 	}
 
-	/**
-	 * Checks if a player is a teacher (exempt from lock restrictions).
-	 * @param playerId - The player ID to check
-	 * @returns True if the player is a teacher
-	 */
-	private isPlayerTeacher(playerId: string): boolean {
-		const playerTeams = this.teamsService.getPlayerTeams(playerId);
-		return playerTeams
-			.map((team) => team.id)
-			.includes(TeamsService.TEACHERS_TEAM_ID);
+	teleportToCenter(teamId: string): void {
+		const settings = this.getLockSettings(teamId);
+		if (!settings) {
+			return;
+		}
+
+		const team = this.teamsService.getTeam(teamId);
+		if (!team || team.memberIds.length === 0) {
+			return;
+		}
+
+		for (const memberId of team.memberIds) {
+			const player = world.getEntity(memberId) as Player;
+			if (player && !this.isPlayerExempted(player.id)) {
+				player.teleport(settings.center);
+				if (settings.showLockMessage) {
+					player.sendMessage({
+						translate: "edu_tools.ui.lock_player.teleported_to_center",
+					});
+				}
+			}
+		}
 	}
+
 	/**     * Returns the main button configuration for the lock player module.
 	 * @returns ButtonConfig for the main button
 	 * */
