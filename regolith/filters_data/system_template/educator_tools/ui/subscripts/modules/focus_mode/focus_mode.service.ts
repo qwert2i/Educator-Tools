@@ -167,9 +167,9 @@ export class FocusModeService implements Module {
 			}
 		}
 		player.onScreenDisplay.setTitle("edu_tools.ui.focus_mode.title", {
-			stayDuration: 3,
+			stayDuration: 60,
 			fadeInDuration: 0,
-			fadeOutDuration: 0.5,
+			fadeOutDuration: 10,
 		});
 	}
 
