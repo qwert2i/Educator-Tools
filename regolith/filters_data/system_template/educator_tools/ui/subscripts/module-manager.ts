@@ -14,6 +14,7 @@ import { FocusModeService } from "./modules/focus_mode/focus_mode.service";
 import { InventoryManageService } from "./modules/inventory_manage/inventory-manage.service";
 import { EnvironmentService } from "./modules/environment/environment.service";
 import { LockPlayerService } from "./modules/lock_player/lock_player.service";
+import { TimerService } from "./modules/timer/timer.service";
 
 /**
  * Interface that all modules must implement.
@@ -76,7 +77,7 @@ export class ModuleManager {
 		const playerStatusService = new PlayerStatusService();
 		const environmentService = new EnvironmentService();
 		const lockPlayerService = new LockPlayerService(this);
-		const timerService = new ItemService(this);
+		const timerService = new TimerService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
