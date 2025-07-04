@@ -13,7 +13,7 @@ import { PlayerStatusService } from "./modules/player_status/player_status.servi
 import { FocusModeService } from "./modules/focus_mode/focus_mode.service";
 import { InventoryManageService } from "./modules/inventory_manage/inventory-manage.service";
 import { EnvironmentService } from "./modules/environment/environment.service";
-import { LockPlayerService } from "./modules/lock-player/lock_player.service";
+import { LockPlayerService } from "./modules/lock_player/lock_player.service";
 
 /**
  * Interface that all modules must implement.
