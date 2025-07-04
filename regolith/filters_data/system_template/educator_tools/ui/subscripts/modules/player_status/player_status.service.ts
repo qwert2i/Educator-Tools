@@ -19,12 +19,12 @@ export class PlayerStatusService implements Module {
 			player,
 			"player_input_permissions",
 		);
-		for (const permission of Object.values(InputPermissionCategory)) {
+		for (const permission of Object.values(InputPermissionCategory).filter(
+			(value) => typeof value !== "string",
+		)) {
 			playerStorage.set(
 				permission.toString(),
-				player.inputPermissions.isPermissionCategoryEnabled(
-					InputPermissionCategory[permission],
-				),
+				player.inputPermissions.isPermissionCategoryEnabled(permission),
 			);
 		}
 		playerStorage.set("has_input_permissions", true);
@@ -38,12 +38,12 @@ export class PlayerStatusService implements Module {
 
 	savePlayerHudElements(player: Player) {
 		const playerStorage = new PropertyStorage(player, "player_hud_elements");
-		for (const hudElement of Object.values(HudElement)) {
+		for (const hudElement of Object.values(HudElement).filter(
+			(value) => typeof value !== "string",
+		)) {
 			playerStorage.set(
 				`hud_${hudElement.toString()}`,
-				player.onScreenDisplay
-					.getHiddenHudElements()
-					.includes(HudElement[hudElement]),
+				player.onScreenDisplay.getHiddenHudElements().includes(hudElement),
 			);
 		}
 		playerStorage.set("has_hud_elements", true);
@@ -86,11 +86,10 @@ export class PlayerStatusService implements Module {
 	}
 
 	setAllInputPermissions(player: Player, enabled: boolean): void {
-		for (const permission of Object.values(InputPermissionCategory)) {
-			player.inputPermissions.setPermissionCategory(
-				InputPermissionCategory[permission],
-				enabled,
-			);
+		for (const permission of Object.values(InputPermissionCategory).filter(
+			(value) => typeof value !== "string",
+		)) {
+			player.inputPermissions.setPermissionCategory(permission, enabled);
 		}
 	}
 
@@ -100,12 +99,11 @@ export class PlayerStatusService implements Module {
 			"player_input_permissions",
 		);
 		if (this.hasInputPermissionsSaved(player)) {
-			for (const permission of Object.values(InputPermissionCategory)) {
+			for (const permission of Object.values(InputPermissionCategory).filter(
+				(value) => typeof value !== "string",
+			)) {
 				const isEnabled = playerStorage.get(permission.toString(), false);
-				player.inputPermissions.setPermissionCategory(
-					InputPermissionCategory[permission],
-					isEnabled,
-				);
+				player.inputPermissions.setPermissionCategory(permission, isEnabled);
 			}
 		}
 	}
@@ -113,7 +111,7 @@ export class PlayerStatusService implements Module {
 	restorePlayerGameMode(player: Player): void {
 		const playerStorage = new PropertyStorage(player, "player_gamemode");
 		if (this.hasGameModeSaved(player)) {
-			const gamemode = playerStorage.get("gamemode", true, GameMode.survival);
+			const gamemode = playerStorage.get("gamemode", true, GameMode.Survival);
 			player.setGameMode(gamemode);
 		}
 	}
@@ -121,14 +119,16 @@ export class PlayerStatusService implements Module {
 	restorePlayerHudElements(player: Player): void {
 		const playerStorage = new PropertyStorage(player, "player_hud_elements");
 		if (this.hasHudElementsSaved(player)) {
-			for (const hudElement of Object.values(HudElement)) {
+			for (const hudElement of Object.values(HudElement).filter(
+				(value) => typeof value !== "string",
+			)) {
 				const isVisible = playerStorage.get(
 					`hud_${hudElement.toString()}`,
 					true,
 				);
 				player.onScreenDisplay.setHudVisibility(
 					isVisible ? HudVisibility.Reset : HudVisibility.Hide,
-					HudElement[hudElement],
+					[hudElement],
 				);
 			}
 		}
