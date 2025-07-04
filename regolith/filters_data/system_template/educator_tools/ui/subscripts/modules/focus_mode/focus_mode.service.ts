@@ -143,7 +143,7 @@ export class FocusModeService implements Module {
 		if (this.playerStatusService.hasGameModeSaved(player)) {
 			this.playerStatusService.savePlayerGameMode(player);
 		}
-		player.setGameMode(GameMode.spectator);
+		player.setGameMode(GameMode.Spectator);
 		if (!this.playerStatusService.hasInputPermissionsSaved(player)) {
 			this.playerStatusService.savePlayerInputPermissions(player);
 		}
