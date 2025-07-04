@@ -76,6 +76,7 @@ export class ModuleManager {
 		const playerStatusService = new PlayerStatusService();
 		const environmentService = new EnvironmentService();
 		const lockPlayerService = new LockPlayerService(this);
+		const timerService = new ItemService(this);
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -97,6 +98,7 @@ export class ModuleManager {
 		this.registerModule(playerStatusService);
 		this.registerModule(environmentService);
 		this.registerModule(lockPlayerService);
+		this.registerModule(timerService);
 
 		// Initialize all modules
 		this.initializeModules();
