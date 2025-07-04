@@ -31,16 +31,6 @@ export class EnvironmentService implements Module {
 			},
 		);
 	}
-	getMainButton(): any {
-		return {
-			labelKey: "edu_tools.ui.main.buttons.environment",
-			iconPath: "textures/edu_tools/ui/icons/main/environment",
-			handler: (sceneManager: any, context: any) => {
-				sceneManager.openSceneWithContext(context, "environment", true);
-			},
-			weight: 200,
-		};
-	}
 
 	setWeather(weatherType: WeatherType): void {
 		world.getDimension("overworld").setWeather(weatherType);

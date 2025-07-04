@@ -1,5 +1,5 @@
 import { PropertyStorage, CachedStorage } from "@shapescape/storage";
-import { world } from "@minecraft/server";
+import { World, world } from "@minecraft/server";
 import { TeamsService } from "./modules/teams/teams.service";
 import { WorldSettingsService } from "./modules/world_settings/world-settings.service";
 import { SceneManager } from "./modules/scene_manager/scene-manager";
@@ -15,6 +15,7 @@ import { InventoryManageService } from "./modules/inventory_manage/inventory-man
 import { EnvironmentService } from "./modules/environment/environment.service";
 import { LockPlayerService } from "./modules/lock_player/lock_player.service";
 import { TimerService } from "./modules/timer/timer.service";
+import { WorldManagementService } from "./modules/world_management/world_management.service";
 
 /**
  * Interface that all modules must implement.
@@ -78,6 +79,7 @@ export class ModuleManager {
 		const environmentService = new EnvironmentService();
 		const lockPlayerService = new LockPlayerService(this);
 		const timerService = new TimerService();
+		const worldManagementService = new WorldManagementService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -100,6 +102,7 @@ export class ModuleManager {
 		this.registerModule(environmentService);
 		this.registerModule(lockPlayerService);
 		this.registerModule(timerService);
+		this.registerModule(worldManagementService);
 
 		// Initialize all modules
 		this.initializeModules();
