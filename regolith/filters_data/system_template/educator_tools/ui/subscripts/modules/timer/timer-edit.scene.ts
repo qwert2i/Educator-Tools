@@ -107,8 +107,10 @@ export class TimerEditScene extends ModalUIScene {
 			timer ? !!timer.entityShown : true,
 		);
 
-		this.show(context.getSourcePlayer(), sceneManager).then(() => {
-			this.applyChanges(context);
+		this.show(context.getSourcePlayer(), sceneManager).then((r) => {
+			if (!r.canceled) {
+				this.applyChanges(context);
+			}
 		});
 	}
 
