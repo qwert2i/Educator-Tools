@@ -1,4 +1,4 @@
-import { RawMessage } from "@minecraft/server";
+import { RawMessage, world } from "@minecraft/server";
 import { SceneContext } from "../scene_manager/scene-context";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { ModalUIScene, RawBodyElement } from "../scene_manager/ui-scene";
@@ -17,79 +17,86 @@ export class TimerEditScene extends ModalUIScene {
 		this.setContext(context);
 		const timer = timerService.getTimer();
 
-		const times = Object.values(TimerDuration).map((duration) => {
-			if (typeof duration !== "number") {
-				return duration; // Skip non-numeric values
-			}
-			const hours = Math.floor(duration / 3600);
-			const minutes = Math.floor((duration % 3600) / 60);
-			const seconds = duration % 60;
+		const times = Object.values(TimerDuration)
+			.filter((value): value is number => typeof value === "number")
+			.map((durationValue) => {
+				const hours = Math.floor(durationValue / 3600);
+				const minutes = Math.floor((durationValue % 3600) / 60);
+				const seconds = durationValue % 60;
 
-			const stringBuilder: RawBodyElement[] = [];
+				const stringBuilder: RawBodyElement[] = [];
 
-			if (hours > 0) {
-				const stringBuilder: RawBodyElement[] = [
-					{
-						text: hours.toString().padStart(2, "0"),
-					},
-				];
-				if (hours > 1) {
+				if (hours > 0) {
 					stringBuilder.push({
-						translate: "edu_tools.ui.timer.time.hours",
+						text: hours.toString() + " ",
 					});
-				} else {
+					if (hours > 1) {
+						stringBuilder.push({
+							translate: "edu_tools.ui.timer.time.hours",
+						});
+					} else {
+						stringBuilder.push({
+							translate: "edu_tools.ui.timer.time.hour",
+						});
+					}
 					stringBuilder.push({
-						translate: "edu_tools.ui.timer.time.hour",
+						text: " ",
 					});
 				}
-			}
-			if (minutes > 0) {
-				const stringBuilder: RawBodyElement[] = [
-					{
-						text: minutes.toString().padStart(2, "0"),
-					},
-				];
-				if (minutes > 1) {
+				if (minutes > 0) {
 					stringBuilder.push({
-						translate: "edu_tools.ui.timer.time.minutes",
+						text: minutes.toString() + " ",
 					});
-				} else {
+					if (minutes > 1) {
+						stringBuilder.push({
+							translate: "edu_tools.ui.timer.time.minutes",
+						});
+					} else {
+						stringBuilder.push({
+							translate: "edu_tools.ui.timer.time.minute",
+						});
+					}
 					stringBuilder.push({
-						translate: "edu_tools.ui.timer.time.minute",
-					});
-				}
-			}
-			if (seconds > 0) {
-				const stringBuilder: RawBodyElement[] = [
-					{
-						text: seconds.toString().padStart(2, "0"),
-					},
-				];
-				if (seconds > 1) {
-					stringBuilder.push({
-						translate: "edu_tools.ui.timer.time.seconds",
-					});
-				} else {
-					stringBuilder.push({
-						translate: "edu_tools.ui.timer.time.second",
+						text: " ",
 					});
 				}
-			}
+				if (seconds > 0) {
+					stringBuilder.push({
+						text: seconds.toString() + " ",
+					});
+					if (seconds > 1) {
+						stringBuilder.push({
+							translate: "edu_tools.ui.timer.time.seconds",
+						});
+					} else {
+						stringBuilder.push({
+							translate: "edu_tools.ui.timer.time.second",
+						});
+					}
+				}
 
-			const rawMessage: RawMessage = {
-				rawtext: stringBuilder,
-			};
-			return rawMessage;
-		});
+				const rawMessage: RawMessage = {
+					rawtext: stringBuilder,
+				};
+				return rawMessage;
+			});
+
+		world.sendMessage(JSON.stringify(times));
 
 		this.addDropdown(
 			"edu_tools.ui.timer_edit.time",
 			times,
 			(selectedIndex: number): void => {
-				const selectedTime = Object.values(TimerDuration)[selectedIndex];
+				const selectedTime = Object.values(TimerDuration).filter(
+					(value): value is number => typeof value === "number",
+				)[selectedIndex];
 				context.setData("timer_duration", selectedTime);
 			},
-			timer ? Object.values(TimerDuration).indexOf(timer.duration) : 0,
+			timer
+				? Object.values(TimerDuration)
+						.filter((value): value is number => typeof value === "number")
+						.indexOf(timer.duration)
+				: 0,
 		);
 
 		this.addToggle(
