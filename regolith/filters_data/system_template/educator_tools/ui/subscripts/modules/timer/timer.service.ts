@@ -191,7 +191,6 @@ export class TimerService implements Module {
 			}
 
 			this.updateTimerEntity(); // Update the entity with current timer state
-			entity.triggerEvent("edu_tools:show_timer"); // Trigger event to show the timer
 			return entity;
 		}
 	}
