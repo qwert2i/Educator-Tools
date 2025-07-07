@@ -4,14 +4,16 @@ import { SceneManager } from "../scene_manager/scene-manager";
 import { Player, Vector3, world } from "@minecraft/server";
 import { AssignmentRepository } from "./assignment.repository";
 import { TeamsService } from "../teams/teams.service";
+import { AssignmentTeacherScene } from "./assignment-teacher.scene";
+import { AssignmentListTeacherScene } from "./assignment-list-teacher.scene";
+import { AssignmentManageScene } from "./assignment-manage.scene";
+import { AssignmentCreatedScene } from "./assignment-created.scene";
 
-export interface Assignment extends AssignmentData {
+export interface Assignment {
 	id: string;
-}
-
-export interface AssignmentData {
 	title: string;
 	description: string;
+	icon: string;
 	assignedTo: string; // Team ID
 }
 
@@ -42,9 +44,33 @@ export class AssignmentService implements Module {
 	registerScenes(sceneManager: SceneManager): void {
 		// Register scenes related to assignment management
 		sceneManager.registerScene(
-			"AssignmentScene",
+			"assugnment_teacher",
 			(manager: SceneManager, context: SceneContext) => {
-				//new AssignmentScene(manager, context);
+				new AssignmentTeacherScene(manager, context);
+			},
+		);
+		sceneManager.registerScene(
+			"active_assignments",
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentListTeacherScene(manager, context, this, "active");
+			},
+		);
+		sceneManager.registerScene(
+			"completed_assignments",
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentListTeacherScene(manager, context, this, "completed");
+			},
+		);
+		sceneManager.registerScene(
+			"assignment_manage",
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentManageScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			"assignment_created",
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentCreatedScene(manager, context, this);
 			},
 		);
 	}
@@ -66,7 +92,7 @@ export class AssignmentService implements Module {
 		}
 	}
 
-	createAssignment(data: AssignmentData): Assignment {
+	createAssignment(data: Omit<Assignment, "id">): Assignment {
 		const id = this.generateRandomHash(data);
 		this.repository.createAssignment(id, data);
 		return {
@@ -85,7 +111,7 @@ export class AssignmentService implements Module {
 
 	updateAssignment(
 		id: string,
-		data: Partial<AssignmentData>,
+		data: Partial<Omit<Assignment, "id">>,
 	): Assignment | undefined {
 		const existingData = this.repository.getAssignment(id);
 		if (!existingData) {

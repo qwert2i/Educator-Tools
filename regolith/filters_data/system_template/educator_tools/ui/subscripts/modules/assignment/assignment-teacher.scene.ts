@@ -40,5 +40,6 @@ export class AssignmentTeacherScene extends ActionUIScene {
 			},
 			"textures/edu_tools/ui/icons/assignment/completed_assignments",
 		);
+		this.show(context.getSourcePlayer(), sceneManager);
 	}
 }
