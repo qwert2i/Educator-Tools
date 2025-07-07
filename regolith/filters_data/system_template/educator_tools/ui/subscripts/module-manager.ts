@@ -16,6 +16,7 @@ import { EnvironmentService } from "./modules/environment/environment.service";
 import { LockPlayerService } from "./modules/lock_player/lock_player.service";
 import { TimerService } from "./modules/timer/timer.service";
 import { WorldManagementService } from "./modules/world_management/world_management.service";
+import { AboutService } from "./modules/about/about.service";
 
 /**
  * Interface that all modules must implement.
@@ -80,6 +81,7 @@ export class ModuleManager {
 		const lockPlayerService = new LockPlayerService(this);
 		const timerService = new TimerService();
 		const worldManagementService = new WorldManagementService();
+		const aboutService = new AboutService();
 
 		// Create WorldSettingsService
 		const worldSettingsStorage = this.storage.getSubStorage("world_settings");
@@ -103,6 +105,7 @@ export class ModuleManager {
 		this.registerModule(lockPlayerService);
 		this.registerModule(timerService);
 		this.registerModule(worldManagementService);
+		this.registerModule(aboutService);
 
 		// Initialize all modules
 		this.initializeModules();
