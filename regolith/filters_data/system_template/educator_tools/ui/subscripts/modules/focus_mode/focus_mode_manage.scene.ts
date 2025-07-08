@@ -24,27 +24,44 @@ export class FocusModeManageScene extends ModalUIScene {
 		const isFocusModeEnabled =
 			this.focusModeService.getTeamFocusMode(subjectTeam);
 
+		this.addLabel({
+			rawtext: [
+				{
+					translate: "edu_tools.ui.focus_mode_manage.body",
+				},
+				{
+					text: " §9",
+				},
+				{
+					text: subjectTeam.name,
+				},
+				{
+					text: " §r",
+				},
+			],
+		});
+
 		this.addToggle(
-			"edu_tools.ui.focus_mode.toggle.enable",
+			"edu_tools.ui.focus_mode_manage.toggle.enable",
 			(value) => {
 				this.focusModeService.setTeamFocusMode(subjectTeam, value);
 			},
 			{
 				defaultValue: isFocusModeEnabled,
-				tooltip: "edu_tools.ui.focus_mode.toggle.enable_tooltip",
+				tooltip: "edu_tools.ui.focus_mode_manage.toggle.enable_tooltip",
 			},
 		);
 
 		this.addTextField(
-			"edu_tools.ui.focus_mode.text_field.message",
-			"edu_tools.ui.focus_mode.text_field.message_placeholder",
+			"edu_tools.ui.focus_mode_manage.text_field.message",
+			"edu_tools.ui.focus_mode_manage.text_field.message_placeholder",
 			(value) => {
 				this.focusModeService.setTeamsFocusModeMessage(subjectTeam, value);
 			},
 			{
 				defaultValue:
 					this.focusModeService.getTeamsFocusModeMessage(subjectTeam),
-				tooltip: "edu_tools.ui.focus_mode.text_field.message_tooltip",
+				tooltip: "edu_tools.ui.focus_mode_manage.text_field.message_tooltip",
 			},
 		);
 

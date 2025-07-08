@@ -95,6 +95,24 @@ export class ActionUIScene {
 	}
 
 	/**
+	 * Adds a label to the UI.
+	 * @param label - The label text to be displayed.
+	 */
+	addLabel(label: string | RawMessage): void {
+		this.form.label(label);
+	}
+
+	/**
+	 * Adds a button with a custom icon to the UI.
+	 * @param text - The text that is displayed on the button.
+	 * @param handler - Defines the actions when the button is pressed.
+	 * @param iconPath - The path to the item texture.
+	 */
+	addDivider(): void {
+		this.form.divider();
+	}
+
+	/**
 	 * Sets the next scene to open.
 	 * @param scene_name - The name of the next scene.
 	 * @param config - Optional configuration for the next scene.
@@ -279,6 +297,16 @@ export class ModalUIScene {
 		this.player = player;
 		this.next_scene_default = next_scene_default;
 		this.next_scene_config = next_scene_config;
+	}
+
+	/**
+	 * Adds a button with a custom icon to the UI.
+	 * @param text - The text that is displayed on the button.
+	 * @param handler - Defines the actions when the button is pressed.
+	 * @param iconPath - The path to the item texture.
+	 */
+	addDivider(): void {
+		this.form.divider();
 	}
 
 	/**

@@ -22,9 +22,11 @@ export class FocusModeScene extends ActionUIScene {
 
 		this.setRawBody([
 			{
-				translate: "edu_tools.ui.focus_mode.menu",
+				translate: "edu_tools.ui.focus_mode.body",
 			},
 		]);
+
+		this.addDivider();
 
 		this.addButton(
 			"edu_tools.ui.focus_mode.buttons.global_disable",
