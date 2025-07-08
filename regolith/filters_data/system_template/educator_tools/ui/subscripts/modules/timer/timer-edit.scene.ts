@@ -92,11 +92,14 @@ export class TimerEditScene extends ModalUIScene {
 				)[selectedIndex];
 				context.setData("timer_duration", selectedTime);
 			},
-			timer
-				? Object.values(TimerDuration)
-						.filter((value): value is number => typeof value === "number")
-						.indexOf(timer.duration)
-				: 0,
+			{
+				defaultValueIndex: timer
+					? Object.values(TimerDuration)
+							.filter((value): value is number => typeof value === "number")
+							.indexOf(timer.duration)
+					: 0,
+				tooltip: "edu_tools.ui.timer_edit.time_tooltip",
+			},
 		);
 
 		this.addToggle(
@@ -104,7 +107,10 @@ export class TimerEditScene extends ModalUIScene {
 			(value: boolean): void => {
 				context.setData("show_timer", value);
 			},
-			timer ? !!timer.entityShown : true,
+			{
+				defaultValue: timer ? !!timer.entityShown : true,
+				tooltip: "edu_tools.ui.timer_edit.show_timer_entity_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager).then((r) => {

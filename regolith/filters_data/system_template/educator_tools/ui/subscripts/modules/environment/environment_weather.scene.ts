@@ -36,6 +36,9 @@ export class EnvironmentWeatherScene extends ModalUIScene {
 					],
 				);
 			},
+			{
+				tooltip: "edu_tools.ui.environment_weather.select_weather_tooltip",
+			},
 		);
 
 		this.addToggle(
@@ -43,7 +46,10 @@ export class EnvironmentWeatherScene extends ModalUIScene {
 			(isEnabled: boolean): void => {
 				environmentService.setWeatherCycle(isEnabled);
 			},
-			environmentService.getWeatherCycle(),
+			{
+				defaultValue: environmentService.getWeatherCycle(),
+				tooltip: "edu_tools.ui.environment_weather.set_weather_cycle_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

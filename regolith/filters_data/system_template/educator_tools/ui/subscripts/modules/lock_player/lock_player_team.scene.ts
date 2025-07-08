@@ -48,15 +48,21 @@ export class LockPlayerTeamScene extends ModalUIScene {
 			(value: number) => {
 				context.setData("radius", value);
 			},
-			5,
-			10,
+			{
+				defaultValue: 10,
+				valueStep: 5,
+				tooltip: "edu_tools.ui.lock_player_team.radius_tooltip",
+			},
 		);
 		this.addToggle(
 			"edu_tools.ui.lock_player_team.teleport_to_center",
 			(value: boolean) => {
 				context.setData("teleportToCenter", value);
 			},
-			false,
+			{
+				defaultValue: true,
+				tooltip: "edu_tools.ui.lock_player_team.teleport_to_center_tooltip",
+			},
 		);
 
 		this.addToggle(
@@ -64,7 +70,10 @@ export class LockPlayerTeamScene extends ModalUIScene {
 			(value: boolean) => {
 				context.setData("showBoundaries", value);
 			},
-			true,
+			{
+				defaultValue: true,
+				tooltip: "edu_tools.ui.lock_player_team.show_boundaries_tooltip",
+			},
 		);
 
 		this.addToggle(
@@ -72,7 +81,10 @@ export class LockPlayerTeamScene extends ModalUIScene {
 			(value: boolean) => {
 				context.setData("showLockMessage", value);
 			},
-			true,
+			{
+				defaultValue: true,
+				tooltip: "edu_tools.ui.lock_player_team.show_lock_message_tooltip",
+			},
 		);
 
 		this.addDropdown(
@@ -81,7 +93,10 @@ export class LockPlayerTeamScene extends ModalUIScene {
 			(value: string) => {
 				context.setData("mode", value);
 			},
-			0,
+			{
+				defaultValueIndex: 0,
+				tooltip: "edu_tools.ui.lock_player_team.mode_tooltip",
+			},
 		);
 
 		const isCreationMode = context.getData("isCreationMode") || false;

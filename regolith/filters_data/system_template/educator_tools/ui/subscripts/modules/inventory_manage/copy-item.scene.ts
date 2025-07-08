@@ -30,6 +30,9 @@ export class CopyItemScene extends ModalUIScene {
 					items[selectedItem].index,
 				);
 			},
+			{
+				tooltip: "edu_tools.ui.copy_item.select_item_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

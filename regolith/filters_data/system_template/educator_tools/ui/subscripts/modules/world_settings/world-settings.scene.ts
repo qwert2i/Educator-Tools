@@ -30,7 +30,10 @@ export class WorldSettingsScene extends ModalUIScene {
 				(value: boolean): void => {
 					this.worldSettingsService.toggleGameRule(rule.id, value);
 				},
-				rule.value,
+				{
+					defaultValue: rule.value,
+					tooltip: rule.translationKey + "_tooltip",
+				},
 			);
 		}
 
@@ -47,9 +50,12 @@ export class WorldSettingsScene extends ModalUIScene {
 					Difficulty[difficulty as keyof typeof Difficulty],
 				);
 			},
-			difficulties.indexOf(
-				Difficulty[world.getDifficulty() as keyof typeof Difficulty],
-			), // Set the current difficulty as selected
+			{
+				defaultValueIndex: difficulties.indexOf(
+					Difficulty[world.getDifficulty() as keyof typeof Difficulty],
+				), // Set the current difficulty as selected
+				tooltip: "edu_tools.ui.world_settings.select_difficulty_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

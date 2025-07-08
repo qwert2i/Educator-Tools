@@ -29,7 +29,10 @@ export class FocusModeManageScene extends ModalUIScene {
 			(value) => {
 				this.focusModeService.setTeamFocusMode(subjectTeam, value);
 			},
-			isFocusModeEnabled,
+			{
+				defaultValue: isFocusModeEnabled,
+				tooltip: "edu_tools.ui.focus_mode.toggle.enable_tooltip",
+			},
 		);
 
 		this.addTextField(
@@ -38,7 +41,11 @@ export class FocusModeManageScene extends ModalUIScene {
 			(value) => {
 				this.focusModeService.setTeamsFocusModeMessage(subjectTeam, value);
 			},
-			this.focusModeService.getTeamsFocusModeMessage(subjectTeam) || "",
+			{
+				defaultValue:
+					this.focusModeService.getTeamsFocusModeMessage(subjectTeam),
+				tooltip: "edu_tools.ui.focus_mode.text_field.message_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

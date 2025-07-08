@@ -32,6 +32,9 @@ export class EnvironmentDaytimeScene extends ModalUIScene {
 					TimeOfDay[daytimes[selectedDaytime] as keyof typeof TimeOfDay],
 				);
 			},
+			{
+				tooltip: "edu_tools.ui.environment_daytime.select_daytime_tooltip",
+			},
 		);
 
 		this.addToggle(
@@ -39,7 +42,10 @@ export class EnvironmentDaytimeScene extends ModalUIScene {
 			(isEnabled: boolean): void => {
 				environmentService.setDayLightCycle(isEnabled);
 			},
-			environmentService.getDayLightCycle(),
+			{
+				defaultValue: environmentService.getDayLightCycle(),
+				tooltip: "edu_tools.ui.environment_daytime.set_daytime_cycle_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

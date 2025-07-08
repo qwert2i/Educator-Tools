@@ -5,6 +5,10 @@ import {
 	ModalFormResponse,
 	MessageFormResponse,
 	ActionFormResponse,
+	ModalFormDataTextFieldOptions,
+	ModalFormDataDropdownOptions,
+	ModalFormDataSliderOptions,
+	ModalFormDataToggleOptions,
 } from "@minecraft/server-ui";
 import {
 	Player,
@@ -285,12 +289,12 @@ export class ModalUIScene {
 	 * @param defaultValue - The default value of the text field.
 	 */
 	addTextField(
-		label: string,
-		text: string,
-		handler: (value: any) => void,
-		defaultValue?: string,
+		label: RawMessage | string,
+		placeholderText: RawMessage | string,
+		handler: (value: string) => void,
+		textFieldOptions?: ModalFormDataTextFieldOptions,
 	): void {
-		this.form.textField(label, text, { defaultValue });
+		this.form.textField(label, placeholderText, textFieldOptions);
 		this.buttonHandlers.push(handler);
 	}
 
@@ -302,12 +306,12 @@ export class ModalUIScene {
 	 * @param defaultIndex - The default selected index of the dropdown.
 	 */
 	addDropdown(
-		label: string,
-		options: (string | RawMessage)[],
+		label: RawMessage | string,
+		items: (RawMessage | string)[],
 		handler: (value: any) => void,
-		defaultIndex?: number,
+		dropdownOptions?: ModalFormDataDropdownOptions,
 	): void {
-		this.form.dropdown(label, options, { defaultValueIndex: defaultIndex });
+		this.form.dropdown(label, items, dropdownOptions);
 		this.buttonHandlers.push(handler);
 	}
 
@@ -320,14 +324,13 @@ export class ModalUIScene {
 	 * @param defaultValue - The default value of the slider.
 	 */
 	addSlider(
-		label: string,
-		min: number,
-		max: number,
-		handler: (value: any) => void,
-		step: number,
-		defaultValue: number,
+		label: RawMessage | string,
+		minimumValue: number,
+		maximumValue: number,
+		handler: (value: number) => void,
+		sliderOptions?: ModalFormDataSliderOptions,
 	): void {
-		this.form.slider(label, min, max, { defaultValue, valueStep: step });
+		this.form.slider(label, minimumValue, maximumValue, sliderOptions);
 		this.buttonHandlers.push(handler);
 	}
 
@@ -338,11 +341,11 @@ export class ModalUIScene {
 	 * @param defaultValue - The default value of the toggle.
 	 */
 	addToggle(
-		label: string,
+		label: RawMessage | string,
 		handler: (value: boolean) => void,
-		defaultValue: boolean,
+		toggleOptions?: ModalFormDataToggleOptions,
 	): void {
-		this.form.toggle(label, { defaultValue });
+		this.form.toggle(label, toggleOptions);
 		this.buttonHandlers.push(handler);
 	}
 

@@ -34,7 +34,10 @@ export class ManageHealthSettingsScene extends ModalUIScene {
 					health: value,
 				});
 			},
-			properties.health,
+			{
+				defaultValue: properties.health,
+				tooltip: "edu_tools.ui.manage_health.settings.health_tooltip",
+			},
 		);
 		this.addToggle(
 			"edu_tools.ui.manage_health.settings.hunger",
@@ -43,7 +46,10 @@ export class ManageHealthSettingsScene extends ModalUIScene {
 					hunger: value,
 				});
 			},
-			properties.hunger,
+			{
+				defaultValue: properties.hunger,
+				tooltip: "edu_tools.ui.manage_health.settings.hunger_tooltip",
+			},
 		);
 		this.addToggle(
 			"edu_tools.ui.manage_health.settings.effect_immunity",
@@ -52,7 +58,10 @@ export class ManageHealthSettingsScene extends ModalUIScene {
 					effect_immunity: value,
 				});
 			},
-			properties.effect_immunity,
+			{
+				defaultValue: properties.effect_immunity,
+				tooltip: "edu_tools.ui.manage_health.settings.effect_immunity_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

@@ -22,7 +22,10 @@ export class TeamsEditScene extends ModalUIScene {
 			(value: string): void => {
 				context.setData("team_name", value);
 			},
-			subjectTeam?.name || "",
+			{
+				defaultValue: subjectTeam ? subjectTeam.name : "",
+				tooltip: "edu_tools.ui.teams_edit.name_tooltip",
+			},
 		);
 
 		this.addTextField(
@@ -31,7 +34,10 @@ export class TeamsEditScene extends ModalUIScene {
 			(value: string): void => {
 				context.setData("team_description", value);
 			},
-			subjectTeam?.description || "",
+			{
+				defaultValue: subjectTeam ? subjectTeam.description : "",
+				tooltip: "edu_tools.ui.teams_edit.description_tooltip",
+			},
 		);
 
 		this.addDropdown(
@@ -40,9 +46,12 @@ export class TeamsEditScene extends ModalUIScene {
 			(selectedIcon: number): void => {
 				context.setData("team_icon", selectedIcon);
 			},
-			subjectTeam?.icon
-				? TeamsService.availableIcons.indexOf(subjectTeam.icon)
-				: 0,
+			{
+				defaultValueIndex: subjectTeam?.icon
+					? TeamsService.availableIcons.indexOf(subjectTeam.icon)
+					: Math.floor(Math.random() * TeamsService.availableIcons.length),
+				tooltip: "edu_tools.ui.teams_edit.icon_tooltip",
+			},
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager).then(() => {
