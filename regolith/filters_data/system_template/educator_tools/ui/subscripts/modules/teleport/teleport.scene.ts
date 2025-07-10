@@ -42,17 +42,13 @@ export class TeleportScene extends ActionUIScene {
 			},
 		]);
 
-		this.addButton(
-			"edu_tools.ui.teleport.buttons.teleport",
-			(): void => {
-				// Call the teleport service to perform the teleport action
-				this.teleportService.teleportTeamToPlayer(
-					context.getSubjectTeam()!,
-					targetPlayer,
-				);
-			},
-			"textures/edu_tools/ui/icons/teleport/teleport",
-		);
+		this.addButton("edu_tools.ui.teleport.buttons.teleport", (): void => {
+			// Call the teleport service to perform the teleport action
+			this.teleportService.teleportTeamToPlayer(
+				context.getSubjectTeam()!,
+				targetPlayer,
+			);
+		});
 
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
