@@ -52,6 +52,11 @@ export class FocusModeManageScene extends ModalUIScene {
 			},
 		);
 
+		let message = this.focusModeService.getTeamsFocusModeMessage(subjectTeam);
+		if (message && typeof message !== "string") {
+			message = message + "";
+		}
+
 		this.addTextField(
 			"edu_tools.ui.focus_mode_manage.text_field.message",
 			"edu_tools.ui.focus_mode_manage.text_field.message_placeholder",
@@ -59,8 +64,7 @@ export class FocusModeManageScene extends ModalUIScene {
 				this.focusModeService.setTeamsFocusModeMessage(subjectTeam, value);
 			},
 			{
-				defaultValue:
-					this.focusModeService.getTeamsFocusModeMessage(subjectTeam),
+				defaultValue: message,
 				tooltip: "edu_tools.ui.focus_mode_manage.text_field.message_tooltip",
 			},
 		);
