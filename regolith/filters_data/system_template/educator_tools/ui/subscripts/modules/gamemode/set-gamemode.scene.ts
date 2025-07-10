@@ -73,8 +73,8 @@ export class SetGamemodeScene extends ActionUIScene {
 		this.gamemodeService.setTeamGamemode(subjectTeam, gamemode);
 
 		const configTeam = {
-			title: "confirm.gamemode",
-			body: "edu_tools.ui.confirm.gamemode.team.body",
+			title: "set_gamemode.confirm",
+			body: "edu_tools.ui.set_gamemode.confirm.body",
 			buttons: [
 				{
 					label: "edu_tools.ui.buttons.continue",
