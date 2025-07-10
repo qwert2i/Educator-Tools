@@ -39,7 +39,6 @@ export class TeamSelectScene extends ActionUIScene {
 				if (teamsService.isPlayerTeam(team.id)) {
 					const player = world.getEntity(team.memberIds[0]) as Player;
 					buttonText = player.name;
-					team.icon = "player";
 				}
 			} else {
 				buttonText = team.name;

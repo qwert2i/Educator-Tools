@@ -24,11 +24,11 @@ export class TeamsService implements Module {
 	public static readonly STUDENTS_TEAM_ID = "system_students";
 
 	public static readonly availableIcons = [
-		"star",
-		"heart",
+		"clownfish",
 		"diamond",
-		"circle",
-		"square",
+		"egg",
+		"iron_axe",
+		"potato",
 	];
 
 	constructor(storage: PropertyStorage) {
@@ -280,7 +280,7 @@ export class TeamsService implements Module {
 			memberIds: playerIds,
 			isSystem: true,
 			editable: false,
-			icon: "all_players_icon",
+			icon: "all",
 		};
 	}
 
@@ -304,7 +304,7 @@ export class TeamsService implements Module {
 				memberIds: [playerId],
 				isSystem: true,
 				editable: false,
-				icon: "player_icon",
+				icon: "player_online",
 				maximumMembers: 1, // Individual teams can only have one member
 				minimumMembers: 1, // At least one member required
 			};
@@ -314,6 +314,9 @@ export class TeamsService implements Module {
 			) {
 				this.storage.set(team.id, team);
 			}
+		} else if (existingTeam) {
+			// If player is not online, return existing team if it exists
+			team = { ...existingTeam, icon: "player_offline" };
 		}
 		return team;
 	}
@@ -338,11 +341,17 @@ export class TeamsService implements Module {
 				memberIds: [],
 				isSystem: true,
 				editable: true,
-				icon: "teacher_icon",
+				icon: "teachers",
 				minimumMembers: 1, // At least one teacher required
 				host_auto_assign: true, // Auto-assign teachers when they join
 			};
 			this.storage.set(TeamsService.TEACHERS_TEAM_ID, team);
+		} else {
+			team = {
+				...team,
+				icon: "teachers", // Ensure icon is set correctly
+				minimumMembers: 1, // At least one teacher required
+			};
 		}
 		return team;
 	}
@@ -365,7 +374,7 @@ export class TeamsService implements Module {
 			memberIds: studentIds,
 			isSystem: true,
 			editable: false,
-			icon: "student_icon",
+			icon: "students",
 		};
 	}
 
