@@ -55,20 +55,23 @@ export class GamemodeService implements Module {
 	/**
 	 * Sets gamemode for a specific player.
 	 * @param player - The player to set gamemode for
-	 * @param gamemode - The gamemode to set (survival, creative, adventure)
+	 * @param gamemode - The gamemode to set (Survival, Creative, Adventure)
 	 */
 	setPlayerGamemode(player: Player, gamemode: string): void {
-		player.setGameMode(GameMode[gamemode.toLowerCase()]);
+		player.setGameMode(GameMode[gamemode]);
 	}
 
 	/**
 	 * Sets gamemode for all players in a team.
 	 * @param team - The team to set gamemode for
-	 * @param gamemode - The gamemode to set (survival, creative, adventure)
+	 * @param gamemode - The gamemode to set (Survival, Creative, Adventure)
 	 * @param exceptPlayer - Optional player to exclude from the change
 	 */
 	setTeamGamemode(team: Team, gamemode: string, exceptPlayer?: Player): void {
 		if (!team) return;
+		// Gamemode is needs to have the first letter capitalized
+		gamemode =
+			gamemode.charAt(0).toUpperCase() + gamemode.slice(1).toLowerCase();
 
 		// For each member ID in the team
 		team.memberIds.forEach((playerId) => {
