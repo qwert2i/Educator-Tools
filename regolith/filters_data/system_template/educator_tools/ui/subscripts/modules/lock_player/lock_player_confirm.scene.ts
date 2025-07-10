@@ -38,5 +38,7 @@ export class LockPlayerConfirmScene extends MessageUIScene {
 			this.lockPlayerService.confirmAction(context);
 		});
 		this.setButton2("edu_tools.ui.lock_player.buttons.cancel", (): void => {});
+
+		this.show(context.getSourcePlayer(), sceneManager);
 	}
 }
