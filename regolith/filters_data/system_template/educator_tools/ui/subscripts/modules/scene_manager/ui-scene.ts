@@ -307,6 +307,7 @@ export class ModalUIScene {
 	 */
 	addDivider(): void {
 		this.form.divider();
+		this.buttonHandlers.push(() => {});
 	}
 
 	/**
@@ -387,6 +388,7 @@ export class ModalUIScene {
 
 	addLabel(label: string | RawMessage): void {
 		this.form.label(label);
+		this.buttonHandlers.push(() => {});
 	}
 
 	/**
