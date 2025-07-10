@@ -107,10 +107,10 @@ export class FocusModeService implements Module {
 		}
 	}
 
-	setTeamsFocusModeMessage(team: Team, message: string): void {
+	setTeamsFocusModeMessage(team: Team, message?: string): void {
 		const key = `focus_mode_message_${team.id}`;
-		if (message) {
-			this.storage.set(key, message);
+		if (message && typeof message === "string") {
+			this.storage.set(key, message.trim());
 		} else {
 			this.storage.drop(key);
 		}
@@ -140,7 +140,7 @@ export class FocusModeService implements Module {
 
 	applyFocusMode(player: Player): void {
 		this.playerStatusService.registerHolder(player, this.id);
-		if (this.playerStatusService.hasGameModeSaved(player)) {
+		if (!this.playerStatusService.hasGameModeSaved(player)) {
 			this.playerStatusService.savePlayerGameMode(player);
 		}
 		player.setGameMode(GameMode.Spectator);
@@ -159,18 +159,23 @@ export class FocusModeService implements Module {
 				fadeOutTime: 0.5,
 			},
 		});
-		const team = this.teamsService.getPlayerTeams(player.id)[0];
+		const team = this.teamsService
+			.getPlayerTeams(player.id)
+			.find((t) => this.getTeamFocusMode(t));
 		if (team) {
 			const message = this.getTeamsFocusModeMessage(team);
 			if (message) {
 				player.onScreenDisplay.updateSubtitle(message);
 			}
 		}
-		player.onScreenDisplay.setTitle("edu_tools.ui.focus_mode.title", {
-			stayDuration: 60,
-			fadeInDuration: 0,
-			fadeOutDuration: 10,
-		});
+		player.onScreenDisplay.setTitle(
+			{ translate: "edu_tools.ui.focus_mode.screen_title" },
+			{
+				stayDuration: 60,
+				fadeInDuration: 0,
+				fadeOutDuration: 10,
+			},
+		);
 	}
 
 	disableFocusMode(player: Player): void {
