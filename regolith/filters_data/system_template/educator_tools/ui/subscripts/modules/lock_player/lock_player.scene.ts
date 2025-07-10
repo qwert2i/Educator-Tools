@@ -36,7 +36,7 @@ export class LockPlayerScene extends ActionUIScene {
 					}
 					return false;
 				});
-				context.setData("isCreationMode", true);
+				//context.setData("isCreationMode", true);
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
 			"textures/edu_tools/ui/icons/lock_player/add_team_lock",
@@ -49,7 +49,7 @@ export class LockPlayerScene extends ActionUIScene {
 				context.setData("team_filter", (team: Team): boolean => {
 					return !!lockPlayerService.getLockSettings(team.id);
 				});
-				context.setData("isCreationMode", false);
+				//context.setData("isCreationMode", false);
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
 			"textures/edu_tools/ui/icons/lock_player/view_teams",

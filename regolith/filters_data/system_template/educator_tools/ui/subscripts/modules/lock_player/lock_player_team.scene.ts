@@ -14,11 +14,10 @@ export class LockPlayerTeamScene extends ModalUIScene {
 		context: SceneContext,
 		lockPlayerService: LockPlayerService,
 	) {
-		super(LockPlayerTeamScene.id, context.getSourcePlayer(), "team_select");
+		super(LockPlayerTeamScene.id, context.getSourcePlayer());
 
 		this.setContext(context);
 
-		this.setTitle("edu_tools.ui.lock_player_team.title");
 		const subjectTeam = context.getSubjectTeam()!;
 		this.addLabel({
 			rawtext: [
@@ -39,17 +38,17 @@ export class LockPlayerTeamScene extends ModalUIScene {
 				},
 			],
 		});
-		this.addLabel(subjectTeam.name);
+		const currentLock = lockPlayerService.getLockSettings(subjectTeam.id);
 
 		this.addSlider(
-			"edu_tools.ui.lock_player_team.radius",
+			{ translate: "edu_tools.ui.lock_player_team.radius" },
 			5,
 			100,
 			(value: number) => {
 				context.setData("radius", value);
 			},
 			{
-				defaultValue: 10,
+				defaultValue: currentLock?.radius || 16,
 				valueStep: 5,
 				tooltip: "edu_tools.ui.lock_player_team.radius_tooltip",
 			},
@@ -60,7 +59,7 @@ export class LockPlayerTeamScene extends ModalUIScene {
 				context.setData("teleportToCenter", value);
 			},
 			{
-				defaultValue: true,
+				defaultValue: currentLock?.teleportToCenter || false,
 				tooltip: "edu_tools.ui.lock_player_team.teleport_to_center_tooltip",
 			},
 		);
@@ -71,7 +70,8 @@ export class LockPlayerTeamScene extends ModalUIScene {
 				context.setData("showBoundaries", value);
 			},
 			{
-				defaultValue: true,
+				// True by default, unless shownBoundaries is set to false in the current lock
+				defaultValue: currentLock?.showBoundaries !== false,
 				tooltip: "edu_tools.ui.lock_player_team.show_boundaries_tooltip",
 			},
 		);
@@ -82,26 +82,28 @@ export class LockPlayerTeamScene extends ModalUIScene {
 				context.setData("showLockMessage", value);
 			},
 			{
-				defaultValue: true,
+				defaultValue: currentLock?.showLockMessage !== false,
 				tooltip: "edu_tools.ui.lock_player_team.show_lock_message_tooltip",
 			},
 		);
 
 		this.addDropdown(
 			"edu_tools.ui.lock_player_team.mode",
-			["center", "player"],
+			[
+				"edu_tools.ui.lock_player_team.mode.options.center",
+				"edu_tools.ui.lock_player_team.mode.options.player",
+			],
 			(value: string) => {
 				context.setData("mode", value);
 			},
 			{
-				defaultValueIndex: 0,
+				defaultValueIndex: !!currentLock?.playerBound ? 1 : 0,
 				tooltip: "edu_tools.ui.lock_player_team.mode_tooltip",
 			},
 		);
 
-		const isCreationMode = context.getData("isCreationMode") || false;
-		if (isCreationMode) {
-			context.setNextScene("lock_player_confirm");
+		if (!currentLock) {
+			//context.setNextScene("lock_player_confirm");
 			context.setTargetTeamRequired(true);
 			context.setData(
 				"team_filter",
@@ -119,10 +121,37 @@ export class LockPlayerTeamScene extends ModalUIScene {
 		}
 
 		const response = this.show(context.getSourcePlayer(), sceneManager);
-		if (!isCreationMode) {
-			response.then(() => {
-				lockPlayerService.confirmAction(context);
-			});
-		}
+		response.then(() => {
+			const mode = context.getData("mode") || 0;
+			const isPlayerBoundMode = mode === 1;
+			const needsTeamSelection =
+				isPlayerBoundMode && (!currentLock || !currentLock.playerBound);
+
+			if (needsTeamSelection) {
+				this.setupTeamSelection(context, sceneManager);
+			} else {
+				sceneManager.openSceneWithContext(context, "lock_player_confirm", true);
+			}
+		});
+	}
+
+	private setupTeamSelection(
+		context: SceneContext,
+		sceneManager: SceneManager,
+	): void {
+		context.setNextScene("lock_player_confirm");
+		context.setTargetTeamRequired(true);
+		context.setData("team_filter", this.createTeamFilter());
+		sceneManager.openSceneWithContext(context, "team_select", true);
+	}
+
+	private createTeamFilter() {
+		return (team: Team, teamsService: TeamsService): boolean => {
+			// Only online teams with a single member are valid
+			return (
+				teamsService.isPlayerTeam(team.id) &&
+				!!world.getEntity(team.memberIds[0])
+			);
+		};
 	}
 }
