@@ -32,7 +32,7 @@ export class TeleportScene extends ActionUIScene {
 				text: " §r",
 			},
 			{
-				translate: "edu_tools.ui.teleport.body.body.2",
+				translate: "edu_tools.ui.teleport.body.2",
 			},
 			{
 				text: " §9",
