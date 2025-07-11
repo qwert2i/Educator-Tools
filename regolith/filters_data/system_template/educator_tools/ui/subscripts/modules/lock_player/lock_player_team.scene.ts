@@ -59,7 +59,7 @@ export class LockPlayerTeamScene extends ModalUIScene {
 				context.setData("teleportToCenter", value);
 			},
 			{
-				defaultValue: currentLock?.teleportToCenter || false,
+				defaultValue: !!currentLock?.teleportToCenter,
 				tooltip: "edu_tools.ui.lock_player_team.teleport_to_center_tooltip",
 			},
 		);
