@@ -168,14 +168,14 @@ export class LockPlayerService implements Module {
 		const teleportToCenter = context.getData("teleportToCenter") || false;
 		const showLockMessage = context.getData("showLockMessage") || false;
 		const showBoundaries = context.getData("showBoundaries") || false;
-		const mode = context.getData("mode") || "center";
+		const mode: number = context.getData("mode") || 0;
 
 		if (targetTeam) {
 			let center: Vector3;
 			let playerBound: string | undefined = undefined;
 			const targetPlayer = world.getEntity(targetTeam.memberIds[0]) as Player;
 			center = targetPlayer.location;
-			if (mode === "player") {
+			if (mode === 1) {
 				playerBound = targetPlayer.id;
 			}
 			this.setLockSettings(subjectTeam.id, {
