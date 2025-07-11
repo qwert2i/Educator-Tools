@@ -121,7 +121,10 @@ export class LockPlayerTeamScene extends ModalUIScene {
 		}
 
 		const response = this.show(context.getSourcePlayer(), sceneManager);
-		response.then(() => {
+		response.then((r) => {
+			if (r.canceled) {
+				return;
+			}
 			const mode = context.getData("mode") || 0;
 			const isPlayerBoundMode = mode === 1;
 			const needsTeamSelection =
