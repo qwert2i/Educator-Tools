@@ -27,10 +27,7 @@ export class LockPlayerScene extends ActionUIScene {
 					for (const memberId of team.memberIds) {
 						const isPlayerExempted =
 							lockPlayerService.isPlayerExempted(memberId);
-						if (
-							world.getEntity(memberId) instanceof Player &&
-							!isPlayerExempted
-						) {
+						if (!isPlayerExempted) {
 							return true;
 						}
 					}
