@@ -36,6 +36,9 @@ The **Educator Tools** Add-On introduces several key functionalities for classro
 - **World Settings Control** – Modify game rules such as PvP, time settings, and mob spawning directly from the tool's interface.
 - **Lock Players Mechanic** – Restrict movement within a designated area to maintain order during the lesson.
 - **Custom Letter & Number Blocks** – Blocks with letters, numbers, and symbols to create engaging educational experiences and suit your needs.
+- **Inventory Copy Tool** – Instantly copy a player's inventory, with multilingual support and a dedicated icon.
+- **Player Health Management UI** – Manage player health directly from a new in-game interface.
+- **Advanced Letter Block Generation** – Generate letter images with custom sizes, antialiasing, grouping, and safe filenames.
 
 ## Usage
 

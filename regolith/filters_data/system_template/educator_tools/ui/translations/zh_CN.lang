@@ -10,23 +10,31 @@ edu_tools.message.no_host=你需要成为世界的主人才能使用这个工具
 edu_tools.ui.main.title=§f教育工具
 edu_tools.ui.main.body=选择要使用的工具
 edu_tools.ui.main.buttons.teleport=传送
+edu_tools.ui.main.buttons.copy_inventory=复制物品栏
 edu_tools.ui.main.buttons.gamemode=游戏模式
 edu_tools.ui.main.buttons.manage_teams=管理团队
 edu_tools.ui.main.buttons.timer=计时器
 edu_tools.ui.main.buttons.world_settings=世界设置
 edu_tools.ui.main.buttons.lock_players=锁定玩家
+edu_tools.ui.main.buttons.manage_health=管理健康
 
 ### Set Players UI Scene
 edu_tools.ui.set_players.teleport.subject.title=§f选择主体
 edu_tools.ui.set_players.teleport.target.title=§f选择目标
 edu_tools.ui.set_players.gamemode.title=§f选择主体
+edu_tools.ui.set_players.manage_health.title=§f管理健康
 edu_tools.ui.set_players.select_subject_for_teleport.body=选择传送§9谁§r
 edu_tools.ui.set_players.select_target_for_teleport.body=选择传送至§c何处§r
 edu_tools.ui.set_players.buttons.you=你
 edu_tools.ui.set_players.buttons.all=所有人
 
 edu_tools.ui.set_players.select_subject_for_gamemode_change.body=选择要改变游戏模式的§9玩家§r
-
+edu_tools.ui.set_players.copy_inventory.subject.title=§f选择主体
+edu_tools.ui.set_players.copy_inventory.target.title=§f选择目标
+edu_tools.ui.set_players.select_subject_for_copy_inventory.body=选择一个§9主体§r以复制物品栏
+edu_tools.ui.set_players.select_target_for_copy_inventory.body=选择一个§c目标§r以粘贴物品栏
+edu_tools.ui.set_players.select_subject_for_manage_health_change.body=选择要管理健康的§9玩家§r
+edu_tools.message.no_space_for_educator_tool=§c你的物品栏中没有足够空间放置教育工具。
 
 ### Gamemode UI Scene
 edu_tools.ui.set_gamemode.title=§设置游戏模式
@@ -41,7 +49,6 @@ edu_tools.ui.set_gamemode.buttons.survival=生存
 edu_tools.ui.set_gamemode.buttons.creative=创造
 
 ### Confirm UI Scene
-edu_tools.ui.confirm.teleport.title=§f确认传送
 edu_tools.ui.confirm.teleport.title=§f已经传送
 edu_tools.ui.confirm.teleport.self.body=已经成功传送
 edu_tools.ui.confirm.teleport.self.body2=至
@@ -49,8 +56,13 @@ edu_tools.ui.confirm.teleport.specific.body=已经成功传送
 edu_tools.ui.confirm.teleport.specific.body2=至
 edu_tools.ui.confirm.teleport.all.body=已经成功传送所有§9玩家§r至目标
 
+edu_tools.ui.confirm.copy_inventory.title=§f确认物品栏复制
+edu_tools.ui.confirm.copy_inventory.specific.body=成功复制物品栏
+edu_tools.ui.confirm.copy_inventory.all.body=成功将物品栏复制到所有§9玩家§r
+
+
 edu_tools.ui.confirm.gamemode.title=§f确认游戏模式改变
-edu_tools.ui.confirm.gamemode.self.body=成功设置§9你§r的游戏模式 
+edu_tools.ui.confirm.gamemode.self.body=成功设置§9你§r的游戏模式
 edu_tools.ui.confirm.gamemode.specific.body=成功设置游戏模式
 edu_tools.ui.confirm.gamemode.all.body=成功设置所有§9玩家§r的游戏模式
 
@@ -65,6 +77,32 @@ edu_tools.ui.confirm.stop_timer.body=你确定要停止计时器吗？这将会�
 
 edu_tools.ui.confirm.edit_timer.title=§f确认计时器编辑
 edu_tools.ui.confirm.edit_timer.body=你确定要编辑计时器吗？这将会覆盖当前的计时器。
+
+edu_tools.ui.confirm.manage_health.disable_hunger.title=§f确认禁用饥饿
+edu_tools.ui.confirm.manage_health.self.disable_hunger.body=你确定要禁用你的饥饿度吗？
+edu_tools.ui.confirm.manage_health.specific.disable_hunger.body=请确认你想禁用以下玩家的饥饿度
+edu_tools.ui.confirm.manage_health.all.disable_hunger.body=你确定要禁用所有§9玩家§r的饥饿度吗？
+edu_tools.ui.confirm.manage_health.enable_hunger.title=§f确认启用饥饿
+edu_tools.ui.confirm.manage_health.self.enable_hunger.body=你确定要启用你的饥饿度吗？
+edu_tools.ui.confirm.manage_health.specific.enable_hunger.body=请确认你想启用以下玩家的饥饿度
+edu_tools.ui.confirm.manage_health.all.enable_hunger.body=你确定要启用所有§9玩家§r的饥饿度吗？
+edu_tools.ui.confirm.manage_health.disable_health.title=§f确认关闭伤害
+edu_tools.ui.confirm.manage_health.self.disable_health.body=您真的想要关闭自己的伤害吗？
+edu_tools.ui.confirm.manage_health.specific.disable_health.body=请确认您想要关闭以下对象的伤害
+edu_tools.ui.confirm.manage_health.all.disable_health.body=您真的想要为所有§9玩家§r关闭伤害吗？
+edu_tools.ui.confirm.manage_health.enable_health.title=§f确认开启伤害
+edu_tools.ui.confirm.manage_health.self.enable_health.body=您真的想要开启自己的伤害吗？
+edu_tools.ui.confirm.manage_health.specific.enable_health.body=请确认您想要开启以下对象的伤害
+edu_tools.ui.confirm.manage_health.all.enable_health.body=您真的想要为所有§9玩家§r开启伤害吗？
+edu_tools.ui.confirm.manage_health.heal.title=§f确认治疗
+edu_tools.ui.confirm.manage_health.self.heal.body=你确定要治疗自己吗？
+edu_tools.ui.confirm.manage_health.specific.heal.body=请确认你想治疗
+edu_tools.ui.confirm.manage_health.all.heal.body=你确定要治疗所有§9玩家§r吗？
+edu_tools.ui.confirm.manage_health.reset=§f确认重置状态
+edu_tools.ui.confirm.manage_health.self.reset.body=您真的想要重置您的状态吗？
+edu_tools.ui.confirm.manage_health.specific.reset.body=请确认您想要重置以下的状态
+edu_tools.ui.confirm.manage_health.all.reset.body=您真的想要重置所有§9玩家§r的状态吗？
+
 
 ### World Settings UI Scene
 edu_tools.ui.world_settings.title=§f世界设置
@@ -141,3 +179,15 @@ edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_center=中�
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_educator=在我周围
 edu_tools.ui.lock_players_settings.dropdowns.lock_mode.options.from_area=区域
 edu_tools.ui.lock_players_settings.sliders.distance_from_center=半径
+
+### Manage Health Scene
+edu_tools.ui.manage_health.title=管理健康
+edu_tools.ui.manage_health.self.body=管理健康状态
+edu_tools.ui.manage_health.specific.body=管理健康状态
+edu_tools.ui.manage_health.all.body=管理所有§9玩家§r的健康状态
+edu_tools.ui.manage_health.buttons.disable_health=关闭伤害
+edu_tools.ui.manage_health.buttons.enable_health=开启伤害
+edu_tools.ui.manage_health.buttons.disable_hunger=禁用饥饿
+edu_tools.ui.manage_health.buttons.enable_hunger=启用饥饿
+edu_tools.ui.manage_health.buttons.heal=治疗
+edu_tools.ui.manage_health.buttons.reset=重置
