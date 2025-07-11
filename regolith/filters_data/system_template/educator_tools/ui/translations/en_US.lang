@@ -79,7 +79,7 @@ edu_tools.ui.lock_player.buttons.add_team_lock=Add a new Lock
 edu_tools.ui.lock_player.buttons.view_teams=View Blocked Teams
 edu_tools.ui.lock_player_team.title=§fLock Team
 edu_tools.ui.lock_player.team.body=You are managing the Lock for
-edu_tools.ui.lock_player_team.body2=§r
+edu_tools.ui.lock_player.team.body2=§r
 edu_tools.ui.lock_player_team.radius=Radius
 edu_tools.ui.lock_player_team.radius_tooltip=The radius of the area where the player or team can move
 edu_tools.ui.lock_player_team.teleport_to_center=Teleport to Center
@@ -92,6 +92,11 @@ edu_tools.ui.lock_player_team.mode=Lock Mode
 edu_tools.ui.lock_player_team.mode_tooltip=Select the mode for the Lock. In Player mode, the lock area will follow a certain player, while in Center mode, the lock area will be centered on a specific point in the world.
 edu_tools.ui.lock_player_team.mode.options.player=Player
 edu_tools.ui.lock_player_team.mode.options.center=Center
+edu_tools.ui.lock_player_team_settings.title=§fLock Player Settings
+edu_tools.ui.lock_player_team_settings.button.settings=Settings
+edu_tools.ui.lock_player_team_settings.button.update_center=Update Center
+edu_tools.ui.lock_player_team_settings.button.teleport_to_center=Teleport to Center
+edu_tools.actionbar.lock_player.too_far_push=You are moving too far away
 
 ## Teleport Scene
 edu_tools.ui.teleport.title=§fTeleport
