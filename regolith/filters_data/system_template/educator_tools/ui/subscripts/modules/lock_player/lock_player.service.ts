@@ -141,7 +141,11 @@ export class LockPlayerService implements Module {
 	}
 
 	getLockedTeams(): string[] {
-		return Object.keys(this.lockStorage.getAll());
+		const allLocks = this.lockStorage.getAll();
+		const keys = allLocks
+			.map((record) => Object.keys(record)[0])
+			.filter((key) => key !== undefined);
+		return keys;
 	}
 
 	updateLockSettings(teamId: string, settings: Partial<LockSettings>): void {
