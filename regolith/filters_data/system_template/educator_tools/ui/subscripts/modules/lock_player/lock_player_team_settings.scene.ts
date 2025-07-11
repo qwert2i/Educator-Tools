@@ -35,6 +35,8 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 			},
 		]);
 
+		const currentLock = this.lockPlayerService.getLockSettings(subjectTeam.id);
+
 		this.addButton(
 			"edu_tools.ui.lock_player_team_settings.button.settings",
 			() => {
@@ -42,15 +44,17 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 			},
 			"textures/edu_tools/ui/icons/lock_player/settings",
 		);
-		this.addButton(
-			"edu_tools.ui.lock_player_team_settings.button.update_center",
-			() => {
-				this.lockPlayerService.updateLockSettings(subjectTeam.id, {
-					center: context.getSourcePlayer().location,
-				});
-			},
-			"textures/edu_tools/ui/icons/lock_player/update_center",
-		);
+		if (!currentLock?.playerBound) {
+			this.addButton(
+				"edu_tools.ui.lock_player_team_settings.button.update_center",
+				() => {
+					this.lockPlayerService.updateLockSettings(subjectTeam.id, {
+						center: context.getSourcePlayer().location,
+					});
+				},
+				"textures/edu_tools/ui/icons/lock_player/update_center",
+			);
+		}
 		this.addButton(
 			"edu_tools.ui.lock_player_team_settings.button.teleport_to_center",
 			() => {
