@@ -26,8 +26,8 @@ export class LockPlayerMechanic {
 	/** Safety margin from the lock radius when teleporting players back */
 	private static readonly TELEPORT_SAFETY_MARGIN = 5;
 
-	private static readonly SPHERE_POINTS_COUNT = 100;
-	private static readonly SPHERE_POINTS_RADIUS = 10;
+	private static readonly SPHERE_POINTS_COUNT = 1000;
+	private static readonly SPHERE_POINTS_RADIUS = 3;
 
 	constructor(
 		private readonly lockPlayerService: LockPlayerService,
@@ -125,16 +125,16 @@ export class LockPlayerMechanic {
 		const center = lockSettings.center;
 		const distance = Vec3.from(playerLocation).distance(center);
 
+		if (
+			lockSettings.showBoundaries &&
+			lockSettings.radius - distance < LockPlayerMechanic.SPHERE_POINTS_RADIUS
+		) {
+			this.displayBoundary(player, lockSettings);
+		}
+
 		// Player is within allowed radius - no action needed
 		if (distance <= lockSettings.radius) {
 			return;
-		}
-
-		if (
-			lockSettings.showBoundaries &&
-			distance < LockPlayerMechanic.SPHERE_POINTS_RADIUS
-		) {
-			this.displayBoundary(player, lockSettings);
 		}
 
 		// Player is outside radius - apply containment mechanics
@@ -183,7 +183,7 @@ export class LockPlayerMechanic {
 
 		player.applyImpulse(impulse);
 		player.onScreenDisplay.setActionBar([
-			{ translate: "edu_tools.message.too_far_push" },
+			{ translate: "edu_tools.actionbar.lock_player.too_far_push" },
 		]);
 	}
 
@@ -285,7 +285,10 @@ export class LockPlayerMechanic {
 			return; // No points generated, nothing to display
 		}
 		for (const point of spherePoints) {
-			player.dimension.spawnParticle("minecraft:basic_flame_particle", point);
+			player.dimension.spawnParticle(
+				"minecraft:redstone_torch_dust_particle",
+				point,
+			);
 		}
 	}
 
