@@ -2,7 +2,7 @@ import { Player, system, Vector2, Vector3, world } from "@minecraft/server";
 import { LockPlayerService, LockSettings } from "./lock_player.service";
 import { ModuleManager } from "../../module-manager";
 import { TeamsService } from "../teams/teams.service";
-import { Vec3 } from "@bedrock-oss/bedrock-boost";
+import { Polyfill, Vec3 } from "@bedrock-oss/bedrock-boost";
 
 /**
  * Mechanic responsible for enforcing player lock restrictions within specified teams.
@@ -32,7 +32,9 @@ export class LockPlayerMechanic {
 	constructor(
 		private readonly lockPlayerService: LockPlayerService,
 		private readonly moduleManager: ModuleManager,
-	) {}
+	) {
+		Polyfill.installPlayer();
+	}
 
 	/**
 	 * Initializes the lock player mechanic by starting the main tick loop.
