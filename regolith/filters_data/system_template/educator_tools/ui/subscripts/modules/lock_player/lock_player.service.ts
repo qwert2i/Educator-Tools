@@ -11,6 +11,7 @@ import { LockPlayerTeamScene } from "./lock_player_team.scene";
 import { Module, ModuleManager } from "../../module-manager";
 import { LockPlayerMechanic } from "./lock_player.mechanic";
 import { TeamsService } from "../teams/teams.service";
+import { LockPlayerTeamSettingsScene } from "./lock_player_team_settings.scene";
 
 export interface LockSettings {
 	radius: number; // The radius around the player that will be locked
@@ -70,6 +71,12 @@ export class LockPlayerService implements Module {
 			LockPlayerTeamScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new LockPlayerTeamScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			LockPlayerTeamSettingsScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new LockPlayerTeamSettingsScene(manager, context, this);
 			},
 		);
 	}
