@@ -62,6 +62,13 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 			},
 			"textures/edu_tools/ui/icons/lock_player/teleport_to_center",
 		);
+		this.addButton(
+			"edu_tools.ui.lock_player_team_settings.button.delete_lock",
+			() => {
+				this.lockPlayerService.clearLockSettings(subjectTeam.id);
+			},
+			"textures/edu_tools/ui/icons/lock_player/delete_lock",
+		);
 
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
