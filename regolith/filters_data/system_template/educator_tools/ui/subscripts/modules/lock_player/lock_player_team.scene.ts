@@ -43,13 +43,13 @@ export class LockPlayerTeamScene extends ModalUIScene {
 		this.addSlider(
 			{ translate: "edu_tools.ui.lock_player_team.radius" },
 			5,
-			100,
+			150,
 			(value: number) => {
 				context.setData("radius", value);
 			},
 			{
 				defaultValue: currentLock?.radius || 16,
-				valueStep: 5,
+				valueStep: 1,
 				tooltip: "edu_tools.ui.lock_player_team.radius_tooltip",
 			},
 		);
