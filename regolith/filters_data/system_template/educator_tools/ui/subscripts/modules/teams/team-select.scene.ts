@@ -8,7 +8,11 @@ import { TeamsService } from "./teams.service";
 export class TeamSelectScene extends ActionUIScene {
 	static readonly id = "team_select";
 
-	constructor(sceneManager: SceneManager, context: SceneContext) {
+	constructor(
+		sceneManager: SceneManager,
+		context: SceneContext,
+		teamsService: TeamsService,
+	) {
 		// Call parent constructor with scene id and source player
 		super(TeamSelectScene.id, context.getSourcePlayer());
 
@@ -16,11 +20,6 @@ export class TeamSelectScene extends ActionUIScene {
 		this.setContext(context);
 		// Set the body text depending on which team selection is required
 		this.setBodyByContext(context);
-
-		// Get the TeamsService module to access team data
-		const teamsService = sceneManager
-			.getModuleManager()
-			.getModule("teams") as TeamsService;
 
 		const teamFilter = context.getData("team_filter");
 
@@ -30,7 +29,7 @@ export class TeamSelectScene extends ActionUIScene {
 			if (
 				teamFilter &&
 				teamFilter instanceof Function &&
-				!teamFilter(team, this)
+				!teamFilter(team, teamsService)
 			) {
 				return; // Skip teams that do not match the filter
 			}

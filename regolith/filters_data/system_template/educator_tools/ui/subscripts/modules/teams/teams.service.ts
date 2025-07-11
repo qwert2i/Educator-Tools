@@ -40,7 +40,7 @@ export class TeamsService implements Module {
 			TeamSelectScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				// Create a new instance of MainScene
-				new TeamSelectScene(manager, context);
+				new TeamSelectScene(manager, context, this);
 			},
 		);
 		sceneManager.registerScene(
