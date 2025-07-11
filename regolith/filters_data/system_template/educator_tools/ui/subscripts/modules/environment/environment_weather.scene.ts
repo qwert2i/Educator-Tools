@@ -12,7 +12,7 @@ export class EnvironmentWeatherScene extends ModalUIScene {
 		context: SceneContext,
 		environmentService: EnvironmentService,
 	) {
-		super(EnvironmentWeatherScene.id, context.getSourcePlayer(), "confirm");
+		super(EnvironmentWeatherScene.id, context.getSourcePlayer());
 
 		this.setContext(context);
 

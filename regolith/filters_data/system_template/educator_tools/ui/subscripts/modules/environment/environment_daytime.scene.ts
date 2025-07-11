@@ -12,7 +12,7 @@ export class EnvironmentDaytimeScene extends ModalUIScene {
 		context: SceneContext,
 		environmentService: EnvironmentService,
 	) {
-		super(EnvironmentDaytimeScene.id, context.getSourcePlayer(), "confirm");
+		super(EnvironmentDaytimeScene.id, context.getSourcePlayer());
 
 		this.setContext(context);
 
