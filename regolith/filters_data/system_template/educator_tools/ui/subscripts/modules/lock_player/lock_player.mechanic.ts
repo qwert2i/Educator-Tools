@@ -26,8 +26,11 @@ export class LockPlayerMechanic {
 	/** Safety margin from the lock radius when teleporting players back */
 	private static readonly TELEPORT_SAFETY_MARGIN = 5;
 
-	private static readonly SPHERE_POINTS_COUNT = 1000;
+	private static readonly SPHERE_POINTS_COUNT = 3000;
 	private static readonly SPHERE_POINTS_RADIUS = 3;
+
+	/** Active boundary display jobs per player */
+	private activeBoundaryJobs: Map<string, number> = new Map();
 
 	constructor(
 		private readonly lockPlayerService: LockPlayerService,
@@ -125,9 +128,15 @@ export class LockPlayerMechanic {
 		const center = lockSettings.center;
 		const distance = Vec3.from(playerLocation).distance(center);
 
+		// Calculate dynamic activation radius based on lock radius
+		const dynamicActivationRadius = Math.max(
+			LockPlayerMechanic.SPHERE_POINTS_RADIUS,
+			lockSettings.radius / 5,
+		);
+
 		if (
 			lockSettings.showBoundaries &&
-			lockSettings.radius - distance < LockPlayerMechanic.SPHERE_POINTS_RADIUS
+			lockSettings.radius - distance < dynamicActivationRadius
 		) {
 			this.displayBoundary(player, lockSettings);
 		}
@@ -272,23 +281,115 @@ export class LockPlayerMechanic {
 		if (!lockSettings) {
 			return;
 		}
+
+		const playerId = player.id;
+
+		// Check if there's already an active job for this player
+		const existingJobId = this.activeBoundaryJobs.get(playerId);
+		if (existingJobId !== undefined) {
+			// Job is still running, no need to start a new one
+			return;
+		}
+
 		const center = lockSettings.center;
 		const radius = lockSettings.radius;
+
+		// Calculate distance from player to boundary edge
+		const playerDistance = Vec3.from(player.location).distance(center);
+		const distanceFromEdge = radius - playerDistance;
+
+		// Calculate dynamic sphere points count with radius scaling
+		const dynamicPointsCount = this.calculateDynamicPointsCount(
+			distanceFromEdge,
+			radius,
+		);
+
 		const spherePoints = this.generateSpherePoints(
 			center,
 			radius,
-			LockPlayerMechanic.SPHERE_POINTS_COUNT,
+			dynamicPointsCount,
 			player.location,
 			LockPlayerMechanic.SPHERE_POINTS_RADIUS,
 		);
+
 		if (spherePoints.length === 0) {
 			return; // No points generated, nothing to display
 		}
-		for (const point of spherePoints) {
-			player.dimension.spawnParticle(
-				"minecraft:redstone_torch_dust_particle",
-				point,
-			);
+
+		// Start the boundary display job
+		const jobId = system.runJob(
+			this.boundaryDisplayGenerator(player, spherePoints),
+		);
+		this.activeBoundaryJobs.set(playerId, jobId);
+	}
+
+	/**
+	 * Calculates the dynamic sphere points count based on distance from boundary edge.
+	 * Returns 100% of SPHERE_POINTS_COUNT when player is at SPHERE_POINTS_RADIUS+1 blocks from edge,
+	 * and reduces by 15% for each additional block of distance.
+	 * Also applies radius-based scaling (SPHERE_POINTS_COUNT * radius/5).
+	 * @param distanceFromEdge - The distance from the player to the boundary edge
+	 * @param radius - The lock radius for scaling calculation
+	 * @returns The calculated number of sphere points to generate
+	 */
+	private calculateDynamicPointsCount(
+		distanceFromEdge: number,
+		radius: number,
+	): number {
+		const thresholdDistance = LockPlayerMechanic.SPHERE_POINTS_RADIUS + 1;
+
+		// Calculate base count with radius scaling
+		const baseCount = Math.floor(
+			LockPlayerMechanic.SPHERE_POINTS_COUNT * (radius / 5),
+		);
+
+		// If player is at or closer than threshold distance, use full count
+		if (distanceFromEdge >= thresholdDistance) {
+			return baseCount;
+		}
+
+		// Calculate how many blocks beyond threshold the player is
+		const blocksOverThreshold = thresholdDistance - distanceFromEdge;
+
+		// Apply 15% reduction per block (0.85 multiplier per block)
+		const reductionFactor = Math.pow(0.85, blocksOverThreshold);
+
+		// Calculate final count and ensure it's at least 1
+		const dynamicCount = Math.max(1, Math.floor(baseCount * reductionFactor));
+
+		return dynamicCount;
+	}
+
+	/**
+	 * Generator function that displays boundary particles with yielding between spawns
+	 * @param player - The player to display boundaries for
+	 * @param spherePoints - Array of points to display as particles
+	 */
+	private *boundaryDisplayGenerator(
+		player: Player,
+		spherePoints: Vector3[],
+	): Generator<void, void, void> {
+		const playerId = player.id;
+
+		try {
+			for (const point of spherePoints) {
+				// Check if player still exists
+				const currentPlayer = world.getEntity(playerId) as Player;
+				if (!currentPlayer) {
+					break; // Player no longer exists, stop generating
+				}
+
+				currentPlayer.dimension.spawnParticle(
+					"minecraft:redstone_wire_dust_particle",
+					point,
+				);
+
+				// Yield to allow other operations to run
+				yield;
+			}
+		} finally {
+			// Clean up the job tracking when generator completes or is interrupted
+			this.activeBoundaryJobs.delete(playerId);
 		}
 	}
 
@@ -420,5 +521,11 @@ export class LockPlayerMechanic {
 			system.clearRun(this.taskId);
 			this.taskId = null;
 		}
+
+		// Clear all active boundary jobs
+		for (const [playerId, jobId] of this.activeBoundaryJobs.entries()) {
+			system.clearJob(jobId);
+		}
+		this.activeBoundaryJobs.clear();
 	}
 }
