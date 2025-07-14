@@ -40,6 +40,14 @@ export class SceneContext {
 	}
 
 	/**
+	 * Sets the scene history to a specific array.
+	 * @param history - The array of scene names to set as history.
+	 */
+	public setHistory(history: string[]): void {
+		this.sceneHistory = [...history];
+	}
+
+	/**
 	 * Gets the previous scene from the history.
 	 * @returns The name of the previous scene or null if there isn't one.
 	 */
