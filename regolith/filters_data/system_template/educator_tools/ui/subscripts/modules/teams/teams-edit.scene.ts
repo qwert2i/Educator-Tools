@@ -61,7 +61,10 @@ export class TeamsEditScene extends ModalUIScene {
 			},
 		);
 
-		this.show(context.getSourcePlayer(), sceneManager).then(() => {
+		this.show(context.getSourcePlayer(), sceneManager).then((r) => {
+			if (r.canceled) {
+				return;
+			}
 			this.applyChanges(context);
 		});
 	}
