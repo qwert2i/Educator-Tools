@@ -57,37 +57,37 @@ export class AssignmentService implements Module {
 	registerScenes(sceneManager: SceneManager): void {
 		// Register scenes related to assignment management
 		sceneManager.registerScene(
-			"assignment_teacher",
+			AssignmentTeacherScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentTeacherScene(manager, context);
 			},
 		);
 		sceneManager.registerScene(
-			"active_assignments",
+			AssignmentListTeacherScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentListTeacherScene(manager, context, this, "active");
 			},
 		);
 		sceneManager.registerScene(
-			"completed_assignments",
+			AssignmentListTeacherScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentListTeacherScene(manager, context, this, "completed");
 			},
 		);
 		sceneManager.registerScene(
-			"assignment_manage",
+			AssignmentManageScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentManageScene(manager, context, this);
 			},
 		);
 		sceneManager.registerScene(
-			"assignment_created",
+			AssignmentCreatedScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentCreatedScene(manager, context, this);
 			},
 		);
 		sceneManager.registerScene(
-			"assignment_create",
+			AssignmentCreateScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentCreateScene(manager, context);
 			},
