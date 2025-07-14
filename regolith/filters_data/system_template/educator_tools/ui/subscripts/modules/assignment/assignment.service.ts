@@ -8,6 +8,7 @@ import { AssignmentTeacherScene } from "./assignment-teacher.scene";
 import { AssignmentListTeacherScene } from "./assignment-list-teacher.scene";
 import { AssignmentManageScene } from "./assignment-manage.scene";
 import { AssignmentCreatedScene } from "./assignment-created.scene";
+import { ButtonConfig } from "../main/main.service";
 
 export interface Assignment {
 	id: string;
@@ -44,7 +45,7 @@ export class AssignmentService implements Module {
 	registerScenes(sceneManager: SceneManager): void {
 		// Register scenes related to assignment management
 		sceneManager.registerScene(
-			"assugnment_teacher",
+			"assignment_teacher",
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentTeacherScene(manager, context);
 			},
@@ -73,6 +74,17 @@ export class AssignmentService implements Module {
 				new AssignmentCreatedScene(manager, context, this);
 			},
 		);
+	}
+
+	getMainButton(): ButtonConfig {
+		return {
+			labelKey: "edu_tools.ui.main.buttons.assignments",
+			iconPath: "textures/edu_tools/ui/icons/main/assignments",
+			handler: (sceneManager: SceneManager, context: SceneContext) => {
+				sceneManager.openSceneWithContext(context, "assignment_teacher", true);
+			},
+			weight: 60,
+		};
 	}
 
 	notifyAssignmentCreated(assignment: Assignment): void {
