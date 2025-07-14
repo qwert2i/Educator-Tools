@@ -32,6 +32,14 @@ export class AssignmentService implements Module {
 	private readonly repository: AssignmentRepository;
 	private teamsService: TeamsService;
 
+	public static readonly availableIcons = [
+		"clownfish",
+		"diamond",
+		"egg",
+		"iron_axe",
+		"potato",
+	];
+
 	constructor(private readonly moduleManager: ModuleManager) {
 		this.repository = new AssignmentRepository();
 	}
