@@ -1,4 +1,4 @@
-import { Difficulty, world } from "@minecraft/server";
+import { Difficulty, RawMessage, world } from "@minecraft/server";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { SceneContext } from "../scene_manager/scene-context";
 import { ModalUIScene } from "../scene_manager/ui-scene";
@@ -40,10 +40,15 @@ export class WorldSettingsScene extends ModalUIScene {
 		const difficulties = Object.keys(Difficulty).filter((key) =>
 			isNaN(Number(key)),
 		);
+		const difficultiesLangKeys: RawMessage[] = difficulties.map(
+			(difficulty) => ({
+				translate: `edu_tools.ui.world_settings.difficulty.${difficulty.toLowerCase()}`,
+			}),
+		);
 
 		this.addDropdown(
 			"edu_tools.ui.world_settings.select_difficulty",
-			difficulties,
+			difficultiesLangKeys,
 			(selectedDifficulty: number): void => {
 				const difficulty = difficulties[selectedDifficulty];
 				this.worldSettingsService.setDifficulty(

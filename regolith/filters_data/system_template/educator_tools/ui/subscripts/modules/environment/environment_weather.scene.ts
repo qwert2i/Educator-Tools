@@ -19,8 +19,14 @@ export class EnvironmentWeatherScene extends ModalUIScene {
 		const weatherTypes = Object.keys(WeatherType).filter((key) =>
 			isNaN(Number(key)),
 		);
+		const weatherTypesLangKeys = weatherTypes.map((weather) => ({
+			translate: `edu_tools.ui.environment_weather.select_weather.options.${weather.toLowerCase()}`,
+		}));
 		// Add a "no change" option
-		weatherTypes.unshift("edu_tools.ui.environment_weather.no_change");
+		weatherTypesLangKeys.unshift({
+			translate:
+				"edu_tools.ui.environment_weather.select_weather.options.no_change",
+		});
 
 		this.addDropdown(
 			"edu_tools.ui.environment_weather.select_weather",
