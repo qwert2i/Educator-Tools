@@ -10,6 +10,9 @@ import { AssignmentManageScene } from "./assignment-manage.scene";
 import { AssignmentCreatedScene } from "./assignment-created.scene";
 import { ButtonConfig } from "../main/main.service";
 import { AssignmentCreateScene } from "./assignment-create.scene";
+import { AssignmentStudentListScene } from "./assignment-student-list.scene";
+import { AssignmentStudentDetailScene } from "./assignment-student-detail.scene";
+import { AssignmentStudentSubmitScene } from "./assignment-student-submit.scene";
 
 export interface Assignment {
 	id: string;
@@ -87,6 +90,25 @@ export class AssignmentService implements Module {
 			"assignment_create",
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentCreateScene(manager, context);
+			},
+		);
+		sceneManager.registerScene(
+			AssignmentStudentListScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentStudentListScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			AssignmentStudentDetailScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentStudentDetailScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			AssignmentStudentSubmitScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// This scene is for students to submit their assignments
+				new AssignmentStudentSubmitScene(manager, context, this);
 			},
 		);
 	}
