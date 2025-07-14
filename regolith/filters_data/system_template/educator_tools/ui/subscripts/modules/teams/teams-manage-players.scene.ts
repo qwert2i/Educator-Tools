@@ -19,6 +19,7 @@ export class TeamsManagePlayersScene extends ActionUIScene {
 			{ translate: "edu_tools.ui.teams_manage_players.body.2" },
 		]);
 		const subjectTeam = context.getSubjectTeam()!;
+		const sourcePlayer = context.getSourcePlayer();
 
 		this.addButton(
 			"edu_tools.ui.teams_manage_players.buttons.add_player",
@@ -52,6 +53,12 @@ export class TeamsManagePlayersScene extends ActionUIScene {
 					(team: Team, teamsService: TeamsService): boolean => {
 						if (teamsService.isPlayerTeam(team.id)) {
 							const playerId = team.memberIds[0];
+							if (
+								subjectTeam.id === TeamsService.TEACHERS_TEAM_ID &&
+								sourcePlayer.id === playerId
+							) {
+								return false;
+							}
 							return subjectTeam.memberIds.includes(playerId);
 						}
 						return false;
