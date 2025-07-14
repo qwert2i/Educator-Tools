@@ -35,11 +35,11 @@ export class TeamsEditPlayersApply extends ActionUIScene {
 		}
 
 		this.addButton(
-			"edu_tools.ui.teams_edit_players_apply.buttons.return",
+			"edu_tools.ui.buttons.back",
 			(): void => {
 				sceneManager.goBackToScene(context, "teams_manage_players");
 			},
-			"textures/edu_tools/ui/icons/return",
+			"textures/edu_tools/ui/icons/_general/back",
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);
