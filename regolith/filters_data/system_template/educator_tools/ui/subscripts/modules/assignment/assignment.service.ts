@@ -179,6 +179,10 @@ export class AssignmentService implements Module {
 		return this.repository.moveToCompleted(id);
 	}
 
+	isAssignmentActive(id: string): boolean {
+		return this.repository.isAssignmentActive(id);
+	}
+
 	getActiveAssignments(): Assignment[] {
 		const activeIds = this.repository.getActiveAssignmentIds();
 		return activeIds

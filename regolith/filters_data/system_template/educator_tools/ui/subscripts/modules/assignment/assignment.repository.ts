@@ -34,6 +34,11 @@ export class AssignmentRepository {
 		return true;
 	}
 
+	isAssignmentActive(id: string): boolean {
+		const activeAssignments = this.storage.get("active") || [];
+		return activeAssignments.includes(id);
+	}
+
 	moveToCompleted(id: string): boolean {
 		const existingData = this.storage.get(id);
 		if (!existingData) {
