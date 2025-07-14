@@ -322,11 +322,11 @@ export class TeamsService implements Module {
 				!existingTeam ||
 				this.getTeamHash(team) !== this.getTeamHash(existingTeam)
 			) {
-				this.storage.set(team.id, team);
+				this.storage.set(team.id, { ...team, icon: "player_offline" });
 			}
 		} else if (existingTeam) {
 			// If player is not online, return existing team if it exists
-			team = { ...existingTeam, icon: "player_offline" };
+			team = existingTeam;
 		}
 		return team;
 	}
