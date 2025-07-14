@@ -239,7 +239,17 @@ export class TeamsService implements Module {
 	getAllTeams(): Team[] {
 		const systemTeams = this.getSystemTeams();
 		const storedTeams = this.getAllTeamsData();
-		return [...systemTeams, ...storedTeams];
+		// Merge teams giving priority to system teams
+		const allTeams = new Map<string, Team>();
+		for (const team of systemTeams) {
+			allTeams.set(team.id, team);
+		}
+		for (const team of storedTeams) {
+			if (!allTeams.has(team.id)) {
+				allTeams.set(team.id, team);
+			}
+		}
+		return Array.from(allTeams.values());
 	}
 
 	/**
