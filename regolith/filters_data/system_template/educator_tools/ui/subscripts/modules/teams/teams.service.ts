@@ -494,10 +494,10 @@ export class TeamsService implements Module {
 	 * @returns Object with team IDs as keys and team objects as values
 	 */
 	private getAllTeamsData(): Team[] {
-		const allKeys: Record<string, any>[] = this.storage.getAll();
+		const allKeys: string[] = this.storage.getKeys();
 		return allKeys
 			.map((key) => {
-				const team = this.storage.get(key.id) as Team | undefined;
+				const team = this.storage.get(key) as Team | undefined;
 				return team || null;
 			})
 			.filter((team): team is Team => team !== null);
