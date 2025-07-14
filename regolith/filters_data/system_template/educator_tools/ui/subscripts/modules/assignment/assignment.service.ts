@@ -9,6 +9,7 @@ import { AssignmentListTeacherScene } from "./assignment-list-teacher.scene";
 import { AssignmentManageScene } from "./assignment-manage.scene";
 import { AssignmentCreatedScene } from "./assignment-created.scene";
 import { ButtonConfig } from "../main/main.service";
+import { AssignmentCreateScene } from "./assignment-create.scene";
 
 export interface Assignment {
 	id: string;
@@ -80,6 +81,12 @@ export class AssignmentService implements Module {
 			"assignment_created",
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentCreatedScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			"assignment_create",
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentCreateScene(manager, context);
 			},
 		);
 	}
