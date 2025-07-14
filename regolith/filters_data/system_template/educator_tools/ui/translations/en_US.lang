@@ -213,3 +213,4 @@ edu_tools.ui.assignment_create.toggles.notify=Notify Students
 edu_tools.ui.assignment_create.toggles.notify_tooltip=Enable or disable notifications for students when the assignment is created.
 edu_tools.ui.assignment_list_teacher.title=§fAssignments
 edu_tools.ui.assignment.no_assignments=No assignments found
+edu_tools.ui.assignment_student_list.title=§fStudent List
