@@ -63,13 +63,13 @@ export class AssignmentService implements Module {
 			},
 		);
 		sceneManager.registerScene(
-			AssignmentListTeacherScene.id,
+			"active_assignments",
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentListTeacherScene(manager, context, this, "active");
 			},
 		);
 		sceneManager.registerScene(
-			AssignmentListTeacherScene.id,
+			"completed_assignments",
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentListTeacherScene(manager, context, this, "completed");
 			},
