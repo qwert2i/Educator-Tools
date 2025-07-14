@@ -14,26 +14,35 @@ export class AssignmentStudentDetailScene extends ActionUIScene {
 		super(AssignmentStudentDetailScene.id, context.getSourcePlayer());
 
 		const assignmentId = context.getData("assignment");
-		const assignment = assignmentId ? assignmentService.getAssignment(assignmentId) : null;
+		const assignment = assignmentId
+			? assignmentService.getAssignment(assignmentId)
+			: null;
 
 		// Handle error states
 		if (!assignmentId || !assignment) {
 			this.handleError(
-				assignmentId ? "edu_tools.ui.assignment.assignment_not_found" : "edu_tools.ui.assignment.no_assignment_selected",
+				assignmentId
+					? "edu_tools.ui.assignment.assignment_not_found"
+					: "edu_tools.ui.assignment.no_assignment_selected",
 				sceneManager,
-				context
+				context,
 			);
 			return;
 		}
 
-		const submission = assignmentService.getSubmission(assignmentId, context.getSourcePlayer().id);
+		const submission = assignmentService.getSubmission(
+			assignmentId,
+			context.getSourcePlayer().id,
+		);
 		const isActive = assignmentService.isAssignmentActive(assignmentId);
 
 		// Display assignment details
 		this.addLabel(assignment.title);
 		this.addLabel(assignment.description);
 		this.addDivider();
-		this.addLabel({ translate: "edu_tools.ui.assignment_student_detail.submission" });
+		this.addLabel({
+			translate: "edu_tools.ui.assignment_student_detail.submission",
+		});
 
 		// Handle submission UI
 		this.handleSubmissionUI(isActive, submission, sceneManager, context);
@@ -41,41 +50,45 @@ export class AssignmentStudentDetailScene extends ActionUIScene {
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
 
-	private handleError(messageKey: string, sceneManager: SceneManager, context: SceneContext) {
+	private handleError(
+		messageKey: string,
+		sceneManager: SceneManager,
+		context: SceneContext,
+	) {
 		this.setRawBody([{ translate: messageKey }]);
 		this.addBackButton(sceneManager, context);
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
 
-	private handleSubmissionUI(isActive: boolean, submission: any, sceneManager: SceneManager, context: SceneContext) {
+	private handleSubmissionUI(
+		isActive: boolean,
+		submission: any,
+		sceneManager: SceneManager,
+		context: SceneContext,
+	) {
 		if (isActive && !submission) {
 			this.addButton(
 				"edu_tools.ui.assignment_student_detail.submit",
 				() => {
-					sceneManager.openSceneWithContext(context, "assignment_student_submission", true);
+					sceneManager.openSceneWithContext(
+						context,
+						"assignment_student_submission",
+						true,
+					);
 				},
 				"textures/edu_tools/ui/icons/assignment/submit",
 			);
 		} else {
-			const messageKey = isActive && submission 
-				? "edu_tools.ui.assignment_student_detail.already_submitted"
-				: "edu_tools.ui.assignment_student_detail.completed";
-			
+			const messageKey =
+				isActive && submission
+					? "edu_tools.ui.assignment_student_detail.already_submitted"
+					: "edu_tools.ui.assignment_student_detail.completed";
+
 			this.addLabel({ translate: messageKey });
 			this.addBackButton(sceneManager, context);
 		}
 	}
 
-	private addBackButton(sceneManager: SceneManager, context: SceneContext) {
-		this.addButton(
-			"edu_tools.ui.buttons.back",
-			() => {
-				sceneManager.goBackToScene(context, "assignment_student_list");
-			},
-			"textures/edu_tools/ui/icons/_general/back",
-		);
-	}
-}
 	private addBackButton(sceneManager: SceneManager, context: SceneContext) {
 		this.addButton(
 			"edu_tools.ui.buttons.back",
