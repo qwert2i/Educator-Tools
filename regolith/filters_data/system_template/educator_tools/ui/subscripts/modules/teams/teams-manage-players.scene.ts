@@ -38,7 +38,7 @@ export class TeamsManagePlayersScene extends ActionUIScene {
 				);
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
-			"textures/edu_tools/ui/icons/teams/add_player",
+			"textures/edu_tools/ui/icons/teams_management/add_player",
 		);
 
 		this.addButton(
@@ -59,7 +59,7 @@ export class TeamsManagePlayersScene extends ActionUIScene {
 				);
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
-			"textures/edu_tools/ui/icons/teams/remove_player",
+			"textures/edu_tools/ui/icons/teams_management/remove_player",
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);

@@ -17,7 +17,7 @@ export class TeamsManagementScene extends ActionUIScene {
 			(): void => {
 				sceneManager.openSceneWithContext(context, "teams_edit", true);
 			},
-			"textures/edu_tools/ui/icons/teams/create_team",
+			"textures/edu_tools/ui/icons/teams_management/create_team",
 		);
 
 		this.addButton(
@@ -30,7 +30,7 @@ export class TeamsManagementScene extends ActionUIScene {
 				});
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
-			"textures/edu_tools/ui/icons/teams/edit_team",
+			"textures/edu_tools/ui/icons/teams_management/edit_team",
 		);
 
 		this.addButton(
@@ -43,7 +43,7 @@ export class TeamsManagementScene extends ActionUIScene {
 				});
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
-			"textures/edu_tools/ui/icons/teams/delete_team",
+			"textures/edu_tools/ui/icons/teams_management/delete_team",
 		);
 
 		context.setTargetTeam(null);
@@ -58,7 +58,7 @@ export class TeamsManagementScene extends ActionUIScene {
 				});
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
-			"textures/edu_tools/ui/icons/teams/manage_players",
+			"textures/edu_tools/ui/icons/teams_management/manage_players",
 		);
 
 		this.show(context.getSourcePlayer(), sceneManager);
