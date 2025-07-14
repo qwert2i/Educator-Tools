@@ -1,4 +1,9 @@
-import { Player } from "@minecraft/server";
+import {
+	Player,
+	ScriptEventCommandMessageAfterEvent,
+	ScriptEventCommandMessageAfterEventSignal,
+	system,
+} from "@minecraft/server";
 import { PropertyStorage } from "@shapescape/storage";
 import { ModuleManager, Module } from "../../module-manager";
 import { TeamsService } from "../teams/teams.service";
@@ -57,6 +62,38 @@ export class SceneManager implements Module {
 
 		// Register scenes from all modules
 		this.moduleManager.registerAllModuleScenes(this);
+	}
+
+	initialize(): void {
+		system.afterEvents.scriptEventReceive.subscribe(
+			(scriptMessage: ScriptEventCommandMessageAfterEvent) => {
+				if (scriptMessage.id === "edu_tools:scene_manager") {
+					this.handleScriptCommand(scriptMessage);
+				}
+			},
+		);
+	}
+
+	private handleScriptCommand(
+		scriptMessage: ScriptEventCommandMessageAfterEvent,
+	) {
+		const args = scriptMessage.message.toLowerCase().split(" ");
+		const command = args.shift()?.toLowerCase();
+		switch (command) {
+			case "open":
+				if (args.length < 1) {
+					console.error("No scene name provided to open command.");
+					return;
+				}
+				const sceneName = args[0];
+				const context = this.createContextAndOpenScene(
+					scriptMessage.sourceEntity as Player,
+					sceneName,
+					...args.slice(1),
+				);
+				this.openSceneWithContext(context, sceneName, true);
+				break;
+		}
 	}
 
 	/**
