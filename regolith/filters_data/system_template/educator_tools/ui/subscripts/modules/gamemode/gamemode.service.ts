@@ -44,7 +44,7 @@ export class GamemodeService implements Module {
 						const player = world.getEntity(memberId) as Player;
 						if (!!player) return true; // Include teams with at least one online player
 					}
-					return true;
+					return false;
 				});
 				sceneManager.openSceneWithContext(context, "team_select", false);
 			},
