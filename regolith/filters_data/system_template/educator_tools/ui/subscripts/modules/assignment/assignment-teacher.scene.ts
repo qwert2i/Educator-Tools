@@ -7,13 +7,7 @@ export class AssignmentTeacherScene extends ActionUIScene {
 
 	constructor(sceneManager: SceneManager, context: SceneContext) {
 		super(AssignmentTeacherScene.id, context.getSourcePlayer());
-		this.setRawBody([
-			{ translate: "edu_tools.ui.assignment.teacher.body.1" },
-			{ text: " §9" },
-			{ text: context.getSubjectTeam()!.name },
-			{ text: " §r" },
-			{ translate: "edu_tools.ui.assignment.teacher.body.2" },
-		]);
+		this.setRawBody([{ translate: "edu_tools.ui.assignment.teacher.body" }]);
 
 		this.addButton(
 			"edu_tools.ui.assignment.teacher.buttons.create_assignment",
