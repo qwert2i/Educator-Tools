@@ -34,12 +34,10 @@ export class TeamSelectScene extends ActionUIScene {
 				return; // Skip teams that do not match the filter
 			}
 			let buttonText = "edu_tools.ui.team.name." + team.id;
-			if (teamsService.isSystemTeam(team.id)) {
-				if (teamsService.isPlayerTeam(team.id)) {
-					const player = world.getEntity(team.memberIds[0]) as Player;
-					buttonText = player.name;
-				}
-			} else {
+			if (
+				!teamsService.isSystemTeam(team.id) ||
+				teamsService.isPlayerTeam(team.id)
+			) {
 				buttonText = team.name;
 			}
 			if (
