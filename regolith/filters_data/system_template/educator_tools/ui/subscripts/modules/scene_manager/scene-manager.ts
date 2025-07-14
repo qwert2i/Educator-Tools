@@ -135,17 +135,62 @@ export class SceneManager implements Module {
 	 * Navigates to the previous scene in the context's history.
 	 * @param context - The context containing the history.
 	 */
-	public goBack(context: SceneContext): void {
-		const previousScene = context.getPreviousScene();
-		if (previousScene) {
-			// Remove the current scene from history first
+	public goBack(context: SceneContext, steps: number = 1): void {
+		if (steps < 1) {
+			console.warn("goBack called with steps less than 1, ignoring.");
+			return;
+		}
+		// Ensure we have enough history to go back
+		if (context.getHistory().length < steps) {
+			console.warn(
+				"Not enough history to go back the requested number of steps.",
+			);
+			return;
+		}
+		// Remove the last 'steps' entries from history
+		let previousSceneId =
+			context.getHistory()[context.getHistory().length - steps - 1];
+		for (let i = 0; i < steps; i++) {
 			context.getHistory().pop();
-
-			// Now open the previous scene
-			const sceneFactory = this.sceneRegistry.get(previousScene);
+		}
+		// If the history is now empty, we can return to the main scene
+		if (context.getHistory().length === 0) {
+			this.openSceneWithContext(context, MainScene.id, true);
+		} else {
+			const sceneFactory = this.sceneRegistry.get(previousSceneId);
 			if (sceneFactory) {
 				sceneFactory(this, context);
 			}
+		}
+	}
+
+	/**
+	 * Navigates back to a specific scene in the history and clears all history after that scene.
+	 * @param context - The context containing the history.
+	 * @param targetSceneId - The ID of the scene to go back to.
+	 * @returns True if the scene was found and navigated to, false otherwise.
+	 */
+	public goBackToScene(context: SceneContext, targetSceneId: string): boolean {
+		const history = context.getHistory();
+		const targetIndex = history.lastIndexOf(targetSceneId);
+
+		if (targetIndex === -1) {
+			console.warn(`Scene '${targetSceneId}' not found in history.`);
+			return false;
+		}
+
+		// Remove all history entries after the target scene
+		history.splice(targetIndex + 1);
+		context.setHistory(history);
+
+		// Navigate to the target scene without adding to history
+		const sceneFactory = this.sceneRegistry.get(targetSceneId);
+		if (sceneFactory) {
+			sceneFactory(this, context);
+			return true;
+		} else {
+			console.error(`Scene '${targetSceneId}' not found in registry`);
+			return false;
 		}
 	}
 
