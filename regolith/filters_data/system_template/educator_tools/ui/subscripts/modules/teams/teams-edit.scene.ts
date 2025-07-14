@@ -40,9 +40,16 @@ export class TeamsEditScene extends ModalUIScene {
 			},
 		);
 
+		const iconsKeys: RawMessage[] = TeamsService.availableIcons.map(
+			(icon) =>
+				({
+					translate: `edu_tools.ui.teams_edit.icon.options.${icon.toLowerCase()}`,
+				} as const),
+		);
+
 		this.addDropdown(
 			"edu_tools.ui.teams_edit.icon",
-			TeamsService.availableIcons,
+			iconsKeys,
 			(selectedIcon: number): void => {
 				context.setData("team_icon", selectedIcon);
 			},
