@@ -58,6 +58,9 @@ edu_tools.ui.teams_manage_players.body.1=You are managing the players of the
 edu_tools.ui.teams_manage_players.body.2=§rteam
 edu_tools.ui.teams_manage_players.buttons.add_player=Add Player
 edu_tools.ui.teams_manage_players.buttons.remove_player=Remove Player
+edu_tools.ui.teams_edit_players_apply.title=§fTeam Updated
+edu_tools.ui.teams_edit_players_apply.add.body=Successfully added the player to the team
+edu_tools.ui.teams_edit_players_apply.remove.body=Successfully removed the player from the team
 
 ### Gamemode Scene
 edu_tools.ui.set_gamemode.title=§fSet Gamemode
