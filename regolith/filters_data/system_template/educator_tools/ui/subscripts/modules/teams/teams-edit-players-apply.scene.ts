@@ -20,10 +20,18 @@ export class TeamsEditPlayersApply extends ActionUIScene {
 		const action = context.getData("action");
 		if (action === "add") {
 			this.setSimpleBody("edu_tools.ui.teams_edit_players_apply.add.body");
-			teamsService.addPlayerToTeam(subjectTeam.id, targetTeam.id);
+			teamsService.addPlayerToTeam(subjectTeam.id, targetTeam.memberIds[0]);
 		} else if (action === "remove") {
 			this.setSimpleBody("edu_tools.ui.teams_edit_players_apply.remove.body");
-			teamsService.removePlayerFromTeam(subjectTeam.id, targetTeam.id);
+			teamsService.removePlayerFromTeam(
+				subjectTeam.id,
+				targetTeam.memberIds[0],
+			);
+		}
+
+		const updatedSubjectTeam = teamsService.getTeam(subjectTeam.id);
+		if (updatedSubjectTeam) {
+			context.setSubjectTeam(updatedSubjectTeam);
 		}
 
 		this.addButton(
