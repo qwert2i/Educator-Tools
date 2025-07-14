@@ -53,6 +53,11 @@ edu_tools.ui.teams_edit.icon.options.clownfish=Clownfish
 edu_tools.ui.teams_edit.icon.options.diamond=Diamond
 edu_tools.ui.teams_edit.icon.options.egg=Egg
 edu_tools.ui.teams_edit.icon.options.potato=Potato
+edu_tools.ui.teams_manage_players.title=§fManage Players
+edu_tools.ui.teams_manage_players.body.1=You are managing the players of the
+edu_tools.ui.teams_manage_players.body.2=§rteam
+edu_tools.ui.teams_manage_players.buttons.add_player=Add Player
+edu_tools.ui.teams_manage_players.buttons.remove_player=Remove Player
 
 ### Gamemode Scene
 edu_tools.ui.set_gamemode.title=§fSet Gamemode

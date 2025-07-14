@@ -46,10 +46,12 @@ export class TeamsManagementScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/teams/delete_team",
 		);
 
+		context.setTargetTeam(null);
+
 		this.addButton(
 			"edu_tools.ui.teams_management.buttons.manage_players",
 			(): void => {
-				context.setNextScene("manage_players");
+				context.setNextScene("teams_manage_players");
 				context.setSubjectTeamRequired(true);
 				context.setData("team_filter", (team: Team): boolean => {
 					return !!team.editable;

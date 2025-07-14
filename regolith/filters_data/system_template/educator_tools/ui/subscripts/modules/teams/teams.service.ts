@@ -9,6 +9,8 @@ import { TeamsDeleteScene } from "./team-delete.scene";
 import { TeamsEditScene } from "./teams-edit.scene";
 import { TeamsManagementScene } from "./teams-management.scene";
 import { ButtonConfig } from "../main/main.service";
+import { TeamsEditPlayersApply } from "./teams-edit-players-apply.scene";
+import { TeamsManagePlayersScene } from "./teams-manage-players.scene";
 
 /**
  * Service for managing player teams.
@@ -62,6 +64,20 @@ export class TeamsService implements Module {
 			(manager: SceneManager, context: SceneContext) => {
 				// Create a new instance of MainScene
 				new TeamsDeleteScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			TeamsEditPlayersApply.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsEditPlayersApply(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			TeamsManagePlayersScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				// Create a new instance of MainScene
+				new TeamsManagePlayersScene(manager, context);
 			},
 		);
 	}
