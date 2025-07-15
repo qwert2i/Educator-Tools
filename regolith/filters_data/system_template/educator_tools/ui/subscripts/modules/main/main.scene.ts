@@ -40,7 +40,7 @@ export class MainScene extends ActionUIScene {
 		}
 
 		this.addDivider();
-		this.addLabel("Made with ❤ by Shapescape - v" + getAddonVersion());
+		this.addLabel("Made with ❤ by Shapescape - " + getAddonVersion());
 
 		// Show the UI to the source player
 		this.show(context.getSourcePlayer(), sceneManager);
