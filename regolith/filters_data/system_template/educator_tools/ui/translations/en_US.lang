@@ -238,3 +238,5 @@ edu_tools.ui.copy_item.title=§fCopy Item
 edu_tools.ui.inventory_manage.copy_item.body.1=Successfully copied the item from
 edu_tools.ui.inventory_manage.copy_item.body.2=§rto
 edu_tools.ui.inventory_manage.copy_item.body.3=§r
+edu_tools.ui.copy_item.select_item=Select Item
+edu_tools.ui.copy_item.select_item_tooltip=Select the item to copy from the inventory
