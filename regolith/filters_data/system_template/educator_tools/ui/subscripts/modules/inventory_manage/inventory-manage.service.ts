@@ -185,9 +185,6 @@ export class InventoryManageService implements Module {
 	}
 
 	private inventoryCopy(source: Player, target: Player): void {
-		const isTeacher = this.teamsService
-			.getTeam("system_teachers")
-			?.memberIds.includes(source.id);
 		const sComponents = source.getComponent(
 			EntityInventoryComponent.componentId,
 		) as EntityInventoryComponent;
@@ -204,14 +201,18 @@ export class InventoryManageService implements Module {
 			for (let i = 0; i < sComponents.container.size; i++) {
 				const item = sComponents.container.getItem(i);
 				if (tComponents.container.size > i) {
-					if (item && item.typeId === "edu_tools:educator_tool" && !isTeacher) {
+					if (
+						item &&
+						item.typeId === "edu_tools:educator_tool" &&
+						!this.shouldGiveEducatorTool(target)
+					) {
 						// Do not copy the Educator Tool if the target player is not a teacher
 						continue;
 					}
 					tComponents.container.setItem(i, item);
 				}
 			}
-			if (this.shouldGiveEducatorTool(source, target)) {
+			if (this.shouldGiveEducatorTool(target)) {
 				if (!this.giveItem(target, "edu_tools:educator_tool")) {
 					world.sendMessage({
 						translate: "edu_tools.message.no_space_for_educator_tool",
@@ -237,10 +238,16 @@ export class InventoryManageService implements Module {
 			for (let i = 0; i < 9; i++) {
 				const item = sComponents.container.getItem(i);
 				if (tComponents.container.size > i) {
+					if (item && item.typeId === "edu_tools:educator_tool") {
+						// Do not copy the Educator Tool if the target player is not a teacher
+						if (!this.shouldGiveEducatorTool(target)) {
+							continue;
+						}
+					}
 					tComponents.container.setItem(i, item);
 				}
 			}
-			if (this.shouldGiveEducatorTool(source, target)) {
+			if (this.shouldGiveEducatorTool(target)) {
 				if (!this.giveItem(target, "edu_tools:educator_tool")) {
 					world.sendMessage({
 						translate: "edu_tools.message.no_space_for_educator_tool",
@@ -267,7 +274,7 @@ export class InventoryManageService implements Module {
 			if (item) {
 				if (
 					item.typeId === "edu_tools:educator_tool" &&
-					!this.shouldGiveEducatorTool(source, target)
+					!this.shouldGiveEducatorTool(target)
 				) {
 					return false; // Do not copy the Educator Tool if the target player is not a teacher
 				}
@@ -277,10 +284,10 @@ export class InventoryManageService implements Module {
 		return false; // Item not found or could not be copied
 	}
 
-	private shouldGiveEducatorTool(source: Player, target: Player): boolean {
+	private shouldGiveEducatorTool(target: Player): boolean {
 		const isTeacher = this.teamsService
 			.getTeam("system_teachers")
-			?.memberIds.includes(source.id);
+			?.memberIds.includes(target.id);
 		const tComponents = target.getComponent(
 			EntityInventoryComponent.componentId,
 		) as EntityInventoryComponent;
