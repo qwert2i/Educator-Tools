@@ -38,6 +38,9 @@ export class MainScene extends ActionUIScene {
 			);
 		}
 
+		this.addDivider();
+		this.addLabel("Made with ❤ by Shapescape - v2.0.0");
+
 		// Show the UI to the source player
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
