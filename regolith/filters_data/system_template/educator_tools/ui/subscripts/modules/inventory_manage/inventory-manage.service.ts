@@ -63,7 +63,7 @@ export class InventoryManageService implements Module {
 			ClearInventoryScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new ClearInventoryScene(manager, context, this);
-			}
+			},
 		);
 	}
 
