@@ -22,17 +22,30 @@ export class TeamSelectScene extends ActionUIScene {
 		this.setBodyByContext(context);
 
 		const teamFilter = context.getData("team_filter");
+		const teamFilterSubject = context.getData("team_filter_subject");
+		const teamFilterTarget = context.getData("team_filter_target");
 
 		// For each team, add a button to the UI
 		teamsService.getAllTeams().forEach((team) => {
-			// If a team filter is defined, apply it
-			if (
-				teamFilter &&
-				teamFilter instanceof Function &&
-				!teamFilter(team, teamsService)
+			// Determine which filter to apply based on context state
+			let shouldSkipTeam = false;
+
+			if (context.isSubjectTeamRequired() && teamFilterSubject) {
+				shouldSkipTeam = !teamFilterSubject(team, teamsService);
+			} else if (
+				!context.isSubjectTeamRequired() &&
+				context.isTargetTeamRequired() &&
+				teamFilterTarget
 			) {
-				return; // Skip teams that do not match the filter
+				shouldSkipTeam = !teamFilterTarget(team, teamsService);
+			} else if (teamFilter) {
+				shouldSkipTeam = !teamFilter(team, teamsService);
 			}
+
+			if (shouldSkipTeam) {
+				return; // Skip this team if it doesn't pass the filter
+			}
+
 			let buttonText = "edu_tools.ui.team.name." + team.id;
 			if (
 				!teamsService.isSystemTeam(team.id) ||
