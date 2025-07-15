@@ -38,7 +38,7 @@ export class InventoryManageService implements Module {
 		sceneManager.registerScene(
 			InventoryManageScene.id,
 			(manager: SceneManager, context: SceneContext) => {
-				new InventoryManageScene(manager, context, this);
+				new InventoryManageScene(manager, context);
 			},
 		);
 		sceneManager.registerScene(

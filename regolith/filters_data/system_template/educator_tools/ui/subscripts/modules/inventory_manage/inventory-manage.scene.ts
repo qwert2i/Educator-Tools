@@ -9,11 +9,7 @@ import { TeamsService } from "../teams/teams.service";
 export class InventoryManageScene extends ActionUIScene {
 	static readonly id = "inventory_manage";
 
-	constructor(
-		sceneManager: SceneManager,
-		context: SceneContext,
-		private inventoryManageService: InventoryManageService,
-	) {
+	constructor(sceneManager: SceneManager, context: SceneContext) {
 		super(InventoryManageScene.id, context.getSourcePlayer());
 
 		// Dynamically add toggles for all game rules
