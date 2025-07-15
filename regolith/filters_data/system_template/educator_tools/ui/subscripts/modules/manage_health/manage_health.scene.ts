@@ -26,7 +26,7 @@ export class ManageHealthScene extends ActionUIScene {
 
 		this.setRawBody([
 			{
-				translate: "edu_tools.ui.manage_health.team.body",
+				translate: "edu_tools.ui.manage_health.team.body.1",
 			},
 			{
 				text: " §9",
@@ -38,7 +38,7 @@ export class ManageHealthScene extends ActionUIScene {
 				text: " §r",
 			},
 			{
-				translate: "edu_tools.ui.manage_health.team.body2",
+				translate: "edu_tools.ui.manage_health.team.body.2",
 			},
 		]);
 

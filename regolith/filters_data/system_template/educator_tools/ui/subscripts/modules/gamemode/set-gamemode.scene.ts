@@ -25,7 +25,7 @@ export class SetGamemodeScene extends ActionUIScene {
 		const subjectTeam = context.getSubjectTeam()!;
 		this.setRawBody([
 			{
-				translate: "edu_tools.ui.set_gamemode.team.body",
+				translate: "edu_tools.ui.set_gamemode.team.body.1",
 			},
 			{
 				text: " §9",
@@ -37,7 +37,7 @@ export class SetGamemodeScene extends ActionUIScene {
 				text: " §r",
 			},
 			{
-				translate: "edu_tools.ui.set_gamemode.team.body2",
+				translate: "edu_tools.ui.set_gamemode.team.body.2",
 			},
 		]);
 

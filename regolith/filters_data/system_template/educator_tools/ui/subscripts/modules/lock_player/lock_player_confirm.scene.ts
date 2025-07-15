@@ -18,7 +18,7 @@ export class LockPlayerConfirmScene extends MessageUIScene {
 
 		this.setRawBody([
 			{
-				translate: "edu_tools.ui.lock_player.team.body",
+				translate: "edu_tools.ui.lock_player.team.body.1",
 			},
 			{
 				text: " §9",
@@ -30,7 +30,7 @@ export class LockPlayerConfirmScene extends MessageUIScene {
 				text: " §r",
 			},
 			{
-				translate: "edu_tools.ui.lock_player.team.body2",
+				translate: "edu_tools.ui.lock_player.team.body.2",
 			},
 		]);
 

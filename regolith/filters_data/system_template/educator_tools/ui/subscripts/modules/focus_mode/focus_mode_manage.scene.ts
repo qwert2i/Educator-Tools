@@ -27,7 +27,7 @@ export class FocusModeManageScene extends ModalUIScene {
 		this.addLabel({
 			rawtext: [
 				{
-					translate: "edu_tools.ui.focus_mode_manage.body",
+					translate: "edu_tools.ui.focus_mode_manage.body.1",
 				},
 				{
 					text: " §9",
@@ -37,6 +37,9 @@ export class FocusModeManageScene extends ModalUIScene {
 				},
 				{
 					text: " §r",
+				},
+				{
+					translate: "edu_tools.ui.focus_mode_manage.body.2",
 				},
 			],
 		});

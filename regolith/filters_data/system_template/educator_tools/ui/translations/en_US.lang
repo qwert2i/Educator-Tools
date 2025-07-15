@@ -64,8 +64,8 @@ edu_tools.ui.teams_edit_players_apply.remove.body=Successfully removed the playe
 
 ### Gamemode Scene
 edu_tools.ui.set_gamemode.title=§fSet Gamemode
-edu_tools.ui.set_gamemode.team.body=Select a gamemode to set for
-edu_tools.ui.set_gamemode.team.body2=§r
+edu_tools.ui.set_gamemode.team.body.1=Select a gamemode to set for
+edu_tools.ui.set_gamemode.team.body.2=§r
 edu_tools.ui.set_gamemode.buttons.adventure=Adventure
 edu_tools.ui.set_gamemode.buttons.survival=Survival
 edu_tools.ui.set_gamemode.buttons.creative=Creative
@@ -75,8 +75,8 @@ edu_tools.ui.set_gamemode.confirm.body=You successfully set the gamemode.
 
 ### Manage Health Scene
 edu_tools.ui.manage_health.title=§fManage Health
-edu_tools.ui.manage_health.team.body=You are managing the health of
-edu_tools.ui.manage_health.team.body2=§r
+edu_tools.ui.manage_health.team.body.1=You are managing the health of
+edu_tools.ui.manage_health.team.body.2=§r
 edu_tools.ui.manage_health.buttons.heal=Heal
 edu_tools.ui.manage_health.buttons.clear_effects=Clear Effects
 edu_tools.ui.manage_health.buttons.reset=Reset
@@ -96,7 +96,8 @@ edu_tools.ui.focus_mode.body=Focus Mode is a tool that allows you to disable the
 edu_tools.ui.focus_mode.buttons.global_disable=Disable Globally
 edu_tools.ui.focus_mode.buttons.select_team=Select Team
 edu_tools.ui.focus_mode_manage.title=§fFocus Mode Management
-edu_tools.ui.focus_mode_manage.body=You are managing the Focus Mode for
+edu_tools.ui.focus_mode_manage.body.1=You are managing the Focus Mode for
+edu_tools.ui.focus_mode_manage.body.2=§r
 edu_tools.ui.focus_mode_manage.toggle.enable=Enable Focus Mode
 edu_tools.ui.focus_mode_manage.toggle.enable_tooltip=Enable or disable Focus Mode for the selected team or player
 edu_tools.ui.focus_mode_manage.text_field.message=Message to show
@@ -109,8 +110,8 @@ edu_tools.ui.lock_player.body=Lock Players is a tool that allows you to control 
 edu_tools.ui.lock_player.buttons.add_team_lock=Add a new Lock
 edu_tools.ui.lock_player.buttons.view_teams=View Blocked Teams
 edu_tools.ui.lock_player_team.title=§fLock Team
-edu_tools.ui.lock_player.team.body=You are managing the Lock for
-edu_tools.ui.lock_player.team.body2=§r
+edu_tools.ui.lock_player.team.body.1=You are managing the Lock for
+edu_tools.ui.lock_player.team.body.2=§r
 edu_tools.ui.lock_player_team.radius=Radius
 edu_tools.ui.lock_player_team.radius_tooltip=The radius of the area where the player or team can move
 edu_tools.ui.lock_player_team.teleport_to_center=Teleport to Center

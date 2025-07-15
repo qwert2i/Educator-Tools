@@ -19,7 +19,7 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 		const subjectTeam = context.getSubjectTeam()!;
 		this.setRawBody([
 			{
-				translate: "edu_tools.ui.lock_player.team.body",
+				translate: "edu_tools.ui.lock_player.team.body.1",
 			},
 			{
 				text: " §9",
@@ -31,7 +31,7 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 				text: " §r",
 			},
 			{
-				translate: "edu_tools.ui.lock_player.team.body2",
+				translate: "edu_tools.ui.lock_player.team.body.2",
 			},
 		]);
 
