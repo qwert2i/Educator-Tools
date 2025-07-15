@@ -22,7 +22,8 @@ export class EnvironmentDaytimeScene extends ModalUIScene {
 		}));
 		// Add a "no change" option
 		dayTimeLangKeys.unshift({
-			translate: "edu_tools.ui.environment_daytime.select_daytime.no_change",
+			translate:
+				"edu_tools.ui.environment_weather.select_weather.options.no_change",
 		});
 
 		this.addDropdown(
