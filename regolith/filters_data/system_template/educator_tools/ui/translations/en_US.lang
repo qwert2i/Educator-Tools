@@ -215,3 +215,26 @@ edu_tools.ui.assignment_create.toggles.notify_tooltip=Enable or disable notifica
 edu_tools.ui.assignment_list_teacher.title=§fAssignments
 edu_tools.ui.assignment.no_assignments=No assignments found
 edu_tools.ui.assignment_student_list.title=§fStudent List
+
+### Inventory Management Scene
+edu_tools.ui.inventory_manage.title=§fInventory Management
+edu_tools.ui.inventory_manage.body=Inventory Management is a tool that allows you to manage the inventory of players and teams. You can copy the inventory of a player or team, clear the inventory, and more.
+edu_tools.ui.inventory_manage.buttons.copy_hotbar=Copy Hotbar
+edu_tools.ui.inventory_manage.buttons.clear_inventory=Clear Inventory
+edu_tools.ui.inventory_manage.buttons.copy_inventory=Copy Inventory
+edu_tools.ui.inventory_manage.buttons.copy_item=Copy Item
+edu_tools.ui.copy_inventory.title=§fCopy Inventory
+edu_tools.ui.inventory_manage.copy_inventory.body.1=Successfully copied the inventory of
+edu_tools.ui.inventory_manage.copy_inventory.body.2=§rto
+edu_tools.ui.inventory_manage.copy_inventory.body.3=§r
+edu_tools.ui.copy_hotbar.title=§fCopy Hotbar
+edu_tools.ui.inventory_manage.copy_hotbar.body.1=Successfully copied the hotbar of
+edu_tools.ui.inventory_manage.copy_hotbar.body.2=§rto
+edu_tools.ui.inventory_manage.copy_hotbar.body.3=§r
+edu_tools.ui.clear_inventory.title=§fClear Inventory
+edu_tools.ui.inventory_manage.clear_inventory.body.1=Successfully cleared the inventory of
+edu_tools.ui.inventory_manage.clear_inventory.body.2=§r
+edu_tools.ui.copy_item.title=§fCopy Item
+edu_tools.ui.inventory_manage.copy_item.body.1=Successfully copied the item from
+edu_tools.ui.inventory_manage.copy_item.body.2=§rto
+edu_tools.ui.inventory_manage.copy_item.body.3=§r

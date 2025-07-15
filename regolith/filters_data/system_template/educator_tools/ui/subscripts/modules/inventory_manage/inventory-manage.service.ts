@@ -12,6 +12,9 @@ import { Team } from "../teams/interfaces/team.interface";
 import { TeamsService } from "../teams/teams.service";
 import { InventoryManageScene } from "./inventory-manage.scene";
 import { CopyItemScene } from "./copy-item.scene";
+import { CopyHotbarScene } from "./copy-hotbar.scene";
+import { CopyInventoryScene } from "./copy-inventory.scene";
+import { ClearInventoryScene } from "./clear-inventory.scene";
 
 export class InventoryManageService implements Module {
 	static readonly id = "inventory_manage";
@@ -44,6 +47,24 @@ export class InventoryManageService implements Module {
 				new CopyItemScene(manager, context, this);
 			},
 		);
+		sceneManager.registerScene(
+			CopyHotbarScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new CopyHotbarScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			CopyInventoryScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new CopyInventoryScene(manager, context, this);
+			},
+		);
+		sceneManager.registerScene(
+			ClearInventoryScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new ClearInventoryScene(manager, context, this);
+			}
+		);
 	}
 
 	getMainButton(): ButtonConfig {
@@ -61,28 +82,30 @@ export class InventoryManageService implements Module {
 		sceneManager: SceneManager,
 		context: SceneContext,
 	): void {
-		const playerAmount = world.getPlayers().length;
-		if (playerAmount === 1) {
+		if (world.getPlayers().length === 1) {
 			sceneManager.openSceneWithContext(context, "not_enough_players", true);
 		} else {
 			context.setSubjectTeamRequired(true);
 			context.setTargetTeamRequired(true);
 			context.setNextScene("inventory_manage");
-			context.setData("team_filter", (team: Team): boolean => {
-				if (team.memberIds.length < 1) {
-					return false; // Skip empty teams
-				}
-				for (const memberId of team.memberIds) {
-					const player = world.getEntity(memberId) as Player;
-					if (!!player) return true; // Include teams with at least one online player
-				}
-				return true;
-			});
-			sceneManager.openSceneWithContext(context, "team_select", false);
+			context.setData(
+				"team_filter",
+				(team: Team, teamsService: TeamsService): boolean => {
+					if (!teamsService.isPlayerTeam(team.id)) {
+						return false;
+					}
+					for (const memberId of team.memberIds) {
+						const player = world.getEntity(memberId) as Player;
+						if (!!player) return true; // Include teams with at least one online player
+					}
+					return true;
+				},
+			);
+			sceneManager.openSceneWithContext(context, "inventory_manage", true);
 		}
 	}
 
-	inventoryManageToTeam(source: Player, target: Team): void {
+	inventoryCopyToTeam(source: Player, target: Team): void {
 		if (!target) return;
 
 		// For each member ID in the team
@@ -90,7 +113,7 @@ export class InventoryManageService implements Module {
 			const player = world.getEntity(playerId) as Player;
 			if (player && player.id !== source.id) {
 				// Copy inventory from source to target player
-				this.inventoryManage(source, player);
+				this.inventoryCopy(source, player);
 			}
 		});
 	}
@@ -161,7 +184,7 @@ export class InventoryManageService implements Module {
 		});
 	}
 
-	private inventoryManage(source: Player, target: Player): void {
+	private inventoryCopy(source: Player, target: Player): void {
 		const isTeacher = this.teamsService
 			.getTeam("system_teachers")
 			?.memberIds.includes(source.id);
