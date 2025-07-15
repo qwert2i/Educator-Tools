@@ -18,10 +18,7 @@ export class ClearInventoryScene extends ActionUIScene {
 			context.getSubjectTeam()!.memberIds[0],
 		) as Player;
 
-		this.inventoryManageService.copyHotbarToTeam(
-			sourcePlayer,
-			context.getTargetTeam()!,
-		);
+		this.inventoryManageService.clearInventoryOfTeam(context.getSubjectTeam()!);
 
 		// Dynamically add toggles for all game rules
 		this.setRawBody([
