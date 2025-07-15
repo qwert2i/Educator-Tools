@@ -64,5 +64,6 @@ export class EnvironmentService implements Module {
 		this.setDayLightCycle(false);
 		this.setWeatherCycle(false);
 		this.setDayTime(TimeOfDay.Noon); // Set time to day
+		this.setWeather(WeatherType.Clear); // Set weather to clear
 	}
 }
