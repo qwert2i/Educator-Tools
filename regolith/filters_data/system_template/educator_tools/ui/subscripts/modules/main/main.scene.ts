@@ -2,6 +2,7 @@ import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
 import { SceneContext } from "../scene_manager/scene-context";
 import { MainService } from "./main.service";
+import { getAddonVersion } from "addon-version";
 
 /**
  * Class representing the Main Scene.
@@ -39,7 +40,7 @@ export class MainScene extends ActionUIScene {
 		}
 
 		this.addDivider();
-		this.addLabel("Made with ❤ by Shapescape - v2.0.0");
+		this.addLabel("Made with ❤ by Shapescape - v" + getAddonVersion());
 
 		// Show the UI to the source player
 		this.show(context.getSourcePlayer(), sceneManager);
