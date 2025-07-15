@@ -83,7 +83,7 @@ export class InventoryManageService implements Module {
 		context: SceneContext,
 	): void {
 		if (world.getPlayers().length === 1) {
-			sceneManager.openSceneWithContext(context, "not_enough_players", true);
+			sceneManager.openSceneWithContext(context, "not_enough_players", false);
 		} else {
 			sceneManager.openSceneWithContext(context, "inventory_manage", true);
 		}
