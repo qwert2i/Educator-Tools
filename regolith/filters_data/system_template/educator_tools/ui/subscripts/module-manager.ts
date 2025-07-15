@@ -1,5 +1,5 @@
 import { PropertyStorage, CachedStorage } from "@shapescape/storage";
-import { World, world } from "@minecraft/server";
+import { world } from "@minecraft/server";
 import { TeamsService } from "./modules/teams/teams.service";
 import { WorldSettingsService } from "./modules/world_settings/world-settings.service";
 import { SceneManager } from "./modules/scene_manager/scene-manager";
@@ -16,7 +16,6 @@ import { EnvironmentService } from "./modules/environment/environment.service";
 import { LockPlayerService } from "./modules/lock_player/lock_player.service";
 import { TimerService } from "./modules/timer/timer.service";
 import { WorldManagementService } from "./modules/world_management/world_management.service";
-import { AboutService } from "./modules/about/about.service";
 import { AssignmentService } from "./modules/assignment/assignment.service";
 
 /**
@@ -82,7 +81,6 @@ export class ModuleManager {
 		const lockPlayerService = new LockPlayerService(this);
 		const timerService = new TimerService();
 		const worldManagementService = new WorldManagementService();
-		const aboutService = new AboutService();
 		const assignmentService = new AssignmentService(this);
 
 		// Create WorldSettingsService
@@ -107,7 +105,6 @@ export class ModuleManager {
 		this.registerModule(lockPlayerService);
 		this.registerModule(timerService);
 		this.registerModule(worldManagementService);
-		this.registerModule(aboutService);
 		this.registerModule(assignmentService);
 
 		// Initialize all modules
