@@ -85,22 +85,6 @@ export class InventoryManageService implements Module {
 		if (world.getPlayers().length === 1) {
 			sceneManager.openSceneWithContext(context, "not_enough_players", true);
 		} else {
-			context.setSubjectTeamRequired(true);
-			context.setTargetTeamRequired(true);
-			context.setNextScene("inventory_manage");
-			context.setData(
-				"team_filter",
-				(team: Team, teamsService: TeamsService): boolean => {
-					if (!teamsService.isPlayerTeam(team.id)) {
-						return false;
-					}
-					for (const memberId of team.memberIds) {
-						const player = world.getEntity(memberId) as Player;
-						if (!!player) return true; // Include teams with at least one online player
-					}
-					return true;
-				},
-			);
 			sceneManager.openSceneWithContext(context, "inventory_manage", true);
 		}
 	}
