@@ -30,7 +30,7 @@ export class EnvironmentWeatherScene extends ModalUIScene {
 
 		this.addDropdown(
 			"edu_tools.ui.environment_weather.select_weather",
-			weatherTypes,
+			weatherTypesLangKeys,
 			(selectedWeather: number): void => {
 				if (selectedWeather === 0) {
 					// If "no change" is selected, do nothing
