@@ -1,4 +1,4 @@
-## Educator Tools
+### Educator Tools
 item.edu_tools:educator_tool=Educator Toolbox
 ### General
 edu_tools.ui.buttons.back=Back
@@ -131,13 +131,13 @@ edu_tools.ui.lock_player_team_settings.button.update_center=Update Center
 edu_tools.ui.lock_player_team_settings.button.teleport_to_center=Teleport to Center
 edu_tools.actionbar.lock_player.too_far_push=You are moving too far away
 
-## Teleport Scene
+### Teleport Scene
 edu_tools.ui.teleport.title=§fTeleport
 edu_tools.ui.teleport.body.1=You are teleporting
 edu_tools.ui.teleport.body.2=§rto
 edu_tools.ui.teleport.buttons.teleport=Teleport
 
-## World Management Scene
+### World Management Scene
 edu_tools.ui.world_management.title=§fWorld Management
 edu_tools.ui.world_management.body=World Management is a tool that allows you to manage the world settings, such as weather, time, and more.
 edu_tools.ui.world_management.buttons.world_settings=World Settings
