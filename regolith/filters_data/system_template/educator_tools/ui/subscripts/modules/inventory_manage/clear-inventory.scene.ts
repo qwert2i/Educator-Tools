@@ -14,9 +14,6 @@ export class ClearInventoryScene extends ActionUIScene {
 		private inventoryManageService: InventoryManageService,
 	) {
 		super(ClearInventoryScene.id, context.getSourcePlayer());
-		const sourcePlayer = world.getEntity(
-			context.getSubjectTeam()!.memberIds[0],
-		) as Player;
 
 		this.inventoryManageService.clearInventoryOfTeam(context.getSubjectTeam()!);
 
