@@ -1,4 +1,5 @@
 ## Educator Tools
+item.edu_tools:educator_tool=Educator Toolbox
 ### General
 edu_tools.ui.buttons.back=Back
 edu_tools.ui.buttons.exit=Exit
