@@ -52,7 +52,7 @@ export class TeamsEditScene extends ModalUIScene {
 			"edu_tools.ui.teams_edit.icon",
 			iconsKeys,
 			(selectedIcon: number): void => {
-				context.setData("team_icon", selectedIcon);
+				context.setData("team_icon", TeamsService.availableIcons[selectedIcon]);
 			},
 			{
 				defaultValueIndex: subjectTeam?.icon
