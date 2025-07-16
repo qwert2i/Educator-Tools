@@ -60,11 +60,17 @@ export class TeamSelectScene extends ActionUIScene {
 			) {
 				return; // Target team selection only includes teams with a single member
 			}
+			let iconPath =
+				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id);
+			if (!team.isSystem) {
+				// If the team is not a system team, use the team's icon if available
+				iconPath = "textures/edu_tools/ui/icons/generic/" + team.icon;
+			}
 			this.addButton(
 				buttonText,
 				() => this.handleTeamButton(sceneManager, context, team),
 				// Set the icon for the team button
-				"textures/edu_tools/ui/icons/teams/" + (team.icon || team.id),
+				iconPath,
 			);
 		});
 
