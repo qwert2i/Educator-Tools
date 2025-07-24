@@ -158,7 +158,17 @@
 							"scope": {
 								"esbuild_path": "data/system_template_esbuild"
 							},
-							"scope_path": "scope.json"
+							"scope_path": "scope.json",
+							"prioritized_systems": [
+								"addon_setup/educator_tools",
+								"scripting_setup"
+							],
+							"systems": [
+								"educator_tools/**",
+								"letter_blocks",
+								"scripting_setup",
+								"addon_setup/educator_tools"
+							]
 						}
 					},
 					{
