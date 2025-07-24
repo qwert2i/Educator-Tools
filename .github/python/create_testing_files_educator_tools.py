@@ -15,6 +15,9 @@ MCADDON_FILE_ROOT = sys.argv[3]
 # THE SUFFIX ADDED TO THE ZIP FILE NAME (the version tag of the release)
 ZIP_FILE_SUFFIX = sys.argv[4]
 
+# SUB PRODUCT NAME
+SUB_PRODUCT_NAME = sys.argv[5]
+
 LANGUAGES = [  # list of the lang files
     "de_DE",
     "ru_RU",
@@ -69,9 +72,10 @@ def main():
     print("create_testing_files.py: Script started")
     zip_path = Path(ZIP_FILES_PATH)
     root_path = Path(ROOT_PATH)
+    pack_path = root_path / "pack" / SUB_PRODUCT_NAME
     mcaddon_file_root = Path(MCADDON_FILE_ROOT)
     # Load project config
-    with (root_path / "pack/release_config.json").open("r") as f:
+    with (pack_path / "release_config.json").open("r") as f:
         config = json.load(f)
     product_creator = config["product_creator"]
     product_name = config["product_name"]
@@ -79,10 +83,10 @@ def main():
     product_description = config["product_description"]
     pack_icon_path = None
     # Load pack_icon depending on file ending
-    if Path(root_path / "pack/pack_icon.png").exists():
-        pack_icon_path = root_path / "pack/pack_icon.png"
-    elif Path(root_path / "pack/pack_icon.jpg").exists():
-        pack_icon_path = root_path / "pack/pack_icon.jpg"
+    if Path(pack_path / "pack_icon.png").exists():
+        pack_icon_path = pack_path / "pack_icon.png"
+    elif Path(pack_path / "pack_icon.jpg").exists():
+        pack_icon_path = pack_path / "pack_icon.jpg"
     else:
         print(
             "Unable to find pack_icon file.\n"

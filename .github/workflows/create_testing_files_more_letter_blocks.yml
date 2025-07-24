@@ -1,4 +1,4 @@
-name: Create Testing Files
+name: Create Testing Files - More Letter Blocks
 
 on:
   release:
@@ -61,7 +61,7 @@ jobs:
 
           chmod +x regolith
           ./regolith install-all
-          ./regolith run packaging
+          ./regolith run packaging_more_letter_blocks
           cd ..
           cd behavior_packs/0
           rm -r -f ./node_modules
@@ -75,7 +75,7 @@ jobs:
           echo INFO: downloading pillow module for Python
           pip install pillow
 
-          python ./.github/python/create_testing_files.py ~/zip_tmp '.' ~/mcaddon_file_dir $tag_name
+          python ./.github/python/create_testing_files_more_letter_blocks.py ~/zip_tmp '.' ~/mcaddon_file_dir $tag_name more_letter_blocks
 
           asset_name_2=$(ls ~/mcaddon_file_dir)
 

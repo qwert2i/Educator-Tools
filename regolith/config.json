@@ -40,6 +40,18 @@
 		},
 		"formatVersion": "1.4.0",
 		"profiles": {
+			"default": {
+				"export": {
+					"build": "standard",
+					"readOnly": false,
+					"target": "development"
+				},
+				"filters": [
+					{
+						"profile": "educator_tools"
+					}
+				]
+			},
 			"bedrock": {
 				"export": {
 					"build": "standard",
@@ -141,7 +153,7 @@
 					}
 				]
 			},
-			"default": {
+			"educator_tools": {
 				"export": {
 					"build": "education",
 					"readOnly": false,
@@ -208,7 +220,71 @@
 					}
 				]
 			},
-			"packaging": {
+			"more_letter_blocks": {
+				"export": {
+					"build": "education",
+					"readOnly": false,
+					"target": "development"
+				},
+				"filters": [
+					{
+						"filter": "python_modules"
+					},
+					{
+						"filter": "system_template",
+						"settings": {
+							"log_path": "system_template_log.json",
+							"scope": {
+								"esbuild_path": "data/system_template_esbuild"
+							},
+							"scope_path": "scope.json",
+							"prioritized_systems": [
+								"addon_setup/more_letter_blocks"
+							],
+							"systems": [
+								"more_letter_blocks",
+								"addon_setup/more_letter_blocks"
+							]
+						}
+					},
+					{
+						"filter": "system_template_esbuild",
+						"settings": {
+							"entryPoint": "data/system_template_esbuild/main.ts",
+							"external": [
+								"@minecraft/server",
+								"@minecraft/server-ui"
+							],
+							"minify": false,
+							"outfile": "`BP/scripts/{path_namespace}/main.js`",
+							"scope_path": "scope.json"
+						}
+					},
+					{
+						"filter": "name_ninja",
+						"settings": {
+							"blocks": {
+								"auto_name": true
+							},
+							"entities": {
+								"auto_name": true
+							},
+							"items": {
+								"auto_name": true
+							},
+							"spawn_eggs": {
+								"auto_name": true,
+								"postfix": "",
+								"prefix": "§fSpawn §f"
+							}
+						}
+					},
+					{
+						"filter": "texture_list"
+					}
+				]
+			},
+			"packaging_educator_tools": {
 				"export": {
 					"bpPath": "../behavior_packs/0",
 					"readOnly": false,
@@ -218,6 +294,19 @@
 				"filters": [
 					{
 						"profile": "default"
+					}
+				]
+			},
+			"packaging_more_letter_blocks": {
+				"export": {
+					"bpPath": "../behavior_packs/1",
+					"readOnly": false,
+					"rpPath": "../resource_packs/1",
+					"target": "exact"
+				},
+				"filters": [
+					{
+						"profile": "more_letter_blocks"
 					}
 				]
 			}
