@@ -179,9 +179,8 @@ export class SceneManager implements Module {
 		}
 		// Ensure we have enough history to go back
 		if (context.getHistory().length < steps) {
-			console.warn(
-				"Not enough history to go back the requested number of steps.",
-			);
+			// If we can't go back, we return to the main scene
+			this.createContextAndOpenScene(context.getSourcePlayer(), MainScene.id);
 			return;
 		}
 		// Remove the last 'steps' entries from history
