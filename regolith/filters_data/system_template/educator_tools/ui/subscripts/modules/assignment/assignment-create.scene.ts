@@ -17,7 +17,7 @@ export class AssignmentCreateScene extends ModalUIScene {
 		if (assignment) {
 			this.addLabel({
 				rawtext: [
-					{ translate: "edu_tools.ui.assignment.create.body.edit" },
+					{ translate: "edu_tools.ui.assignment_create.body.edit" },
 					{ text: " §9" },
 					{ text: context.getSubjectTeam()!.name },
 					{ text: " §r" },
@@ -25,7 +25,7 @@ export class AssignmentCreateScene extends ModalUIScene {
 			});
 		} else {
 			this.addLabel({
-				translate: "edu_tools.ui.assignment.create.body.create",
+				translate: "edu_tools.ui.assignment_create.body.create",
 			});
 		}
 

@@ -157,8 +157,8 @@ edu_tools.ui.world_settings.toggles.command_blocks=Command Blocks
 edu_tools.ui.world_settings.toggles.command_blocks_tooltip=Enable or disable command blocks
 edu_tools.ui.world_settings.toggles.world_damage=World Damage
 edu_tools.ui.world_settings.toggles.world_damage_tooltip=Enable or disable world damage
-edu_tools.ui.world_settings.selectors.difficulty=Difficulty
-edu_tools.ui.world_settings.selectors.difficulty_tooltip=Select the difficulty of the world
+edu_tools.ui.world_settings.select_difficulty=Difficulty
+edu_tools.ui.world_settings.select_difficulty_tooltip=Select the difficulty of the world
 edu_tools.ui.world_settings.difficulty.peaceful=Peaceful
 edu_tools.ui.world_settings.difficulty.easy=Easy
 edu_tools.ui.world_settings.difficulty.normal=Normal
@@ -191,11 +191,11 @@ edu_tools.ui.environment_weather.set_weather_cycle=Weather Cycle
 edu_tools.ui.environment_weather.set_weather_cycle_tooltip=Enable or disable the weather cycle
 
 ### Assignments Scene
-edu_tools.ui.assignments.title=§fAssignments
-edu_tools.ui.assignments.body=Assignments is a tool that allows you to create and manage assignments for your students. You can create assignments, view assignments, and manage assignment submissions.
-edu_tools.ui.assignments.buttons.create_assignment=Create Assignment
-edu_tools.ui.assignments.buttons.active_assignments=Active Assignments
-edu_tools.ui.assignments.buttons.completed_assignments=Completed Assignments
+edu_tools.ui.assignment_teacher.title=§fAssignments
+edu_tools.ui.assignment_teacher.body=Assignments is a tool that allows you to create and manage assignments for your students. You can create assignments, view assignments, and manage assignment submissions.
+edu_tools.ui.assignment_teacher.buttons.create_assignment=Create Assignment
+edu_tools.ui.assignment_teacher.buttons.active_assignments=Active Assignments
+edu_tools.ui.assignment_teacher.buttons.completed_assignments=Completed Assignments
 edu_tools.ui.assignment_create.title=§fCreate Assignment
 edu_tools.ui.assignment_create.body=You are creating a new assignment
 edu_tools.ui.assignment_create.name=Assignment Name
