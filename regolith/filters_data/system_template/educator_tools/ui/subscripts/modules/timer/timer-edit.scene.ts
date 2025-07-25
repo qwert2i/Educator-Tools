@@ -81,8 +81,6 @@ export class TimerEditScene extends ModalUIScene {
 				return rawMessage;
 			});
 
-		world.sendMessage(JSON.stringify(times));
-
 		this.addDropdown(
 			"edu_tools.ui.timer_edit.time",
 			times,
