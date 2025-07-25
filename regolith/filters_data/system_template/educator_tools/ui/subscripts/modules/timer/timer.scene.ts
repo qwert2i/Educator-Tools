@@ -32,7 +32,7 @@ export class TimerScene extends ActionUIScene {
 					(): void => {
 						timerService.resumeTimer();
 					},
-					"textures/edu_tools/ui/icons/timer/resume_timer",
+					"textures/edu_tools/ui/icons/timer/start_timer",
 				);
 			} else {
 				this.addButton(
@@ -56,7 +56,7 @@ export class TimerScene extends ActionUIScene {
 				(): void => {
 					timerService.clearTimer();
 				},
-				"textures/edu_tools/ui/icons/timer/remove_timer",
+				"textures/edu_tools/ui/icons/timer/stop_timer",
 			);
 		} else {
 			this.addButton(
