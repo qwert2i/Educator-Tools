@@ -82,10 +82,16 @@ export class TeamSelectScene extends ActionUIScene {
 
 	// Set the body text based on which team is required
 	private setBodyByContext(context: SceneContext): void {
+		let bodyKey = context.getData("body_key");
+		if (bodyKey)
+			bodyKey = "edu_tools.ui." + bodyKey + ".team_select.get_subject.body";
+
 		if (context.isSubjectTeamRequired()) {
-			this.setSimpleBody("edu_tools.ui.team_select.get_subject.body");
+			this.setSimpleBody(
+				bodyKey || "edu_tools.ui.team_select.get_subject.body",
+			);
 		} else if (context.isTargetTeamRequired()) {
-			this.setSimpleBody("edu_tools.ui.team_select.get_target.body");
+			this.setSimpleBody(bodyKey || "edu_tools.ui.team_select.get_target.body");
 		} else {
 			console.warn(
 				"TeamSelectScene: Neither get_subject nor get_target is set in context data.",

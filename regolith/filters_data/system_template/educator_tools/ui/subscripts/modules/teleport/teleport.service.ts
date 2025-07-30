@@ -58,6 +58,7 @@ export class TeleportService implements Module {
 				}
 				return true;
 			});
+			context.setData("body_key", "teleport");
 			sceneManager.openSceneWithContext(context, "team_select", false);
 		}
 	}

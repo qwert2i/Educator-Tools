@@ -48,6 +48,7 @@ export class InventoryManageScene extends ActionUIScene {
 						return false;
 					},
 				);
+				context.setData("body_key", "inventory_manage.copy_inventory");
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
 			"textures/edu_tools/ui/icons/inventory_manage/copy_inventory",
@@ -82,6 +83,7 @@ export class InventoryManageScene extends ActionUIScene {
 						return false;
 					},
 				);
+				context.setData("body_key", "inventory_manage.copy_hotbar");
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
 			"textures/edu_tools/ui/icons/inventory_manage/copy_hotbar",
@@ -116,6 +118,7 @@ export class InventoryManageScene extends ActionUIScene {
 						return false;
 					},
 				);
+				context.setData("body_key", "inventory_manage.copy_item");
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
 			"textures/edu_tools/ui/icons/inventory_manage/copy_item",
@@ -139,6 +142,7 @@ export class InventoryManageScene extends ActionUIScene {
 						return false;
 					},
 				);
+				context.setData("body_key", "inventory_manage.clear_inventory");
 				sceneManager.openSceneWithContext(context, "team_select", true);
 			},
 			"textures/edu_tools/ui/icons/inventory_manage/clear_inventory",
