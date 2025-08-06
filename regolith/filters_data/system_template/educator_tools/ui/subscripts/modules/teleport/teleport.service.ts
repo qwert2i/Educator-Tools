@@ -72,7 +72,7 @@ export class TeleportService implements Module {
 						const player = world.getEntity(memberId) as Player;
 						if (!!player) return true; // Include teams with at least one online player
 					}
-					return true;
+					return false;
 				},
 			);
 			context.setData("body_key", "teleport");
