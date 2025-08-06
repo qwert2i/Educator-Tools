@@ -270,6 +270,7 @@ edu_tools.ui.timer.time.minutes=Minutes
 edu_tools.ui.timer.time.hour=Hour
 edu_tools.ui.timer.time.hours=Hours
 edu_tools.ui.timer_edit.show_timer_entity=Show Timer Entity
+edu_tools.ui.timer_edit.show_timer_entity_tooltip=Enable or disable the visual representation of the timer in the world
 edu_tools.ui.timer.buttons.create=Create Timer
 edu_tools.ui.timer.buttons.edit=Edit Timer
 edu_tools.ui.timer.buttons.pause=Pause Timer
