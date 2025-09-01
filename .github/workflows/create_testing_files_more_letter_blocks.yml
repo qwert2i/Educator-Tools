@@ -63,7 +63,7 @@ jobs:
           ./regolith install-all
           ./regolith run packaging_more_letter_blocks
           cd ..
-          cd behavior_packs/0
+          cd behavior_packs/1
           rm -r -f ./node_modules
 
       - name: Create pack file
