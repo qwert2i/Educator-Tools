@@ -211,7 +211,8 @@ export class AssignmentService implements Module {
 
 	addSubmission(
 		assignmentId: string,
-		submission: Omit<Submission, "id" | "assignmentId">,
+		player: Player,
+		submission: Omit<Submission, "id" | "assignmentId" | "submittedBy">,
 	): Submission | undefined {
 		const assignmentData = this.repository.getAssignment(assignmentId);
 		if (!assignmentData) {
@@ -222,6 +223,7 @@ export class AssignmentService implements Module {
 			...submission,
 			id: id,
 			assignmentId: assignmentId,
+			submittedBy: player.id,
 		};
 		this.repository.addSubmission(assignmentId, id, newSubmission);
 		return newSubmission;
