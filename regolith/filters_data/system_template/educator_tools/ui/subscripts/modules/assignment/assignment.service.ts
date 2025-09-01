@@ -77,7 +77,7 @@ export class AssignmentService implements Module {
 		sceneManager.registerScene(
 			AssignmentManageScene.id,
 			(manager: SceneManager, context: SceneContext) => {
-				new AssignmentManageScene(manager, context, this);
+				new AssignmentManageScene(manager, context, this, this.teamsService);
 			},
 		);
 		sceneManager.registerScene(
