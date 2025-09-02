@@ -165,7 +165,7 @@ export class AssignmentService implements Module {
 			const player = world.getEntity(memberId) as Player;
 			if (player) {
 				player.sendMessage([
-					{ translate: "edu_tools.ui.assignment.new_assignment" },
+					{ translate: "edu_tools.message.assignment.new_assignment" },
 					{ text: ` ${assignment.title}` },
 				]);
 			}

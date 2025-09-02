@@ -263,6 +263,7 @@ edu_tools.ui.assignment.assignment_not_found=Assignment not found.
 edu_tools.ui.assignment.no_assignment_selected=No assignment selected.
 edu_tools.message.assignment_student_submit.success=§aYour assignment has been submitted successfully.
 edu_tools.message.assignment_student_submit.failure=§cFailed to submit the assignment. Please try again.
+edu_tools.message.assignment.new_assignment=§aA new assignment has been created: §r
 
 ### Inventory Management Scene
 edu_tools.ui.inventory_manage.title=§fInventory Management
