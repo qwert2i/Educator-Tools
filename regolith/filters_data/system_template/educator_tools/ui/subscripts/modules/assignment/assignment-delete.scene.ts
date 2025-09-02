@@ -1,3 +1,4 @@
+import { world } from "@minecraft/server";
 import { SceneContext } from "../scene_manager/scene-context";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
@@ -29,8 +30,14 @@ export class AssignmentDeleteScene extends ActionUIScene {
 		this.addButton(
 			"edu_tools.ui.assignment.delete.buttons.delete",
 			(): void => {
-				assignmentService.deleteAssignment(assignment.id);
-				sceneManager.goBackToScene(context, "assignment_list_teacher");
+				//assignmentService.deleteAssignment(assignment.id);
+				world.sendMessage(JSON.stringify(context.getHistory()));
+				const target = this.getBackTargetFromHistory(context);
+				if (target) {
+					sceneManager.goBackToScene(context, target);
+				} else {
+					sceneManager.goBackToScene(context, "assignment_teacher");
+				}
 			},
 			"textures/edu_tools/ui/icons/assignment/assignment_delete",
 		);
@@ -42,5 +49,18 @@ export class AssignmentDeleteScene extends ActionUIScene {
 			"textures/edu_tools/ui/icons/_general/back",
 		);
 		this.show(context.getSourcePlayer(), sceneManager);
+	}
+
+	private getBackTargetFromHistory(context: SceneContext): string | undefined {
+		const history = context.getHistory();
+		const idxActive = history.lastIndexOf("active_assignments");
+		const idxCompleted = history.lastIndexOf("completed_assignments");
+
+		if (idxActive === -1 && idxCompleted === -1) return undefined;
+		if (idxActive === -1) return "completed_assignments";
+		if (idxCompleted === -1) return "active_assignments";
+		return idxActive > idxCompleted
+			? "active_assignments"
+			: "completed_assignments";
 	}
 }
