@@ -15,6 +15,7 @@ import { AssignmentStudentDetailScene } from "./assignment-student-detail.scene"
 import { AssignmentStudentSubmitScene } from "./assignment-student-submit.scene";
 import { AssignmentSubmissionsScene } from "./assignment-submissions.scene";
 import { AssignmentSubmissionScene } from "./assignment-submission.scene";
+import { AssignmentDeleteScene } from "./assignment-delete.scene";
 
 export interface Assignment {
 	id: string;
@@ -133,6 +134,12 @@ export class AssignmentService implements Module {
 					this,
 					this.teamsService,
 				);
+			},
+		);
+		sceneManager.registerScene(
+			AssignmentDeleteScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentDeleteScene(manager, context, this);
 			},
 		);
 	}
