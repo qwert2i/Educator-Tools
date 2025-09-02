@@ -65,6 +65,17 @@ export class AssignmentManageScene extends ActionUIScene {
 			},
 			"textures/edu_tools/ui/icons/assignment/assignment_submissions",
 		);
+		this.addButton(
+			"edu_tools.ui.buttons.back",
+			() => {
+				if (context.getHistory().includes("assignment_list_teacher")) {
+					sceneManager.goBackToScene(context, "assignment_list_teacher");
+				} else {
+					sceneManager.goBackToScene(context, "assignment_manage");
+				}
+			},
+			"textures/edu_tools/ui/icons/_general/back",
+		);
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
 }
