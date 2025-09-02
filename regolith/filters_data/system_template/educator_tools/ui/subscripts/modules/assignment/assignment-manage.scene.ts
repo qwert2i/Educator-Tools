@@ -36,6 +36,7 @@ export class AssignmentManageScene extends ActionUIScene {
 		this.addButton(
 			"edu_tools.ui.assignment.manage.buttons.assignment_update",
 			(): void => {
+				context.setData("assignment", assignment);
 				sceneManager.openSceneWithContext(context, "assignment_create", true);
 			},
 			"textures/edu_tools/ui/icons/assignment/assignment_update",
