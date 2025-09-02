@@ -14,6 +14,7 @@ import { AssignmentStudentListScene } from "./assignment-student-list.scene";
 import { AssignmentStudentDetailScene } from "./assignment-student-detail.scene";
 import { AssignmentStudentSubmitScene } from "./assignment-student-submit.scene";
 import { AssignmentSubmissionsScene } from "./assignment-submissions.scene";
+import { AssignmentSubmissionScene } from "./assignment-submission.scene";
 
 export interface Assignment {
 	id: string;
@@ -116,6 +117,17 @@ export class AssignmentService implements Module {
 			AssignmentSubmissionsScene.id,
 			(manager: SceneManager, context: SceneContext) => {
 				new AssignmentSubmissionsScene(
+					manager,
+					context,
+					this,
+					this.teamsService,
+				);
+			},
+		);
+		sceneManager.registerScene(
+			AssignmentSubmissionScene.id,
+			(manager: SceneManager, context: SceneContext) => {
+				new AssignmentSubmissionScene(
 					manager,
 					context,
 					this,
