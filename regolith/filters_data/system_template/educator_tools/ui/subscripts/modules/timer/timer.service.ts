@@ -73,6 +73,7 @@ export class TimerService implements Module {
 	initialize(): void {
 		// Initialize the timer mechanic to handle periodic updates
 		this.timerMechanic = new TimerMechanic(this);
+		this.timerMechanic.initialize();
 	}
 
 	/**
