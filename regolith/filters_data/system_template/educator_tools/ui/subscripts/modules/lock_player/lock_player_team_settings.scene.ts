@@ -1,7 +1,6 @@
 import { SceneContext } from "../scene_manager/scene-context";
 import { SceneManager } from "../scene_manager/scene-manager";
 import { ActionUIScene } from "../scene_manager/ui-scene";
-import { TeamsService } from "../teams/teams.service";
 import { LockPlayerService } from "./lock_player.service";
 
 export class LockPlayerTeamSettingsScene extends ActionUIScene {
