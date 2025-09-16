@@ -32,8 +32,8 @@ export class AssignmentStudentDetailScene extends ActionUIScene {
 		}
 
 		const submission = assignmentService.getPlayerSubmissions(
-			assignmentId,
 			context.getSourcePlayer().id,
+			assignmentId,
 		);
 		const isActive = assignmentService.isAssignmentActive(assignmentId);
 
