@@ -11,7 +11,7 @@ export class NotEnoughPlayersScene extends ActionUIScene {
 		this.setSimpleBody("edu_tools.ui.not_enough_players.body");
 
 		this.addButton("edu_tools.ui.buttons.back", (): void => {
-			sceneManager.goBack(context, 100);
+			sceneManager.goBack(context, 1);
 		});
 
 		this.show(context.getSourcePlayer(), sceneManager);
