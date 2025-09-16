@@ -85,6 +85,14 @@ export class TeamSelectScene extends ActionUIScene {
 			});
 		}
 
+		this.addButton(
+			"edu_tools.ui.buttons.back",
+			(): void => {
+				sceneManager.goBack(context, 1);
+			},
+			"textures/edu_tools/ui/icons/_general/back",
+		);
+
 		this.show(context.getSourcePlayer(), sceneManager);
 	}
 
