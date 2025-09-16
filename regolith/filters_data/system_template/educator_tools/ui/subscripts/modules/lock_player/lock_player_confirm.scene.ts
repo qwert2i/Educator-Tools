@@ -14,7 +14,6 @@ export class LockPlayerConfirmScene extends MessageUIScene {
 		this.setContext(context);
 
 		const subjectTeam = context.getSubjectTeam()!;
-		const targetTeam = context.getTargetTeam()!;
 
 		this.setRawBody([
 			{
@@ -38,6 +37,11 @@ export class LockPlayerConfirmScene extends MessageUIScene {
 			"edu_tools.ui.lock_player_confirm.buttons.confirm",
 			(): void => {
 				this.lockPlayerService.confirmAction(context);
+				sceneManager.openSceneWithContext(
+					context,
+					"lock_player_team_settings",
+					true,
+				);
 			},
 		);
 		this.setButton2(
