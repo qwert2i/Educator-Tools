@@ -14,6 +14,7 @@ export class TeamSelectScene extends ActionUIScene {
 	) {
 		// Call parent constructor with scene id and source player
 		super(TeamSelectScene.id, context.getSourcePlayer());
+		let teamsAvailable = false;
 
 		// Store the context for later use
 		this.setContext(context);
@@ -71,10 +72,17 @@ export class TeamSelectScene extends ActionUIScene {
 				// Set the icon for the team button
 				iconPath,
 			);
+			teamsAvailable = true;
 		});
 
 		if (!context.isSubjectTeamRequired() && !context.isTargetTeamRequired()) {
 			context.setData("team_filter", undefined);
+		}
+
+		if (!teamsAvailable) {
+			this.addLabel({
+				translate: "edu_tools.ui.no_teams.body",
+			});
 		}
 
 		this.show(context.getSourcePlayer(), sceneManager);
