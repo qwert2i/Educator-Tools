@@ -279,8 +279,11 @@ export class TimerService implements Module {
 	 */
 	getRemainingTime(): number {
 		const timer = this.getTimer();
-		if (!timer || !timer.started) {
+		if (!timer) {
 			return 0;
+		}
+		if (!timer.started) {
+			return timer.duration * 20; // Full duration in ticks if not started
 		}
 
 		let elapsed: number;
