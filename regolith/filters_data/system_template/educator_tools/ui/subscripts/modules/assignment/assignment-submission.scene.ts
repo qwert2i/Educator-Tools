@@ -23,10 +23,10 @@ export class AssignmentSubmissionScene extends ActionUIScene {
 
 		this.addLabel({
 			rawtext: [
-				{ translate: "edu_tools.ui.assignment.submission_detail.from" },
+				{ translate: "edu_tools.ui.assignment.submission_details.from" },
 				{ text: " " + submissionPlayerName + " " },
 				{
-					translate: "edu_tools.ui.assignment.submission_detail.for_assignment",
+					translate: "edu_tools.ui.assignment.submission_details.for_assignment",
 				},
 				{ text: " " + assignment?.title },
 			],
