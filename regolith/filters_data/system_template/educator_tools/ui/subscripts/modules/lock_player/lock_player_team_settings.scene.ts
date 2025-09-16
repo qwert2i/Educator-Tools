@@ -51,6 +51,12 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 					this.lockPlayerService.updateLockSettings(subjectTeam.id, {
 						center: context.getSourcePlayer().location,
 					});
+					this.player.sendMessage(
+						{
+							translate:
+								"edu_tools.message.lock_player_team_settings.update_center",
+						},
+					);
 				},
 				"textures/edu_tools/ui/icons/lock_player/update_center",
 			);
@@ -59,6 +65,10 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 			"edu_tools.ui.lock_player_team_settings.button.teleport_to_center",
 			() => {
 				this.lockPlayerService.teleportToCenter(subjectTeam.id);
+				this.player.sendMessage({
+					translate:
+						"edu_tools.message.lock_player_team_settings.teleport_to_center",
+				});
 			},
 			"textures/edu_tools/ui/icons/lock_player/teleport_to_center",
 		);
@@ -66,6 +76,9 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 			"edu_tools.ui.lock_player_team_settings.button.delete_lock",
 			() => {
 				this.lockPlayerService.clearLockSettings(subjectTeam.id);
+				this.player.sendMessage({
+					translate: "edu_tools.message.lock_player_team_settings.delete_lock",
+				});
 			},
 			"textures/edu_tools/ui/icons/lock_player/delete_lock",
 		);
