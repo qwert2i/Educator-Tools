@@ -90,6 +90,9 @@ edu_tools.ui.manage_health.settings.hunger=Enable Hunger
 edu_tools.ui.manage_health.settings.hunger_tooltip=Enable or disable the hunger functionality
 edu_tools.ui.manage_health.settings.effect_immunity=Enable Effect Immunity
 edu_tools.ui.manage_health.settings.effect_immunity_tooltip=Enabling this will prevent players from receiving any effects, including positive ones
+edu_tools.message.manage_health.team.healed=§aThe player/team §r%1§a has been healed.
+edu_tools.message.manage_health.team.cleared_effects=§aThe player/team §r%1§a has had their effects cleared.
+edu_tools.message.manage_health.team.reset=§aThe player/team §r%1§a has had their health settings reset.
 
 ### Focus Mode Scene
 edu_tools.ui.focus_mode.title=§fFocus Mode
