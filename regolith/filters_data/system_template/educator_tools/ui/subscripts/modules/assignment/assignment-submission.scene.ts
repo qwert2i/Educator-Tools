@@ -25,7 +25,9 @@ export class AssignmentSubmissionScene extends ActionUIScene {
 			rawtext: [
 				{ translate: "edu_tools.ui.assignment.submission_detail.from" },
 				{ text: " " + submissionPlayerName + " " },
-				{ translate: "edu_tools.ui.assignment.submission.for_assignment" },
+				{
+					translate: "edu_tools.ui.assignment.submission_detail.for_assignment",
+				},
 				{ text: " " + assignment?.title },
 			],
 		});
