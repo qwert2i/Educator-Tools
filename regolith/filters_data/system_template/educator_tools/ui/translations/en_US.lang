@@ -207,6 +207,7 @@ edu_tools.ui.environment_weather.select_weather.options.rain=Rain
 edu_tools.ui.environment_weather.select_weather.options.thunder=Thunder
 edu_tools.ui.environment_weather.set_weather_cycle=Weather Cycle
 edu_tools.ui.environment_weather.set_weather_cycle_tooltip=Enable or disable the weather cycle
+edu_tools.message.environment.always_day_set=§aThe world has been set to always day.
 
 ### Assignments Scene
 edu_tools.ui.assignment_teacher.title=§fAssignments
