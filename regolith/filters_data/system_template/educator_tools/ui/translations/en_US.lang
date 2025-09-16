@@ -333,3 +333,5 @@ edu_tools.ui.timer.buttons.pause=Pause Timer
 edu_tools.ui.timer.buttons.resume=Resume Timer
 edu_tools.ui.timer.buttons.start=Start Timer
 edu_tools.ui.timer.buttons.remove=Remove Timer
+edu_tools.message.timer.time_left=§aTime left: §r%1 §a
+edu_tools.message.timer.times_up=§cTime's up!
