@@ -79,6 +79,7 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 				this.player.sendMessage({
 					translate: "edu_tools.message.lock_player_team_settings.delete_lock",
 				});
+				sceneManager.goBackToScene(context, "lock_player_team");
 			},
 			"textures/edu_tools/ui/icons/lock_player/delete_lock",
 		);
