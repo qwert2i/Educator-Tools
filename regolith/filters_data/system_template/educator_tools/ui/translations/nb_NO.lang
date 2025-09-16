@@ -11,7 +11,7 @@ edu_tools.ui.no_teams.title=§fIngen lag tilgjengelig
 edu_tools.ui.no_teams.body=Det er ingen lag tilgjengelig. Vennligst opprett lag for å bruke dette verktøyet.
 
 ### Main UI Scene
-edu_tools.ui.main.title=§fUtdanningsverktøy
+edu_tools.ui.main.title=§fVerktøy for lærere
 edu_tools.ui.main.body=Velg et verktøy å bruke
 edu_tools.ui.main.buttons.teleport=Teleport
 edu_tools.ui.main.buttons.copy_inventory=Kopier inventar
