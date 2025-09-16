@@ -7,6 +7,8 @@ edu_tools.ui.buttons.continue=Continue
 
 edu_tools.ui.not_enough_players.title=Not Enough Players
 edu_tools.ui.not_enough_players.body=You need at least two players to use this tool
+edu_tools.ui.no_teams.title=No Teams Available
+edu_tools.ui.no_teams.body=There are no teams available. Please create teams to use this tool.
 
 ### Main UI Scene
 edu_tools.ui.main.title=§fEducator Tools
