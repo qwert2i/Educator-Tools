@@ -105,6 +105,8 @@ edu_tools.ui.focus_mode_manage.toggle.enable_tooltip=Enable or disable Focus Mod
 edu_tools.ui.focus_mode_manage.text_field.message=Message to show
 edu_tools.ui.focus_mode_manage.text_field.message_tooltip=Message to show when Focus Mode is enabled
 edu_tools.ui.focus_mode_manage.text_field.message_placeholder=Enter your message here
+edu_tools.message.focus_mode.global_disable=§aFocus Mode has been disabled for all players.
+edu_tools.message.focus_mode.settings_updated=§aFocus Mode settings have been updated.
 
 ### Lock Player Scene
 edu_tools.ui.lock_player.title=§fLock Players

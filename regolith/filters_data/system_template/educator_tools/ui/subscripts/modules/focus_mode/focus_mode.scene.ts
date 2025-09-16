@@ -37,6 +37,9 @@ export class FocusModeScene extends ActionUIScene {
 			"edu_tools.ui.focus_mode.buttons.global_disable",
 			(): void => {
 				this.focusModeService.globalDisableFocusMode();
+				this.player.sendMessage({
+					translate: "edu_tools.message.focus_mode.global_disable",
+				});
 			},
 			"textures/edu_tools/ui/icons/focus_mode/global_disable",
 		);
