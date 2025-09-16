@@ -51,12 +51,10 @@ export class LockPlayerTeamSettingsScene extends ActionUIScene {
 					this.lockPlayerService.updateLockSettings(subjectTeam.id, {
 						center: context.getSourcePlayer().location,
 					});
-					this.player.sendMessage(
-						{
-							translate:
-								"edu_tools.message.lock_player_team_settings.update_center",
-						},
-					);
+					this.player.sendMessage({
+						translate:
+							"edu_tools.message.lock_player_team_settings.update_center",
+					});
 				},
 				"textures/edu_tools/ui/icons/lock_player/update_center",
 			);
