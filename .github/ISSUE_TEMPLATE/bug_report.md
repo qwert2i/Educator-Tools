@@ -10,9 +10,11 @@ assignees: ''
 ### Minecraft Education version and device
 Ex: 1.21.06. Win10
 
+### Educator Tools version
+Ex: 1.0.0. You can find this at the bottom of the Educator Toolbox's UI in game.
+
 ## 🐛 Bug Report
 A clear and concise description of the bug.
-
 
 ### 🔍 Steps to Reproduce
 Steps to reproduce the behavior:
