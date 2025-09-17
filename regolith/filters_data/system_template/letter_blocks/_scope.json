@@ -2,13 +2,13 @@
 	"letter_sets": [
 		{
 			"id": "main_letter_set",
-			"font_size": 64,
+			"font_size": 48,
 			"text_color": [10, 10, 10, 255],
 			"image_size": [64, 64],
 			"font_path": "fonts/AzeretMono-Black.ttf",
 			"background_image_path": "letter_blocks/blank.block.png",
 			"suffix": null,
-			"antialias": true,
+			"aliasing": true,
 			"letters": [
 				{
 					"char": "\\u0041",
@@ -619,13 +619,13 @@
 		},
 		{
 			"id": "bigger_symbols",
-			"font_size": 48,
+			"font_size": 32,
 			"text_color": [10, 10, 10, 255],
 			"image_size": [64, 64],
 			"font_path": "fonts/AzeretMono-Black.ttf",
 			"background_image_path": "letter_blocks/blank.block.png",
 			"suffix": null,
-			"antialias": true,
+			"aliasing": true,
 			"letters": [
 				{
 					"char": "\\u00bc",
